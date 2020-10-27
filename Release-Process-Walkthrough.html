@@ -1,0 +1,407 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Release Process Walkthrough - NixOS Release Wiki</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li class="chapter-item expanded "><a href="Release-Process-Walkthrough.html" class="active"><strong aria-hidden="true">2.</strong> Release Process Walkthrough</a></li><li class="chapter-item expanded "><a href="Release-Management-Team.html"><strong aria-hidden="true">3.</strong> Release Management Team</a></li><li class="chapter-item expanded "><a href="Release-Schedule.html"><strong aria-hidden="true">4.</strong> Release Schedule</a></li><li class="chapter-item expanded "><a href="Zero-Hydra-Failures.html"><strong aria-hidden="true">5.</strong> ZERO Hydra Failures</a></li><li class="chapter-item expanded "><a href="GO-NO-GO-Meeting.html"><strong aria-hidden="true">6.</strong> GO / NO-GO Meeting</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">NixOS Release Wiki</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#release-process-walkthrough" id="release-process-walkthrough">Release Process Walkthrough</a></h1>
+<p>Going through an example of releasing NixOS 19.09:</p>
+<h2><a class="header" href="#one-month-before-the-beta" id="one-month-before-the-beta">One month before the beta</a></h2>
+<ul>
+<li>
+<p>Create an announcement on <a href="https://discourse.nixos.org">Discourse</a>
+as a warning about upcoming beta “feature freeze” in a month. <a href="https://discourse.nixos.org/t/nixos-19-09-feature-freeze/3707">See
+this post as an
+example</a>.</p>
+</li>
+<li>
+<p>Discuss with Eelco Dolstra and the community (via IRC, ML) about
+what will reach the deadline. Any issue or Pull Request targeting
+the release should be included in the release milestone.</p>
+</li>
+<li>
+<p>Remove attributes that we know we will not be able to support,
+especially if there is a stable alternative. E.g. Check that our
+Linux kernels’ <a href="https://www.kernel.org/category/releases.html">projected
+end-of-life</a> are
+after our release projected end-of-life.</p>
+</li>
+</ul>
+<h2><a class="header" href="#at-beta-release-time" id="at-beta-release-time">At beta release time</a></h2>
+<ol>
+<li>From the master branch run:</li>
+</ol>
+<pre><code class="language-sh">git checkout -b release-19.09
+</code></pre>
+<ol start="2">
+<li>
+<p><a href="https://github.com/NixOS/nixpkgs/commit/10e61bf5be57736035ec7a804cb0bf3d083bf2cf#diff-9c798092bac0caeb5c52d509be0ca263R69">Bump the <code>system.defaultChannel</code> attribute in
+<code>nixos/modules/misc/version.nix</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/NixOS/nixpkgs/commit/10e61bf5be57736035ec7a804cb0bf3d083bf2cf#diff-831e8d9748240fb23e6734fdc2a6d16eR15">Update <code>versionSuffix</code> in
+<code>nixos/release.nix</code></a></p>
+</li>
+</ol>
+<p>To get the commit count, use the following command:</p>
+<pre><code>git rev-list --count release-19.09
+</code></pre>
+<ol>
+<li>
+<p>Edit changelog at <code>nixos/doc/manual/release-notes/rl-1909.xml</code>.</p>
+<ul>
+<li>
+<p>Get all new NixOS modules:</p>
+<pre><code class="language-sh">git diff release-19.03..release-19.09 nixos/modules/module-list.nix | grep ^+
+</code></pre>
+</li>
+<li>
+<p>Note systemd, kernel, glibc, desktop environment, and Nix
+upgrades.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Tag the release:</p>
+</li>
+</ol>
+<pre><code class="language-sh">git tag --annotate --message=&quot;Release 19.09-beta&quot; 19.09-beta
+git push upstream 19.09-beta
+</code></pre>
+<ol start="3">
+<li><a href="https://github.com/NixOS/nixpkgs/commit/01268fda85b7eee4e462c873d8654f975067731f#diff-2bc0e46110b507d6d5a344264ef15adaR1">On the <code>master</code> branch, increment the <code>.version</code>
+file</a></li>
+</ol>
+<pre><code class="language-sh">echo -n &quot;20.03&quot; &gt; .version
+</code></pre>
+<ol start="4">
+<li>
+<p><a href="https://github.com/NixOS/nixpkgs/commit/01268fda85b7eee4e462c873d8654f975067731f#diff-03f3d41b68f62079c55001f1a1c55c1dR137">Update <code>codeName</code> in
+<code>lib/trivial.nix</code></a>
+This will be the name for the next release.</p>
+</li>
+<li>
+<p><a href="https://github.com/NixOS/nixpkgs/commit/01268fda85b7eee4e462c873d8654f975067731f#diff-e7ee5ff686cdcc513ca089d6e5682587R11">Create a new release notes file for the upcoming release +
+1</a>,
+in our case this is <code>rl-2003.xml</code>.</p>
+</li>
+<li>
+<p>Contact the infrastructure team to create the necessary Hydra
+Jobsets.</p>
+</li>
+<li>
+<p><a href="https://github.com/NixOS/nixos-org-configurations/blob/master/channels.nix">Create a channel at https://nixos.org/channels by creating a PR to
+nixos-org-configurations, changing<code>channels.nix</code></a></p>
+</li>
+<li>
+<p>Get all Hydra jobsets for the release to have their first
+evaluation.</p>
+</li>
+<li>
+<p><a href="https://github.com/NixOS/nixpkgs/issues/13559">Create an issue for tracking Zero Hydra Failures progress.
+ZHF is an effort to get build failures down to zero.</a></p>
+</li>
+</ol>
+<h2><a class="header" href="#during-beta" id="during-beta">During Beta</a></h2>
+<ul>
+<li>Monitor the master branch for bugfixes and minor updates and
+cherry-pick them to the release branch.</li>
+</ul>
+<h2><a class="header" href="#before-the-final-release" id="before-the-final-release">Before the final release</a></h2>
+<ul>
+<li>
+<p>Re-check that the release notes are complete.</p>
+</li>
+<li>
+<p>Release Nix (currently only Eelco Dolstra can do that). <a href="https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/installer/tools/nix-fallback-paths.nix">Make sure fallback is updated.</a></p>
+</li>
+<li>
+<p><a href="https://github.com/NixOS/nixpkgs/commit/40fd9ae3ac8048758abdcfc7d28a78b5f22fe97e">Update README.md with new stable NixOS version information.</a></p>
+</li>
+<li>
+<p>Change <code>stableBranch</code> to <code>true</code> in Hydra and wait for the channel to
+update.</p>
+</li>
+</ul>
+<h2><a class="header" href="#at-final-release-time" id="at-final-release-time">At final release time</a></h2>
+<ol>
+<li>
+<p>Update <a href="https://nixos.org/manual/nixos/stable/index.html#sec-upgrading">Upgrading NixOS</a> section of the manual to match new
+stable release version.</p>
+</li>
+<li>
+<p>Update <code>rl-1909.xml</code> with the release date.</p>
+</li>
+<li>
+<p>Tag the final release</p>
+</li>
+</ol>
+<pre><code class="language-sh">git tag --annotate --message=&quot;Release 19.09&quot; 19.09
+git push upstream 19.09
+</code></pre>
+<ol start="4">
+<li>
+<p>Update <a href="https://github.com/NixOS/nixos-homepage">nixos-homepage</a> for
+the release.</p>
+<ol>
+<li>
+<p><a href="https://github.com/NixOS/nixos-homepage/blob/47ac3571c4d71e841fd4e6c6e1872e762b9c4942/Makefile#L1">Update <code>NIXOS_SERIES</code> in the <code>Makefile</code></a>.</p>
+</li>
+<li>
+<p><a href="https://github.com/NixOS/nixos-homepage/blob/47ac3571c4d71e841fd4e6c6e1872e762b9c4942/nixos-release.tt#L1">Update <code>nixos-release.tt</code> with the new NixOS version</a>.</p>
+</li>
+<li>
+<p><a href="https://github.com/NixOS/nixos-homepage/blob/47ac3571c4d71e841fd4e6c6e1872e762b9c4942/flake.nix#L10">Update the <code>flake.nix</code> input <code>released-nixpkgs</code> to 19.09</a>.</p>
+</li>
+<li>
+<p>Run <code>./update.sh</code> (this updates flake.lock to updated channel).</p>
+</li>
+<li>
+<p><a href="https://github.com/NixOS/nixos-homepage/blob/a5626c71c03a2dd69086564e56f1a230a2bb177a/logo/nixos-logo-19.09-loris-lores.png">Add a compressed version of the NixOS logo for 19.09</a>.</p>
+</li>
+<li>
+<p><a href="https://github.com/NixOS/nixos-homepage/commit/a5626c71c03a2dd69086564e56f1a230a2bb177a#diff-9cdc6434d3e4fd93a6e5bb0a531a7c71R5">Compose a news item for the website RSSfeed</a>.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Create a new topic on <a href="https://discourse.nixos.org/">the Discourse instance</a> to announce the release.</p>
+</li>
+</ol>
+<p>You should include the following information:</p>
+<ul>
+<li>Number of commits for the release:</li>
+</ul>
+<pre><code class="language-sh">git log release-19.03..release-19.09 --format=%an | wc -l
+</code></pre>
+<ul>
+<li>Commits by contributor:</li>
+</ul>
+<pre><code class="language-sh">git shortlog --summary --numbered release-19.03..release-19.09
+</code></pre>
+<p>Best to check how the previous post was formulated to see what needs to
+be included.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="Home.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="Release-Management-Team.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="Home.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="Release-Management-Team.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>
