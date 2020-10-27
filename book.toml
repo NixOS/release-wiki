@@ -1,0 +1,6 @@
+[book]
+authors = ["WORLDofPEACE"]
+language = "en"
+multilingual = false
+src = "src"
+title = "NixOS Release Wiki"
