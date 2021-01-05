@@ -65,21 +65,27 @@ echo -n "20.03" > .version
 4.  [Update `codeName` in
     `lib/trivial.nix`](https://github.com/NixOS/nixpkgs/commit/01268fda85b7eee4e462c873d8654f975067731f#diff-03f3d41b68f62079c55001f1a1c55c1dR137)
     This will be the name for the next release.
-
+    
 5.  [Create a new release notes file for the upcoming release +
      1](https://github.com/NixOS/nixpkgs/commit/01268fda85b7eee4e462c873d8654f975067731f#diff-e7ee5ff686cdcc513ca089d6e5682587R11),
     in our case this is `rl-2003.xml`.
 
-6.  Contact the infrastructure team to create the necessary Hydra
+6.  Tag master branch so that `git describe` shows the correct metadata.
+```sh
+git tag --annotate 20.03-pre
+git push upstream 20.03-pre
+```
+
+7.  Contact the infrastructure team to create the necessary Hydra
     Jobsets.
 
-7.  [Create a channel at https://nixos.org/channels by creating a PR to
+8.  [Create a channel at https://nixos.org/channels by creating a PR to
     nixos-org-configurations, changing`channels.nix`](https://github.com/NixOS/nixos-org-configurations/blob/master/channels.nix)
 
-8.  Get all Hydra jobsets for the release to have their first
+9.  Get all Hydra jobsets for the release to have their first
     evaluation.
 
-9.  [Create an issue for tracking Zero Hydra Failures progress.
+10.  [Create an issue for tracking Zero Hydra Failures progress.
     ZHF is an effort to get build failures down to zero.](https://github.com/NixOS/nixpkgs/issues/13559)
 
 ## During Beta
