@@ -249,6 +249,14 @@ This will be the name for the next release.</p>
 in our case this is <code>rl-2003.xml</code>.</p>
 </li>
 <li>
+<p>Tag master branch so that <code>git describe</code> shows the correct metadata.</p>
+</li>
+</ol>
+<pre><code class="language-sh">git tag --annotate 20.03-pre
+git push upstream 20.03-pre
+</code></pre>
+<ol start="7">
+<li>
 <p>Contact the infrastructure team to create the necessary Hydra
 Jobsets.</p>
 </li>
