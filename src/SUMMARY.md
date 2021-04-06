@@ -6,3 +6,4 @@
 - [Release Schedule](Release-Schedule)
 - [ZERO Hydra Failures](Zero-Hydra-Failures)
 - [GO / NO-GO Meeting](GO-NO-GO-Meeting)
+- [Release Critical Packages](Release-Critical-Packages.md)
