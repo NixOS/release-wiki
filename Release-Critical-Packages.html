@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Home - NixOS Release Wiki</title>
+        <title>Release Critical Packages - NixOS Release Wiki</title>
         
         
 
@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html" class="active"><strong aria-hidden="true">1.</strong> Home</a></li><li class="chapter-item expanded "><a href="Release-Process-Walkthrough.html"><strong aria-hidden="true">2.</strong> Release Process Walkthrough</a></li><li class="chapter-item expanded "><a href="Release-Management-Team.html"><strong aria-hidden="true">3.</strong> Release Management Team</a></li><li class="chapter-item expanded "><a href="Release-Schedule.html"><strong aria-hidden="true">4.</strong> Release Schedule</a></li><li class="chapter-item expanded "><a href="Zero-Hydra-Failures.html"><strong aria-hidden="true">5.</strong> ZERO Hydra Failures</a></li><li class="chapter-item expanded "><a href="GO-NO-GO-Meeting.html"><strong aria-hidden="true">6.</strong> GO / NO-GO Meeting</a></li><li class="chapter-item expanded "><a href="Release-Critical-Packages.html"><strong aria-hidden="true">7.</strong> Release Critical Packages</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li class="chapter-item expanded "><a href="Release-Process-Walkthrough.html"><strong aria-hidden="true">2.</strong> Release Process Walkthrough</a></li><li class="chapter-item expanded "><a href="Release-Management-Team.html"><strong aria-hidden="true">3.</strong> Release Management Team</a></li><li class="chapter-item expanded "><a href="Release-Schedule.html"><strong aria-hidden="true">4.</strong> Release Schedule</a></li><li class="chapter-item expanded "><a href="Zero-Hydra-Failures.html"><strong aria-hidden="true">5.</strong> ZERO Hydra Failures</a></li><li class="chapter-item expanded "><a href="GO-NO-GO-Meeting.html"><strong aria-hidden="true">6.</strong> GO / NO-GO Meeting</a></li><li class="chapter-item expanded "><a href="Release-Critical-Packages.html" class="active"><strong aria-hidden="true">7.</strong> Release Critical Packages</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -163,23 +163,41 @@
 
                 <div id="content" class="content">
                     <main>
-                        <p align="center">
-  <a href="https://nixos.org/nixos"><img src="https://nixos.org/logo/nixos-hires.png" width="500px" alt="NixOS logo" /></a>
-</p>
-<p>This is the official wiki for the NixOS release process.
-All release managers should document how they're actively changing the release process here.
-And also use as it as a reference on how to release NixOS and engage the community.</p>
+                        <h1><a class="header" href="#release-critical-packages" id="release-critical-packages">Release Critical Packages</a></h1>
+<p>These packages are deemed &quot;sufficiently complex&quot; in the package ecosystem to
+warrant treating them differently when stabilizing the package set leading up to
+a stable release. Generally, theses packages will be closely related to <code>stdenv</code>
+or fundamental to NixOS (e.g. <code>systemd</code>). The implications of 
+<a href="https://github.com/NixOS/rfcs/blob/master/rfcs/0085-nixos-release-stablization.md">RFC 0085</a>
+are that these packages can not have breaking changes applied to them for six weeks
+leading up to a release date. This delay allows for changes in these packages to be
+sufficiently stabilized through usage on unstable, and allows for many staging
+iterations for these fixes to be applied.</p>
+<h2><a class="header" href="#list-of-release-critical-packages" id="list-of-release-critical-packages">List of Release Critical Packages:</a></h2>
+<ul>
+<li><code>binutils</code></li>
+<li><code>gcc</code></li>
+<li><code>glibc</code></li>
+<li><code>systemd</code></li>
+</ul>
+<h3><a class="header" href="#process-for-modifying-release-critical-packages" id="process-for-modifying-release-critical-packages">Process for Modifying Release Critical Packages</a></h3>
+<p>A release retrospective will take place after a release occured; one of the
+topics of discussion will be to modify the list of critical packages.
+Packages may be added if they caused a significant amount of pain, or packages
+may be removed if their updates cause little to no pain. Pain in this case
+is defined as causing failing builds, regressions in downstream packages,
+or regressions in user experience.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-
-                        
-                            <a rel="next" href="Release-Process-Walkthrough.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
+                            <a rel="prev" href="GO-NO-GO-Meeting.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
                             </a>
+                        
+
                         
 
                         <div style="clear: both"></div>
@@ -189,11 +207,11 @@ And also use as it as a reference on how to release NixOS and engage the communi
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-
-                
-                    <a rel="next" href="Release-Process-Walkthrough.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
+                    <a rel="prev" href="GO-NO-GO-Meeting.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
                     </a>
+                
+
                 
             </nav>
 
