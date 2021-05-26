@@ -111,12 +111,20 @@ git push upstream 20.03-pre
 
 2.  Update `rl-1909.xml` with the release date.
 
-3.  Tag the final release
+3.  Tag the release
 
 ```sh
-git tag --annotate --message="Release 19.09" 19.09
-git push upstream 19.09
+git tag --annotate --message="Release 19.09" 19.09-initial
+git push upstream 19.09-initial
 ```
+
+   <details><summary>Why <code>-initial</code>?</summary>
+    
+      Previously, when the `-initial` suffix wasn't there, the tags have caused confusion and security problems when user configurations accidentally reference the tag instead of the release branch.
+      While the tag marks a point in time that is somewhat arbitrary, it's role is important for removing the `-pre` suffix from `git describe`, making somewhat visible its status as a released stable branch.
+      
+   </details>
+
 
 4.  Update [nixos-homepage](https://github.com/NixOS/nixos-homepage) for
     the release.
