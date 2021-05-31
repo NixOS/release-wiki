@@ -1,15 +1,50 @@
 # Release Process Walkthrough
 
-Going through an example of releasing NixOS 19.09:
+## Release schedule
 
-## One month before the beta
+With RFC85, the release schedule is largely already dictated below:
+
+| Weeks from Release | Branches Affected | Events |
+| --- | --- | --- |
+| -8 Weeks | | Ask ecosystems for desired changes, in "Feature Freeze" |
+| -6 Weeks | `staging-next`, `staging` | Restrict breaking changes to Release Critical Packages |
+| -4 Weeks | `staging-next`, `staging` | Restrict all breaking changes: allow only non-breaking updates and Desktop Manager changes |
+| -3 Weeks | `master` | (Day before ZHF) merge `staging-next` into `master`, prep for ZHF |
+| -3 Weeks | `master` | Begin ZHF, Focus on minimizing regressions in PRs targeting `master` |
+| -2 Weeks | `master` | Merge first `staging-next` fixes into `master`; begin second `staging-next` cycle |
+| -2 Weeks | `staging` | Unrestrict all breaking changes; new changes will not be present in `master` before branch-off |
+| -1 Weeks | `master` | Merge second `staging-next` fix cycle |
+| -1 Weeks | `staging-next` | Unrestrict all breaking changes; new changes will not be present in `master` before branch-off |
+| -1 Weeks | `master`, `release` | Perform Branch-off, create release channels, create new beta / unstable tags |
+| -1 Weeks | `master`, `release` | ZHF transitions to "backporting" workflow |
+| -1 Weeks | `release` | Prepare for release, finish remaining issues |
+| 0 Weeks | `release` | Release! |
+| 0 Weeks | | ZHF Ends |
+
+Clarification of terms:
+
+| Term | Definition |
+| --- | --- |
+| `staging` | Git branch used to batch changes which cause large rebuilds (`500+` packages). This is to avoid straining infrastructure trying to build large package sets with each change. Since nix captures all changes in a dependency tree, a change to a fundamental package like glibc can affect 50,000+ packages. |
+| `staging-next` | Git branch used to build all of the batched changes. This branch has a [hydra jobset](https://hydra.nixos.org/jobset/nixpkgs/staging-next) which is used to fix regressions before the changes will be merged into master. |
+| `ZHF` | Zero Hydra Failures. A 2-4 week window before a release where there is a large attempt to stabilize failing builds. Also allows for additional "housekeeping" such as removing stale, abandoned, or unmaintained packages. |
+
+
+The purpose of these changes are mainly to push "riskier" PRs to being merged earlier,
+or after a release. Merging pull-requests which may have many downstream breakages should
+be avoided right before ZHF, as ZHF should focus on stabilization of the nixpkgs package
+set, and not distracted by large noise-to-signal build failures. Also, fixes to packages
+which required the `staging` process will likely require additional `staging` cycles to
+remedy the regressions.
+
+## 8 Weeks before release
 
 - Create an announcement on [Discourse](https://discourse.nixos.org)
   as a warning about upcoming beta “feature freeze” in a month. [See
   this post as an
   example](https://discourse.nixos.org/t/nixos-19-09-feature-freeze/3707).
 
-- Discuss with Eelco Dolstra and the community (via IRC, ML) about
+- Discuss with Eelco Dolstra and the community (via Matrix) about
   what will reach the deadline. Any issue or Pull Request targeting
   the release should be included in the release milestone.
 
@@ -19,25 +54,33 @@ Going through an example of releasing NixOS 19.09:
   end-of-life](https://www.kernel.org/category/releases.html) are
   after our release projected end-of-life.
 
-## At beta release time
+## Zero Hyra Failure
 
-1.  From the master branch run:
+1.  [Create an issue for tracking Zero Hydra Failures progress.
+    ZHF is an effort to get build failures down to zero.](https://github.com/NixOS/nixpkgs/issues/13559)
+
+2.  With RFC85, the [nixpkgs/trunk](https://hydra.nixos.org/jobset/nixpkgs/trunk) jobset will be used to track regressions.
+
+## At beta release time, 1 week before release
+
+1.  Merge current "Staging next" pull-request
+2.  From the master branch run:
 
 ```sh
 git checkout -b release-19.09
 ```
 
-2.  [Bump the `system.defaultChannel` attribute in
+3.  [Bump the `system.defaultChannel` attribute in
     `nixos/modules/misc/version.nix`](https://github.com/NixOS/nixpkgs/commit/10e61bf5be57736035ec7a804cb0bf3d083bf2cf#diff-9c798092bac0caeb5c52d509be0ca263R69)
 
-3.  [Update `versionSuffix` in
+4.  [Update `versionSuffix` in
     `nixos/release.nix`](https://github.com/NixOS/nixpkgs/commit/10e61bf5be57736035ec7a804cb0bf3d083bf2cf#diff-831e8d9748240fb23e6734fdc2a6d16eR15)
 
 To get the commit count, use the following command:
 
     git rev-list --count release-19.09
 
-1.  Edit changelog at `nixos/doc/manual/release-notes/rl-1909.xml`.
+5.  Edit changelog at `nixos/doc/manual/release-notes/rl-1909.xml`.
 
     - Get all new NixOS modules:
 
@@ -48,45 +91,39 @@ To get the commit count, use the following command:
     - Note systemd, kernel, glibc, desktop environment, and Nix
       upgrades.
 
-2.  Tag the release:
+6.  Tag the release:
 
 ```sh
 git tag --annotate --message="Release 19.09-beta" 19.09-beta
 git push upstream 19.09-beta
 ```
 
-3.  [On the `master` branch, increment the `.version`
+7.  [On the `master` branch, increment the `.version`
     file](https://github.com/NixOS/nixpkgs/commit/01268fda85b7eee4e462c873d8654f975067731f#diff-2bc0e46110b507d6d5a344264ef15adaR1)
 
 ```sh
 echo -n "20.03" > .version
 ```
 
-4.  [Update `codeName` in
+8.  [Update `codeName` in
     `lib/trivial.nix`](https://github.com/NixOS/nixpkgs/commit/01268fda85b7eee4e462c873d8654f975067731f#diff-03f3d41b68f62079c55001f1a1c55c1dR137)
     This will be the name for the next release.
     
-5.  [Create a new release notes file for the upcoming release +
+9.  [Create a new release notes file for the upcoming release +
      1](https://github.com/NixOS/nixpkgs/commit/01268fda85b7eee4e462c873d8654f975067731f#diff-e7ee5ff686cdcc513ca089d6e5682587R11),
     in our case this is `rl-2003.xml`.
 
-6.  Tag master branch so that `git describe` shows the correct metadata.
+10.  Tag master branch so that `git describe` shows the correct metadata.
 ```sh
 git tag --annotate 20.03-pre
 git push upstream 20.03-pre
 ```
 
-7.  Contact the infrastructure team to create the necessary Hydra
+11.  Contact the infrastructure team to create the necessary Hydra
     Jobsets.
 
-8.  [Create a channel at https://nixos.org/channels by creating a PR to
+12.  [Create a channel at https://nixos.org/channels by creating a PR to
     nixos-org-configurations, changing`channels.nix`](https://github.com/NixOS/nixos-org-configurations/blob/master/channels.nix)
-
-9.  Get all Hydra jobsets for the release to have their first
-    evaluation.
-
-10.  [Create an issue for tracking Zero Hydra Failures progress.
-    ZHF is an effort to get build failures down to zero.](https://github.com/NixOS/nixpkgs/issues/13559)
 
 ## During Beta
 
