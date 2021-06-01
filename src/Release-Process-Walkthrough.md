@@ -121,19 +121,21 @@ git push upstream 19.09
 4.  Update [nixos-homepage](https://github.com/NixOS/nixos-homepage) for
     the release.
 
-    1.  [Update `NIXOS_SERIES` in the `Makefile`](https://github.com/NixOS/nixos-homepage/blob/47ac3571c4d71e841fd4e6c6e1872e762b9c4942/Makefile#L1).
+    1.  [Update the `flake.nix` input `released-nixpkgs` to 19.09](https://github.com/NixOS/nixos-homepage/blob/47ac3571c4d71e841fd4e6c6e1872e762b9c4942/flake.nix#L10).
 
-    2.  [Update `nixos-release.tt` with the new NixOS version](https://github.com/NixOS/nixos-homepage/blob/47ac3571c4d71e841fd4e6c6e1872e762b9c4942/nixos-release.tt#L1).
+    2.  Run `./scripts/update.sh` (this updates flake.lock to updated channel).
 
-    3.  [Update the `flake.nix` input `released-nixpkgs` to 19.09](https://github.com/NixOS/nixos-homepage/blob/47ac3571c4d71e841fd4e6c6e1872e762b9c4942/flake.nix#L10).
+    3.  [Add a compressed version of the NixOS logo for 19.09](https://github.com/NixOS/nixos-homepage/blob/a5626c71c03a2dd69086564e56f1a230a2bb177a/logo/nixos-logo-19.09-loris-lores.png).
 
-    4.  Run `./update.sh` (this updates flake.lock to updated channel).
+    4.  [Compose a news item for the website RSSfeed](https://github.com/NixOS/nixos-homepage/commit/a5626c71c03a2dd69086564e56f1a230a2bb177a#diff-9cdc6434d3e4fd93a6e5bb0a531a7c71R5).
 
-    5.  [Add a compressed version of the NixOS logo for 19.09](https://github.com/NixOS/nixos-homepage/blob/a5626c71c03a2dd69086564e56f1a230a2bb177a/logo/nixos-logo-19.09-loris-lores.png).
+5.  Update [nixos-search](https://github.com/NixOS/nixos-search/)
 
-    6.  [Compose a news item for the website RSSfeed](https://github.com/NixOS/nixos-homepage/commit/a5626c71c03a2dd69086564e56f1a230a2bb177a#diff-9cdc6434d3e4fd93a6e5bb0a531a7c71R5).
+    1.  Follow similar changes to [this PR](https://github.com/NixOS/nixos-search/pull/311/files).
 
-5.  Create a new topic on [the Discourse instance](https://discourse.nixos.org/) to announce the release.
+    2.  Get in contact with Garbas to ensure proper deployment.
+
+6.  Create a new topic on [the Discourse instance](https://discourse.nixos.org/) to announce the release.
 
 You should include the following information:
 
