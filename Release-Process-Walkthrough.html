@@ -344,22 +344,27 @@ git push upstream 19.09
 the release.</p>
 <ol>
 <li>
-<p><a href="https://github.com/NixOS/nixos-homepage/blob/47ac3571c4d71e841fd4e6c6e1872e762b9c4942/Makefile#L1">Update <code>NIXOS_SERIES</code> in the <code>Makefile</code></a>.</p>
-</li>
-<li>
-<p><a href="https://github.com/NixOS/nixos-homepage/blob/47ac3571c4d71e841fd4e6c6e1872e762b9c4942/nixos-release.tt#L1">Update <code>nixos-release.tt</code> with the new NixOS version</a>.</p>
-</li>
-<li>
 <p><a href="https://github.com/NixOS/nixos-homepage/blob/47ac3571c4d71e841fd4e6c6e1872e762b9c4942/flake.nix#L10">Update the <code>flake.nix</code> input <code>released-nixpkgs</code> to 19.09</a>.</p>
 </li>
 <li>
-<p>Run <code>./update.sh</code> (this updates flake.lock to updated channel).</p>
+<p>Run <code>./scripts/update.sh</code> (this updates flake.lock to updated channel).</p>
 </li>
 <li>
 <p><a href="https://github.com/NixOS/nixos-homepage/blob/a5626c71c03a2dd69086564e56f1a230a2bb177a/logo/nixos-logo-19.09-loris-lores.png">Add a compressed version of the NixOS logo for 19.09</a>.</p>
 </li>
 <li>
 <p><a href="https://github.com/NixOS/nixos-homepage/commit/a5626c71c03a2dd69086564e56f1a230a2bb177a#diff-9cdc6434d3e4fd93a6e5bb0a531a7c71R5">Compose a news item for the website RSSfeed</a>.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Update <a href="https://github.com/NixOS/nixos-search/">nixos-search</a></p>
+<ol>
+<li>
+<p>Follow similar changes to <a href="https://github.com/NixOS/nixos-search/pull/311/files">this PR</a>.</p>
+</li>
+<li>
+<p>Get in contact with Garbas to ensure proper deployment.</p>
 </li>
 </ol>
 </li>
