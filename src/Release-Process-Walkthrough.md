@@ -190,3 +190,19 @@ git shortlog --summary --numbered release-19.03..release-19.09
 
 Best to check how the previous post was formulated to see what needs to
 be included.
+
+## After Release
+
+1.  [Update repology](https://github.com/repology/repology-updater/pull/1156/files)
+
+2.  Update osinfo-db entries. [example](https://gitlab.com/libosinfo/osinfo-db/-/merge_requests/312)
+
+```sh
+nix-shell -p "python3.withPackages (p: [ p.lxml p.requests ])" -p cdrkit
+./scripts/updates/nixos.py --release YY.MM --codename <codename> --release-date YYYY-MM-DD --next-release YY.MM
+git add .
+git commit -s -m "nixos: Add YY.MM release"
+
+# run tests to validate your changes
+nix-shell -p "python3.withPackages (p: [ p.lxml p.requests p.pytest ])" -p cdrkit osinfo-db-tools gettext --run "make check"
+```
