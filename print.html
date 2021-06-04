@@ -172,8 +172,37 @@
 All release managers should document how they're actively changing the release process here.
 And also use as it as a reference on how to release NixOS and engage the community.</p>
 <h1><a class="header" href="#release-process-walkthrough" id="release-process-walkthrough">Release Process Walkthrough</a></h1>
-<p>Going through an example of releasing NixOS 19.09:</p>
-<h2><a class="header" href="#one-month-before-the-beta" id="one-month-before-the-beta">One month before the beta</a></h2>
+<h2><a class="header" href="#release-schedule" id="release-schedule">Release schedule</a></h2>
+<p>With RFC85, the release schedule is largely already dictated below:</p>
+<table><thead><tr><th>Weeks from Release</th><th>Branches Affected</th><th>Events</th></tr></thead><tbody>
+<tr><td>-8 Weeks</td><td></td><td>Ask ecosystems for desired changes, in &quot;Feature Freeze&quot;</td></tr>
+<tr><td>-6 Weeks</td><td><code>staging-next</code>, <code>staging</code></td><td>Restrict breaking changes to Release Critical Packages</td></tr>
+<tr><td>-4 Weeks</td><td><code>staging-next</code>, <code>staging</code></td><td>Restrict all breaking changes: allow only non-breaking updates and Desktop Manager changes</td></tr>
+<tr><td>-3 Weeks</td><td><code>master</code></td><td>(Day before ZHF) merge <code>staging-next</code> into <code>master</code>, prep for ZHF</td></tr>
+<tr><td>-3 Weeks</td><td><code>master</code></td><td>Begin ZHF, Focus on minimizing regressions in PRs targeting <code>master</code></td></tr>
+<tr><td>-2 Weeks</td><td><code>master</code></td><td>Merge first <code>staging-next</code> fixes into <code>master</code>; begin second <code>staging-next</code> cycle</td></tr>
+<tr><td>-2 Weeks</td><td><code>staging</code></td><td>Unrestrict all breaking changes; new changes will not be present in <code>master</code> before branch-off</td></tr>
+<tr><td>-1 Weeks</td><td><code>master</code></td><td>Merge second <code>staging-next</code> fix cycle</td></tr>
+<tr><td>-1 Weeks</td><td><code>staging-next</code></td><td>Unrestrict all breaking changes; new changes will not be present in <code>master</code> before branch-off</td></tr>
+<tr><td>-1 Weeks</td><td><code>master</code>, <code>release</code></td><td>Perform Branch-off, create release channels, create new beta / unstable tags</td></tr>
+<tr><td>-1 Weeks</td><td><code>master</code>, <code>release</code></td><td>ZHF transitions to &quot;backporting&quot; workflow</td></tr>
+<tr><td>-1 Weeks</td><td><code>release</code></td><td>Prepare for release, finish remaining issues</td></tr>
+<tr><td>0 Weeks</td><td><code>release</code></td><td>Release!</td></tr>
+<tr><td>0 Weeks</td><td></td><td>ZHF Ends</td></tr>
+</tbody></table>
+<p>Clarification of terms:</p>
+<table><thead><tr><th>Term</th><th>Definition</th></tr></thead><tbody>
+<tr><td><code>staging</code></td><td>Git branch used to batch changes which cause large rebuilds (<code>500+</code> packages). This is to avoid straining infrastructure trying to build large package sets with each change. Since nix captures all changes in a dependency tree, a change to a fundamental package like glibc can affect 50,000+ packages.</td></tr>
+<tr><td><code>staging-next</code></td><td>Git branch used to build all of the batched changes. This branch has a <a href="https://hydra.nixos.org/jobset/nixpkgs/staging-next">hydra jobset</a> which is used to fix regressions before the changes will be merged into master.</td></tr>
+<tr><td><code>ZHF</code></td><td>Zero Hydra Failures. A 2-4 week window before a release where there is a large attempt to stabilize failing builds. Also allows for additional &quot;housekeeping&quot; such as removing stale, abandoned, or unmaintained packages.</td></tr>
+</tbody></table>
+<p>The purpose of these changes are mainly to push &quot;riskier&quot; PRs to being merged earlier,
+or after a release. Merging pull-requests which may have many downstream breakages should
+be avoided right before ZHF, as ZHF should focus on stabilization of the nixpkgs package
+set, and not distracted by large noise-to-signal build failures. Also, fixes to packages
+which required the <code>staging</code> process will likely require additional <code>staging</code> cycles to
+remedy the regressions.</p>
+<h2><a class="header" href="#8-weeks-before-release" id="8-weeks-before-release">8 Weeks before release</a></h2>
 <ul>
 <li>
 <p>Create an announcement on <a href="https://discourse.nixos.org">Discourse</a>
@@ -182,7 +211,7 @@ this post as an
 example</a>.</p>
 </li>
 <li>
-<p>Discuss with Eelco Dolstra and the community (via IRC, ML) about
+<p>Discuss with Eelco Dolstra and the community (via Matrix) about
 what will reach the deadline. Any issue or Pull Request targeting
 the release should be included in the release milestone.</p>
 </li>
@@ -194,13 +223,24 @@ end-of-life</a> are
 after our release projected end-of-life.</p>
 </li>
 </ul>
-<h2><a class="header" href="#at-beta-release-time" id="at-beta-release-time">At beta release time</a></h2>
+<h2><a class="header" href="#zero-hyra-failure" id="zero-hyra-failure">Zero Hyra Failure</a></h2>
 <ol>
+<li>
+<p><a href="https://github.com/NixOS/nixpkgs/issues/13559">Create an issue for tracking Zero Hydra Failures progress.
+ZHF is an effort to get build failures down to zero.</a></p>
+</li>
+<li>
+<p>With RFC85, the <a href="https://hydra.nixos.org/jobset/nixpkgs/trunk">nixpkgs/trunk</a> jobset will be used to track regressions.</p>
+</li>
+</ol>
+<h2><a class="header" href="#at-beta-release-time-1-week-before-release" id="at-beta-release-time-1-week-before-release">At beta release time, 1 week before release</a></h2>
+<ol>
+<li>Merge current &quot;Staging next&quot; pull-request</li>
 <li>From the master branch run:</li>
 </ol>
 <pre><code class="language-sh">git checkout -b release-19.09
 </code></pre>
-<ol start="2">
+<ol start="3">
 <li>
 <p><a href="https://github.com/NixOS/nixpkgs/commit/10e61bf5be57736035ec7a804cb0bf3d083bf2cf#diff-9c798092bac0caeb5c52d509be0ca263R69">Bump the <code>system.defaultChannel</code> attribute in
 <code>nixos/modules/misc/version.nix</code></a></p>
@@ -213,7 +253,7 @@ after our release projected end-of-life.</p>
 <p>To get the commit count, use the following command:</p>
 <pre><code>git rev-list --count release-19.09
 </code></pre>
-<ol>
+<ol start="5">
 <li>
 <p>Edit changelog at <code>nixos/doc/manual/release-notes/rl-1909.xml</code>.</p>
 <ul>
@@ -235,13 +275,13 @@ upgrades.</p>
 <pre><code class="language-sh">git tag --annotate --message=&quot;Release 19.09-beta&quot; 19.09-beta
 git push upstream 19.09-beta
 </code></pre>
-<ol start="3">
+<ol start="7">
 <li><a href="https://github.com/NixOS/nixpkgs/commit/01268fda85b7eee4e462c873d8654f975067731f#diff-2bc0e46110b507d6d5a344264ef15adaR1">On the <code>master</code> branch, increment the <code>.version</code>
 file</a></li>
 </ol>
 <pre><code class="language-sh">echo -n &quot;20.03&quot; &gt; .version
 </code></pre>
-<ol start="4">
+<ol start="8">
 <li>
 <p><a href="https://github.com/NixOS/nixpkgs/commit/01268fda85b7eee4e462c873d8654f975067731f#diff-03f3d41b68f62079c55001f1a1c55c1dR137">Update <code>codeName</code> in
 <code>lib/trivial.nix</code></a>
@@ -259,7 +299,7 @@ in our case this is <code>rl-2003.xml</code>.</p>
 <pre><code class="language-sh">git tag --annotate 20.03-pre
 git push upstream 20.03-pre
 </code></pre>
-<ol start="7">
+<ol start="11">
 <li>
 <p>Contact the infrastructure team to create the necessary Hydra
 Jobsets.</p>
@@ -267,14 +307,6 @@ Jobsets.</p>
 <li>
 <p><a href="https://github.com/NixOS/nixos-org-configurations/blob/master/channels.nix">Create a channel at https://nixos.org/channels by creating a PR to
 nixos-org-configurations, changing<code>channels.nix</code></a></p>
-</li>
-<li>
-<p>Get all Hydra jobsets for the release to have their first
-evaluation.</p>
-</li>
-<li>
-<p><a href="https://github.com/NixOS/nixpkgs/issues/13559">Create an issue for tracking Zero Hydra Failures progress.
-ZHF is an effort to get build failures down to zero.</a></p>
 </li>
 </ol>
 <h2><a class="header" href="#during-beta" id="during-beta">During Beta</a></h2>
@@ -389,7 +421,7 @@ release</p>
 <p>This team has special write permissions to certain repositories in NixOS.
 It is <strong>very</strong> important that the new co-release-manager removes the previous manager
 from the team when they assign a new one.</p>
-<h1><a class="header" href="#release-schedule" id="release-schedule">Release Schedule</a></h1>
+<h1><a class="header" href="#release-schedule-1" id="release-schedule-1">Release Schedule</a></h1>
 <h1><a class="header" href="#zero-hydra-failures" id="zero-hydra-failures">ZERO Hydra Failures</a></h1>
 <h1><a class="header" href="#go--no-go-meeting" id="go--no-go-meeting">GO / NO-GO Meeting</a></h1>
 <h1><a class="header" href="#release-critical-packages" id="release-critical-packages">Release Critical Packages</a></h1>
