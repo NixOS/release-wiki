@@ -393,6 +393,23 @@ the release.</p>
 </code></pre>
 <p>Best to check how the previous post was formulated to see what needs to
 be included.</p>
+<h2><a class="header" href="#after-release" id="after-release">After Release</a></h2>
+<ol>
+<li>
+<p><a href="https://github.com/repology/repology-updater/pull/1156/files">Update repology</a></p>
+</li>
+<li>
+<p>Update osinfo-db entries. <a href="https://gitlab.com/libosinfo/osinfo-db/-/merge_requests/312">example</a></p>
+</li>
+</ol>
+<pre><code class="language-sh">nix-shell -p &quot;python3.withPackages (p: [ p.lxml p.requests ])&quot; -p cdrkit
+./scripts/updates/nixos.py --release YY.MM --codename &lt;codename&gt; --release-date YYYY-MM-DD --next-release YY.MM
+git add .
+git commit -s -m &quot;nixos: Add YY.MM release&quot;
+
+# run tests to validate your changes
+nix-shell -p &quot;python3.withPackages (p: [ p.lxml p.requests p.pytest ])&quot; -p cdrkit osinfo-db-tools gettext --run &quot;make check&quot;
+</code></pre>
 <h1><a class="header" href="#release-management-team" id="release-management-team">Release Management Team</a></h1>
 <p>For each release there are two release managers. After each release the
 release manager having managed two releases steps down and the release
