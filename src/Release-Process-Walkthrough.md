@@ -206,3 +206,9 @@ git commit -s -m "nixos: Add YY.MM release"
 # run tests to validate your changes
 nix-shell -p "python3.withPackages (p: [ p.lxml p.requests p.pytest ])" -p cdrkit osinfo-db-tools gettext --run "make check"
 ```
+
+3.  Update ami images
+
+  1.  Someone with s3 buck permssions will need to run `https://github.com/NixOS/nixpkgs/blob/master/nixos/maintainers/scripts/ec2/create-amis.sh` (usually AmineChikhaoui).
+
+  2.  [Create PR adding it to NixOS configuration](https://github.com/NixOS/nixpkgs/pull/101720).
