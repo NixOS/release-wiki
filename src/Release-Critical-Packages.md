@@ -14,6 +14,7 @@ iterations for these fixes to be applied.
 - `binutils`
 - `gcc`
 - `glibc`
+- `llvm`
 - `systemd`
 
 ### Process for Modifying Release Critical Packages
