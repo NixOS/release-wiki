@@ -2,7 +2,7 @@
 
 These packages are deemed "sufficiently complex" in the package ecosystem to
 warrant treating them differently when stabilizing the package set leading up to
-a stable release. Generally, theses packages will be closely related to `stdenv`
+a stable release. Generally, these packages will be closely related to `stdenv`
 or fundamental to NixOS (e.g. `systemd`). The implications of 
 [RFC 0085](https://github.com/NixOS/rfcs/blob/master/rfcs/0085-nixos-release-stablization.md)
 are that these packages can not have breaking changes applied to them for six weeks
