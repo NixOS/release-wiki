@@ -96,6 +96,13 @@ To get the commit count, use the following command:
 ```sh
 git tag --annotate --message="Release 19.09-beta" 19.09-beta
 git push upstream 19.09-beta
+
+# create staging branches
+git checkout -b staging-19.09
+git push upstream staging-19.09
+
+git checkout -b staging-next-19.09
+git push upstream staging-next-19.09
 ```
 
 7.  [On the `master` branch, increment the `.version`
