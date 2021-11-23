@@ -266,6 +266,13 @@ upgrades.</p>
 </ol>
 <pre><code class="language-sh">git tag --annotate --message=&quot;Release 19.09-beta&quot; 19.09-beta
 git push upstream 19.09-beta
+
+# create staging branches
+git checkout -b staging-19.09
+git push upstream staging-19.09
+
+git checkout -b staging-next-19.09
+git push upstream staging-next-19.09
 </code></pre>
 <ol start="7">
 <li><a href="https://github.com/NixOS/nixpkgs/commit/01268fda85b7eee4e462c873d8654f975067731f#diff-2bc0e46110b507d6d5a344264ef15adaR1">On the <code>master</code> branch, increment the <code>.version</code>
