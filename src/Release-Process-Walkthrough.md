@@ -143,7 +143,7 @@ git push upstream 20.03-pre
 
 - Release Nix (currently only Eelco Dolstra can do that). [Make sure fallback is updated.](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/installer/tools/nix-fallback-paths.nix)
 
-- [Update README.md with new stable NixOS version information.](https://github.com/NixOS/nixpkgs/commit/40fd9ae3ac8048758abdcfc7d28a78b5f22fe97e) (for both `master` and `release-19.09` branches)
+- [Update README.md with new stable NixOS version information.](https://github.com/NixOS/nixpkgs/commit/40fd9ae3ac8048758abdcfc7d28a78b5f22fe97e) (for both `master` then backport to `release-19.09` branch)
 
 - Two days before expected release date, change `stableBranch` to `true` in Hydra and wait for the channel to
   update.
