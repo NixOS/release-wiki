@@ -127,7 +127,7 @@ git push upstream 20.03-pre
 ```
 
 11.  Contact the infrastructure team to create the necessary Hydra
-    Jobsets. (nixos-21.11, nixos-21.11-small, nixos-21.11-aarch64)
+    Jobsets. (nixos-19.09, nixos-19.09-small, nixos-19.09-aarch64, nixpkgs-19.09-darwin)
 
 12.  [Create a channel at https://nixos.org/channels by creating a PR to
     nixos-org-configurations, changing`channels.nix`](https://github.com/NixOS/nixos-org-configurations/blob/master/channels.nix)
@@ -139,14 +139,13 @@ git push upstream 20.03-pre
 
 ## Before the final release
 
+- Two days before expected release date, change `stableBranch` to `true` in Hydra and wait for the channel to update.
+
 - Re-check that the release notes are complete.
 
 - Release Nix (currently only Eelco Dolstra can do that). [Make sure fallback is updated.](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/installer/tools/nix-fallback-paths.nix)
 
 - [Update README.md with new stable NixOS version information.](https://github.com/NixOS/nixpkgs/commit/40fd9ae3ac8048758abdcfc7d28a78b5f22fe97e) (for both `master` then backport to `release-19.09` branch)
-
-- Two days before expected release date, change `stableBranch` to `true` in Hydra and wait for the channel to
-  update.
 
 ## At final release time
 Create these PRs on master and backport to release-19.09.
@@ -187,7 +186,7 @@ You should include the following information:
 - Number of commits for the release:
 
 ```sh
-git log origin/release-19.03..release-19.09 --format=%an | wc -l
+git log upstream/release-19.03..upstream/release-19.09 --format=%an | wc -l
 ```
 
 - Commits by contributor:
