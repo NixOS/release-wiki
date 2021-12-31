@@ -54,6 +54,9 @@ remedy the regressions.
   end-of-life](https://www.kernel.org/category/releases.html) are
   after our release projected end-of-life.
 
+- Ensure that release managers have restart, abort, and bump 
+  privileges on hydra.nixos.org.
+
 ## Zero Hyra Failure
 
 1.  [Create an issue for tracking Zero Hydra Failures progress.
