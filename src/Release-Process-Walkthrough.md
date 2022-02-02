@@ -222,3 +222,8 @@ nix-shell -p "python3.withPackages (p: [ p.lxml p.requests p.pytest ])" -p cdrki
   1.  Someone with s3 buck permssions will need to run `https://github.com/NixOS/nixpkgs/blob/master/nixos/maintainers/scripts/ec2/create-amis.sh` (usually AmineChikhaoui).
 
   2.  [Create PR adding it to NixOS configuration](https://github.com/NixOS/nixpkgs/pull/101720).
+
+## A Month after Release
+
+1. [EOL Channels should be marked unmaintained](https://github.com/NixOS/nixos-org-configurations/pull/201)
+
