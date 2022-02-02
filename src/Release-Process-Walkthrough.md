@@ -201,6 +201,11 @@ git shortlog --summary --numbered release-19.03..release-19.09
 Best to check how the previous post was formulated to see what needs to
 be included.
 
+7. Update [nixos-org-configurations](https://github.com/NixOS/nixos-org-configurations/pull/192/files) with updated channel status
+
+  - previous stable branches should be marked "deprecated"
+  - beta branches should be marked "stable"
+
 ## After Release
 
 1.  [Update repology](https://github.com/repology/repology-updater/pull/1156/files)
