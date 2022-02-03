@@ -54,6 +54,9 @@ remedy the regressions.
   end-of-life](https://www.kernel.org/category/releases.html) are
   after our release projected end-of-life.
 
+- Ensure that all release managers are included in the
+  [release-manager group](https://github.com/orgs/NixOS/teams/nixos-release-managers/members)
+
 - Ensure that release managers have restart, abort, and bump 
   privileges on hydra.nixos.org.
 
