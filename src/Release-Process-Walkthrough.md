@@ -154,6 +154,10 @@ git push upstream 20.03-pre
 - Change `stableBranch` to `true` in Hydra and wait for the channel to
   update.
 
+- Ensure the following items are sufficiently tested:
+  - Graphical NixOS installer images (Can be found on nixos hydra jobset)
+  - Minimal NixOS installer images (Can be found on nixos hydra jobset)
+
 ## At final release time
 
 1.  Update [Upgrading NixOS](https://nixos.org/manual/nixos/stable/index.html#sec-upgrading) section of the manual to match new
