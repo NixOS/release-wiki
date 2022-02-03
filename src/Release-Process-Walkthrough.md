@@ -53,6 +53,10 @@ remedy the regressions.
   Linux kernels’ [projected
   end-of-life](https://www.kernel.org/category/releases.html) are
   after our release projected end-of-life.
+  
+- Request scale up of Hydra resources for the duration of ZHF and release to improve the
+  iteration speed we can support and reduce the timeframe of alowing large rebuilds.
+  eg: https://github.com/NixOS/nixos-org-configurations/issues/186
 
 - Ensure that all release managers are included in the
   [release-manager group](https://github.com/orgs/NixOS/teams/nixos-release-managers/members)
