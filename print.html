@@ -322,7 +322,7 @@ git push upstream 20.03-pre
 <ol start="11">
 <li>
 <p>Contact the infrastructure team to create the necessary Hydra
-Jobsets.</p>
+Jobsets. (nixos-19.09, nixos-19.09-small, nixos-19.09-aarch64, nixpkgs-19.09-darwin)</p>
 </li>
 <li>
 <p><a href="https://github.com/NixOS/nixos-org-configurations/blob/master/channels.nix">Create a channel at https://nixos.org/channels by creating a PR to
@@ -337,17 +337,16 @@ cherry-pick them to the release branch.</li>
 <h2><a class="header" href="#before-the-final-release" id="before-the-final-release">Before the final release</a></h2>
 <ul>
 <li>
+<p>Two days before expected release date, change <code>stableBranch</code> to <code>true</code> in Hydra and wait for the channel to update.</p>
+</li>
+<li>
 <p>Re-check that the release notes are complete.</p>
 </li>
 <li>
 <p>Release Nix (currently only Eelco Dolstra can do that). <a href="https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/installer/tools/nix-fallback-paths.nix">Make sure fallback is updated.</a></p>
 </li>
 <li>
-<p><a href="https://github.com/NixOS/nixpkgs/commit/40fd9ae3ac8048758abdcfc7d28a78b5f22fe97e">Update README.md with new stable NixOS version information.</a></p>
-</li>
-<li>
-<p>Change <code>stableBranch</code> to <code>true</code> in Hydra and wait for the channel to
-update.</p>
+<p><a href="https://github.com/NixOS/nixpkgs/commit/40fd9ae3ac8048758abdcfc7d28a78b5f22fe97e">Update README.md with new stable NixOS version information.</a> (for both <code>master</code> then backport to <code>release-19.09</code> branch)</p>
 </li>
 <li>
 <p>Ensure the following items are sufficiently tested:</p>
@@ -358,6 +357,7 @@ update.</p>
 </li>
 </ul>
 <h2><a class="header" href="#at-final-release-time" id="at-final-release-time">At final release time</a></h2>
+<p>Create these PRs on master and backport to release-19.09.</p>
 <ol>
 <li>
 <p>Update <a href="https://nixos.org/manual/nixos/stable/index.html#sec-upgrading">Upgrading NixOS</a> section of the manual to match new
@@ -411,7 +411,7 @@ the release.</p>
 <ul>
 <li>Number of commits for the release:</li>
 </ul>
-<pre><code class="language-sh">git log release-19.03..release-19.09 --format=%an | wc -l
+<pre><code class="language-sh">git log upstream/release-19.03..upstream/release-19.09 --format=%an | wc -l
 </code></pre>
 <ul>
 <li>Commits by contributor:</li>
