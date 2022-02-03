@@ -137,7 +137,7 @@ git push upstream 20.03-pre
 ```
 
 11.  Contact the infrastructure team to create the necessary Hydra
-    Jobsets.
+    Jobsets. (nixos-19.09, nixos-19.09-small, nixos-19.09-aarch64, nixpkgs-19.09-darwin)
 
 12.  [Create a channel at https://nixos.org/channels by creating a PR to
     nixos-org-configurations, changing`channels.nix`](https://github.com/NixOS/nixos-org-configurations/blob/master/channels.nix)
@@ -149,20 +149,20 @@ git push upstream 20.03-pre
 
 ## Before the final release
 
+- Two days before expected release date, change `stableBranch` to `true` in Hydra and wait for the channel to update.
+
 - Re-check that the release notes are complete.
 
 - Release Nix (currently only Eelco Dolstra can do that). [Make sure fallback is updated.](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/installer/tools/nix-fallback-paths.nix)
 
-- [Update README.md with new stable NixOS version information.](https://github.com/NixOS/nixpkgs/commit/40fd9ae3ac8048758abdcfc7d28a78b5f22fe97e)
-
-- Change `stableBranch` to `true` in Hydra and wait for the channel to
-  update.
+- [Update README.md with new stable NixOS version information.](https://github.com/NixOS/nixpkgs/commit/40fd9ae3ac8048758abdcfc7d28a78b5f22fe97e) (for both `master` then backport to `release-19.09` branch)
 
 - Ensure the following items are sufficiently tested:
   - Graphical NixOS installer images (Can be found on nixos hydra jobset)
   - Minimal NixOS installer images (Can be found on nixos hydra jobset)
 
 ## At final release time
+Create these PRs on master and backport to release-19.09.
 
 1.  Update [Upgrading NixOS](https://nixos.org/manual/nixos/stable/index.html#sec-upgrading) section of the manual to match new
     stable release version.
@@ -200,7 +200,7 @@ You should include the following information:
 - Number of commits for the release:
 
 ```sh
-git log release-19.03..release-19.09 --format=%an | wc -l
+git log upstream/release-19.03..upstream/release-19.09 --format=%an | wc -l
 ```
 
 - Commits by contributor:
