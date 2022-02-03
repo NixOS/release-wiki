@@ -404,6 +404,13 @@ the release.</p>
 </code></pre>
 <p>Best to check how the previous post was formulated to see what needs to
 be included.</p>
+<ol start="7">
+<li>Update <a href="https://github.com/NixOS/nixos-org-configurations/pull/192/files">nixos-org-configurations</a> with updated channel status</li>
+</ol>
+<ul>
+<li>previous stable branches should be marked &quot;deprecated&quot;</li>
+<li>beta branches should be marked &quot;stable&quot;</li>
+</ul>
 <h2><a class="header" href="#after-release" id="after-release">After Release</a></h2>
 <ol>
 <li>
@@ -431,6 +438,10 @@ nix-shell -p &quot;python3.withPackages (p: [ p.lxml p.requests p.pytest ])&quot
 <li>
 <p><a href="https://github.com/NixOS/nixpkgs/pull/101720">Create PR adding it to NixOS configuration</a>.</p>
 </li>
+</ol>
+<h2><a class="header" href="#a-month-after-release" id="a-month-after-release">A Month after Release</a></h2>
+<ol>
+<li><a href="https://github.com/NixOS/nixos-org-configurations/pull/201">EOL Channels should be marked unmaintained</a></li>
 </ol>
 <h1><a class="header" href="#release-management-team" id="release-management-team">Release Management Team</a></h1>
 <p>For each release there are two release managers. After each release the
