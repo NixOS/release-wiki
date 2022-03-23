@@ -73,6 +73,9 @@ remedy the regressions.
 
 ## At beta release time, 1 week before release
 
+For these steps "19.09" represents the current release tag and "20.03" represents the next
+(6 months in the future) release tag.
+
 1.  Merge current "Staging next" pull-request
 2.  From the master branch run:
 
@@ -136,8 +139,29 @@ git tag --annotate 20.03-pre
 git push upstream 20.03-pre
 ```
 
-11.  Contact the infrastructure team to create the necessary Hydra
-    Jobsets. (nixos-19.09, nixos-19.09-small, nixos-19.09-aarch64, nixpkgs-19.09-darwin)
+11.  Contact the infrastructure team to create the necessary Hydra Jobsets. (TODO: document neccessary steps)
+    - https://hydra.nixos.org/project/nixos
+        - release-19.09	NixOS 19.09
+        - release-19.09-aarch64	NixOS 19.09
+        - release-19.09-small	NixOS 19.09
+    - https://hydra.nixos.org/project/nixpkgs
+        - nixpkgs-19.09-darwin
+        - nixpkgs-staging-next
+
+For example: https://hydra.nixos.org/jobset/nixos/release-19.09#tabs-configuration
+```
+State:	Enabled
+Description:	NixOS 19.09 release branch
+Nix expression:	nixos/release-combined.nix in input nixpkgs
+Check interval:	86400
+Scheduling shares:	5000000 (8.21% out of 60904568 shares)
+Number of evaluations to keep:	1
+Inputs
+Input name	Type	Values
+nixpkgs	Git checkout	https://github.com/NixOS/nixpkgs.git release-19.09
+stableBranch	Boolean	false
+supportedSystems	Nix expression	[ "x86_64-linux" "aarch64-linux" ]
+```
 
 12.  [Create a channel at https://nixos.org/channels by creating a PR to
     nixos-org-configurations, changing`channels.nix`](https://github.com/NixOS/nixos-org-configurations/blob/master/channels.nix)
