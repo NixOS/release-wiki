@@ -97,7 +97,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li class="chapter-item expanded "><a href="Release-Process-Walkthrough.html"><strong aria-hidden="true">2.</strong> Release Process Walkthrough</a></li><li class="chapter-item expanded "><a href="Release-Management-Team.html"><strong aria-hidden="true">3.</strong> Release Management Team</a></li><li class="chapter-item expanded "><a href="Release-Schedule.html"><strong aria-hidden="true">4.</strong> Release Schedule</a></li><li class="chapter-item expanded "><a href="Zero-Hydra-Failures.html"><strong aria-hidden="true">5.</strong> ZERO Hydra Failures</a></li><li class="chapter-item expanded "><a href="GO-NO-GO-Meeting.html"><strong aria-hidden="true">6.</strong> GO / NO-GO Meeting</a></li><li class="chapter-item expanded "><a href="Release-Critical-Packages.html"><strong aria-hidden="true">7.</strong> Release Critical Packages</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li class="chapter-item expanded "><a href="Release-Management-Team.html"><strong aria-hidden="true">2.</strong> Release Management Team</a></li><li class="chapter-item expanded "><a href="Release-Critical-Packages.html"><strong aria-hidden="true">3.</strong> Release Critical Packages</a></li><li class="chapter-item expanded "><a href="Release-Process.html"><strong aria-hidden="true">4.</strong> Release Process</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Zero-Hydra-Failures.html"><strong aria-hidden="true">4.1.</strong> ZERO Hydra Failures (contents TBD)</a></li><li class="chapter-item expanded "><a href="GO-NO-GO-Meeting.html"><strong aria-hidden="true">4.2.</strong> GO / NO-GO Meeting (contents TBD)</a></li><li class="chapter-item expanded "><a href="Release-Process-Walkthrough.html"><strong aria-hidden="true">4.3.</strong> Release Process Walkthrough</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -171,9 +171,69 @@
 <p>This is the official wiki for the NixOS release process.
 All release managers should document how they're actively changing the release process here.
 And also use as it as a reference on how to release NixOS and engage the community.</p>
-<h1><a class="header" href="#release-process-walkthrough" id="release-process-walkthrough">Release Process Walkthrough</a></h1>
-<h2><a class="header" href="#release-schedule" id="release-schedule">Release schedule</a></h2>
-<p>With RFC85, the release schedule is largely already dictated below:</p>
+<h1><a class="header" href="#release-management-team" id="release-management-team">Release Management Team</a></h1>
+<p>For each release there are two release managers. After each release the
+release manager having managed two releases steps down and the release
+management team of the last release appoints a new release manager.</p>
+<p>This makes sure a release management team always consists of one release
+manager who already has managed one release and one release manager
+being introduced to their role, making it easier to pass on knowledge
+and experience.</p>
+<p>Release managers for the current NixOS release are tracked by GitHub
+team
+<a href="https://github.com/orgs/NixOS/teams/nixos-release-managers/members"><code>@NixOS/nixos-release-managers</code></a>.</p>
+<p>A release manager’s role and responsibilities are:</p>
+<ul>
+<li>
+<p>manage the release process</p>
+</li>
+<li>
+<p>start discussions about features and changes for a given release</p>
+</li>
+<li>
+<p>create a roadmap</p>
+</li>
+<li>
+<p>release in cooperation with Eelco Dolstra</p>
+</li>
+<li>
+<p>decide which bug fixes, features, etc… get backported after a
+release</p>
+</li>
+</ul>
+<p>This team has special write permissions to certain repositories in NixOS.
+It is <strong>very</strong> important that the new co-release-manager removes the previous manager
+from the team when they assign a new one.</p>
+<h1><a class="header" href="#release-critical-packages" id="release-critical-packages">Release Critical Packages</a></h1>
+<p>These packages are deemed &quot;sufficiently complex&quot; in the package ecosystem to
+warrant treating them differently when stabilizing the package set leading up to
+a stable release. Generally, these packages will be closely related to <code>stdenv</code>
+or fundamental to NixOS (e.g. <code>systemd</code>). The implications of 
+<a href="https://github.com/NixOS/rfcs/blob/master/rfcs/0085-nixos-release-stablization.md">RFC 0085</a>
+are that these packages can not have breaking changes applied to them for six weeks
+leading up to a release date. This delay allows for changes in these packages to be
+sufficiently stabilized through usage on unstable, and allows for many staging
+iterations for these fixes to be applied.</p>
+<h2><a class="header" href="#list-of-release-critical-packages" id="list-of-release-critical-packages">List of Release Critical Packages:</a></h2>
+<ul>
+<li><code>binutils</code></li>
+<li><code>gcc</code></li>
+<li><code>glibc</code></li>
+<li><code>llvm</code></li>
+<li><code>systemd</code></li>
+</ul>
+<h3><a class="header" href="#process-for-modifying-release-critical-packages" id="process-for-modifying-release-critical-packages">Process for Modifying Release Critical Packages</a></h3>
+<p>A release retrospective will take place after a release occured; one of the
+topics of discussion will be to modify the list of critical packages.
+Packages may be added if they caused a significant amount of pain, or packages
+may be removed if their updates cause little to no pain. Pain in this case
+is defined as causing failing builds, regressions in downstream packages,
+or regressions in user experience.</p>
+<h1><a class="header" href="#release-process" id="release-process">Release Process</a></h1>
+<p>These pages give an overview of the release process with as many details as there are available at the time of writing.</p>
+<p>Since this is an ongoing refactoring, the last few steps are collapsed into a single page</p>
+<h2><a class="header" href="#release-schedule" id="release-schedule">Release Schedule</a></h2>
+<p>With <a href="https://github.com/NixOS/rfcs/blob/master/rfcs/0085-nixos-release-stablization.md">RFC85</a>, the release schedule is largely already dictated below:</p>
 <table><thead><tr><th>Weeks from Release</th><th>Branches Affected</th><th>Events</th></tr></thead><tbody>
 <tr><td>-8 Weeks</td><td></td><td>Ask ecosystems for desired changes, in &quot;Feature Freeze&quot;</td></tr>
 <tr><td>-6 Weeks</td><td><code>staging-next</code>, <code>staging</code></td><td>Restrict breaking changes to Release Critical Packages</td></tr>
@@ -192,8 +252,8 @@ And also use as it as a reference on how to release NixOS and engage the communi
 </tbody></table>
 <p>Clarification of terms:</p>
 <table><thead><tr><th>Term</th><th>Definition</th></tr></thead><tbody>
-<tr><td><code>staging</code></td><td>Git branch used to batch changes which cause large rebuilds (<code>500+</code> packages). This is to avoid straining infrastructure trying to build large package sets with each change. Since nix captures all changes in a dependency tree, a change to a fundamental package like glibc can affect 50,000+ packages.</td></tr>
-<tr><td><code>staging-next</code></td><td>Git branch used to build all of the batched changes. This branch has a <a href="https://hydra.nixos.org/jobset/nixpkgs/staging-next">hydra jobset</a> which is used to fix regressions before the changes will be merged into master.</td></tr>
+<tr><td><code>staging</code></td><td>Git branch used to batch changes which cause large rebuilds (<code>500+</code> packages). This is to avoid straining infrastructure trying to build large package sets with each change. Since nix captures all changes in a dependency tree, a change to a fundamental package like glibc can affect <code>50,000+</code> packages.</td></tr>
+<tr><td><code>staging-next</code></td><td>Git branch used to build all of the batched changes. This branch has a <a href="https://hydra.nixos.org/jobset/nixpkgs/staging-next">Hydra jobset</a> which is used to fix regressions before the changes will be merged into master.</td></tr>
 <tr><td><code>ZHF</code></td><td>Zero Hydra Failures. A 2-4 week window before a release where there is a large attempt to stabilize failing builds. Also allows for additional &quot;housekeeping&quot; such as removing stale, abandoned, or unmaintained packages.</td></tr>
 </tbody></table>
 <p>The purpose of these changes are mainly to push &quot;riskier&quot; PRs to being merged earlier,
@@ -202,6 +262,9 @@ be avoided right before ZHF, as ZHF should focus on stabilization of the nixpkgs
 set, and not distracted by large noise-to-signal build failures. Also, fixes to packages
 which required the <code>staging</code> process will likely require additional <code>staging</code> cycles to
 remedy the regressions.</p>
+<h1><a class="header" href="#zero-hydra-failures" id="zero-hydra-failures">ZERO Hydra Failures</a></h1>
+<h1><a class="header" href="#go--no-go-meeting" id="go--no-go-meeting">GO / NO-GO Meeting</a></h1>
+<h1><a class="header" href="#release-process-walkthrough" id="release-process-walkthrough">Release Process Walkthrough</a></h1>
 <h2><a class="header" href="#8-weeks-before-release" id="8-weeks-before-release">8 Weeks before release</a></h2>
 <ul>
 <li>
@@ -481,67 +544,6 @@ nix-shell -p &quot;python3.withPackages (p: [ p.lxml p.requests p.pytest ])&quot
 <ol>
 <li><a href="https://github.com/NixOS/nixos-org-configurations/pull/201">EOL Channels should be marked unmaintained</a></li>
 </ol>
-<h1><a class="header" href="#release-management-team" id="release-management-team">Release Management Team</a></h1>
-<p>For each release there are two release managers. After each release the
-release manager having managed two releases steps down and the release
-management team of the last release appoints a new release manager.</p>
-<p>This makes sure a release management team always consists of one release
-manager who already has managed one release and one release manager
-being introduced to their role, making it easier to pass on knowledge
-and experience.</p>
-<p>Release managers for the current NixOS release are tracked by GitHub
-team
-<a href="https://github.com/orgs/NixOS/teams/nixos-release-managers/members"><code>@NixOS/nixos-release-managers</code></a>.</p>
-<p>A release manager’s role and responsibilities are:</p>
-<ul>
-<li>
-<p>manage the release process</p>
-</li>
-<li>
-<p>start discussions about features and changes for a given release</p>
-</li>
-<li>
-<p>create a roadmap</p>
-</li>
-<li>
-<p>release in cooperation with Eelco Dolstra</p>
-</li>
-<li>
-<p>decide which bug fixes, features, etc… get backported after a
-release</p>
-</li>
-</ul>
-<p>This team has special write permissions to certain repositories in NixOS.
-It is <strong>very</strong> important that the new co-release-manager removes the previous manager
-from the team when they assign a new one.</p>
-<h1><a class="header" href="#release-schedule-1" id="release-schedule-1">Release Schedule</a></h1>
-<h1><a class="header" href="#zero-hydra-failures" id="zero-hydra-failures">ZERO Hydra Failures</a></h1>
-<h1><a class="header" href="#go--no-go-meeting" id="go--no-go-meeting">GO / NO-GO Meeting</a></h1>
-<h1><a class="header" href="#release-critical-packages" id="release-critical-packages">Release Critical Packages</a></h1>
-<p>These packages are deemed &quot;sufficiently complex&quot; in the package ecosystem to
-warrant treating them differently when stabilizing the package set leading up to
-a stable release. Generally, these packages will be closely related to <code>stdenv</code>
-or fundamental to NixOS (e.g. <code>systemd</code>). The implications of 
-<a href="https://github.com/NixOS/rfcs/blob/master/rfcs/0085-nixos-release-stablization.md">RFC 0085</a>
-are that these packages can not have breaking changes applied to them for six weeks
-leading up to a release date. This delay allows for changes in these packages to be
-sufficiently stabilized through usage on unstable, and allows for many staging
-iterations for these fixes to be applied.</p>
-<h2><a class="header" href="#list-of-release-critical-packages" id="list-of-release-critical-packages">List of Release Critical Packages:</a></h2>
-<ul>
-<li><code>binutils</code></li>
-<li><code>gcc</code></li>
-<li><code>glibc</code></li>
-<li><code>llvm</code></li>
-<li><code>systemd</code></li>
-</ul>
-<h3><a class="header" href="#process-for-modifying-release-critical-packages" id="process-for-modifying-release-critical-packages">Process for Modifying Release Critical Packages</a></h3>
-<p>A release retrospective will take place after a release occured; one of the
-topics of discussion will be to modify the list of critical packages.
-Packages may be added if they caused a significant amount of pain, or packages
-may be removed if their updates cause little to no pain. Pain in this case
-is defined as causing failing builds, regressions in downstream packages,
-or regressions in user experience.</p>
 
                     </main>
 
