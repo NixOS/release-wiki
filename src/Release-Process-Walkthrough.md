@@ -229,4 +229,4 @@ nix-shell -p "python3.withPackages (p: [ p.lxml p.requests p.pytest ])" -p cdrki
 ## A Month after Release
 
 1. [EOL Channels should be marked unmaintained](https://github.com/NixOS/nixos-org-configurations/pull/201)
-
+2. Increase the `oldestSupportedRelease` in `lib/trivial.nix` to match the oldest non-EOL release.
