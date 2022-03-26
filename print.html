@@ -172,6 +172,11 @@
 All release managers should document how they're actively changing the release process here.
 And also use as it as a reference on how to release NixOS and engage the community.</p>
 <h1><a class="header" href="#release-management-team" id="release-management-team">Release Management Team</a></h1>
+<blockquote>
+<p>When you are nixpkgs committer, you already have the skillset necessary for release management.
+You just need to apply it in a different way.</p>
+<p>— Jon Ringer</p>
+</blockquote>
 <p>For each release there are two release managers. After each release the
 release manager having managed two releases steps down and the release
 management team of the last release appoints a new release manager.</p>
@@ -204,6 +209,7 @@ release</p>
 <p>This team has special write permissions to certain repositories in NixOS.
 It is <strong>very</strong> important that the new co-release-manager removes the previous manager
 from the team when they assign a new one.</p>
+<p>A release manager must have the commit bit in the nixpkgs repository.</p>
 <h1><a class="header" href="#release-critical-packages" id="release-critical-packages">Release Critical Packages</a></h1>
 <p>These packages are deemed &quot;sufficiently complex&quot; in the package ecosystem to
 warrant treating them differently when stabilizing the package set leading up to
