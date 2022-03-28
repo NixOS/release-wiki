@@ -21,12 +21,6 @@
   iteration speed we can support and reduce the timeframe of alowing large rebuilds.
   eg: https://github.com/NixOS/nixos-org-configurations/issues/186
 
-- Ensure that all release managers are included in the
-  [release-manager group](https://github.com/orgs/NixOS/teams/nixos-release-managers/members)
-
-- Ensure that release managers have restart, abort, and bump 
-  privileges on hydra.nixos.org.
-
 ## Zero Hyra Failure
 
 1.  [Create an issue for tracking Zero Hydra Failures progress.
