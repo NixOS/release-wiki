@@ -97,7 +97,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li class="chapter-item expanded "><a href="Release-Management-Team.html"><strong aria-hidden="true">2.</strong> Release Management Team</a></li><li class="chapter-item expanded "><a href="Release-Critical-Packages.html"><strong aria-hidden="true">3.</strong> Release Critical Packages</a></li><li class="chapter-item expanded "><a href="Release-Process.html"><strong aria-hidden="true">4.</strong> Release Process</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Zero-Hydra-Failures.html"><strong aria-hidden="true">4.1.</strong> ZERO Hydra Failures (contents TBD)</a></li><li class="chapter-item expanded "><a href="GO-NO-GO-Meeting.html"><strong aria-hidden="true">4.2.</strong> GO / NO-GO Meeting (contents TBD)</a></li><li class="chapter-item expanded "><a href="Release-Process-Walkthrough.html"><strong aria-hidden="true">4.3.</strong> Release Process Walkthrough</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li class="chapter-item expanded "><a href="Release-Management-Team.html"><strong aria-hidden="true">2.</strong> Release Management Team</a></li><li class="chapter-item expanded "><a href="Release-Critical-Packages.html"><strong aria-hidden="true">3.</strong> Release Critical Packages</a></li><li class="chapter-item expanded "><a href="Release-Process.html"><strong aria-hidden="true">4.</strong> Release Process</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Once-Appointed.html"><strong aria-hidden="true">4.1.</strong> What to do once appointed</a></li><li class="chapter-item expanded "><a href="Zero-Hydra-Failures.html"><strong aria-hidden="true">4.2.</strong> ZERO Hydra Failures (contents TBD)</a></li><li class="chapter-item expanded "><a href="GO-NO-GO-Meeting.html"><strong aria-hidden="true">4.3.</strong> GO / NO-GO Meeting (contents TBD)</a></li><li class="chapter-item expanded "><a href="Release-Process-Walkthrough.html"><strong aria-hidden="true">4.4.</strong> Release Process Walkthrough</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -171,6 +171,10 @@
 <p>This is the official wiki for the NixOS release process.
 All release managers should document how they're actively changing the release process here.
 And also use as it as a reference on how to release NixOS and engage the community.</p>
+<p>This is not a set of rules but rather what the previous release managers did.
+It mainly serves as a list of tasks to remember and is not written in stone.
+This means that if you are a Release Manager and think you can do thing better, feel free to do so!
+Also, if you are not a Release Manager and think the process can be improved, open an Issue or Pull Request on the <a href="https://github.com/NixOS/release-wiki">repository</a>.</p>
 <h1><a class="header" href="#release-management-team" id="release-management-team">Release Management Team</a></h1>
 <blockquote>
 <p>When you are nixpkgs committer, you already have the skillset necessary for release management.
@@ -268,6 +272,48 @@ be avoided right before ZHF, as ZHF should focus on stabilization of the nixpkgs
 set, and not distracted by large noise-to-signal build failures. Also, fixes to packages
 which required the <code>staging</code> process will likely require additional <code>staging</code> cycles to
 remedy the regressions.</p>
+<h1><a class="header" href="#what-to-do-once-appointed" id="what-to-do-once-appointed">What to do once appointed</a></h1>
+<p>You have been appointed as the new Release Manager? Congratulations!
+This is a loose list of things you could start doing now.
+These tasks are not urgent but can be done as early as the appointment which should start to get you into your new role.
+While not urgent, these task need to be completed at some point before the release process starts.
+The release manager of the previous release will get in contact with you and help you along the way.</p>
+<p>This is not an actual part of the release process but rather preparations for starting the process.</p>
+<ul>
+<li>Get in contact with the previous release manager and schedule a meeting</li>
+<li>Enter the <a href="https://matrix.to/#/#nixos-release-management:nixos.org">release management Matrix room</a></li>
+<li>Gain access to the <a href="https://github.com/orgs/NixOS/teams/nixos-release-managers/members">release-manager GitHub Team</a> by asking any of the existing people with &quot;Manager&quot; rights
+<ul>
+<li>Also make sure there are only people left as members who are managing this release</li>
+</ul>
+</li>
+<li>Ensure you have a <a href="https://hydra.nixos.org/">Hydra</a> account which will come in handy
+<ul>
+<li>Ensure that all release managers have at least <code>restart-jobs</code>, <code>bump-to-front</code>, and <code>cancel-build</code> privileges (see the top-right &quot;Preferences&quot; button). If they are missing, reach out to the Infrastructure team</li>
+</ul>
+</li>
+<li>Create a blockers <a href="https://github.com/orgs/NixOS/projects">project</a> in the organization for your release and the next one
+<ul>
+<li>Also close old ones while you're at it and consider migrating remaining open issues to the current project</li>
+</ul>
+</li>
+<li>You may also create a <a href="https://github.com/NixOS/nixpkgs/milestones">release milestone</a> in the nixpkgs project. This is not really used for the process but people from different subsystems often use it. If you don't create it, someone else will probably do so</li>
+<li>Figure out a codename for the next release (not the one you are releasing but the next one) and write it down somewhere for the branch-off</li>
+<li>Find someone to create a <a href="https://github.com/NixOS/nixos-artwork/tree/master/releases">logo</a> or create one yourself for the current release and PR it into the repository</li>
+<li>Check if the process can be improved this release
+<ul>
+<li>Find comments on the Discourse posts, GitHub issues, … of the previous release and see if the comments suggest doing something different this time</li>
+<li>Read the Discourse post of the last retrospective</li>
+<li>Check the Issues and Pull Requests of the <a href="https://github.com/NixOS/release-wiki">release-wiki repository</a></li>
+</ul>
+</li>
+<li>Figure out concrete dates for the week offsets outlined in schedule</li>
+<li>Publish a &quot;Let's have a great XX.XX release cycle!&quot; post on Discourse, outlining the plans for this release. <a href="https://discourse.nixos.org/t/lets-have-a-great-22-05-release-cycle/18357">Example of 22.05</a>
+<ul>
+<li>This links to the release schedule issue (<a href="https://github.com/NixOS/nixpkgs/issues/165792">22.05 example</a>) which must be created before posting to Discourse</li>
+</ul>
+</li>
+</ul>
 <h1><a class="header" href="#zero-hydra-failures" id="zero-hydra-failures">ZERO Hydra Failures</a></h1>
 <h1><a class="header" href="#go--no-go-meeting" id="go--no-go-meeting">GO / NO-GO Meeting</a></h1>
 <h1><a class="header" href="#release-process-walkthrough" id="release-process-walkthrough">Release Process Walkthrough</a></h1>
@@ -295,14 +341,6 @@ after our release projected end-of-life.</p>
 <p>Request scale up of Hydra resources for the duration of ZHF and release to improve the
 iteration speed we can support and reduce the timeframe of alowing large rebuilds.
 eg: https://github.com/NixOS/nixos-org-configurations/issues/186</p>
-</li>
-<li>
-<p>Ensure that all release managers are included in the
-<a href="https://github.com/orgs/NixOS/teams/nixos-release-managers/members">release-manager group</a></p>
-</li>
-<li>
-<p>Ensure that release managers have restart, abort, and bump 
-privileges on hydra.nixos.org.</p>
 </li>
 </ul>
 <h2><a class="header" href="#zero-hyra-failure" id="zero-hyra-failure">Zero Hyra Failure</a></h2>

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Release Process - NixOS Release Wiki</title>
+        <title>What to do once appointed - NixOS Release Wiki</title>
         
         
 
@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li class="chapter-item expanded "><a href="Release-Management-Team.html"><strong aria-hidden="true">2.</strong> Release Management Team</a></li><li class="chapter-item expanded "><a href="Release-Critical-Packages.html"><strong aria-hidden="true">3.</strong> Release Critical Packages</a></li><li class="chapter-item expanded "><a href="Release-Process.html" class="active"><strong aria-hidden="true">4.</strong> Release Process</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Once-Appointed.html"><strong aria-hidden="true">4.1.</strong> What to do once appointed</a></li><li class="chapter-item expanded "><a href="Zero-Hydra-Failures.html"><strong aria-hidden="true">4.2.</strong> ZERO Hydra Failures (contents TBD)</a></li><li class="chapter-item expanded "><a href="GO-NO-GO-Meeting.html"><strong aria-hidden="true">4.3.</strong> GO / NO-GO Meeting (contents TBD)</a></li><li class="chapter-item expanded "><a href="Release-Process-Walkthrough.html"><strong aria-hidden="true">4.4.</strong> Release Process Walkthrough</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li class="chapter-item expanded "><a href="Release-Management-Team.html"><strong aria-hidden="true">2.</strong> Release Management Team</a></li><li class="chapter-item expanded "><a href="Release-Critical-Packages.html"><strong aria-hidden="true">3.</strong> Release Critical Packages</a></li><li class="chapter-item expanded "><a href="Release-Process.html"><strong aria-hidden="true">4.</strong> Release Process</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Once-Appointed.html" class="active"><strong aria-hidden="true">4.1.</strong> What to do once appointed</a></li><li class="chapter-item expanded "><a href="Zero-Hydra-Failures.html"><strong aria-hidden="true">4.2.</strong> ZERO Hydra Failures (contents TBD)</a></li><li class="chapter-item expanded "><a href="GO-NO-GO-Meeting.html"><strong aria-hidden="true">4.3.</strong> GO / NO-GO Meeting (contents TBD)</a></li><li class="chapter-item expanded "><a href="Release-Process-Walkthrough.html"><strong aria-hidden="true">4.4.</strong> Release Process Walkthrough</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -163,52 +163,61 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#release-process" id="release-process">Release Process</a></h1>
-<p>These pages give an overview of the release process with as many details as there are available at the time of writing.</p>
-<p>Since this is an ongoing refactoring, the last few steps are collapsed into a single page</p>
-<h2><a class="header" href="#release-schedule" id="release-schedule">Release Schedule</a></h2>
-<p>With <a href="https://github.com/NixOS/rfcs/blob/master/rfcs/0085-nixos-release-stablization.md">RFC85</a>, the release schedule is largely already dictated below:</p>
-<table><thead><tr><th>Weeks from Release</th><th>Branches Affected</th><th>Events</th></tr></thead><tbody>
-<tr><td>-8 Weeks</td><td></td><td>Ask ecosystems for desired changes, in &quot;Feature Freeze&quot;</td></tr>
-<tr><td>-6 Weeks</td><td><code>staging-next</code>, <code>staging</code></td><td>Restrict breaking changes to Release Critical Packages</td></tr>
-<tr><td>-4 Weeks</td><td><code>staging-next</code>, <code>staging</code></td><td>Restrict all breaking changes: allow only non-breaking updates and Desktop Manager changes</td></tr>
-<tr><td>-3 Weeks</td><td><code>master</code></td><td>(Day before ZHF) merge <code>staging-next</code> into <code>master</code>, prep for ZHF</td></tr>
-<tr><td>-3 Weeks</td><td><code>master</code></td><td>Begin ZHF, Focus on minimizing regressions in PRs targeting <code>master</code></td></tr>
-<tr><td>-2 Weeks</td><td><code>master</code></td><td>Merge first <code>staging-next</code> fixes into <code>master</code>; begin second <code>staging-next</code> cycle</td></tr>
-<tr><td>-2 Weeks</td><td><code>staging</code></td><td>Unrestrict all breaking changes; new changes will not be present in <code>master</code> before branch-off</td></tr>
-<tr><td>-1 Weeks</td><td><code>master</code></td><td>Merge second <code>staging-next</code> fix cycle</td></tr>
-<tr><td>-1 Weeks</td><td><code>staging-next</code></td><td>Unrestrict all breaking changes; new changes will not be present in <code>master</code> before branch-off</td></tr>
-<tr><td>-1 Weeks</td><td><code>master</code>, <code>release</code></td><td>Perform Branch-off, create release channels, create new beta / unstable tags</td></tr>
-<tr><td>-1 Weeks</td><td><code>master</code>, <code>release</code></td><td>ZHF transitions to &quot;backporting&quot; workflow</td></tr>
-<tr><td>-1 Weeks</td><td><code>release</code></td><td>Prepare for release, finish remaining issues</td></tr>
-<tr><td>0 Weeks</td><td><code>release</code></td><td>Release!</td></tr>
-<tr><td>0 Weeks</td><td></td><td>ZHF Ends</td></tr>
-</tbody></table>
-<p>Clarification of terms:</p>
-<table><thead><tr><th>Term</th><th>Definition</th></tr></thead><tbody>
-<tr><td><code>staging</code></td><td>Git branch used to batch changes which cause large rebuilds (<code>500+</code> packages). This is to avoid straining infrastructure trying to build large package sets with each change. Since nix captures all changes in a dependency tree, a change to a fundamental package like glibc can affect <code>50,000+</code> packages.</td></tr>
-<tr><td><code>staging-next</code></td><td>Git branch used to build all of the batched changes. This branch has a <a href="https://hydra.nixos.org/jobset/nixpkgs/staging-next">Hydra jobset</a> which is used to fix regressions before the changes will be merged into master.</td></tr>
-<tr><td><code>ZHF</code></td><td>Zero Hydra Failures. A 2-4 week window before a release where there is a large attempt to stabilize failing builds. Also allows for additional &quot;housekeeping&quot; such as removing stale, abandoned, or unmaintained packages.</td></tr>
-</tbody></table>
-<p>The purpose of these changes are mainly to push &quot;riskier&quot; PRs to being merged earlier,
-or after a release. Merging pull-requests which may have many downstream breakages should
-be avoided right before ZHF, as ZHF should focus on stabilization of the nixpkgs package
-set, and not distracted by large noise-to-signal build failures. Also, fixes to packages
-which required the <code>staging</code> process will likely require additional <code>staging</code> cycles to
-remedy the regressions.</p>
+                        <h1><a class="header" href="#what-to-do-once-appointed" id="what-to-do-once-appointed">What to do once appointed</a></h1>
+<p>You have been appointed as the new Release Manager? Congratulations!
+This is a loose list of things you could start doing now.
+These tasks are not urgent but can be done as early as the appointment which should start to get you into your new role.
+While not urgent, these task need to be completed at some point before the release process starts.
+The release manager of the previous release will get in contact with you and help you along the way.</p>
+<p>This is not an actual part of the release process but rather preparations for starting the process.</p>
+<ul>
+<li>Get in contact with the previous release manager and schedule a meeting</li>
+<li>Enter the <a href="https://matrix.to/#/#nixos-release-management:nixos.org">release management Matrix room</a></li>
+<li>Gain access to the <a href="https://github.com/orgs/NixOS/teams/nixos-release-managers/members">release-manager GitHub Team</a> by asking any of the existing people with &quot;Manager&quot; rights
+<ul>
+<li>Also make sure there are only people left as members who are managing this release</li>
+</ul>
+</li>
+<li>Ensure you have a <a href="https://hydra.nixos.org/">Hydra</a> account which will come in handy
+<ul>
+<li>Ensure that all release managers have at least <code>restart-jobs</code>, <code>bump-to-front</code>, and <code>cancel-build</code> privileges (see the top-right &quot;Preferences&quot; button). If they are missing, reach out to the Infrastructure team</li>
+</ul>
+</li>
+<li>Create a blockers <a href="https://github.com/orgs/NixOS/projects">project</a> in the organization for your release and the next one
+<ul>
+<li>Also close old ones while you're at it and consider migrating remaining open issues to the current project</li>
+</ul>
+</li>
+<li>You may also create a <a href="https://github.com/NixOS/nixpkgs/milestones">release milestone</a> in the nixpkgs project. This is not really used for the process but people from different subsystems often use it. If you don't create it, someone else will probably do so</li>
+<li>Figure out a codename for the next release (not the one you are releasing but the next one) and write it down somewhere for the branch-off</li>
+<li>Find someone to create a <a href="https://github.com/NixOS/nixos-artwork/tree/master/releases">logo</a> or create one yourself for the current release and PR it into the repository</li>
+<li>Check if the process can be improved this release
+<ul>
+<li>Find comments on the Discourse posts, GitHub issues, … of the previous release and see if the comments suggest doing something different this time</li>
+<li>Read the Discourse post of the last retrospective</li>
+<li>Check the Issues and Pull Requests of the <a href="https://github.com/NixOS/release-wiki">release-wiki repository</a></li>
+</ul>
+</li>
+<li>Figure out concrete dates for the week offsets outlined in schedule</li>
+<li>Publish a &quot;Let's have a great XX.XX release cycle!&quot; post on Discourse, outlining the plans for this release. <a href="https://discourse.nixos.org/t/lets-have-a-great-22-05-release-cycle/18357">Example of 22.05</a>
+<ul>
+<li>This links to the release schedule issue (<a href="https://github.com/NixOS/nixpkgs/issues/165792">22.05 example</a>) which must be created before posting to Discourse</li>
+</ul>
+</li>
+</ul>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="Release-Critical-Packages.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="Release-Process.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="Once-Appointed.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="Zero-Hydra-Failures.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -220,13 +229,13 @@ remedy the regressions.</p>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a rel="prev" href="Release-Critical-Packages.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="Release-Process.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a rel="next" href="Once-Appointed.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="Zero-Hydra-Failures.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
