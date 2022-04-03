@@ -17,6 +17,7 @@ This is not an actual part of the release process but rather preparations for st
 - Create a blockers [project](https://github.com/orgs/NixOS/projects) in the organization for your release and the next one
 	- Also close old ones while you're at it and consider migrating remaining open issues to the current project
 - You may also create a [release milestone](https://github.com/NixOS/nixpkgs/milestones) in the nixpkgs project. This is not really used for the process but people from different subsystems often use it. If you don't create it, someone else will probably do so
+	- Close milestones of previous releases
 - Figure out a codename for the next release (not the one you are releasing but the next one) and write it down somewhere for the branch-off
 - Find someone to create a [logo](https://github.com/NixOS/nixos-artwork/tree/master/releases) or create one yourself for the current release and PR it into the repository
 - Check if the process can be improved this release
