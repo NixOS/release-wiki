@@ -1,26 +1,5 @@
 # Release Process Walkthrough
 
-## 8 Weeks before release
-
-- Create an announcement on [Discourse](https://discourse.nixos.org)
-  as a warning about upcoming beta “feature freeze” in a month. [See
-  this post as an
-  example](https://discourse.nixos.org/t/nixos-19-09-feature-freeze/3707).
-
-- Discuss with Eelco Dolstra and the community (via Matrix) about
-  what will reach the deadline. Any issue or Pull Request targeting
-  the release should be included in the release milestone.
-
-- Remove attributes that we know we will not be able to support,
-  especially if there is a stable alternative. E.g. Check that our
-  Linux kernels’ [projected
-  end-of-life](https://www.kernel.org/category/releases.html) are
-  after our release projected end-of-life.
-
-- Request scale up of Hydra resources for the duration of ZHF and release to improve the
-  iteration speed we can support and reduce the timeframe of alowing large rebuilds.
-  eg: https://github.com/NixOS/nixos-org-configurations/issues/186
-
 ## Zero Hyra Failure
 
 1.  [Create an issue for tracking Zero Hydra Failures progress.
