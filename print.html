@@ -97,7 +97,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li class="chapter-item expanded "><a href="Release-Management-Team.html"><strong aria-hidden="true">2.</strong> Release Management Team</a></li><li class="chapter-item expanded "><a href="Release-Critical-Packages.html"><strong aria-hidden="true">3.</strong> Release Critical Packages</a></li><li class="chapter-item expanded "><a href="Release-Process.html"><strong aria-hidden="true">4.</strong> Release Process</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Once-Appointed.html"><strong aria-hidden="true">4.1.</strong> What to do once appointed</a></li><li class="chapter-item expanded "><a href="Zero-Hydra-Failures.html"><strong aria-hidden="true">4.2.</strong> ZERO Hydra Failures (contents TBD)</a></li><li class="chapter-item expanded "><a href="GO-NO-GO-Meeting.html"><strong aria-hidden="true">4.3.</strong> GO / NO-GO Meeting (contents TBD)</a></li><li class="chapter-item expanded "><a href="Release-Process-Walkthrough.html"><strong aria-hidden="true">4.4.</strong> Release Process Walkthrough</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li class="chapter-item expanded "><a href="Release-Management-Team.html"><strong aria-hidden="true">2.</strong> Release Management Team</a></li><li class="chapter-item expanded "><a href="Release-Critical-Packages.html"><strong aria-hidden="true">3.</strong> Release Critical Packages</a></li><li class="chapter-item expanded "><a href="Release-Process.html"><strong aria-hidden="true">4.</strong> Release Process</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Once-Appointed.html"><strong aria-hidden="true">4.1.</strong> What to do once appointed</a></li><li class="chapter-item expanded "><a href="Feature-Freeze-Announcement.html"><strong aria-hidden="true">4.2.</strong> Feature Freeze announcement and pre-release cleanup</a></li><li class="chapter-item expanded "><a href="Zero-Hydra-Failures.html"><strong aria-hidden="true">4.3.</strong> ZERO Hydra Failures</a></li><li class="chapter-item expanded "><a href="GO-NO-GO-Meeting.html"><strong aria-hidden="true">4.4.</strong> GO / NO-GO Meeting (contents TBD)</a></li><li class="chapter-item expanded "><a href="Release-Process-Walkthrough.html"><strong aria-hidden="true">4.5.</strong> Release Process Walkthrough</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -319,35 +319,60 @@ The release manager of the previous release will get in contact with you and hel
 </ul>
 </li>
 </ul>
-<h1><a class="header" href="#zero-hydra-failures" id="zero-hydra-failures">ZERO Hydra Failures</a></h1>
-<h1><a class="header" href="#go--no-go-meeting" id="go--no-go-meeting">GO / NO-GO Meeting</a></h1>
-<h1><a class="header" href="#release-process-walkthrough" id="release-process-walkthrough">Release Process Walkthrough</a></h1>
-<h2><a class="header" href="#8-weeks-before-release" id="8-weeks-before-release">8 Weeks before release</a></h2>
+<h1><a class="header" href="#feature-freeze-announcement-and-pre-release-cleanup" id="feature-freeze-announcement-and-pre-release-cleanup">Feature Freeze announcement and pre-release cleanup</a></h1>
+<p>The feature freeze announcement should be done 8 weeks before the release to
+inform subsystem maintainers about the upcoming feature freeze and to discuss
+potential blockers in the respective subsystems. This announcement is done on
+GitHub (<a href="https://github.com/NixOS/nixpkgs/issues/167025">22.05
+example</a>). It's also a good
+idea to cross-post this to Discourse to raise awareness about the upcoming
+freeze (<a href="https://discourse.nixos.org/t/22-05-feature-freeze/18453">22.05
+example</a>).</p>
+<p>People and teams will be pinged in this issue. The list of people and teams
+pinged is generated from the teams list in nixpkgs. The script to generate
+the pings is: <code>./maintainers/feature-freeze-teams.pl</code> in nixpkgs. The script
+needs a GitHub username and a token to read the teams from the NixOS org.
+Instructions are provided as a comment in the script.</p>
+<p>You might need to add a comment that pings people again because GitHub seems
+to limit the amount of people that can be pinged per post.</p>
+<h2><a class="header" href="#pre-release-cleanup" id="pre-release-cleanup">Pre-release cleanup</a></h2>
+<p>The pre-release cleanup consists of multiple small cleanups to keep the release
+secure throughout its lifecycle while also maintaining some level of
+cleanliness.</p>
 <ul>
-<li>
-<p>Create an announcement on <a href="https://discourse.nixos.org">Discourse</a>
-as a warning about upcoming beta “feature freeze” in a month. <a href="https://discourse.nixos.org/t/nixos-19-09-feature-freeze/3707">See
-this post as an
-example</a>.</p>
-</li>
-<li>
-<p>Discuss with Eelco Dolstra and the community (via Matrix) about
-what will reach the deadline. Any issue or Pull Request targeting
-the release should be included in the release milestone.</p>
-</li>
 <li>
 <p>Remove attributes that we know we will not be able to support,
 especially if there is a stable alternative. E.g. Check that our
 Linux kernels’ <a href="https://www.kernel.org/category/releases.html">projected
 end-of-life</a> are
-after our release projected end-of-life.</p>
+after our release projected end-of-life. Also check these package sets:</p>
+<ul>
+<li>MariaDB</li>
+<li>PHP</li>
+<li>PostgreSQL</li>
+</ul>
 </li>
 <li>
-<p>Request scale up of Hydra resources for the duration of ZHF and release to improve the
-iteration speed we can support and reduce the timeframe of alowing large rebuilds.
-eg: https://github.com/NixOS/nixos-org-configurations/issues/186</p>
+<p>Attributes that can also be safely removed are packages that were broken for
+more than 2 years.</p>
+</li>
+<li>
+<p>Remove old aliases that have been <code>throw</code>s for at least one release. There is
+a script in the nixpkgs tree to do that:
+<code>maintainers/scripts/remove-old-aliases.py --file ./pkgs/top-level/aliases.nix --year 2019 --month 6</code>
+The conversion to <code>throw</code>s is usually done in one big Pull Request so you can
+remove all aliases from the date prior to this Pull Request. <a href="https://github.com/NixOS/nixpkgs/pull/161146">Example of the
+2022 throw conversion</a>.</p>
 </li>
 </ul>
+<h1><a class="header" href="#zero-hydra-failures" id="zero-hydra-failures">ZERO Hydra Failures</a></h1>
+<h2><a class="header" href="#hydra-resource-scale-up" id="hydra-resource-scale-up">Hydra resource scale-up</a></h2>
+<p>Some days before ZHF starts is a good time to request the scale up of Hydra
+resources for the duration of ZHF and release to improve the iteration speed we
+can support and reduce the timeframe of alowing large rebuilds.
+<a href="https://github.com/NixOS/nixos-org-configurations/issues/186">21.11 example</a>.</p>
+<h1><a class="header" href="#go--no-go-meeting" id="go--no-go-meeting">GO / NO-GO Meeting</a></h1>
+<h1><a class="header" href="#release-process-walkthrough" id="release-process-walkthrough">Release Process Walkthrough</a></h1>
 <h2><a class="header" href="#zero-hyra-failure" id="zero-hyra-failure">Zero Hyra Failure</a></h2>
 <ol>
 <li>
