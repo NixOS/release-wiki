@@ -1,12 +1,5 @@
 # Release Process Walkthrough
 
-## Zero Hyra Failure
-
-1.  [Create an issue for tracking Zero Hydra Failures progress.
-    ZHF is an effort to get build failures down to zero.](https://github.com/NixOS/nixpkgs/issues/13559)
-
-2.  With RFC85, the [nixpkgs/trunk](https://hydra.nixos.org/jobset/nixpkgs/trunk) jobset will be used to track regressions.
-
 ## At beta release time, 1 week before release
 
 For these steps "19.09" represents the current release tag and "20.03" represents the next
