@@ -41,6 +41,10 @@ Inputs:
 ## Actual branch-off
 
 1. Wait for the staging team to merge the final staging-next iteration
+   ```shell
+   git fetch upstream staging-next
+   git merge upstream/staging-next
+   ```
 
 1. Fetch and check out the master branch
 
@@ -76,7 +80,7 @@ Inputs:
 
    ```shell
    git tag --annotate --message="Release 21.05-beta" 21.05-beta
-   git push upstream release-21.05 21.05-beta staging-21.05 staging-next-21.05
+   git push upstream master release-21.05 21.05-beta staging-21.05 staging-next-21.05
    ```
 
 1. Switch back to the master branch and [increment the `.version`
@@ -93,7 +97,7 @@ Inputs:
 
 1. [Create a new release notes file for the upcoming release +
    1](https://github.com/NixOS/nixpkgs/commit/01268fda85b7eee4e462c873d8654f975067731f#diff-e7ee5ff686cdcc513ca089d6e5682587R11),
-  in our case this is `rl-2111.section.md`. Don't forget to link the new file in the parent markdown file
+  in our case this is `rl-2111.section.md`. Don't forget to link the new file in the parent markdown file and to run `md-to-db.sh`
 
 1. Commit the changes
 
