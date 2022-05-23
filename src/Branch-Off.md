@@ -99,18 +99,19 @@ Inputs:
    1](https://github.com/NixOS/nixpkgs/commit/01268fda85b7eee4e462c873d8654f975067731f#diff-e7ee5ff686cdcc513ca089d6e5682587R11),
   in our case this is `rl-2111.section.md`. Don't forget to link the new file in the parent markdown file and to run `md-to-db.sh`
 
-1. Commit the changes
+1. Commit the changes ([22.05 example](https://github.com/NixOS/nixpkgs/commit/bfdfe12c788d7474b88e7a7790b88b1c0f8e01b5))
 
 1. Tag master branch so that `git describe` shows the correct metadata.
    ```shell
    git tag --annotate 21.11-pre
    git push upstream master 21.11-pre
+   git describe HEAD # should yield 21.11-pre
    ```
 
 1. Trigger an evaluation of the new jobsets in Hydra
 
 1. Create a channel at `https://nixos.org/channels` by creating a PR to
-   `nixos-org-configurations`. Update [`channels.nix`](https://github.com/NixOS/nixos-org-configurations/blob/master/channels.nix) to include the channel as a beta channel and notify the infrastructure team
+   `nixos-org-configurations`. Update [`channels.nix`](https://github.com/NixOS/nixos-org-configurations/blob/master/channels.nix) to include the channel as a beta channel and notify the infrastructure team. [22.05 example](https://github.com/NixOS/nixos-org-configurations/pull/209)
 
 1. Create the backport [labels](https://github.com/NixOS/nixpkgs/labels) for all new branches:
    - `backport staging-21.05`
