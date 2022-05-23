@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li class="chapter-item expanded "><a href="Release-Management-Team.html"><strong aria-hidden="true">2.</strong> Release Management Team</a></li><li class="chapter-item expanded "><a href="Release-Critical-Packages.html"><strong aria-hidden="true">3.</strong> Release Critical Packages</a></li><li class="chapter-item expanded "><a href="Release-Process.html"><strong aria-hidden="true">4.</strong> Release Process</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Once-Appointed.html"><strong aria-hidden="true">4.1.</strong> What to do once appointed</a></li><li class="chapter-item expanded "><a href="Feature-Freeze-Announcement.html"><strong aria-hidden="true">4.2.</strong> Feature Freeze announcement and pre-release cleanup</a></li><li class="chapter-item expanded "><a href="Zero-Hydra-Failures.html"><strong aria-hidden="true">4.3.</strong> ZERO Hydra Failures</a></li><li class="chapter-item expanded "><a href="GO-NO-GO-Meeting.html"><strong aria-hidden="true">4.4.</strong> GO / NO-GO Meeting (contents TBD)</a></li><li class="chapter-item expanded "><a href="Release-Process-Walkthrough.html" class="active"><strong aria-hidden="true">4.5.</strong> Release Process Walkthrough</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li class="chapter-item expanded "><a href="Release-Management-Team.html"><strong aria-hidden="true">2.</strong> Release Management Team</a></li><li class="chapter-item expanded "><a href="Release-Critical-Packages.html"><strong aria-hidden="true">3.</strong> Release Critical Packages</a></li><li class="chapter-item expanded "><a href="Release-Process.html"><strong aria-hidden="true">4.</strong> Release Process</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Once-Appointed.html"><strong aria-hidden="true">4.1.</strong> What to do once appointed</a></li><li class="chapter-item expanded "><a href="Feature-Freeze-Announcement.html"><strong aria-hidden="true">4.2.</strong> Feature Freeze announcement and pre-release cleanup</a></li><li class="chapter-item expanded "><a href="Zero-Hydra-Failures.html"><strong aria-hidden="true">4.3.</strong> ZERO Hydra Failures</a></li><li class="chapter-item expanded "><a href="Branch-Off.html"><strong aria-hidden="true">4.4.</strong> Branch-off</a></li><li class="chapter-item expanded "><a href="GO-NO-GO-Meeting.html"><strong aria-hidden="true">4.5.</strong> GO / NO-GO Meeting (contents TBD)</a></li><li class="chapter-item expanded "><a href="Release-Process-Walkthrough.html" class="active"><strong aria-hidden="true">4.6.</strong> Release Process Walkthrough</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -164,111 +164,6 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#release-process-walkthrough" id="release-process-walkthrough">Release Process Walkthrough</a></h1>
-<h2><a class="header" href="#at-beta-release-time-1-week-before-release" id="at-beta-release-time-1-week-before-release">At beta release time, 1 week before release</a></h2>
-<p>For these steps &quot;19.09&quot; represents the current release tag and &quot;20.03&quot; represents the next
-(6 months in the future) release tag.</p>
-<ol>
-<li>Merge current &quot;Staging next&quot; pull-request</li>
-<li>From the master branch run:</li>
-</ol>
-<pre><code class="language-sh">git checkout -b release-19.09
-</code></pre>
-<ol start="3">
-<li>
-<p><a href="https://github.com/NixOS/nixpkgs/commit/10e61bf5be57736035ec7a804cb0bf3d083bf2cf#diff-9c798092bac0caeb5c52d509be0ca263R69">Bump the <code>system.defaultChannel</code> attribute in
-<code>nixos/modules/misc/version.nix</code></a></p>
-</li>
-<li>
-<p><a href="https://github.com/NixOS/nixpkgs/commit/10e61bf5be57736035ec7a804cb0bf3d083bf2cf#diff-831e8d9748240fb23e6734fdc2a6d16eR15">Update <code>versionSuffix</code> in
-<code>nixos/release.nix</code></a></p>
-</li>
-</ol>
-<p>To get the commit count, use the following command:</p>
-<pre><code>git rev-list --count release-19.09
-</code></pre>
-<ol start="5">
-<li>
-<p>Edit changelog at <code>nixos/doc/manual/release-notes/rl-1909.xml</code>.</p>
-<ul>
-<li>
-<p>Get all new NixOS modules:</p>
-<pre><code class="language-sh">git diff release-19.03..release-19.09 nixos/modules/module-list.nix | grep ^+
-</code></pre>
-</li>
-<li>
-<p>Note systemd, kernel, glibc, desktop environment, and Nix
-upgrades.</p>
-</li>
-</ul>
-</li>
-<li>
-<p>Tag the release:</p>
-</li>
-</ol>
-<pre><code class="language-sh">git tag --annotate --message=&quot;Release 19.09-beta&quot; 19.09-beta
-git push upstream 19.09-beta
-
-# create staging branches
-git checkout -b staging-19.09
-git push upstream staging-19.09
-
-git checkout -b staging-next-19.09
-git push upstream staging-next-19.09
-</code></pre>
-<ol start="7">
-<li><a href="https://github.com/NixOS/nixpkgs/commit/01268fda85b7eee4e462c873d8654f975067731f#diff-2bc0e46110b507d6d5a344264ef15adaR1">On the <code>master</code> branch, increment the <code>.version</code>
-file</a></li>
-</ol>
-<pre><code class="language-sh">echo -n &quot;20.03&quot; &gt; .version
-</code></pre>
-<ol start="8">
-<li>
-<p><a href="https://github.com/NixOS/nixpkgs/commit/01268fda85b7eee4e462c873d8654f975067731f#diff-03f3d41b68f62079c55001f1a1c55c1dR137">Update <code>codeName</code> in
-<code>lib/trivial.nix</code></a>
-This will be the name for the next release.</p>
-</li>
-<li>
-<p><a href="https://github.com/NixOS/nixpkgs/commit/01268fda85b7eee4e462c873d8654f975067731f#diff-e7ee5ff686cdcc513ca089d6e5682587R11">Create a new release notes file for the upcoming release +
-1</a>,
-in our case this is <code>rl-2003.xml</code>.</p>
-</li>
-<li>
-<p>Tag master branch so that <code>git describe</code> shows the correct metadata.</p>
-</li>
-</ol>
-<pre><code class="language-sh">git tag --annotate 20.03-pre
-git push upstream 20.03-pre
-</code></pre>
-<ol start="11">
-<li>Contact the infrastructure team to create the necessary Hydra Jobsets. (TODO: document neccessary steps)
-- https://hydra.nixos.org/project/nixos
-<ul>
-<li>release-19.09	NixOS 19.09</li>
-<li>release-19.09-aarch64	NixOS 19.09</li>
-<li>release-19.09-small	NixOS 19.09
-- https://hydra.nixos.org/project/nixpkgs</li>
-<li>nixpkgs-19.09-darwin</li>
-<li>nixpkgs-staging-next</li>
-</ul>
-</li>
-</ol>
-<p>For example: https://hydra.nixos.org/jobset/nixos/release-19.09#tabs-configuration</p>
-<pre><code>State:	Enabled
-Description:	NixOS 19.09 release branch
-Nix expression:	nixos/release-combined.nix in input nixpkgs
-Check interval:	86400
-Scheduling shares:	5000000 (8.21% out of 60904568 shares)
-Number of evaluations to keep:	1
-Inputs
-Input name	Type	Values
-nixpkgs	Git checkout	https://github.com/NixOS/nixpkgs.git release-19.09
-stableBranch	Boolean	false
-supportedSystems	Nix expression	[ &quot;x86_64-linux&quot; &quot;aarch64-linux&quot; ]
-</code></pre>
-<ol start="12">
-<li><a href="https://github.com/NixOS/nixos-org-configurations/blob/master/channels.nix">Create a channel at https://nixos.org/channels by creating a PR to
-nixos-org-configurations, changing<code>channels.nix</code></a></li>
-</ol>
 <h2><a class="header" href="#during-beta" id="during-beta">During Beta</a></h2>
 <ul>
 <li>Monitor the master branch for bugfixes and minor updates and
