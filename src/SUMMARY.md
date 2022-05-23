@@ -9,5 +9,4 @@
 cleanup](Feature-Freeze-Announcement.md)
 	- [ZERO Hydra Failures](Zero-Hydra-Failures.md)
 	- [Branch-off](Branch-Off.md)
-	- [GO / NO-GO Meeting (contents TBD)](GO-NO-GO-Meeting.md)
 	- [Release Process Walkthrough](Release-Process-Walkthrough.md)
