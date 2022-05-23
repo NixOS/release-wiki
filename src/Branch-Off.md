@@ -44,19 +44,6 @@ Inputs:
 
 1. Fetch and check out the master branch
 
-1. Edit changelog at `nixos/doc/manual/release-notes/rl-2105.section.md`:
-
-    - Compile the list of new NixOS modules:
-
-      ```shell
-      git diff release-20.11..release-21.05 nixos/modules/module-list.nix | grep ^+
-      ```
-
-    - Take note of systemd, kernel, glibc, desktop environment, and Nix
-      upgrades.
-
-    - Commit the changelog after running `md-to-db.sh`
-
 1. Update the [periodic-merge workflow](https://github.com/NixOS/nixpkgs/blob/master/.github/workflows/periodic-merge-24h.yml) to include the new branch, then commit and push to master
 
 1. Create the release branch:
