@@ -99,7 +99,7 @@ Inputs:
    1](https://github.com/NixOS/nixpkgs/commit/01268fda85b7eee4e462c873d8654f975067731f#diff-e7ee5ff686cdcc513ca089d6e5682587R11),
   in our case this is `rl-2111.section.md`. Don't forget to link the new file in the parent markdown file and to run `md-to-db.sh`
 
-1. Commit the changes ([22.05 example](https://github.com/NixOS/nixpkgs/commit/bfdfe12c788d7474b88e7a7790b88b1c0f8e01b5))
+1. Commit the changes ([22.05 example](https://github.com/NixOS/nixpkgs/commit/bfdfe12c788d7474b88e7a7790b88b1c0f8e01b5) + [this additional commit](https://github.com/NixOS/nixpkgs/commit/953b5d19bca4d4ddfaef5625cca277c47b39f5e7))
 
 1. Tag master branch so that `git describe` shows the correct metadata.
    ```shell
