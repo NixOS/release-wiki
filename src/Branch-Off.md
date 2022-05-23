@@ -57,7 +57,7 @@ Inputs:
 
     - Commit the changelog after running `md-to-db.sh`
 
-1. Update the [periodic-merge workflow](https://github.com/NixOS/nixpkgs/blob/master/.github/workflows/periodic-merge-24h.yml) to include the new branch and commit + push master
+1. Update the [periodic-merge workflow](https://github.com/NixOS/nixpkgs/blob/master/.github/workflows/periodic-merge-24h.yml) to include the new branch, then commit and push to master
 
 1. Create the release branch:
 
