@@ -128,3 +128,5 @@ Inputs:
    - Commit the result and create a Pull Request
 
 1. Inform the [Marketing team](https://matrix.to/#/#marketing:nixos.org) about the upcoming release and the `nixos-serach` Pull Request
+
+1. Comment onto the ZHF issue that the branch-off has been performed and issues now have to be backported ([22.05 example](https://github.com/NixOS/nixpkgs/issues/172160#issuecomment-1135112918))
