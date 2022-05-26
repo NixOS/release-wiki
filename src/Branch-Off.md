@@ -119,7 +119,7 @@ Inputs:
 
    Use the description `Backport PR automatically` and the color value `#0fafaa`
 
-1. Update the flake input of nixos-search once the Pull Request in `nixos-org-configurations` is merged:
+1. Update the flake input of nixos-search once the Pull Request in `nixos-org-configurations` is merged and the nixos-21.05 channel is available on [channels.nixos.org](https://channels.nixos.org):
    - Clone [nixos-search](https://github.com/NixOS/nixos-search)
    - Update the flake inputs:
      ```shell
