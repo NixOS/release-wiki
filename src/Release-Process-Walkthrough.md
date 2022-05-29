@@ -1,24 +1,5 @@
 # Release Process Walkthrough
 
-## During Beta
-
-- Monitor the master branch for bugfixes and minor updates and
-  cherry-pick them to the release branch.
-
-## Before the final release
-
-- Two days before expected release date, change `stableBranch` to `true` in Hydra and wait for the channel to update.
-
-- Re-check that the release notes are complete.
-
-- Release Nix (currently only Eelco Dolstra can do that). [Make sure fallback is updated.](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/installer/tools/nix-fallback-paths.nix)
-
-- [Update README.md with new stable NixOS version information.](https://github.com/NixOS/nixpkgs/commit/40fd9ae3ac8048758abdcfc7d28a78b5f22fe97e) (for both `master` then backport to `release-19.09` branch)
-
-- Ensure the following items are sufficiently tested:
-  - Graphical NixOS installer images (Can be found on nixos hydra jobset)
-  - Minimal NixOS installer images (Can be found on nixos hydra jobset)
-
 ## At final release time
 Create these PRs on master and backport to release-19.09.
 
