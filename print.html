@@ -97,7 +97,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li class="chapter-item expanded "><a href="Release-Management-Team.html"><strong aria-hidden="true">2.</strong> Release Management Team</a></li><li class="chapter-item expanded "><a href="Release-Critical-Packages.html"><strong aria-hidden="true">3.</strong> Release Critical Packages</a></li><li class="chapter-item expanded "><a href="Release-Process.html"><strong aria-hidden="true">4.</strong> Release Process</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Once-Appointed.html"><strong aria-hidden="true">4.1.</strong> What to do once appointed</a></li><li class="chapter-item expanded "><a href="Feature-Freeze-Announcement.html"><strong aria-hidden="true">4.2.</strong> Feature Freeze announcement and pre-release cleanup</a></li><li class="chapter-item expanded "><a href="Zero-Hydra-Failures.html"><strong aria-hidden="true">4.3.</strong> ZERO Hydra Failures</a></li><li class="chapter-item expanded "><a href="Branch-Off.html"><strong aria-hidden="true">4.4.</strong> Branch-off</a></li><li class="chapter-item expanded "><a href="Release-Process-Walkthrough.html"><strong aria-hidden="true">4.5.</strong> Release Process Walkthrough</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li class="chapter-item expanded "><a href="Release-Management-Team.html"><strong aria-hidden="true">2.</strong> Release Management Team</a></li><li class="chapter-item expanded "><a href="Release-Critical-Packages.html"><strong aria-hidden="true">3.</strong> Release Critical Packages</a></li><li class="chapter-item expanded "><a href="Release-Process.html"><strong aria-hidden="true">4.</strong> Release Process</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Once-Appointed.html"><strong aria-hidden="true">4.1.</strong> What to do once appointed</a></li><li class="chapter-item expanded "><a href="Feature-Freeze-Announcement.html"><strong aria-hidden="true">4.2.</strong> Feature Freeze announcement and pre-release cleanup</a></li><li class="chapter-item expanded "><a href="Zero-Hydra-Failures.html"><strong aria-hidden="true">4.3.</strong> ZERO Hydra Failures</a></li><li class="chapter-item expanded "><a href="Branch-Off.html"><strong aria-hidden="true">4.4.</strong> Branch-off</a></li><li class="chapter-item expanded "><a href="Beta-Phase.html"><strong aria-hidden="true">4.5.</strong> Beta Phase</a></li><li class="chapter-item expanded "><a href="Final-Release.html"><strong aria-hidden="true">4.6.</strong> Final Release</a></li><li class="chapter-item expanded "><a href="Release-Process-Walkthrough.html"><strong aria-hidden="true">4.7.</strong> Release Process Walkthrough</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -535,25 +535,33 @@ git describe HEAD # should yield 21.11-pre
 <p>Comment onto the ZHF issue that the branch-off has been performed and issues now have to be backported (<a href="https://github.com/NixOS/nixpkgs/issues/172160#issuecomment-1135112918">22.05 example</a>)</p>
 </li>
 </ol>
-<h1><a class="header" href="#release-process-walkthrough" id="release-process-walkthrough">Release Process Walkthrough</a></h1>
-<h2><a class="header" href="#during-beta" id="during-beta">During Beta</a></h2>
+<h1><a class="header" href="#beta-phase" id="beta-phase">Beta Phase</a></h1>
 <ul>
-<li>Monitor the master branch for bugfixes and minor updates and
-cherry-pick them to the release branch.</li>
+<li>
+<p>Monitor the master branch for bugfixes and minor updates and
+cherry-pick them to the release branch.</p>
+</li>
+<li>
+<p>Start marking packages as broken. There is no fully defined process to do
+this, so look at the corresponding
+<a href="https://github.com/NixOS/release-wiki/issues/4">issue</a> and also
+<a href="https://github.com/NixOS/release-wiki/pull/42#discussion_r882695363">this discussion</a>.</p>
+</li>
 </ul>
+<h1><a class="header" href="#final-release" id="final-release">Final Release</a></h1>
 <h2><a class="header" href="#before-the-final-release" id="before-the-final-release">Before the final release</a></h2>
 <ul>
 <li>
-<p>Two days before expected release date, change <code>stableBranch</code> to <code>true</code> in Hydra and wait for the channel to update.</p>
+<p>Two days before expected release date, change <code>stableBranch</code> to <code>true</code> in Hydra and wait for the channel to update</p>
 </li>
 <li>
-<p>Re-check that the release notes are complete.</p>
+<p>Re-check that the release notes are complete</p>
 </li>
 <li>
-<p>Release Nix (currently only Eelco Dolstra can do that). <a href="https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/installer/tools/nix-fallback-paths.nix">Make sure fallback is updated.</a></p>
+<p>Merge the Pull Request that marks broken packages as broken</p>
 </li>
 <li>
-<p><a href="https://github.com/NixOS/nixpkgs/commit/40fd9ae3ac8048758abdcfc7d28a78b5f22fe97e">Update README.md with new stable NixOS version information.</a> (for both <code>master</code> then backport to <code>release-19.09</code> branch)</p>
+<p><a href="https://github.com/NixOS/nixpkgs/commit/40fd9ae3ac8048758abdcfc7d28a78b5f22fe97e">Update README.md with new stable NixOS version information.</a> (for <code>master</code> then backport to the release branch)</p>
 </li>
 <li>
 <p>Ensure the following items are sufficiently tested:</p>
@@ -563,6 +571,7 @@ cherry-pick them to the release branch.</li>
 </ul>
 </li>
 </ul>
+<h1><a class="header" href="#release-process-walkthrough" id="release-process-walkthrough">Release Process Walkthrough</a></h1>
 <h2><a class="header" href="#at-final-release-time" id="at-final-release-time">At final release time</a></h2>
 <p>Create these PRs on master and backport to release-19.09.</p>
 <ol>
