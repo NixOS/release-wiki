@@ -1,5 +1,8 @@
 # Final Release
 
+`$OLDVER` represents the previous stable release (the one you are replacing),
+`$NEWVER` represents the release you are currently releasing.
+
 ## Before the final release
 
 - Two days before expected release date, change `stableBranch` to `true` in Hydra and wait for the channel to update
@@ -19,13 +22,13 @@
   - Number of commits for the release:
 
     ```shell
-    git log upstream/release-20.11..upstream/release-21.05 --format=%an | wc -l
+    git log upstream/release-$OLDVER..upstream/release-$NEWVER --format=%an | wc -l
     ```
 
   - Commits by contributor:
 
     ```shell
-    git shortlog --summary --numbered release-20.11..release-21.05
+    git shortlog --summary --numbered release-$OLDVER..release-$NEWVER
     ```
 
   - New/updated/removed packages:
@@ -66,8 +69,8 @@
   - Added/removed modules:
 
     ```shell
-    git diff release-20.11..release-21.05 nixos/modules/module-list.nix | grep ^+ | wc -l
-    git diff release-20.11..release-21.05 nixos/modules/module-list.nix | grep ^- | wc -l
+    git diff release-$OLDVER..release-$NEWVER nixos/modules/module-list.nix | grep ^+ | wc -l
+    git diff release-$OLDVER..release-$NEWVER nixos/modules/module-list.nix | grep ^- | wc -l
     ```
 
   - Added/removed options:
@@ -83,30 +86,34 @@
 
 ## At final release time
 
-1. Create these PRs on master and backport to release-21.05:
+1. Create these PRs on master and backport to the release branch:
 
    1. Update [Upgrading NixOS](https://nixos.org/manual/nixos/stable/index.html#sec-upgrading) section of the manual to match new
       stable release version.
 
-   1. Update `rl-2105.xml` with the release date.
-
-   1. Tag the final release
+   1. Update `rl-$NEWVER.xml` with the release date.
 
    1. Update the Pull Request Template and CONTRIBUTUTING.md on master ([21.11 example](https://github.com/NixOS/nixpkgs/pull/147977))
 
-      ```shell
-      git tag --annotate --message="Release 22.01" 21.05
-      git push upstream 21.05
-      ```
+1. Tag the release **on the release branch**:
+
+   ```shell
+   git tag --annotate --message="Release $NEWVER" $NEWVER
+   git push upstream $NEWVER
+   ```
 
 1. Update [nixos-homepage](https://github.com/NixOS/nixos-homepage) for
    the release ([22.05 example](https://github.com/NixOS/nixos-homepage/pull/853)).
 
-   1. [Update the `flake.nix` input `released-nixpkgs` to 21.05](https://github.com/NixOS/nixos-homepage/blob/47ac3571c4d71e841fd4e6c6e1872e762b9c4942/flake.nix#L10).
+   1. [Update the `flake.nix` input `released-nixpkgs` to $NEWVER](https://github.com/NixOS/nixos-homepage/blob/47ac3571c4d71e841fd4e6c6e1872e762b9c4942/flake.nix#L10).
 
    1. Run `./scripts/update.sh` (this updates flake.lock to updated channel).
 
    1. Add a compressed version of the NixOS logo ([19.09 example](https://github.com/NixOS/nixos-homepage/blob/a5626c71c03a2dd69086564e56f1a230a2bb177a/logo/nixos-logo-19.09-loris-lores.png)). The logo should have a width of 100px.
+
+   1. Write the announcement to `blog/announcements.xml`
+
+   1. The website is hosted by a CDN so you may occasionally see the old site for a couple of minutes/hours (?) after your changes
 
 1. Update [nixos-org-configurations](https://github.com/NixOS/nixos-org-configurations) with the updated channel status ([21.11 example](https://github.com/NixOS/nixos-org-configurations/pull/192/files))
    - previous stable branches should be marked "deprecated"
@@ -116,3 +123,33 @@
 
 1. When the Pull Request in `nixos-org-configurations` is merged, update [nixos-search](https://github.com/NixOS/nixos-search/) to mark the channel as released.
    This is the same process as for the creation of the beta channel in the project.
+
+## After Release
+
+1. Update repology ([22.05 example](https://github.com/repology/repology-updater/pull/1156/files))
+
+1. Update osinfo-db entries. [example](https://gitlab.com/libosinfo/osinfo-db/-/merge_requests/312)
+
+   ```shell
+   nix-shell -p "python3.withPackages (p: [ p.lxml p.requests ])" -p cdrkit
+   ./scripts/updates/nixos.py --release YY.MM --codename <codename> --release-date YYYY-MM-DD --next-release YY.MM
+   git add .
+   git commit -s -m "nixos: Add YY.MM release"
+
+   # run tests to validate your changes
+   nix-shell -p "python3.withPackages (p: [ p.lxml p.requests p.pytest ])" -p cdrkit osinfo-db-tools gettext --run "make check"
+   ```
+
+1. Update AMI images
+
+   1. Someone with s3 bucket permssions will need to run `https://github.com/NixOS/nixpkgs/blob/master/nixos/maintainers/scripts/ec2/create-amis.sh` (usually AmineChikhaoui - just ping them in the infrastructure matrix room).
+
+   1. [Create PR adding it to NixOS configuration](https://github.com/NixOS/nixpkgs/pull/101720).
+
+1. Close the [milestone](https://github.com/NixOS/nixpkgs/milestones)
+
+1. Close the [blockers project](https://github.com/orgs/NixOS/projects)
+
+1. Close all issues you opened for the release and unpin them if necessary
+
+1. Ask someone with the appropriate permissions to update the description of the NixOS and NixOS Dev Matrix rooms to include the new release
