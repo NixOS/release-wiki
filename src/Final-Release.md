@@ -152,3 +152,5 @@
 1. Close all issues you opened for the release and unpin them if necessary
 
 1. Ask someone with the appropriate permissions to update the description of the NixOS and NixOS Dev Matrix rooms to include the new release
+
+1. Create an announcement for the retrospective, some days after the old channel is discontinued ([22.05 example](https://discourse.nixos.org/t/22-05-retrospective/19413))
