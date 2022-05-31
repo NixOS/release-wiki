@@ -13,6 +13,8 @@
 
 - [Update README.md with new stable NixOS version information.](https://github.com/NixOS/nixpkgs/commit/40fd9ae3ac8048758abdcfc7d28a78b5f22fe97e) (for `master` then backport to the release branch)
 
+- Update [Upgrading NixOS](https://nixos.org/manual/nixos/stable/index.html#sec-upgrading) section of the manual to match new stable release version and backport this as well. This way the manual will already reflect the new version on release.
+
 - Ensure the following items are sufficiently tested:
   - Graphical NixOS installer images (Can be found on nixos hydra jobset)
   - Minimal NixOS installer images (Can be found on nixos hydra jobset)
@@ -87,9 +89,6 @@
 ## At final release time
 
 1. Create these PRs on master and backport to the release branch:
-
-   1. Update [Upgrading NixOS](https://nixos.org/manual/nixos/stable/index.html#sec-upgrading) section of the manual to match new
-      stable release version.
 
    1. Update `rl-$NEWVER.xml` with the release date.
 
