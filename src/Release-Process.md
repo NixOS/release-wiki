@@ -2,8 +2,6 @@
 
 These pages give an overview of the release process with as many details as there are available at the time of writing.
 
-Since this is an ongoing refactoring, the last few steps are collapsed into a single page
-
 ## Release Schedule
 
 With [RFC85](https://github.com/NixOS/rfcs/blob/master/rfcs/0085-nixos-release-stablization.md), the release schedule is largely already dictated below:
