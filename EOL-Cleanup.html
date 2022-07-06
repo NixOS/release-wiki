@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Release Process Walkthrough - NixOS Release Wiki</title>
+        <title>EOL cleanup - NixOS Release Wiki</title>
         
         
 
@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li class="chapter-item expanded "><a href="Release-Management-Team.html"><strong aria-hidden="true">2.</strong> Release Management Team</a></li><li class="chapter-item expanded "><a href="Release-Critical-Packages.html"><strong aria-hidden="true">3.</strong> Release Critical Packages</a></li><li class="chapter-item expanded "><a href="Release-Process.html"><strong aria-hidden="true">4.</strong> Release Process</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Once-Appointed.html"><strong aria-hidden="true">4.1.</strong> What to do once appointed</a></li><li class="chapter-item expanded "><a href="Feature-Freeze-Announcement.html"><strong aria-hidden="true">4.2.</strong> Feature Freeze announcement and pre-release cleanup</a></li><li class="chapter-item expanded "><a href="Zero-Hydra-Failures.html"><strong aria-hidden="true">4.3.</strong> ZERO Hydra Failures</a></li><li class="chapter-item expanded "><a href="Branch-Off.html"><strong aria-hidden="true">4.4.</strong> Branch-off</a></li><li class="chapter-item expanded "><a href="Beta-Phase.html"><strong aria-hidden="true">4.5.</strong> Beta Phase</a></li><li class="chapter-item expanded "><a href="Final-Release.html"><strong aria-hidden="true">4.6.</strong> Final Release</a></li><li class="chapter-item expanded "><a href="Release-Process-Walkthrough.html" class="active"><strong aria-hidden="true">4.7.</strong> Release Process Walkthrough</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li class="chapter-item expanded "><a href="Release-Management-Team.html"><strong aria-hidden="true">2.</strong> Release Management Team</a></li><li class="chapter-item expanded "><a href="Release-Critical-Packages.html"><strong aria-hidden="true">3.</strong> Release Critical Packages</a></li><li class="chapter-item expanded "><a href="Release-Process.html"><strong aria-hidden="true">4.</strong> Release Process</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Once-Appointed.html"><strong aria-hidden="true">4.1.</strong> What to do once appointed</a></li><li class="chapter-item expanded "><a href="Feature-Freeze-Announcement.html"><strong aria-hidden="true">4.2.</strong> Feature Freeze announcement and pre-release cleanup</a></li><li class="chapter-item expanded "><a href="Zero-Hydra-Failures.html"><strong aria-hidden="true">4.3.</strong> ZERO Hydra Failures</a></li><li class="chapter-item expanded "><a href="Branch-Off.html"><strong aria-hidden="true">4.4.</strong> Branch-off</a></li><li class="chapter-item expanded "><a href="Beta-Phase.html"><strong aria-hidden="true">4.5.</strong> Beta Phase</a></li><li class="chapter-item expanded "><a href="Final-Release.html"><strong aria-hidden="true">4.6.</strong> Final Release</a></li><li class="chapter-item expanded "><a href="EOL-Cleanup.html" class="active"><strong aria-hidden="true">4.7.</strong> EOL cleanup</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -163,24 +163,16 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#release-process-walkthrough" id="release-process-walkthrough">Release Process Walkthrough</a></h1>
-<h2><a class="header" href="#a-month-after-release" id="a-month-after-release">A Month after Release</a></h2>
+                        <h1><a class="header" href="#eol-cleanup" id="eol-cleanup">EOL cleanup</a></h1>
+<p>Once a month has passed after the release was released, the old release goes end of life.</p>
 <ol>
-<li>
-<p><a href="https://github.com/NixOS/nixos-org-configurations/pull/201">EOL Channels should be marked unmaintained</a></p>
-</li>
-<li>
-<p>Increase the <code>oldestSupportedRelease</code> in <code>lib/trivial.nix</code> to match the oldest non-EOL release.</p>
-</li>
-<li>
-<p>Inform the infrastructure team so they can scale Hydra back down</p>
-</li>
-<li>
-<p><a href="https://github.com/NixOS/nixos-org-configurations/pull/201">EOL Channels should be marked unmaintained</a></p>
-</li>
-<li>
-<p>Increase the <code>oldestSupportedRelease</code> in <code>lib/trivial.nix</code> to match the oldest non-EOL release.</p>
-</li>
+<li><a href="https://github.com/NixOS/nixos-org-configurations/pull/201">EOL Channels should be marked unmaintained</a></li>
+<li>Once this is merged, update <a href="https://github.com/NixOS/nixos-search/pull/495">nixos-search as well</a></li>
+<li>Inform the infrastructure team so they can scale Hydra back down</li>
+<li>Close all Pull Requests that are still opened against one of the the old release- or staging-branches</li>
+<li>Delete the old <a href="https://github.com/NixOS/nixpkgs/labels?q=backport">backport labels</a></li>
+<li>Remove the old <a href="https://github.com/NixOS/nixpkgs/commit/8befefd1a72da597bdb1d01e97127e0c9866912e">automerge workflows</a></li>
+<li>Increase the <code>oldestSupportedRelease</code> in <code>lib/trivial.nix</code> to match the oldest non-EOL release (<a href="https://github.com/NixOS/nixpkgs/pull/180152">22.05 example</a>)</li>
 </ol>
 
                     </main>
