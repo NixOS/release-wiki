@@ -97,8 +97,8 @@
 1. Tag the release **on the release branch**:
 
    ```shell
-   git tag --annotate --message="Release $NEWVER" $NEWVER
-   git push upstream $NEWVER
+   git tag --annotate --message="Release $NEWVER" $NEWVER-start
+   git push upstream $NEWVER-start
    ```
 
 1. Update [nixos-homepage](https://github.com/NixOS/nixos-homepage) for
