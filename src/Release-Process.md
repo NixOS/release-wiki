@@ -22,7 +22,7 @@ With [RFC85](https://github.com/NixOS/rfcs/blob/master/rfcs/0085-nixos-release-s
 | -1 Weeks | `release` | Prepare for release, finish remaining issues |
 | 0 Weeks | `release` | **Release!** |
 | 0 Weeks | | ZHF Ends |
-| +4 Weeks | | Release Retrospective and final cleanup |
+| +1 Weeks | | Release Retrospective and final cleanup |
 
 Clarification of terms:
 
