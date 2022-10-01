@@ -18,6 +18,7 @@
 - Ensure the following items are sufficiently tested:
   - Graphical NixOS installer images (Can be found on nixos hydra jobset)
   - Minimal NixOS installer images (Can be found on nixos hydra jobset)
+  - If not suitable hardware can be accessed, use [QEMU emulation](https://gist.github.com/mweinelt/b7399e31a05e2e9659acf52b842a417c) for basic testing
 
 - Gather some information about the release for the final announcement
 
