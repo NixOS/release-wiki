@@ -290,6 +290,9 @@ git describe HEAD # should yield 21.11-pre
 <p>Use the description <code>Backport PR automatically</code> and the color value <code>#0fafaa</code></p>
 </li>
 <li>
+<p>Add <code>SUPPORT_END=YYYY-MM-DD</code> to <code>osReleaseContents</code> in <code>nixos/modules/misc/version.nix</code> on the release branch.</p>
+</li>
+<li>
 <p>Update the flake input of nixos-search once the Pull Request in <code>nixos-org-configurations</code> is merged and the nixos-21.05 channel is available on <a href="https://channels.nixos.org">channels.nixos.org</a>:</p>
 <ul>
 <li>Clone <a href="https://github.com/NixOS/nixos-search">nixos-search</a></li>
