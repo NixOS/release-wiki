@@ -38,11 +38,3 @@ cleanliness.
 
 - Attributes that can also be safely removed are packages that were broken for
   more than 2 years.
-
-- Remove old aliases that have been `throw`s for at least one release. There is
-  a script in the nixpkgs tree to do that:
-  `maintainers/scripts/remove-old-aliases.py --file
-  ./pkgs/top-level/aliases.nix --year 2019 --month 6`
-  The conversion to `throw`s is usually done in one big Pull Request so you can
-  remove all aliases from the date prior to this Pull Request. [Example of the
-  2022 throw conversion](https://github.com/NixOS/nixpkgs/pull/161146).
