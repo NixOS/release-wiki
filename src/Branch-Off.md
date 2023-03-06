@@ -1,7 +1,7 @@
 # Branch-off
 
-For these steps "21.05" represents the current release tag and "21.11" represents the next
-(6 months in the future) release tag. "20.11" is the last release which was released 6 months
+For these steps "23.05" represents the current release tag and "23.11" represents the next
+(6 months in the future) release tag. "22.11" is the last release which was released 6 months
 ago.
 
 ## Jobset creation
@@ -12,29 +12,29 @@ infrastructure team and the release team to work more asynchronously. Reach out 
 before release to create the necessary Hydra Jobsets. You can link them this section.
 
 - [https://hydra.nixos.org/project/nixos](https://hydra.nixos.org/project/nixos)
-    - release-21.05	NixOS 21.05
-    - release-21.05-aarch64	NixOS 21.05
-    - release-21.05-small	NixOS 21.05
+    - release-22.11
+    - release-22.11-small
 - [https://hydra.nixos.org/project/nixpkgs](https://hydra.nixos.org/project/nixpkgs)
-    - nixpkgs-21.05-darwin
-    - staging-next-21.05
+    - nixpkgs-22.11-darwin
+    - staging-next-22.11
 
-For example: [21.05 configuration](https://hydra.nixos.org/jobset/nixos/release-21.05#tabs-configuration)
+Example configuration: [nixos:release-22.11](https://hydra.nixos.org/jobset/nixos/release-22.11#tabs-configuration)
 
 |Field|Value|
 |-|-|
 |State|Enabled|
-|Description|NixOS 21.05 release branch|
+|Description|NixOS 22.11 release branch|
 |Nix expression|`nixos/release-combined.nix` in input `nixpkgs`|
-|Check interval|5000000|
-|Scheduling shares|500|
+|Check interval|86400|
+|Scheduling shares|5000000 (8.32% out of 60071636 shares)|
+|Enable Dynamic RunCommand Hooks:|No (not enabled by server)|
 |Number of evaluations to keep|1|
 
 Inputs:
 
 |Input name|Type|Values|
 |-|-|-|
-|`nixpkgs`|Git checkout|`https://github.com/NixOS/nixpkgs.git release-21.05`|
+|`nixpkgs`|Git checkout|`https://github.com/NixOS/nixpkgs.git release-22.11`|
 |`stableBranch`|Boolean|`false`|
 |`supportedSystems`|Nix expression|`[ "x86_64-linux" "aarch64-linux" ]`|
 
