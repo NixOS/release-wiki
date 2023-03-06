@@ -26,8 +26,6 @@ A release manager’s role and responsibilities are:
 
 -   create a roadmap
 
--   release in cooperation with Eelco Dolstra
-
 -   decide which bug fixes, features, etc… get backported after a
     release
 
