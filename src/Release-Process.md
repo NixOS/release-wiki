@@ -8,21 +8,23 @@ With [RFC85](https://github.com/NixOS/rfcs/blob/master/rfcs/0085-nixos-release-s
 
 | Weeks from Release | Branches Affected | Events |
 | --- | --- | --- |
-| -8 Weeks | | Ask ecosystems for desired changes, in "Feature Freeze" |
+| -8 Weeks | | Start discussion about "Feature Freeze & Release Blockers" with ecosystems maintainers |
 | -6 Weeks | `staging-next`, `staging` | Restrict breaking changes to Release Critical Packages |
-| -4 Weeks | `staging-next`, `staging` | Restrict all breaking changes: allow only non-breaking updates and Desktop Manager changes |
-| -3 Weeks | `master` | (Day before ZHF) merge `staging-next` into `master`, prep for ZHF |
-| -3 Weeks | `master` | Begin ZHF, Focus on minimizing regressions in PRs targeting `master` |
-| -2 Weeks | `master` | Merge first `staging-next` fixes into `master`; begin second `staging-next` cycle |
-| -2 Weeks | `staging` | Unrestrict all breaking changes; new changes will not be present in `master` before branch-off |
-| -1 Weeks | `master` | Merge second `staging-next` fix cycle |
-| -1 Weeks | `staging-next` | Unrestrict all breaking changes; new changes will not be present in `master` before branch-off |
+| -4 Weeks | `staging-next`, `staging` | Restrict all breaking changes with the exception of updates to desktop environment |
+| -3 Weeks | `master` | Wait for `staging-next` merge into `master`, begin first `staging-next` cycle |
+| -3 Weeks | `master` | Begin Zero Hydra Failures campaign |
+| -2 Weeks | `master` | Wait for first `staging-next` merge into `master`; begin second `staging-next` cycle |
+| -2 Weeks | `staging` | Unrestrict all breaking changes; new changes will not be present in the release |
+| -1 Weeks | `master` | Wait for second `staging-next` merge into `master` |
+| -1 Weeks | `staging-next` | Unrestrict all breaking changes; new changes will not be present in the release |
 | -1 Weeks | `master`, `release` | Perform Branch-off, create release channels, create new beta / unstable tags |
-| -1 Weeks | `master`, `release` | ZHF transitions to "backporting" workflow |
+| -1 Weeks | `master` | Mark failing packages as broken |
+| -1 Weeks | `master`, `release` | Create the release branch and tags |
+| -1 Weeks | `release` | Create release channels |
+| -1 Weeks | `master`, `release` | Fixes need to use the "backport" workflow to arrive in the release |
 | -1 Weeks | `release` | Prepare for release, finish remaining issues |
-| 0 Weeks | `release` | **Release!** |
-| 0 Weeks | | ZHF Ends |
-| +1 Weeks | | Release Retrospective |
+| 0 Weeks | `release` | **Release!** Marks the end of the Zero Hydra Failures campaign. |
+| +1 Weeks | | Release Retrospective, everyone is invited to give feedback! |
 | +4 Weeks | | End of life cleanup |
 
 
