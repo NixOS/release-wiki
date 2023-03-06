@@ -1,11 +1,16 @@
 # ZERO Hydra Failures
 
-## Hydra resource scale-up
+## Hydra scaling
 
-Some days before ZHF starts is a good time to request the scale up of Hydra
-resources for the duration of ZHF and release to improve the iteration speed we
-can support and reduce the timeframe of alowing large rebuilds.
-[21.11 example](https://github.com/NixOS/nixos-org-configurations/issues/186).
+The activity during ZHF is usually higher, so more build capacity is a good
+investment, to keep up with the pace of contributions.
+
+There is an autoscaler in place for aarch64-linux and x86_64-linux while the
+darwin allocations are pretty much static.
+
+If capacity issues are apparent, contact the infrastructure team on the
+`nixos-org-configurations` repository (example: [21.11 example](https://github.com/NixOS/nixos-org-configurations/issues/186)),
+and start a discussion in [#infra:nixos.org](https://matrix.to/#/#infra:nixos.org).
 
 ## ZHF issue
 
