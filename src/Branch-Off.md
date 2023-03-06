@@ -163,5 +163,15 @@ The following steps should be done after the channels have become available on [
 
 1. Give the [Marketing team](https://matrix.to/#/#marketing:nixos.org) a heads-up about the upcoming release
 
+1. Get in contact with [Amine Chikhaoui](https://github.com/AmineChikhaoui) on the infrastructure room on Matrix, so
+   they can get the AMIs updated in time for the release.
+
+   1. They will need to run [`create-amis.sh`](https://github.com/NixOS/nixpkgs/blob/master/nixos/maintainers/scripts/ec2/create-amis.sh`),
+      which requires write permissions to the S3 bucket.
+
+   1. Create PR adding it to NixOS configuration. Examples:
+      - [22.11](https://github.com/NixOS/nixpkgs/pull/204014)
+      - [20.09](https://github.com/NixOS/nixpkgs/pull/101720)
+
 1. Update the ZHF issue, that now that the branch-off has been performed, fixes have to be backported.
    Examples: [22.05](https://github.com/NixOS/nixpkgs/issues/172160#issuecomment-1135112918)

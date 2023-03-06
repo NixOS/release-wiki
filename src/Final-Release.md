@@ -140,7 +140,7 @@
    nix-shell -p "python3.withPackages (p: [ p.lxml p.requests p.pytest ])" -p cdrkit osinfo-db-tools gettext --run "make check"
    ```
 
-1. Update AMI images
+1. Make sure the AMI images have been updated
 
    1. Someone with s3 bucket permssions will need to run `https://github.com/NixOS/nixpkgs/blob/master/nixos/maintainers/scripts/ec2/create-amis.sh` (usually AmineChikhaoui - just ping them in the infrastructure matrix room).
 
