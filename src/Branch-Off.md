@@ -40,6 +40,12 @@ Inputs:
 
 ## Actual branch-off
 
+Set NEWVER to the new release version:
+
+```shell
+export NEWVER=23.05
+```
+
 ### On the master branch
 
 Pull in the final changes before performing the actal branch-off.
@@ -51,7 +57,7 @@ Pull in the final changes before performing the actal branch-off.
 1. Create the release branch:
 
    ```shell
-   git switch -c release-21.05
+   git switch -c release-$NEWVER
    ```
 
 ### On the release branch
@@ -65,7 +71,7 @@ Update metadata on the release branch, create its staging branches and tag the r
    To get the commit count, use the following command:
 
    ```shell
-   git rev-list --count release-21.05
+   git rev-list --count release-$NEWVER
    ```
 
 
@@ -79,15 +85,15 @@ Update metadata on the release branch, create its staging branches and tag the r
 
 1. Create the staging branches
    ```shell
-   git branch staging-21.05
-   git branch staging-next-21.05
+   git branch staging-$NEWVER
+   git branch staging-next-$NEWVER
    ```
 
 1. Tag the release and push everything
 
    ```shell
-   git tag --annotate --message="Release 21.05-beta" 21.05-beta
-   git push upstream master release-21.05 21.05-beta staging-21.05 staging-next-21.05
+   git tag --annotate --message="Release $NEWVER-beta" $NEWVER-beta
+   git push upstream master release-$NEWVER $NEWVER-beta staging-$NEWVER staging-next-$NEWVER
    ```
 
 1. Create jobsets on hydra by contacting the infrastructure team and start the evaluation on all new jobsets.
@@ -109,7 +115,8 @@ Now we prepare the master branch for the next release after this one.
    file in the repository root.
 
    ```shell
-   echo -n "21.11" > .version
+   # The release after $NEWVER (23.05 -> 23.11)
+   echo -n "23.11" > .version
    ````
 
 1. Update the `codeName` attribute in [`lib/trivial.nix`](https://github.com/NixOS/nixpkgs/commit/01268fda85b7eee4e462c873d8654f975067731f#diff-03f3d41b68f62079c55001f1a1c55c1dR137)
@@ -123,9 +130,9 @@ Now we prepare the master branch for the next release after this one.
 1. Tag the master branch, so that `git describe` shows the new version as the base for commits..
 
    ```shell
-   git tag --annotate 21.11-pre
-   git push upstream master 21.11-pre
-   git describe HEAD # should yield 21.11-pre
+   git tag --annotate $NEWVER-pre
+   git push upstream master $NEWVER-pre
+   git describe HEAD # should yield 23.05-pre
    ```
 
 ### And afterwards
@@ -135,12 +142,6 @@ Now that everything on git is done, we are still missing the channels.
 1. Create the necessary channels for `https://channels.nixos.org` in beta status, by updating
    [`channels.nix`](https://github.com/NixOS/nixos-org-configurations/blob/master/channels.nix) in `nixos-org-configurations`
    and nag the infrastructure team to get these changes deployed.
-
-   The channels since NixOS 22.11 are:
-
-     - nixos-22.11
-     - nixos-22.11-small
-     - nixos-22.11-darwin
 
    Example: [22.11](https://github.com/NixOS/nixos-org-configurations/commit/9a0b3674a11b445c973334c78e8ca0eda36775e4)
 
