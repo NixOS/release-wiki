@@ -15,14 +15,13 @@ and start a discussion in [#infra:nixos.org](https://matrix.to/#/#infra:nixos.or
 ## ZHF issue
 
 - Create an issue for tracking Zero Hydra Failures progress. ZHF is an effort
-  to get build failures down to zero.
-  [22.05 example](https://github.com/NixOS/nixpkgs/issues/172160)
+  to get build failures down to zero. Examples:
+  [22.11](https://github.com/NixOS/nixpkgs/issues/199919), [22.05](https://github.com/NixOS/nixpkgs/issues/172160)
 
-- With RFC85, the
-  [nixpkgs/trunk](https://hydra.nixos.org/jobset/nixpkgs/trunk) jobset will be
-  used to track regressions.
+- The [nixpkgs/trunk](https://hydra.nixos.org/jobset/nixpkgs/trunk) jobset is ideal
+  to track regressions, since it builds for all platforms.
 
-- Monitor the issue and linked Pull Requests and check if new blockers come up.
+- Subscribe to the issue and monitor the conversation for new blockers.
 
-- Get in contact with the staging team (for example via their Matrix room) in
-  the last days before branch-off to coordinate the staging-next merges.
+- Get in contact with the staging team through their Matrix room at [#staging:nixos.org](https://matrix.to/#/#staging:nixos.org)
+  to coordinate the staging-next merges.
