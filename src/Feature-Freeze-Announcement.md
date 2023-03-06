@@ -28,10 +28,13 @@ cleanliness.
   especially if there is a stable alternative. E.g. Check that our
   Linux kernels’ [projected
   end-of-life](https://www.kernel.org/category/releases.html) are
-  after our release projected end-of-life. Also check these package sets:
-	- MariaDB
-	- PHP
-	- PostgreSQL
+  after our release projected end-of-life.
+
+  Many EOL dates are also tracked by the [endoflife.date](https://endoflife.date)
+  project and some packages might need closer supervision in that regard.
+
+  The ["Picking up the garbage"](https://github.com/NixOS/nixpkgs/projects/18)
+  project tracks problematic packages that should be removed.
 
 - Attributes that can also be safely removed are packages that were broken for
   more than 2 years.
