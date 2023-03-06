@@ -1,7 +1,7 @@
 # Summary
 
 - [Home](Home.md)
-- [Release Management Team](Release-Management-Team.md)
+- [Release Managers](Release-Managers.md)
 - [Release Critical Packages](Release-Critical-Packages.md)
 - [Release Process](Release-Process.md)
 	- [What to do once appointed](Once-Appointed.md)

@@ -1,4 +1,4 @@
-# Release Management Team
+# Release Managers
 
 > When you are nixpkgs committer, you already have the skillset necessary for release management.
 > You just need to apply it in a different way.
