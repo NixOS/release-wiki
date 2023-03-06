@@ -13,6 +13,8 @@ This is not an actual part of the release process but rather preparations for st
 	- Request moderator permissions on the room, this allows to manage the topic and create video calls
 - Gain access to the [release-manager GitHub Team](https://github.com/orgs/NixOS/teams/nixos-release-managers/members) by asking any of the existing people with "Manager" rights
 	- Also make sure there are only people left as members who are managing this release
+- Gain access to the [nixos-release Discourse Team](https://discourse.nixos.org/g/nixos-release)
+  - Your partner should have the permissions to invite you. Make sure to remove previous members, who are not active anymore.
 - Update the [NixOS Release Team](https://github.com/NixOS/nixos-homepage/blob/master/community/teams/nixos-release.tt) members on the homepage
 	- You will be the primary contact for this release, your experienced team mate will be secondary.
 - Ensure you have a [Hydra](https://hydra.nixos.org/) account which will come in handy
