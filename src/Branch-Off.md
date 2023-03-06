@@ -176,3 +176,5 @@ The following steps should be done after the channels have become available on [
 
 1. Update the ZHF issue, that now that the branch-off has been performed, fixes have to be backported.
    Examples: [22.05](https://github.com/NixOS/nixpkgs/issues/172160#issuecomment-1135112918)
+
+1. Make sure the release editors have started finalizing the release notes. Only 7 days left until release!
