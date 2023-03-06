@@ -28,8 +28,11 @@ export NEWVER=23.05
   - Graphical (GNOME/KDE)
   - Minimal
 
-  All ISO images can be found on the `nixos/release-$NEWVER` hydra jobset. If not suitable hardware can be accessed,
-  use [QEMU emulation](https://gist.github.com/mweinelt/b7399e31a05e2e9659acf52b842a417c) for basic testing
+  All ISO images can be found on the `nixos/release-$NEWVER` hydra jobset.
+
+  If you don't have any hardware to test the aarch64-linux on, [QEMU
+  emulation](QEMU-aarch64.md) should allow to boot the images in a
+  reasonable time to check the installer starts and is usable.
 
 - Gather some information about the release for the final announcement
 
