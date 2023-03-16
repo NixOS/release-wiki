@@ -1,4 +1,4 @@
-# Release Management Team
+# Release Managers
 
 > When you are nixpkgs committer, you already have the skillset necessary for release management.
 > You just need to apply it in a different way.
@@ -25,8 +25,6 @@ A release manager’s role and responsibilities are:
 -   start discussions about features and changes for a given release
 
 -   create a roadmap
-
--   release in cooperation with Eelco Dolstra
 
 -   decide which bug fixes, features, etc… get backported after a
     release

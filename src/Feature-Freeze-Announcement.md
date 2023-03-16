@@ -28,18 +28,13 @@ cleanliness.
   especially if there is a stable alternative. E.g. Check that our
   Linux kernels’ [projected
   end-of-life](https://www.kernel.org/category/releases.html) are
-  after our release projected end-of-life. Also check these package sets:
-	- MariaDB
-	- PHP
-	- PostgreSQL
+  after our release projected end-of-life.
+
+  Many EOL dates are also tracked by the [endoflife.date](https://endoflife.date)
+  project and some packages might need closer supervision in that regard.
+
+  The ["Picking up the garbage"](https://github.com/NixOS/nixpkgs/projects/18)
+  project tracks problematic packages that should be removed.
 
 - Attributes that can also be safely removed are packages that were broken for
   more than 2 years.
-
-- Remove old aliases that have been `throw`s for at least one release. There is
-  a script in the nixpkgs tree to do that:
-  `maintainers/scripts/remove-old-aliases.py --file
-  ./pkgs/top-level/aliases.nix --year 2019 --month 6`
-  The conversion to `throw`s is usually done in one big Pull Request so you can
-  remove all aliases from the date prior to this Pull Request. [Example of the
-  2022 throw conversion](https://github.com/NixOS/nixpkgs/pull/161146).

@@ -13,6 +13,8 @@ This is not an actual part of the release process but rather preparations for st
 	- Request moderator permissions on the room, this allows to manage the topic and create video calls
 - Gain access to the [release-manager GitHub Team](https://github.com/orgs/NixOS/teams/nixos-release-managers/members) by asking any of the existing people with "Manager" rights
 	- Also make sure there are only people left as members who are managing this release
+- Gain access to the [nixos-release Discourse Team](https://discourse.nixos.org/g/nixos-release)
+  - Your partner should have the permissions to invite you. Make sure to remove previous members, who are not active anymore.
 - Update the [NixOS Release Team](https://github.com/NixOS/nixos-homepage/blob/master/community/teams/nixos-release.tt) members on the homepage
 	- You will be the primary contact for this release, your experienced team mate will be secondary.
 - Ensure you have a [Hydra](https://hydra.nixos.org/) account which will come in handy
@@ -27,5 +29,5 @@ This is not an actual part of the release process but rather preparations for st
 	- Read the Discourse post of the last retrospective
 	- Check the Issues and Pull Requests of the [release-wiki repository](https://github.com/NixOS/release-wiki)
 - Figure out concrete dates for the week offsets outlined in schedule
-- Publish a "Let's have a great XX.XX release cycle!" post on Discourse, outlining the plans for this release. [Example of 22.05](https://discourse.nixos.org/t/lets-have-a-great-22-05-release-cycle/18357)
-	- This links to the release schedule issue ([22.05 example](https://github.com/NixOS/nixpkgs/issues/165792)) which must be created before posting to Discourse
+- Publish a "Let's have a great XX.XX release cycle!" post on Discourse, outlining the plans for this release. Examples: [22.05](https://discourse.nixos.org/t/lets-have-a-great-22-05-release-cycle/18357)
+	- This links to the release schedule issue (examples: [22.11](https://github.com/NixOS/nixpkgs/issues/193585), [22.05](https://github.com/NixOS/nixpkgs/issues/165792)) which must be created before posting to Discourse
