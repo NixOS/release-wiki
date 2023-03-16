@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>EOL cleanup - NixOS Release Wiki</title>
+        <title>Contrib - NixOS Release Wiki</title>
         
         
 
@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li class="chapter-item expanded "><a href="Roles.html"><strong aria-hidden="true">2.</strong> Roles</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Release-Managers.html"><strong aria-hidden="true">2.1.</strong> Release Managers</a></li><li class="chapter-item expanded "><a href="Release-Editors.html"><strong aria-hidden="true">2.2.</strong> Release Editors</a></li></ol></li><li class="chapter-item expanded "><a href="Release-Critical-Packages.html"><strong aria-hidden="true">3.</strong> Release Critical Packages</a></li><li class="chapter-item expanded "><a href="Release-Process.html"><strong aria-hidden="true">4.</strong> Release Process</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Once-Appointed.html"><strong aria-hidden="true">4.1.</strong> What to do once appointed</a></li><li class="chapter-item expanded "><a href="Feature-Freeze-Announcement.html"><strong aria-hidden="true">4.2.</strong> Feature Freeze announcement and pre-release cleanup</a></li><li class="chapter-item expanded "><a href="Zero-Hydra-Failures.html"><strong aria-hidden="true">4.3.</strong> ZERO Hydra Failures</a></li><li class="chapter-item expanded "><a href="Branch-Off.html"><strong aria-hidden="true">4.4.</strong> Branch-off</a></li><li class="chapter-item expanded "><a href="Beta-Phase.html"><strong aria-hidden="true">4.5.</strong> Beta Phase</a></li><li class="chapter-item expanded "><a href="Final-Release.html"><strong aria-hidden="true">4.6.</strong> Final Release</a></li><li class="chapter-item expanded "><a href="Retrospective.html"><strong aria-hidden="true">4.7.</strong> Retrospective</a></li><li class="chapter-item expanded "><a href="EOL-Cleanup.html" class="active"><strong aria-hidden="true">4.8.</strong> EOL cleanup</a></li><li class="chapter-item expanded "><a href="Handover.html"><strong aria-hidden="true">4.9.</strong> Handover to the next team</a></li></ol></li><li class="chapter-item expanded "><a href="Contrib.html"><strong aria-hidden="true">5.</strong> Contrib</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="QEMU-aarch64.html"><strong aria-hidden="true">5.1.</strong> QEMU Aarch64 Emulation</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li class="chapter-item expanded "><a href="Roles.html"><strong aria-hidden="true">2.</strong> Roles</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Release-Managers.html"><strong aria-hidden="true">2.1.</strong> Release Managers</a></li><li class="chapter-item expanded "><a href="Release-Editors.html"><strong aria-hidden="true">2.2.</strong> Release Editors</a></li></ol></li><li class="chapter-item expanded "><a href="Release-Critical-Packages.html"><strong aria-hidden="true">3.</strong> Release Critical Packages</a></li><li class="chapter-item expanded "><a href="Release-Process.html"><strong aria-hidden="true">4.</strong> Release Process</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Once-Appointed.html"><strong aria-hidden="true">4.1.</strong> What to do once appointed</a></li><li class="chapter-item expanded "><a href="Feature-Freeze-Announcement.html"><strong aria-hidden="true">4.2.</strong> Feature Freeze announcement and pre-release cleanup</a></li><li class="chapter-item expanded "><a href="Zero-Hydra-Failures.html"><strong aria-hidden="true">4.3.</strong> ZERO Hydra Failures</a></li><li class="chapter-item expanded "><a href="Branch-Off.html"><strong aria-hidden="true">4.4.</strong> Branch-off</a></li><li class="chapter-item expanded "><a href="Beta-Phase.html"><strong aria-hidden="true">4.5.</strong> Beta Phase</a></li><li class="chapter-item expanded "><a href="Final-Release.html"><strong aria-hidden="true">4.6.</strong> Final Release</a></li><li class="chapter-item expanded "><a href="Retrospective.html"><strong aria-hidden="true">4.7.</strong> Retrospective</a></li><li class="chapter-item expanded "><a href="EOL-Cleanup.html"><strong aria-hidden="true">4.8.</strong> EOL cleanup</a></li><li class="chapter-item expanded "><a href="Handover.html"><strong aria-hidden="true">4.9.</strong> Handover to the next team</a></li></ol></li><li class="chapter-item expanded "><a href="Contrib.html" class="active"><strong aria-hidden="true">5.</strong> Contrib</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="QEMU-aarch64.html"><strong aria-hidden="true">5.1.</strong> QEMU Aarch64 Emulation</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -163,52 +163,23 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#eol-cleanup" id="eol-cleanup">EOL cleanup</a></h1>
-<p>The old release reaches its end of life one month after the new release
-gets released. At that point a few cleanup tasks need to be done.</p>
-<ol>
-<li>
-<p>Set the EOL channel status to <code>deprecated</code> in <code>nixos-org-configurations</code>. Examples:</p>
-<ul>
-<li><a href="https://github.com/NixOS/nixos-org-configurations/pull/229">channels: Deprecate NixOS 22.05</a></li>
-<li><a href="https://github.com/NixOS/nixos-org-configurations/pull/211">channels: Mark 21.11 as unmaintained</a></li>
-<li><a href="https://github.com/NixOS/nixos-org-configurations/pull/201">channels:21.05 is unmaintained</a></li>
-</ul>
-</li>
-<li>
-<p>Once this is merged, update the <a href="https://github.com/NixOS/nixos-search"><code>nixos-search</code></a>
-repository to reflect that status on <a href="https://search.nixos.org">search.nixos.org</a>.</p>
-<pre><code class="language-shell">nix --extra-experimental-features nix-command flakes flake update nixos-org-configurations
-</code></pre>
-</li>
-<li>
-<p>Close all pull requests that target one of the the old release- or staging-branches</p>
-</li>
-<li>
-<p>Prune old <a href="https://github.com/NixOS/nixpkgs/labels?q=backport">backport labels</a></p>
-</li>
-<li>
-<p>Remove the old release from the <a href="https://github.com/NixOS/nixpkgs/commit/8befefd1a72da597bdb1d01e97127e0c9866912e">periodic merge workflows</a></p>
-</li>
-<li>
-<p>Increase the <code>oldestSupportedRelease</code> in <code>lib/trivial.nix</code> to match
-the oldest supported release.</p>
-<p>Examples: <a href="https://github.com/NixOS/nixpkgs/pull/180152">22.05</a></p>
-</li>
-</ol>
+                        <h1><a class="header" href="#contrib" id="contrib">Contrib</a></h1>
+<p>This section holds scripts that can be helpful in the context of the
+release, but are optional and would likely impact the legibility of
+the documentation if included inline.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="Retrospective.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="Handover.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="Handover.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="QEMU-aarch64.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -220,13 +191,13 @@ the oldest supported release.</p>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a rel="prev" href="Retrospective.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="Handover.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a rel="next" href="Handover.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="QEMU-aarch64.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

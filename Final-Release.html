@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li class="chapter-item expanded "><a href="Release-Management-Team.html"><strong aria-hidden="true">2.</strong> Release Management Team</a></li><li class="chapter-item expanded "><a href="Release-Critical-Packages.html"><strong aria-hidden="true">3.</strong> Release Critical Packages</a></li><li class="chapter-item expanded "><a href="Release-Process.html"><strong aria-hidden="true">4.</strong> Release Process</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Once-Appointed.html"><strong aria-hidden="true">4.1.</strong> What to do once appointed</a></li><li class="chapter-item expanded "><a href="Feature-Freeze-Announcement.html"><strong aria-hidden="true">4.2.</strong> Feature Freeze announcement and pre-release cleanup</a></li><li class="chapter-item expanded "><a href="Zero-Hydra-Failures.html"><strong aria-hidden="true">4.3.</strong> ZERO Hydra Failures</a></li><li class="chapter-item expanded "><a href="Branch-Off.html"><strong aria-hidden="true">4.4.</strong> Branch-off</a></li><li class="chapter-item expanded "><a href="Beta-Phase.html"><strong aria-hidden="true">4.5.</strong> Beta Phase</a></li><li class="chapter-item expanded "><a href="Final-Release.html" class="active"><strong aria-hidden="true">4.6.</strong> Final Release</a></li><li class="chapter-item expanded "><a href="EOL-Cleanup.html"><strong aria-hidden="true">4.7.</strong> EOL cleanup</a></li><li class="chapter-item expanded "><a href="Handover.html"><strong aria-hidden="true">4.8.</strong> Handover to the next team</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li class="chapter-item expanded "><a href="Roles.html"><strong aria-hidden="true">2.</strong> Roles</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Release-Managers.html"><strong aria-hidden="true">2.1.</strong> Release Managers</a></li><li class="chapter-item expanded "><a href="Release-Editors.html"><strong aria-hidden="true">2.2.</strong> Release Editors</a></li></ol></li><li class="chapter-item expanded "><a href="Release-Critical-Packages.html"><strong aria-hidden="true">3.</strong> Release Critical Packages</a></li><li class="chapter-item expanded "><a href="Release-Process.html"><strong aria-hidden="true">4.</strong> Release Process</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Once-Appointed.html"><strong aria-hidden="true">4.1.</strong> What to do once appointed</a></li><li class="chapter-item expanded "><a href="Feature-Freeze-Announcement.html"><strong aria-hidden="true">4.2.</strong> Feature Freeze announcement and pre-release cleanup</a></li><li class="chapter-item expanded "><a href="Zero-Hydra-Failures.html"><strong aria-hidden="true">4.3.</strong> ZERO Hydra Failures</a></li><li class="chapter-item expanded "><a href="Branch-Off.html"><strong aria-hidden="true">4.4.</strong> Branch-off</a></li><li class="chapter-item expanded "><a href="Beta-Phase.html"><strong aria-hidden="true">4.5.</strong> Beta Phase</a></li><li class="chapter-item expanded "><a href="Final-Release.html" class="active"><strong aria-hidden="true">4.6.</strong> Final Release</a></li><li class="chapter-item expanded "><a href="Retrospective.html"><strong aria-hidden="true">4.7.</strong> Retrospective</a></li><li class="chapter-item expanded "><a href="EOL-Cleanup.html"><strong aria-hidden="true">4.8.</strong> EOL cleanup</a></li><li class="chapter-item expanded "><a href="Handover.html"><strong aria-hidden="true">4.9.</strong> Handover to the next team</a></li></ol></li><li class="chapter-item expanded "><a href="Contrib.html"><strong aria-hidden="true">5.</strong> Contrib</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="QEMU-aarch64.html"><strong aria-hidden="true">5.1.</strong> QEMU Aarch64 Emulation</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -164,54 +164,63 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#final-release" id="final-release">Final Release</a></h1>
-<p><code>$OLDVER</code> represents the previous stable release (the one you are replacing),
-<code>$NEWVER</code> represents the release you are currently releasing.</p>
+<p>Set the following environment variables to execute the commands below</p>
+<pre><code class="language-shell"># The version of the previous stable release
+export OLDVER=22.11
+# The version that is about to be released
+export NEWVER=23.05
+</code></pre>
 <h2><a class="header" href="#before-the-final-release" id="before-the-final-release">Before the final release</a></h2>
 <ul>
 <li>
 <p>Two days before expected release date, change <code>stableBranch</code> to <code>true</code> in Hydra and wait for the channel to update</p>
 </li>
 <li>
-<p>Re-check that the release notes are complete</p>
+<p>Re-check that the release editors have completed their work on the release notes</p>
 </li>
 <li>
 <p>Merge the Pull Request that marks broken packages as broken</p>
 </li>
 <li>
-<p><a href="https://github.com/NixOS/nixpkgs/commit/40fd9ae3ac8048758abdcfc7d28a78b5f22fe97e">Update README.md with new stable NixOS version information.</a> (for <code>master</code> then backport to the release branch)</p>
+<p>Update <a href="https://github.com/NixOS/nixpkgs/commit/40fd9ae3ac8048758abdcfc7d28a78b5f22fe97e">README.md</a> on master with
+new stable NixOS version information. Then backport the change to the release branch.</p>
 </li>
 <li>
-<p>Update <a href="https://nixos.org/manual/nixos/stable/index.html#sec-upgrading">Upgrading NixOS</a> section of the manual to match new stable release version and backport this as well. This way the manual will already reflect the new version on release.</p>
+<p>Update <a href="https://nixos.org/manual/nixos/stable/index.html#sec-upgrading">Upgrading NixOS</a> section of the manual to
+match new stable release version and backport this as well. This way the manual will already reflect the new version
+on release. Example: <a href="https://github.com/nixos/nixpkgs/commit/cbaacfb8dfa2ddadfb152fa8ef163b40db9041af">22.05</a></p>
 </li>
 <li>
-<p>Ensure the following items are sufficiently tested:</p>
+<p>Ensure the installer images are sufficiently tested on both aarch64 and x86_64 linux:</p>
 <ul>
-<li>Graphical NixOS installer images (Can be found on nixos hydra jobset)</li>
-<li>Minimal NixOS installer images (Can be found on nixos hydra jobset)</li>
-<li>If not suitable hardware can be accessed, use <a href="https://gist.github.com/mweinelt/b7399e31a05e2e9659acf52b842a417c">QEMU emulation</a> for basic testing</li>
+<li>Graphical (GNOME/KDE)</li>
+<li>Minimal</li>
 </ul>
+<p>All ISO images can be found on the <code>nixos/release-$NEWVER</code> hydra jobset.</p>
+<p>If you don't have any hardware to test the aarch64-linux on, <a href="QEMU-aarch64.html">QEMU
+emulation</a> should allow to boot the images in a
+reasonable time to check the installer starts and is usable.</p>
 </li>
 <li>
 <p>Gather some information about the release for the final announcement</p>
 <ul>
 <li>
-<p>Number of commits for the release:</p>
-<pre><code class="language-shell">git log upstream/release-$OLDVER..upstream/release-$NEWVER --format=%an | wc -l
-</code></pre>
-</li>
-<li>
-<p>Commits by contributor:</p>
-<pre><code class="language-shell">git shortlog --summary --numbered release-$OLDVER..release-$NEWVER
+<p>Number of non-merge commits for the release:</p>
+<pre><code class="language-shell">git log upstream/release-$OLDVER..upstream/release-$NEWVER --no-merges --format=%an | wc -l
 </code></pre>
 </li>
 <li>
 <p>New/updated/removed packages:</p>
+<pre><code class="language-shell">git switch release-$OLDVER
+NIX_PATH= nix-env -f $PWD -qaP --json --out-path &gt; old.json
+
+git switch release-$NEWVER
+NIX_PATH= nix-env -f $PWD -qaP --json --out-path &gt; new.json
+</code></pre>
 <pre><code class="language-python">#!/usr/bin/env bash
 
 import json
 
-# Files generated by checking out the corresponding branch and running:
-# NIX_PATH= nix-env -f $PWD -qaP --json --out-path &gt; new.json
 with open('old.json') as f:
     old = json.load(f)
 with open('new.json') as f:
@@ -256,17 +265,41 @@ comm -13 &lt;(jq -r 'keys[]' old.json | sort) &lt;(jq -r 'keys[]' new.json | sor
 </li>
 </ul>
 <h2><a class="header" href="#at-final-release-time" id="at-final-release-time">At final release time</a></h2>
+<h3><a class="header" href="#on-the-master-branch" id="on-the-master-branch">On the master branch</a></h3>
 <ol>
 <li>
 <p>Create these PRs on master and backport to the release branch:</p>
 <ol>
 <li>
-<p>Update <code>rl-$NEWVER.xml</code> with the release date.</p>
+<p>Update <code>rl-$NEWVER.section.md</code> with the final release date.</p>
 </li>
 <li>
-<p>Update the Pull Request Template and CONTRIBUTUTING.md on master (<a href="https://github.com/NixOS/nixpkgs/pull/147977">21.11 example</a>)</p>
+<p>Update the release versions in <a href="https://github.com/NixOS/nixpkgs/blob/master/.github/PULL_REQUEST_TEMPLATE.md"><code>PULL_REQUEST_TEMPLATE.md</code></a>
+on master.</p>
+<p>Examples: <a href="https://github.com/NixOS/nixpkgs/commit/f1b9cc23aa8b1549dd7cb53dbe9fc950efc97646#diff-18813c86948efc57e661623d7ba48ff94325c9b5421ec9177f724922dd553a35">22.11</a></p>
+</li>
+<li>
+<p>Update <a href="https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md"><code>CONTRIBUTUTING.md</code></a> on master</p>
+<p>Examples: <a href="https://github.com/NixOS/nixpkgs/commit/f1b9cc23aa8b1549dd7cb53dbe9fc950efc97646#diff-eca12c0a30e25b4b46522ebf89465a03ba72a03f540796c979137931d8f92055">22.11</a></p>
+</li>
+<li>
+<p>Commit and push all changes.</p>
+<pre><code class="language-shell">git commit -m &quot;Release NixOS $NEWVER&quot; -S
+git push upstream master
+</code></pre>
 </li>
 </ol>
+</li>
+</ol>
+<h3><a class="header" href="#on-the-release-branch" id="on-the-release-branch">On the release branch</a></h3>
+<ol>
+<li>
+<p>Switch to the release branch</p>
+<pre><code class="language-shell">git switch release-$NEWVER
+</code></pre>
+</li>
+<li>
+<p>Cherry-pick the release commit from master</p>
 </li>
 <li>
 <p>Tag the release <strong>on the release branch</strong>:</p>
@@ -275,11 +308,13 @@ git push upstream $NEWVER
 </code></pre>
 </li>
 <li>
-<p>Update <a href="https://github.com/NixOS/nixos-homepage">nixos-homepage</a> for
-the release (<a href="https://github.com/NixOS/nixos-homepage/pull/853">22.05 example</a>).</p>
+<p>Update <a href="https://github.com/NixOS/nixos-homepage">nixos-homepage</a> for the release.</p>
+<p>Examples: <a href="https://github.com/NixOS/nixos-homepage/pull/952">22.11</a>, <a href="https://github.com/NixOS/nixos-homepage/pull/853">22.05</a></p>
+<p>This step requires the released ISOs, from the hydra evaluation with <code>stableBranch</code> enabled, to be available.</p>
 <ol>
 <li>
-<p><a href="https://github.com/NixOS/nixos-homepage/blob/47ac3571c4d71e841fd4e6c6e1872e762b9c4942/flake.nix#L10">Update the <code>flake.nix</code> input <code>released-nixpkgs</code> to $NEWVER</a>.</p>
+<p>Update the <a href="https://github.com/NixOS/nixos-homepage/blob/bd11c42e925f192e6e2d369d021b58046daf384c/flake.nix#L9"><code>flake.nix</code></a>
+input <code>released-nixpkgs</code> to $NEWVER and then run:</p>
 </li>
 <li>
 <p>Run <code>./scripts/update.sh</code> (this updates flake.lock to updated channel).</p>
@@ -291,32 +326,36 @@ the release (<a href="https://github.com/NixOS/nixos-homepage/pull/853">22.05 ex
 <p>Write the announcement to <code>blog/announcements.xml</code></p>
 </li>
 <li>
-<p>The website is hosted by a CDN so you may occasionally see the old site for a couple of minutes/hours (?) after your changes</p>
+<p>Create a pull request and poke the marking team. Make sure to
+push to a branch on the <code>nixos-homepage</code> repository, not your
+own fork, so the CI actions work properly.</p>
 </li>
 </ol>
+<p>The website is hosted by a CDN so you may occasionally see the old site for a couple of minutes/hours (?) after your changes</p>
 </li>
 <li>
-<p>Update <a href="https://github.com/NixOS/nixos-org-configurations">nixos-org-configurations</a> with the updated channel status (<a href="https://github.com/NixOS/nixos-org-configurations/pull/192/files">21.11 example</a>)</p>
-<ul>
-<li>previous stable branches should be marked &quot;deprecated&quot;</li>
-<li>beta branches should be marked &quot;stable&quot;</li>
-</ul>
+<p>Update <a href="https://github.com/NixOS/nixos-org-configurations">nixos-org-configurations</a> to reflect the <code>stable</code> channel
+status for $NEWVER and the <code>deprecated</code> status for $OLDVER.</p>
+<p>Examples: <a href="https://github.com/NixOS/nixos-org-configurations/pull/228">22.11</a>, <a href="https://github.com/NixOS/nixos-org-configurations/pull/210">22.05</a>, <a href="https://github.com/NixOS/nixos-org-configurations/pull/192">21.11</a></p>
 </li>
 <li>
-<p>Create a new topic on <a href="https://discourse.nixos.org/">Discourse</a> to announce the release</p>
+<p>Create a new topic on <a href="https://discourse.nixos.org/">Discourse</a> to announce the release.</p>
+<p>Examples: <a href="https://discourse.nixos.org/t/nixos-22-11-released/23637">22.11</a>, <a href="https://discourse.nixos.org/t/nixos-22-05-released/19404">22.05</a></p>
 </li>
 <li>
-<p>When the Pull Request in <code>nixos-org-configurations</code> is merged, update <a href="https://github.com/NixOS/nixos-search/">nixos-search</a> to mark the channel as released.
+<p>Once the Pull Request in <code>nixos-org-configurations</code> is merged, update <a href="https://github.com/NixOS/nixos-search/">nixos-search</a> to mark the channel as released.
 This is the same process as for the creation of the beta channel in the project.</p>
 </li>
 </ol>
 <h2><a class="header" href="#after-release" id="after-release">After Release</a></h2>
 <ol>
 <li>
-<p>Update repology (<a href="https://github.com/repology/repology-updater/pull/1156/files">22.05 example</a>)</p>
+<p>Add the new release to repology. Don't remove old releases, they want to keep them around.</p>
+<p>Examples: <a href="https://github.com/repology/repology-updater/pull/1289">22.11</a>, <a href="https://github.com/repology/repology-updater/pull/1156">22.05</a></p>
 </li>
 <li>
-<p>Update osinfo-db entries. <a href="https://gitlab.com/libosinfo/osinfo-db/-/merge_requests/312">example</a></p>
+<p>Update osinfo-db entries.</p>
+<p>Examples: <a href="https://gitlab.com/libosinfo/osinfo-db/-/merge_requests/539">22.11</a>, <a href="https://gitlab.com/libosinfo/osinfo-db/-/merge_requests/457">22.05</a>, <a href="https://gitlab.com/libosinfo/osinfo-db/-/merge_requests/385">21.11</a></p>
 <pre><code class="language-shell">nix-shell -p &quot;python3.withPackages (p: [ p.lxml p.requests ])&quot; -p cdrkit
 ./scripts/updates/nixos.py --release YY.MM --codename &lt;codename&gt; --release-date YYYY-MM-DD --next-release YY.MM
 git add .
@@ -327,15 +366,7 @@ nix-shell -p &quot;python3.withPackages (p: [ p.lxml p.requests p.pytest ])&quot
 </code></pre>
 </li>
 <li>
-<p>Update AMI images</p>
-<ol>
-<li>
-<p>Someone with s3 bucket permssions will need to run <code>https://github.com/NixOS/nixpkgs/blob/master/nixos/maintainers/scripts/ec2/create-amis.sh</code> (usually AmineChikhaoui - just ping them in the infrastructure matrix room).</p>
-</li>
-<li>
-<p><a href="https://github.com/NixOS/nixpkgs/pull/101720">Create PR adding it to NixOS configuration</a>.</p>
-</li>
-</ol>
+<p>Check that the AMI image references have been updated in <code>nixos/modules/virtualisation/amazon-ec2-amis.nix</code>.</p>
 </li>
 <li>
 <p>Close the <a href="https://github.com/NixOS/nixpkgs/milestones">milestone</a></p>
@@ -350,9 +381,10 @@ nix-shell -p &quot;python3.withPackages (p: [ p.lxml p.requests p.pytest ])&quot
 <p>Ask someone with the appropriate permissions to update the description of the NixOS and NixOS Dev Matrix rooms to include the new release</p>
 </li>
 <li>
-<p>Create an announcement for the retrospective, some days after the old channel is discontinued (<a href="https://discourse.nixos.org/t/22-05-retrospective/19413">22.05 example</a>)</p>
+<p>Create an announcement for the retrospective, some days after the old channel is discontinued.</p>
 </li>
 </ol>
+<p>Examples: <a href="https://discourse.nixos.org/t/nixos-22-11-retrospective/23858">22.11</a>, <a href="https://discourse.nixos.org/t/22-05-retrospective/19413">22.05</a></p>
 
                     </main>
 
@@ -365,7 +397,7 @@ nix-shell -p &quot;python3.withPackages (p: [ p.lxml p.requests p.pytest ])&quot
                         
 
                         
-                            <a rel="next" href="EOL-Cleanup.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="Retrospective.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -383,7 +415,7 @@ nix-shell -p &quot;python3.withPackages (p: [ p.lxml p.requests p.pytest ])&quot
                 
 
                 
-                    <a rel="next" href="EOL-Cleanup.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="Retrospective.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

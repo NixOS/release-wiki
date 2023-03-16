@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li class="chapter-item expanded "><a href="Release-Management-Team.html"><strong aria-hidden="true">2.</strong> Release Management Team</a></li><li class="chapter-item expanded "><a href="Release-Critical-Packages.html"><strong aria-hidden="true">3.</strong> Release Critical Packages</a></li><li class="chapter-item expanded "><a href="Release-Process.html" class="active"><strong aria-hidden="true">4.</strong> Release Process</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Once-Appointed.html"><strong aria-hidden="true">4.1.</strong> What to do once appointed</a></li><li class="chapter-item expanded "><a href="Feature-Freeze-Announcement.html"><strong aria-hidden="true">4.2.</strong> Feature Freeze announcement and pre-release cleanup</a></li><li class="chapter-item expanded "><a href="Zero-Hydra-Failures.html"><strong aria-hidden="true">4.3.</strong> ZERO Hydra Failures</a></li><li class="chapter-item expanded "><a href="Branch-Off.html"><strong aria-hidden="true">4.4.</strong> Branch-off</a></li><li class="chapter-item expanded "><a href="Beta-Phase.html"><strong aria-hidden="true">4.5.</strong> Beta Phase</a></li><li class="chapter-item expanded "><a href="Final-Release.html"><strong aria-hidden="true">4.6.</strong> Final Release</a></li><li class="chapter-item expanded "><a href="EOL-Cleanup.html"><strong aria-hidden="true">4.7.</strong> EOL cleanup</a></li><li class="chapter-item expanded "><a href="Handover.html"><strong aria-hidden="true">4.8.</strong> Handover to the next team</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li class="chapter-item expanded "><a href="Roles.html"><strong aria-hidden="true">2.</strong> Roles</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Release-Managers.html"><strong aria-hidden="true">2.1.</strong> Release Managers</a></li><li class="chapter-item expanded "><a href="Release-Editors.html"><strong aria-hidden="true">2.2.</strong> Release Editors</a></li></ol></li><li class="chapter-item expanded "><a href="Release-Critical-Packages.html"><strong aria-hidden="true">3.</strong> Release Critical Packages</a></li><li class="chapter-item expanded "><a href="Release-Process.html" class="active"><strong aria-hidden="true">4.</strong> Release Process</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Once-Appointed.html"><strong aria-hidden="true">4.1.</strong> What to do once appointed</a></li><li class="chapter-item expanded "><a href="Feature-Freeze-Announcement.html"><strong aria-hidden="true">4.2.</strong> Feature Freeze announcement and pre-release cleanup</a></li><li class="chapter-item expanded "><a href="Zero-Hydra-Failures.html"><strong aria-hidden="true">4.3.</strong> ZERO Hydra Failures</a></li><li class="chapter-item expanded "><a href="Branch-Off.html"><strong aria-hidden="true">4.4.</strong> Branch-off</a></li><li class="chapter-item expanded "><a href="Beta-Phase.html"><strong aria-hidden="true">4.5.</strong> Beta Phase</a></li><li class="chapter-item expanded "><a href="Final-Release.html"><strong aria-hidden="true">4.6.</strong> Final Release</a></li><li class="chapter-item expanded "><a href="Retrospective.html"><strong aria-hidden="true">4.7.</strong> Retrospective</a></li><li class="chapter-item expanded "><a href="EOL-Cleanup.html"><strong aria-hidden="true">4.8.</strong> EOL cleanup</a></li><li class="chapter-item expanded "><a href="Handover.html"><strong aria-hidden="true">4.9.</strong> Handover to the next team</a></li></ol></li><li class="chapter-item expanded "><a href="Contrib.html"><strong aria-hidden="true">5.</strong> Contrib</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="QEMU-aarch64.html"><strong aria-hidden="true">5.1.</strong> QEMU Aarch64 Emulation</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -168,21 +168,23 @@
 <h2><a class="header" href="#release-schedule" id="release-schedule">Release Schedule</a></h2>
 <p>With <a href="https://github.com/NixOS/rfcs/blob/master/rfcs/0085-nixos-release-stablization.md">RFC85</a>, the release schedule is largely already dictated below:</p>
 <table><thead><tr><th>Weeks from Release</th><th>Branches Affected</th><th>Events</th></tr></thead><tbody>
-<tr><td>-8 Weeks</td><td></td><td>Ask ecosystems for desired changes, in &quot;Feature Freeze&quot;</td></tr>
+<tr><td>-8 Weeks</td><td></td><td>Start discussion about &quot;Feature Freeze &amp; Release Blockers&quot; with ecosystems maintainers</td></tr>
 <tr><td>-6 Weeks</td><td><code>staging-next</code>, <code>staging</code></td><td>Restrict breaking changes to Release Critical Packages</td></tr>
-<tr><td>-4 Weeks</td><td><code>staging-next</code>, <code>staging</code></td><td>Restrict all breaking changes: allow only non-breaking updates and Desktop Manager changes</td></tr>
-<tr><td>-3 Weeks</td><td><code>master</code></td><td>(Day before ZHF) merge <code>staging-next</code> into <code>master</code>, prep for ZHF</td></tr>
-<tr><td>-3 Weeks</td><td><code>master</code></td><td>Begin ZHF, Focus on minimizing regressions in PRs targeting <code>master</code></td></tr>
-<tr><td>-2 Weeks</td><td><code>master</code></td><td>Merge first <code>staging-next</code> fixes into <code>master</code>; begin second <code>staging-next</code> cycle</td></tr>
-<tr><td>-2 Weeks</td><td><code>staging</code></td><td>Unrestrict all breaking changes; new changes will not be present in <code>master</code> before branch-off</td></tr>
-<tr><td>-1 Weeks</td><td><code>master</code></td><td>Merge second <code>staging-next</code> fix cycle</td></tr>
-<tr><td>-1 Weeks</td><td><code>staging-next</code></td><td>Unrestrict all breaking changes; new changes will not be present in <code>master</code> before branch-off</td></tr>
+<tr><td>-4 Weeks</td><td><code>staging-next</code>, <code>staging</code></td><td>Restrict all breaking changes with the exception of updates to desktop environment</td></tr>
+<tr><td>-3 Weeks</td><td><code>master</code></td><td>Wait for <code>staging-next</code> merge into <code>master</code>, begin first <code>staging-next</code> cycle</td></tr>
+<tr><td>-3 Weeks</td><td><code>master</code></td><td>Begin Zero Hydra Failures campaign</td></tr>
+<tr><td>-2 Weeks</td><td><code>master</code></td><td>Wait for first <code>staging-next</code> merge into <code>master</code>; begin second <code>staging-next</code> cycle</td></tr>
+<tr><td>-2 Weeks</td><td><code>staging</code></td><td>Unrestrict all breaking changes; new changes will not be present in the release</td></tr>
+<tr><td>-1 Weeks</td><td><code>master</code></td><td>Wait for second <code>staging-next</code> merge into <code>master</code></td></tr>
+<tr><td>-1 Weeks</td><td><code>staging-next</code></td><td>Unrestrict all breaking changes; new changes will not be present in the release</td></tr>
 <tr><td>-1 Weeks</td><td><code>master</code>, <code>release</code></td><td>Perform Branch-off, create release channels, create new beta / unstable tags</td></tr>
-<tr><td>-1 Weeks</td><td><code>master</code>, <code>release</code></td><td>ZHF transitions to &quot;backporting&quot; workflow</td></tr>
+<tr><td>-1 Weeks</td><td><code>master</code></td><td>Mark failing packages as broken</td></tr>
+<tr><td>-1 Weeks</td><td><code>master</code>, <code>release</code></td><td>Create the release branch and tags</td></tr>
+<tr><td>-1 Weeks</td><td><code>release</code></td><td>Create release channels</td></tr>
+<tr><td>-1 Weeks</td><td><code>master</code>, <code>release</code></td><td>Fixes need to use the &quot;backport&quot; workflow to arrive in the release</td></tr>
 <tr><td>-1 Weeks</td><td><code>release</code></td><td>Prepare for release, finish remaining issues</td></tr>
-<tr><td>0 Weeks</td><td><code>release</code></td><td><strong>Release!</strong></td></tr>
-<tr><td>0 Weeks</td><td></td><td>ZHF Ends</td></tr>
-<tr><td>+1 Weeks</td><td></td><td>Release Retrospective</td></tr>
+<tr><td>0 Weeks</td><td><code>release</code></td><td><strong>Release!</strong> Marks the end of the Zero Hydra Failures campaign.</td></tr>
+<tr><td>+1 Weeks</td><td></td><td>Release Retrospective, everyone is invited to give feedback!</td></tr>
 <tr><td>+4 Weeks</td><td></td><td>End of life cleanup</td></tr>
 </tbody></table>
 <p>Clarification of terms:</p>
