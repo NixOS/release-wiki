@@ -2,7 +2,7 @@
 
 Set the following environment variables to execute the commands below
 
-```shell
+```bash
 # The version of the previous stable release
 export OLDVER=22.11
 # The version that is about to be released
@@ -38,13 +38,13 @@ export NEWVER=23.05
 
   - Number of non-merge commits for the release:
 
-    ```shell
+    ```bash
     git log upstream/release-$OLDVER..upstream/release-$NEWVER --no-merges --format=%an | wc -l
     ```
 
   - New/updated/removed packages:
 
-    ```shell
+    ```bash
     git switch release-$OLDVER
     NIX_PATH= nix-env -f $PWD -qaP --json --out-path > old.json
 
@@ -85,7 +85,7 @@ export NEWVER=23.05
 
   - Added/removed modules:
 
-    ```shell
+    ```bash
     git diff release-$OLDVER..release-$NEWVER nixos/modules/module-list.nix | grep ^+ | wc -l
     git diff release-$OLDVER..release-$NEWVER nixos/modules/module-list.nix | grep ^- | wc -l
     ```
@@ -94,7 +94,7 @@ export NEWVER=23.05
 
     Download the result of the `nixos.options` job in Hydra from both your release and the previous release, then do:
 
-    ```shell
+    ```bash
     # removed options:
     comm -23 <(jq -r 'keys[]' old.json | sort) <(jq -r 'keys[]' new.json | sort) | wc -l
     # new options:
@@ -120,7 +120,7 @@ export NEWVER=23.05
 
    1. Commit and push all changes.
    
-      ```shell
+      ```bash
       git commit -m "Release NixOS $NEWVER" -S
       git push upstream master
       ```
@@ -129,7 +129,7 @@ export NEWVER=23.05
 
 1. Switch to the release branch
 
-   ```shell
+   ```bash
    git switch release-$NEWVER
    ```
 
@@ -137,7 +137,7 @@ export NEWVER=23.05
 
 1. Tag the release **on the release branch**:
 
-   ```shell
+   ```bash
    git tag --annotate --message="Release $NEWVER" $NEWVER
    git push upstream $NEWVER
    ```
@@ -185,7 +185,7 @@ export NEWVER=23.05
 
    Examples: [22.11](https://gitlab.com/libosinfo/osinfo-db/-/merge_requests/539), [22.05](https://gitlab.com/libosinfo/osinfo-db/-/merge_requests/457), [21.11](https://gitlab.com/libosinfo/osinfo-db/-/merge_requests/385)
 
-   ```shell
+   ```bash
    nix-shell -p "python3.withPackages (p: [ p.lxml p.requests ])" -p cdrkit
    ./scripts/updates/nixos.py --release YY.MM --codename <codename> --release-date YYYY-MM-DD --next-release YY.MM
    git add .

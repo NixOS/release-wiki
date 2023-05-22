@@ -6,7 +6,7 @@ installer ISOs provided through the `nixos:unstable-small` and
 
 Pass the ISO file as the first argument, and everything should boot up.
 
-```shell
+```bash
 #!/usr/bin/env nix-shell
 #!nix-shell -i bash -p qemu_full virt-viewer
 # shellcheck shell=bash
