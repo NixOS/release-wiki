@@ -53,7 +53,7 @@ export NEWVER=23.05
     ```
 
     ```python
-    #!/usr/bin/env bash
+    #!/usr/bin/env python3
 
     import json
 
