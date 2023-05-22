@@ -472,7 +472,7 @@ before release to create the necessary Hydra Jobsets. You can link them this sec
 </tbody></table>
 <h2><a class="header" href="#actual-branch-off" id="actual-branch-off">Actual branch-off</a></h2>
 <p>Set NEWVER to the new release version:</p>
-<pre><code class="language-shell">export NEWVER=23.05
+<pre><code class="language-bash">export NEWVER=23.05
 </code></pre>
 <h3><a class="header" href="#on-the-master-branch" id="on-the-master-branch">On the master branch</a></h3>
 <p>Pull in the final changes before performing the actal branch-off.</p>
@@ -485,7 +485,7 @@ before release to create the necessary Hydra Jobsets. You can link them this sec
 </li>
 <li>
 <p>Create the release branch:</p>
-<pre><code class="language-shell">git switch -c release-$NEWVER
+<pre><code class="language-bash">git switch -c release-$NEWVER
 </code></pre>
 </li>
 </ol>
@@ -498,7 +498,7 @@ before release to create the necessary Hydra Jobsets. You can link them this sec
 <li>
 <p>Update the <code>versionSuffix</code> attribute in <a href="https://github.com/NixOS/nixpkgs/commit/7ae60dd7068478db5d936a3850b6df859aec21d0"><code>nixos/release.nix</code></a></p>
 <p>To get the commit count, use the following command:</p>
-<pre><code class="language-shell">git rev-list --count release-$NEWVER
+<pre><code class="language-bash">git rev-list --count release-$NEWVER
 </code></pre>
 </li>
 <li>
@@ -506,18 +506,18 @@ before release to create the necessary Hydra Jobsets. You can link them this sec
 </li>
 <li>
 <p>Commit the changes from the previous steps</p>
-<pre><code class="language-shell">git commit -m &quot;$NEWVER beta release&quot; -S
+<pre><code class="language-bash">git commit -m &quot;$NEWVER beta release&quot; -S
 </code></pre>
 </li>
 <li>
 <p>Create the staging branches</p>
-<pre><code class="language-shell">git branch staging-$NEWVER
+<pre><code class="language-bash">git branch staging-$NEWVER
 git branch staging-next-$NEWVER
 </code></pre>
 </li>
 <li>
 <p>Tag the release and push everything</p>
-<pre><code class="language-shell">git tag --annotate --message=&quot;Release $NEWVER-beta&quot; $NEWVER-beta
+<pre><code class="language-bash">git tag --annotate --message=&quot;Release $NEWVER-beta&quot; $NEWVER-beta
 git push upstream master release-$NEWVER $NEWVER-beta staging-$NEWVER staging-next-$NEWVER
 </code></pre>
 </li>
@@ -526,7 +526,7 @@ git push upstream master release-$NEWVER $NEWVER-beta staging-$NEWVER staging-ne
 </li>
 <li>
 <p>Switch back to the master branch</p>
-<pre><code class="language-shell">git switch master
+<pre><code class="language-bash">git switch master
 </code></pre>
 </li>
 </ol>
@@ -539,7 +539,7 @@ git push upstream master release-$NEWVER $NEWVER-beta staging-$NEWVER staging-ne
 <li>
 <p>Increment the <a href="https://github.com/NixOS/nixpkgs/commit/01268fda85b7eee4e462c873d8654f975067731f#diff-2bc0e46110b507d6d5a344264ef15adaR1"><code>.version</code></a>
 file in the repository root.</p>
-<pre><code class="language-shell"># The release after $NEWVER (23.05 -&gt; 23.11)
+<pre><code class="language-bash"># The release after $NEWVER (23.05 -&gt; 23.11)
 echo -n &quot;23.11&quot; &gt; .version
 </code></pre>
 </li>
@@ -556,7 +556,7 @@ for the next release</p>
 </li>
 <li>
 <p>Tag the master branch, so that <code>git describe</code> shows the new version as the base for commits..</p>
-<pre><code class="language-shell">git tag --annotate $NEWVER-pre
+<pre><code class="language-bash">git tag --annotate $NEWVER-pre
 git push upstream master $NEWVER-pre
 git describe HEAD # should yield 23.05-pre
 </code></pre>
@@ -589,7 +589,7 @@ Examples: <a href="https://github.com/NixOS/nixpkgs/issues/172160#issuecomment-1
 <ol>
 <li>
 <p>Update the flake input on the <code>nixos-search</code> repository` and create a pull request:</p>
-<pre><code class="language-shell">git clone git@github.com:nixos/nixos-search`
+<pre><code class="language-bash">git clone git@github.com:nixos/nixos-search`
 nix --extra-experimental-features nix-command flakes flake update nixos-org-configurations
 </code></pre>
 </li>
@@ -632,7 +632,7 @@ this, so look at the corresponding
 </ul>
 <h1><a class="header" href="#final-release" id="final-release">Final Release</a></h1>
 <p>Set the following environment variables to execute the commands below</p>
-<pre><code class="language-shell"># The version of the previous stable release
+<pre><code class="language-bash"># The version of the previous stable release
 export OLDVER=22.11
 # The version that is about to be released
 export NEWVER=23.05
@@ -673,18 +673,18 @@ reasonable time to check the installer starts and is usable.</p>
 <ul>
 <li>
 <p>Number of non-merge commits for the release:</p>
-<pre><code class="language-shell">git log upstream/release-$OLDVER..upstream/release-$NEWVER --no-merges --format=%an | wc -l
+<pre><code class="language-bash">git log upstream/release-$OLDVER..upstream/release-$NEWVER --no-merges --format=%an | wc -l
 </code></pre>
 </li>
 <li>
 <p>New/updated/removed packages:</p>
-<pre><code class="language-shell">git switch release-$OLDVER
+<pre><code class="language-bash">git switch release-$OLDVER
 NIX_PATH= nix-env -f $PWD -qaP --json --out-path &gt; old.json
 
 git switch release-$NEWVER
 NIX_PATH= nix-env -f $PWD -qaP --json --out-path &gt; new.json
 </code></pre>
-<pre><code class="language-python">#!/usr/bin/env bash
+<pre><code class="language-python">#!/usr/bin/env python3
 
 import json
 
@@ -715,14 +715,14 @@ be included.</p>
 </li>
 <li>
 <p>Added/removed modules:</p>
-<pre><code class="language-shell">git diff release-$OLDVER..release-$NEWVER nixos/modules/module-list.nix | grep ^+ | wc -l
+<pre><code class="language-bash">git diff release-$OLDVER..release-$NEWVER nixos/modules/module-list.nix | grep ^+ | wc -l
 git diff release-$OLDVER..release-$NEWVER nixos/modules/module-list.nix | grep ^- | wc -l
 </code></pre>
 </li>
 <li>
 <p>Added/removed options:</p>
 <p>Download the result of the <code>nixos.options</code> job in Hydra from both your release and the previous release, then do:</p>
-<pre><code class="language-shell"># removed options:
+<pre><code class="language-bash"># removed options:
 comm -23 &lt;(jq -r 'keys[]' old.json | sort) &lt;(jq -r 'keys[]' new.json | sort) | wc -l
 # new options:
 comm -13 &lt;(jq -r 'keys[]' old.json | sort) &lt;(jq -r 'keys[]' new.json | sort) | wc -l
@@ -751,7 +751,7 @@ on master.</p>
 </li>
 <li>
 <p>Commit and push all changes.</p>
-<pre><code class="language-shell">git commit -m &quot;Release NixOS $NEWVER&quot; -S
+<pre><code class="language-bash">git commit -m &quot;Release NixOS $NEWVER&quot; -S
 git push upstream master
 </code></pre>
 </li>
@@ -762,7 +762,7 @@ git push upstream master
 <ol>
 <li>
 <p>Switch to the release branch</p>
-<pre><code class="language-shell">git switch release-$NEWVER
+<pre><code class="language-bash">git switch release-$NEWVER
 </code></pre>
 </li>
 <li>
@@ -770,7 +770,7 @@ git push upstream master
 </li>
 <li>
 <p>Tag the release <strong>on the release branch</strong>:</p>
-<pre><code class="language-shell">git tag --annotate --message=&quot;Release $NEWVER&quot; $NEWVER
+<pre><code class="language-bash">git tag --annotate --message=&quot;Release $NEWVER&quot; $NEWVER
 git push upstream $NEWVER
 </code></pre>
 </li>
@@ -823,7 +823,7 @@ This is the same process as for the creation of the beta channel in the project.
 <li>
 <p>Update osinfo-db entries.</p>
 <p>Examples: <a href="https://gitlab.com/libosinfo/osinfo-db/-/merge_requests/539">22.11</a>, <a href="https://gitlab.com/libosinfo/osinfo-db/-/merge_requests/457">22.05</a>, <a href="https://gitlab.com/libosinfo/osinfo-db/-/merge_requests/385">21.11</a></p>
-<pre><code class="language-shell">nix-shell -p &quot;python3.withPackages (p: [ p.lxml p.requests ])&quot; -p cdrkit
+<pre><code class="language-bash">nix-shell -p &quot;python3.withPackages (p: [ p.lxml p.requests ])&quot; -p cdrkit
 ./scripts/updates/nixos.py --release YY.MM --codename &lt;codename&gt; --release-date YYYY-MM-DD --next-release YY.MM
 git add .
 git commit -s -m &quot;nixos: Add YY.MM release&quot;
@@ -924,7 +924,7 @@ gets released. At that point a few cleanup tasks need to be done.</p>
 <li>
 <p>Once this is merged, update the <a href="https://github.com/NixOS/nixos-search"><code>nixos-search</code></a>
 repository to reflect that status on <a href="https://search.nixos.org">search.nixos.org</a>.</p>
-<pre><code class="language-shell">nix --extra-experimental-features nix-command flakes flake update nixos-org-configurations
+<pre><code class="language-bash">nix --extra-experimental-features nix-command flakes flake update nixos-org-configurations
 </code></pre>
 </li>
 <li>
@@ -955,7 +955,7 @@ the documentation if included inline.</p>
 installer ISOs provided through the <code>nixos:unstable-small</code> and
 <code>nixos:trunk</code> jobsets, when no native hardware support exists.</p>
 <p>Pass the ISO file as the first argument, and everything should boot up.</p>
-<pre><code class="language-shell">#!/usr/bin/env nix-shell
+<pre><code class="language-bash">#!/usr/bin/env nix-shell
 #!nix-shell -i bash -p qemu_full virt-viewer
 # shellcheck shell=bash
 

@@ -165,7 +165,7 @@
                     <main>
                         <h1><a class="header" href="#final-release" id="final-release">Final Release</a></h1>
 <p>Set the following environment variables to execute the commands below</p>
-<pre><code class="language-shell"># The version of the previous stable release
+<pre><code class="language-bash"># The version of the previous stable release
 export OLDVER=22.11
 # The version that is about to be released
 export NEWVER=23.05
@@ -206,18 +206,18 @@ reasonable time to check the installer starts and is usable.</p>
 <ul>
 <li>
 <p>Number of non-merge commits for the release:</p>
-<pre><code class="language-shell">git log upstream/release-$OLDVER..upstream/release-$NEWVER --no-merges --format=%an | wc -l
+<pre><code class="language-bash">git log upstream/release-$OLDVER..upstream/release-$NEWVER --no-merges --format=%an | wc -l
 </code></pre>
 </li>
 <li>
 <p>New/updated/removed packages:</p>
-<pre><code class="language-shell">git switch release-$OLDVER
+<pre><code class="language-bash">git switch release-$OLDVER
 NIX_PATH= nix-env -f $PWD -qaP --json --out-path &gt; old.json
 
 git switch release-$NEWVER
 NIX_PATH= nix-env -f $PWD -qaP --json --out-path &gt; new.json
 </code></pre>
-<pre><code class="language-python">#!/usr/bin/env bash
+<pre><code class="language-python">#!/usr/bin/env python3
 
 import json
 
@@ -248,14 +248,14 @@ be included.</p>
 </li>
 <li>
 <p>Added/removed modules:</p>
-<pre><code class="language-shell">git diff release-$OLDVER..release-$NEWVER nixos/modules/module-list.nix | grep ^+ | wc -l
+<pre><code class="language-bash">git diff release-$OLDVER..release-$NEWVER nixos/modules/module-list.nix | grep ^+ | wc -l
 git diff release-$OLDVER..release-$NEWVER nixos/modules/module-list.nix | grep ^- | wc -l
 </code></pre>
 </li>
 <li>
 <p>Added/removed options:</p>
 <p>Download the result of the <code>nixos.options</code> job in Hydra from both your release and the previous release, then do:</p>
-<pre><code class="language-shell"># removed options:
+<pre><code class="language-bash"># removed options:
 comm -23 &lt;(jq -r 'keys[]' old.json | sort) &lt;(jq -r 'keys[]' new.json | sort) | wc -l
 # new options:
 comm -13 &lt;(jq -r 'keys[]' old.json | sort) &lt;(jq -r 'keys[]' new.json | sort) | wc -l
@@ -284,7 +284,7 @@ on master.</p>
 </li>
 <li>
 <p>Commit and push all changes.</p>
-<pre><code class="language-shell">git commit -m &quot;Release NixOS $NEWVER&quot; -S
+<pre><code class="language-bash">git commit -m &quot;Release NixOS $NEWVER&quot; -S
 git push upstream master
 </code></pre>
 </li>
@@ -295,7 +295,7 @@ git push upstream master
 <ol>
 <li>
 <p>Switch to the release branch</p>
-<pre><code class="language-shell">git switch release-$NEWVER
+<pre><code class="language-bash">git switch release-$NEWVER
 </code></pre>
 </li>
 <li>
@@ -303,7 +303,7 @@ git push upstream master
 </li>
 <li>
 <p>Tag the release <strong>on the release branch</strong>:</p>
-<pre><code class="language-shell">git tag --annotate --message=&quot;Release $NEWVER&quot; $NEWVER
+<pre><code class="language-bash">git tag --annotate --message=&quot;Release $NEWVER&quot; $NEWVER
 git push upstream $NEWVER
 </code></pre>
 </li>
@@ -356,7 +356,7 @@ This is the same process as for the creation of the beta channel in the project.
 <li>
 <p>Update osinfo-db entries.</p>
 <p>Examples: <a href="https://gitlab.com/libosinfo/osinfo-db/-/merge_requests/539">22.11</a>, <a href="https://gitlab.com/libosinfo/osinfo-db/-/merge_requests/457">22.05</a>, <a href="https://gitlab.com/libosinfo/osinfo-db/-/merge_requests/385">21.11</a></p>
-<pre><code class="language-shell">nix-shell -p &quot;python3.withPackages (p: [ p.lxml p.requests ])&quot; -p cdrkit
+<pre><code class="language-bash">nix-shell -p &quot;python3.withPackages (p: [ p.lxml p.requests ])&quot; -p cdrkit
 ./scripts/updates/nixos.py --release YY.MM --codename &lt;codename&gt; --release-date YYYY-MM-DD --next-release YY.MM
 git add .
 git commit -s -m &quot;nixos: Add YY.MM release&quot;

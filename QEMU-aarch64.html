@@ -168,7 +168,7 @@
 installer ISOs provided through the <code>nixos:unstable-small</code> and
 <code>nixos:trunk</code> jobsets, when no native hardware support exists.</p>
 <p>Pass the ISO file as the first argument, and everything should boot up.</p>
-<pre><code class="language-shell">#!/usr/bin/env nix-shell
+<pre><code class="language-bash">#!/usr/bin/env nix-shell
 #!nix-shell -i bash -p qemu_full virt-viewer
 # shellcheck shell=bash
 

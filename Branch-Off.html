@@ -204,7 +204,7 @@ before release to create the necessary Hydra Jobsets. You can link them this sec
 </tbody></table>
 <h2><a class="header" href="#actual-branch-off" id="actual-branch-off">Actual branch-off</a></h2>
 <p>Set NEWVER to the new release version:</p>
-<pre><code class="language-shell">export NEWVER=23.05
+<pre><code class="language-bash">export NEWVER=23.05
 </code></pre>
 <h3><a class="header" href="#on-the-master-branch" id="on-the-master-branch">On the master branch</a></h3>
 <p>Pull in the final changes before performing the actal branch-off.</p>
@@ -217,7 +217,7 @@ before release to create the necessary Hydra Jobsets. You can link them this sec
 </li>
 <li>
 <p>Create the release branch:</p>
-<pre><code class="language-shell">git switch -c release-$NEWVER
+<pre><code class="language-bash">git switch -c release-$NEWVER
 </code></pre>
 </li>
 </ol>
@@ -230,7 +230,7 @@ before release to create the necessary Hydra Jobsets. You can link them this sec
 <li>
 <p>Update the <code>versionSuffix</code> attribute in <a href="https://github.com/NixOS/nixpkgs/commit/7ae60dd7068478db5d936a3850b6df859aec21d0"><code>nixos/release.nix</code></a></p>
 <p>To get the commit count, use the following command:</p>
-<pre><code class="language-shell">git rev-list --count release-$NEWVER
+<pre><code class="language-bash">git rev-list --count release-$NEWVER
 </code></pre>
 </li>
 <li>
@@ -238,18 +238,18 @@ before release to create the necessary Hydra Jobsets. You can link them this sec
 </li>
 <li>
 <p>Commit the changes from the previous steps</p>
-<pre><code class="language-shell">git commit -m &quot;$NEWVER beta release&quot; -S
+<pre><code class="language-bash">git commit -m &quot;$NEWVER beta release&quot; -S
 </code></pre>
 </li>
 <li>
 <p>Create the staging branches</p>
-<pre><code class="language-shell">git branch staging-$NEWVER
+<pre><code class="language-bash">git branch staging-$NEWVER
 git branch staging-next-$NEWVER
 </code></pre>
 </li>
 <li>
 <p>Tag the release and push everything</p>
-<pre><code class="language-shell">git tag --annotate --message=&quot;Release $NEWVER-beta&quot; $NEWVER-beta
+<pre><code class="language-bash">git tag --annotate --message=&quot;Release $NEWVER-beta&quot; $NEWVER-beta
 git push upstream master release-$NEWVER $NEWVER-beta staging-$NEWVER staging-next-$NEWVER
 </code></pre>
 </li>
@@ -258,7 +258,7 @@ git push upstream master release-$NEWVER $NEWVER-beta staging-$NEWVER staging-ne
 </li>
 <li>
 <p>Switch back to the master branch</p>
-<pre><code class="language-shell">git switch master
+<pre><code class="language-bash">git switch master
 </code></pre>
 </li>
 </ol>
@@ -271,7 +271,7 @@ git push upstream master release-$NEWVER $NEWVER-beta staging-$NEWVER staging-ne
 <li>
 <p>Increment the <a href="https://github.com/NixOS/nixpkgs/commit/01268fda85b7eee4e462c873d8654f975067731f#diff-2bc0e46110b507d6d5a344264ef15adaR1"><code>.version</code></a>
 file in the repository root.</p>
-<pre><code class="language-shell"># The release after $NEWVER (23.05 -&gt; 23.11)
+<pre><code class="language-bash"># The release after $NEWVER (23.05 -&gt; 23.11)
 echo -n &quot;23.11&quot; &gt; .version
 </code></pre>
 </li>
@@ -288,7 +288,7 @@ for the next release</p>
 </li>
 <li>
 <p>Tag the master branch, so that <code>git describe</code> shows the new version as the base for commits..</p>
-<pre><code class="language-shell">git tag --annotate $NEWVER-pre
+<pre><code class="language-bash">git tag --annotate $NEWVER-pre
 git push upstream master $NEWVER-pre
 git describe HEAD # should yield 23.05-pre
 </code></pre>
@@ -321,7 +321,7 @@ Examples: <a href="https://github.com/NixOS/nixpkgs/issues/172160#issuecomment-1
 <ol>
 <li>
 <p>Update the flake input on the <code>nixos-search</code> repository` and create a pull request:</p>
-<pre><code class="language-shell">git clone git@github.com:nixos/nixos-search`
+<pre><code class="language-bash">git clone git@github.com:nixos/nixos-search`
 nix --extra-experimental-features nix-command flakes flake update nixos-org-configurations
 </code></pre>
 </li>
