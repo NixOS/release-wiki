@@ -42,7 +42,7 @@ Inputs:
 
 Set NEWVER to the new release version:
 
-```shell
+```bash
 export NEWVER=23.05
 ```
 
@@ -56,7 +56,7 @@ Pull in the final changes before performing the actal branch-off.
 
 1. Create the release branch:
 
-   ```shell
+   ```bash
    git switch -c release-$NEWVER
    ```
 
@@ -70,7 +70,7 @@ Update metadata on the release branch, create its staging branches and tag the r
 
    To get the commit count, use the following command:
 
-   ```shell
+   ```bash
    git rev-list --count release-$NEWVER
    ```
 
@@ -79,19 +79,19 @@ Update metadata on the release branch, create its staging branches and tag the r
 
 1. Commit the changes from the previous steps
 
-   ```shell
+   ```bash
    git commit -m "$NEWVER beta release" -S
    ```
 
 1. Create the staging branches
-   ```shell
+   ```bash
    git branch staging-$NEWVER
    git branch staging-next-$NEWVER
    ```
 
 1. Tag the release and push everything
 
-   ```shell
+   ```bash
    git tag --annotate --message="Release $NEWVER-beta" $NEWVER-beta
    git push upstream master release-$NEWVER $NEWVER-beta staging-$NEWVER staging-next-$NEWVER
    ```
@@ -100,7 +100,7 @@ Update metadata on the release branch, create its staging branches and tag the r
 
 1. Switch back to the master branch
 
-   ```shell
+   ```bash
    git switch master
    ```
 
@@ -114,7 +114,7 @@ Now we prepare the master branch for the next release after this one.
 1. Increment the [`.version`](https://github.com/NixOS/nixpkgs/commit/01268fda85b7eee4e462c873d8654f975067731f#diff-2bc0e46110b507d6d5a344264ef15adaR1)
    file in the repository root.
 
-   ```shell
+   ```bash
    # The release after $NEWVER (23.05 -> 23.11)
    echo -n "23.11" > .version
    ````
@@ -129,7 +129,7 @@ Now we prepare the master branch for the next release after this one.
 
 1. Tag the master branch, so that `git describe` shows the new version as the base for commits..
 
-   ```shell
+   ```bash
    git tag --annotate $NEWVER-pre
    git push upstream master $NEWVER-pre
    git describe HEAD # should yield 23.05-pre
@@ -160,7 +160,7 @@ The following steps should be done after the channels have become available on [
 
 1. Update the flake input on the `nixos-search` repository` and create a pull request:
 
-   ```shell
+   ```bash
    git clone git@github.com:nixos/nixos-search`
    nix --extra-experimental-features nix-command flakes flake update nixos-org-configurations
    ```

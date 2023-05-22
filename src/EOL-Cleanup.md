@@ -11,7 +11,7 @@ gets released. At that point a few cleanup tasks need to be done.
 1. Once this is merged, update the [`nixos-search`](https://github.com/NixOS/nixos-search)
    repository to reflect that status on [search.nixos.org](https://search.nixos.org).
 
-   ```shell
+   ```bash
    nix --extra-experimental-features nix-command flakes flake update nixos-org-configurations
    ```
 
