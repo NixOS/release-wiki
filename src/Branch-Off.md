@@ -167,7 +167,7 @@ The following steps should be done after the channels have become available on [
 1. Get in contact with [Amine Chikhaoui](https://github.com/AmineChikhaoui) on the infrastructure room on Matrix, so
    they can get the AMIs updated in time for the release.
 
-   1. They will need to run [`create-amis.sh`](https://github.com/NixOS/nixpkgs/blob/master/nixos/maintainers/scripts/ec2/create-amis.sh`),
+   1. They will need to run [`create-amis.sh`](https://github.com/NixOS/nixpkgs/blob/master/nixos/maintainers/scripts/ec2/create-amis.sh),
       which requires write permissions to the S3 bucket.
 
    1. Create PR adding it to NixOS configuration. Examples:
