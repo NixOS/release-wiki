@@ -150,6 +150,9 @@ Now that everything on git is done, we are still missing the channels.
    - `backport staging-21.05`
 
    Use the description `Backport PR automatically` and the color value `#0fafaa`
+   
+1. Update the ZHF issue, that now that the branch-off has been performed, fixes have to be backported.
+   Examples: [22.05](https://github.com/NixOS/nixpkgs/issues/172160#issuecomment-1135112918)
 
 ### Once the channel is available
 
@@ -173,8 +176,5 @@ The following steps should be done after the channels have become available on [
    1. Create PR adding it to NixOS configuration. Examples:
       - [22.11](https://github.com/NixOS/nixpkgs/pull/204014)
       - [20.09](https://github.com/NixOS/nixpkgs/pull/101720)
-
-1. Update the ZHF issue, that now that the branch-off has been performed, fixes have to be backported.
-   Examples: [22.05](https://github.com/NixOS/nixpkgs/issues/172160#issuecomment-1135112918)
 
 1. Make sure the release editors have started finalizing the release notes. Only 7 days left until release!
