@@ -147,7 +147,7 @@ Now that everything on git is done, we are still missing the channels.
 
 1. Create the backport [labels](https://github.com/NixOS/nixpkgs/labels) for all new branches:
    - `backport staging-21.05`
-   - `backport staging-21.05`
+   - `backport release-21.05`
 
    Use the description `Backport PR automatically` and the color value `#0fafaa`
    
