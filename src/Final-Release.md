@@ -42,6 +42,12 @@ export NEWVER=23.05
     git log upstream/release-$OLDVER..upstream/release-$NEWVER --no-merges --format=%an | wc -l
     ```
 
+  - Number of contributors for this release:
+
+    ```bash
+    git log upstream/release-$OLDVER..upstream/release-$NEWVER --no-merges --format=%an | sort | uniq | wc -l
+    ````
+
   - New/updated/removed packages:
 
     ```bash
