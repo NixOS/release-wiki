@@ -3,7 +3,7 @@
 The old release reaches its end of life one month after the new release
 gets released. At that point a few cleanup tasks need to be done.
 
-1. Set the EOL channel status to `deprecated` in `nixos-org-configurations`. Examples:
+1. Set the EOL channel status from `deprecated` to `unmaintained` in `nixos-org-configurations`. Examples:
     - [channels: Deprecate NixOS 22.05](https://github.com/NixOS/nixos-org-configurations/pull/229)
     - [channels: Mark 21.11 as unmaintained](https://github.com/NixOS/nixos-org-configurations/pull/211)
     - [channels:21.05 is unmaintained](https://github.com/NixOS/nixos-org-configurations/pull/201)
