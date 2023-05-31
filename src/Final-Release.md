@@ -135,10 +135,16 @@ export NEWVER=23.05
 
 1. Cherry-pick the release commit from master
 
-1. Tag the release **on the release branch**:
+1. Push the commit to the release branch
 
    ```bash
-   git tag --annotate --message="Release $NEWVER" $NEWVER
+   git push
+   ````
+
+1. Find the commit id and tag the release **on the release branch**:
+
+   ```bash
+   git tag --annotate --message="Release $NEWVER" $NEWVER <COMMIT_ID>
    git push upstream $NEWVER
    ```
 
