@@ -105,7 +105,7 @@ export NEWVER=23.05
 
 ### On the master branch
 
-1. Create these PRs on master and backport to the release branch:
+1. Create and merge a PR for master with commits to:
 
    1. Update `rl-$NEWVER.section.md` with the final release date.
 
@@ -118,22 +118,16 @@ export NEWVER=23.05
 
       Examples: [22.11](https://github.com/NixOS/nixpkgs/commit/f1b9cc23aa8b1549dd7cb53dbe9fc950efc97646#diff-eca12c0a30e25b4b46522ebf89465a03ba72a03f540796c979137931d8f92055)
 
-   1. Commit and push all changes.
-   
-      ```bash
-      git commit -m "Release NixOS $NEWVER" -S
-      git push upstream master
-      ```
-
 ### On the release branch
 
-1. Switch to the release branch
+1. Create and merge a backport PR of the above
+
+1. Switch to the release branch and update it to include commit of the merged backport PR
 
    ```bash
    git switch release-$NEWVER
+   git pull
    ```
-
-1. Cherry-pick the release commit from master
 
 1. Tag the release **on the release branch**:
 
