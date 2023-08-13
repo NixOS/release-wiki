@@ -77,14 +77,11 @@ Update metadata on the release branch, create its staging branches and tag the r
 
 1. Add `SUPPORT_END=YYYY-MM-DD` to `osReleaseContents` in `nixos/modules/misc/version.nix`.
 
-1. Commit the changes from the previous steps
-
-   ```bash
-   git commit -m "$NEWVER beta release" -S
-   ```
+1. Commit the changes from the previous steps to a pull request to the release branch and merge it
 
 1. Create the staging branches
    ```bash
+   git pull
    git branch staging-$NEWVER
    git branch staging-next-$NEWVER
    ```
@@ -93,7 +90,7 @@ Update metadata on the release branch, create its staging branches and tag the r
 
    ```bash
    git tag --annotate --message="Release $NEWVER-beta" $NEWVER-beta
-   git push upstream master release-$NEWVER $NEWVER-beta staging-$NEWVER staging-next-$NEWVER
+   git push upstream release-$NEWVER $NEWVER-beta staging-$NEWVER staging-next-$NEWVER
    ```
 
 1. Create jobsets on hydra by contacting the infrastructure team and start the evaluation on all new jobsets.
