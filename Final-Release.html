@@ -210,6 +210,11 @@ reasonable time to check the installer starts and is usable.</p>
 </code></pre>
 </li>
 <li>
+<p>Number of contributors for this release:</p>
+<pre><code class="language-bash">git log upstream/release-$OLDVER..upstream/release-$NEWVER --no-merges --format=%an | sort | uniq | wc -l
+</code></pre>
+</li>
+<li>
 <p>New/updated/removed packages:</p>
 <pre><code class="language-bash">git switch release-$OLDVER
 NIX_PATH= nix-env -f $PWD -qaP --json --out-path &gt; old.json
