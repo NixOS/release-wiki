@@ -307,8 +307,13 @@ git push upstream master
 <p>Cherry-pick the release commit from master</p>
 </li>
 <li>
-<p>Tag the release <strong>on the release branch</strong>:</p>
-<pre><code class="language-bash">git tag --annotate --message=&quot;Release $NEWVER&quot; $NEWVER
+<p>Push the commit to the release branch</p>
+<pre><code class="language-bash">git push
+</code></pre>
+</li>
+<li>
+<p>Find the commit id and tag the release <strong>on the release branch</strong>:</p>
+<pre><code class="language-bash">git tag --annotate --message=&quot;Release $NEWVER&quot; $NEWVER &lt;COMMIT_ID&gt;
 git push upstream $NEWVER
 </code></pre>
 </li>
