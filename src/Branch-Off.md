@@ -1,7 +1,7 @@
 # Branch-off
 
-For these steps "23.05" represents the current release tag and "23.11" represents the next
-(6 months in the future) release tag. "22.11" is the last release which was released 6 months
+For these steps "24.05" represents the current release tag and "24.11" represents the next
+(6 months in the future) release tag. "23.11" is the last release which was released 6 months
 ago.
 
 ## Jobset creation
@@ -12,18 +12,18 @@ infrastructure team and the release team to work more asynchronously. Reach out 
 before release to create the necessary Hydra Jobsets. You can link them this section.
 
 - [https://hydra.nixos.org/project/nixos](https://hydra.nixos.org/project/nixos)
-    - release-22.11
-    - release-22.11-small
+  - release-24.05
+  - release-24.05-small
 - [https://hydra.nixos.org/project/nixpkgs](https://hydra.nixos.org/project/nixpkgs)
-    - nixpkgs-22.11-darwin
-    - staging-next-22.11
+  - nixpkgs-24.05-darwin
+  - staging-next-24.05
 
-Example configuration: [nixos:release-22.11](https://hydra.nixos.org/jobset/nixos/release-22.11#tabs-configuration)
+Example configuration: [nixos:release-23.11](https://hydra.nixos.org/jobset/nixos/release-23.11#tabs-configuration)
 
 |Field|Value|
 |-|-|
 |State|Enabled|
-|Description|NixOS 22.11 release branch|
+|Description|NixOS 24.05 release branch|
 |Nix expression|`nixos/release-combined.nix` in input `nixpkgs`|
 |Check interval|86400|
 |Scheduling shares|5000000 (8.32% out of 60071636 shares)|
@@ -34,7 +34,7 @@ Inputs:
 
 |Input name|Type|Values|
 |-|-|-|
-|`nixpkgs`|Git checkout|`https://github.com/NixOS/nixpkgs.git release-22.11`|
+|`nixpkgs`|Git checkout|`https://github.com/NixOS/nixpkgs.git release-24.05`|
 |`stableBranch`|Boolean|`false`|
 |`supportedSystems`|Nix expression|`[ "x86_64-linux" "aarch64-linux" ]`|
 
@@ -43,7 +43,7 @@ Inputs:
 Set NEWVER to the new release version:
 
 ```bash
-export NEWVER=23.05
+export NEWVER=24.05
 ```
 
 ### On the master branch
@@ -74,7 +74,6 @@ Update metadata on the release branch, create its staging branches and tag the r
    git rev-list --count release-$NEWVER
    ```
 
-
 1. Add `SUPPORT_END=YYYY-MM-DD` to `osReleaseContents` in `nixos/modules/misc/version.nix`.
 
 1. Commit the changes from the previous steps
@@ -84,6 +83,7 @@ Update metadata on the release branch, create its staging branches and tag the r
    ```
 
 1. Create the staging branches
+
    ```bash
    git branch staging-$NEWVER
    git branch staging-next-$NEWVER
@@ -108,40 +108,35 @@ Update metadata on the release branch, create its staging branches and tag the r
 
 Now we prepare the master branch for the next release after this one.
 
-
 1. Update the [periodic-merge workflow](https://github.com/NixOS/nixpkgs/blob/master/.github/workflows/periodic-merge-24h.yml) to include the new release.
 
 1. Increment the [`.version`](https://github.com/NixOS/nixpkgs/commit/01268fda85b7eee4e462c873d8654f975067731f#diff-2bc0e46110b507d6d5a344264ef15adaR1)
    file in the repository root.
 
    ```bash
-   # The release after $NEWVER (23.05 -> 23.11)
-   echo -n "23.11" > .version
+   # The release after $NEWVER (24.05 -> 24.11)
+   echo -n "24.11" > .version
    ````
 
-1. Update the `codeName` attribute in [`lib/trivial.nix`](https://github.com/NixOS/nixpkgs/commit/01268fda85b7eee4e462c873d8654f975067731f#diff-03f3d41b68f62079c55001f1a1c55c1dR137)
+1. Update the `codeName` attribute in [`lib/trivial.nix`](https://github.com/NixOS/nixpkgs/commit/2c28f1de7cdc10be556d2106108411dd2482794b#diff-29c71aa8261b14b1cad6e6fa28486fed7295050db4eeb32ba205672ba91d40e1)
    This will be the name for the next release.
 
-1. Create a new [release notes file](https://github.com/NixOS/nixpkgs/commit/01268fda85b7eee4e462c873d8654f975067731f#diff-e7ee5ff686cdcc513ca089d6e5682587R11)
+1. Create a new [release notes file](https://github.com/NixOS/nixpkgs/blob/44b98d80ea6a56ccc1838aa0ac9e891de9130913/nixos/doc/manual/release-notes/rl-2311.section.md?plain=1)
    for the next release
 
-1. Update the release versions in [`PULL_REQUEST_TEMPLATE.md`](https://github.com/NixOS/nixpkgs/blob/master/.github/PULL_REQUEST_TEMPLATE.md)
+1. Update the release versions in [`.github/PULL_REQUEST_TEMPLATE.md`](https://github.com/NixOS/nixpkgs/commit/2c6ae7132ca558f1052da0eececed3cad191b883#diff-18813c86948efc57e661623d7ba48ff94325c9b5421ec9177f724922dd553a35)
    on master.
 
-   Examples: [22.11](https://github.com/NixOS/nixpkgs/commit/f1b9cc23aa8b1549dd7cb53dbe9fc950efc97646#diff-18813c86948efc57e661623d7ba48ff94325c9b5421ec9177f724922dd553a35)
+1. Update [`CONTRIBUTING.md`](https://github.com/NixOS/nixpkgs/commit/2c6ae7132ca558f1052da0eececed3cad191b883#diff-eca12c0a30e25b4b46522ebf89465a03ba72a03f540796c979137931d8f92055) on master.
 
-1. Update [`CONTRIBUTING.md`](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md) on master
+1. Commit the changes ([23.05 example](https://github.com/NixOS/nixpkgs/commit/2c28f1de7cdc10be556d2106108411dd2482794b) + [this commit](https://github.com/NixOS/nixpkgs/commit/44b98d80ea6a56ccc1838aa0ac9e891de9130913) + [this commit](https://github.com/NixOS/nixpkgs/commit/2c6ae7132ca558f1052da0eececed3cad191b883))
 
-   Examples: [22.11](https://github.com/NixOS/nixpkgs/commit/f1b9cc23aa8b1549dd7cb53dbe9fc950efc97646#diff-eca12c0a30e25b4b46522ebf89465a03ba72a03f540796c979137931d8f92055)
-
-1. Commit the changes ([22.05 example](https://github.com/NixOS/nixpkgs/commit/bfdfe12c788d7474b88e7a7790b88b1c0f8e01b5) + [this additional commit](https://github.com/NixOS/nixpkgs/commit/953b5d19bca4d4ddfaef5625cca277c47b39f5e7))
-
-1. Tag the master branch, so that `git describe` shows the new version as the base for commits..
+1. Tag the master branch, so that `git describe` shows the new version as the base for commits.
 
    ```bash
-   git tag --annotate $NEWVER-pre
-   git push upstream master $NEWVER-pre
-   git describe HEAD # should yield 23.05-pre
+   git tag --annotate 24.11-pre
+   git push upstream master 24.11-pre
+   git describe HEAD # should yield 24.11-pre
    ```
 
 ### And afterwards
@@ -155,11 +150,11 @@ Now that everything on git is done, we are still missing the channels.
    Example: [22.11](https://github.com/NixOS/infra/commit/9a0b3674a11b445c973334c78e8ca0eda36775e4)
 
 1. Create the backport [labels](https://github.com/NixOS/nixpkgs/labels) for all new branches:
-   - `backport staging-21.05`
-   - `backport release-21.05`
+   - `backport staging-24.05`
+   - `backport release-24.05`
 
    Use the description `Backport PR automatically` and the color value `#0fafaa`
-   
+
 1. Update the ZHF issue, that now that the branch-off has been performed, fixes have to be backported.
    Examples: [22.05](https://github.com/NixOS/nixpkgs/issues/172160#issuecomment-1135112918)
 
@@ -167,7 +162,7 @@ Now that everything on git is done, we are still missing the channels.
 
 The following steps should be done after the channels have become available on [channels.nixos.org](https://channels.nixos.org).
 
-1. Update the flake input on the `nixos-search` repository` and create a pull request:
+1. Update the flake input on the `nixos-search` repository, and create a pull request:
 
    ```bash
    git clone git@github.com:nixos/nixos-search
