@@ -1,7 +1,7 @@
 # Branch-off
 
-For these steps "23.05" represents the current release tag and "23.11" represents the next
-(6 months in the future) release tag. "22.11" is the last release which was released 6 months
+For these steps "23.11" represents the current release tag and "24.05" represents the next
+(6 months in the future) release tag. "23.05" is the last release which was released 6 months
 ago.
 
 ## Jobset creation
@@ -12,18 +12,18 @@ infrastructure team and the release team to work more asynchronously. Reach out 
 before release to create the necessary Hydra Jobsets. You can link them this section.
 
 - [https://hydra.nixos.org/project/nixos](https://hydra.nixos.org/project/nixos)
-    - release-22.11
-    - release-22.11-small
+    - release-23.11
+    - release-23.11-small
 - [https://hydra.nixos.org/project/nixpkgs](https://hydra.nixos.org/project/nixpkgs)
-    - nixpkgs-22.11-darwin
-    - staging-next-22.11
+    - nixpkgs-23.11-darwin
+    - staging-next-23.11
 
-Example configuration: [nixos:release-22.11](https://hydra.nixos.org/jobset/nixos/release-22.11#tabs-configuration)
+Example configuration: [nixos:release-23.11](https://hydra.nixos.org/jobset/nixos/release-23.11#tabs-configuration)
 
 |Field|Value|
 |-|-|
 |State|Enabled|
-|Description|NixOS 22.11 release branch|
+|Description|NixOS 23.11 release branch|
 |Nix expression|`nixos/release-combined.nix` in input `nixpkgs`|
 |Check interval|86400|
 |Scheduling shares|5000000 (8.32% out of 60071636 shares)|
@@ -34,7 +34,7 @@ Inputs:
 
 |Input name|Type|Values|
 |-|-|-|
-|`nixpkgs`|Git checkout|`https://github.com/NixOS/nixpkgs.git release-22.11`|
+|`nixpkgs`|Git checkout|`https://github.com/NixOS/nixpkgs.git release-23.11`|
 |`stableBranch`|Boolean|`false`|
 |`supportedSystems`|Nix expression|`[ "x86_64-linux" "aarch64-linux" ]`|
 
@@ -43,7 +43,7 @@ Inputs:
 Set NEWVER to the new release version:
 
 ```bash
-export NEWVER=23.05
+export NEWVER=23.11
 ```
 
 ### On the master branch
@@ -115,8 +115,8 @@ Now we prepare the master branch for the next release after this one.
    file in the repository root.
 
    ```bash
-   # The release after $NEWVER (23.05 -> 23.11)
-   echo -n "23.11" > .version
+   # The release after $NEWVER (23.11 -> 24.05)
+   echo -n "24.05" > .version
    ````
 
 1. Update the `codeName` attribute in [`lib/trivial.nix`](https://github.com/NixOS/nixpkgs/commit/01268fda85b7eee4e462c873d8654f975067731f#diff-03f3d41b68f62079c55001f1a1c55c1dR137)
@@ -132,7 +132,7 @@ Now we prepare the master branch for the next release after this one.
    ```bash
    git tag --annotate $NEWVER-pre
    git push upstream master $NEWVER-pre
-   git describe HEAD # should yield 23.05-pre
+   git describe HEAD # should yield 24.05-pre
    ```
 
 ### And afterwards
@@ -146,8 +146,8 @@ Now that everything on git is done, we are still missing the channels.
    Example: [22.11](https://github.com/NixOS/nixos-org-configurations/commit/9a0b3674a11b445c973334c78e8ca0eda36775e4)
 
 1. Create the backport [labels](https://github.com/NixOS/nixpkgs/labels) for all new branches:
-   - `backport staging-21.05`
-   - `backport release-21.05`
+   - `backport staging-23.11`
+   - `backport release-23.11`
 
    Use the description `Backport PR automatically` and the color value `#0fafaa`
    
