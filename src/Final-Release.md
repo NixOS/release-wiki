@@ -207,8 +207,6 @@ export NEWVER=23.05
    nix-shell -p "python3.withPackages (p: [ p.lxml p.requests p.pytest ])" -p cdrkit osinfo-db-tools gettext --run "make check"
    ```
 
-1. Check that the AMI image references have been updated in `nixos/modules/virtualisation/amazon-ec2-amis.nix`.
-
 1. Close the [milestone](https://github.com/NixOS/nixpkgs/milestones)
 
 1. Close the [blockers project](https://github.com/orgs/NixOS/projects)
