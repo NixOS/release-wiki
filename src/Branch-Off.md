@@ -64,7 +64,7 @@ Pull in the final changes before performing the actal branch-off.
 
 Update metadata on the release branch, create its staging branches and tag the release.
 
-1. Update the `system.defaultChannel` attribute in [`nixos/modules/misc/version.nix`](https://github.com/NixOS/nixpkgs/commit/bb029673bface2fc9fb807f209f63ca06478a72d)
+1. Update the `system.defaultChannel` attribute in [`nixos/modules/config/nix-channel.nix`](https://github.com/NixOS/nixpkgs/commit/bb029673bface2fc9fb807f209f63ca06478a72d)
 
 1. Update the `versionSuffix` attribute in [`nixos/release.nix`](https://github.com/NixOS/nixpkgs/commit/7ae60dd7068478db5d936a3850b6df859aec21d0)
 
