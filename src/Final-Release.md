@@ -115,15 +115,6 @@ export NEWVER=23.05
 
    1. Update `rl-$NEWVER.section.md` with the final release date.
 
-   1. Update the release versions in [`PULL_REQUEST_TEMPLATE.md`](https://github.com/NixOS/nixpkgs/blob/master/.github/PULL_REQUEST_TEMPLATE.md)
-      on master.
-
-      Examples: [22.11](https://github.com/NixOS/nixpkgs/commit/f1b9cc23aa8b1549dd7cb53dbe9fc950efc97646#diff-18813c86948efc57e661623d7ba48ff94325c9b5421ec9177f724922dd553a35)
-
-   1. Update [`CONTRIBUTUTING.md`](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md) on master
-
-      Examples: [22.11](https://github.com/NixOS/nixpkgs/commit/f1b9cc23aa8b1549dd7cb53dbe9fc950efc97646#diff-eca12c0a30e25b4b46522ebf89465a03ba72a03f540796c979137931d8f92055)
-
    1. Commit and push all changes.
    
       ```bash
