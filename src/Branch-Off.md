@@ -161,8 +161,8 @@ The following steps should be done after the channels have become available on [
 1. Update the flake input on the `nixos-search` repository` and create a pull request:
 
    ```bash
-   git clone git@github.com:nixos/nixos-search`
-   nix --extra-experimental-features nix-command flakes flake update nixos-org-configurations
+   git clone git@github.com:nixos/nixos-search
+   nix --extra-experimental-features "nix-command flakes" flake lock --update-input nixos-org-configurations
    ```
 
 1. Give the [Marketing team](https://matrix.to/#/#marketing:nixos.org) a heads-up about the upcoming release
