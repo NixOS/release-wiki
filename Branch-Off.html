@@ -321,8 +321,8 @@ Examples: <a href="https://github.com/NixOS/nixpkgs/issues/172160#issuecomment-1
 <ol>
 <li>
 <p>Update the flake input on the <code>nixos-search</code> repository` and create a pull request:</p>
-<pre><code class="language-bash">git clone git@github.com:nixos/nixos-search`
-nix --extra-experimental-features nix-command flakes flake update nixos-org-configurations
+<pre><code class="language-bash">git clone git@github.com:nixos/nixos-search
+nix --extra-experimental-features &quot;nix-command flakes&quot; flake lock --update-input nixos-org-configurations
 </code></pre>
 </li>
 <li>
