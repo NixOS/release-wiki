@@ -552,6 +552,15 @@ This will be the name for the next release.</p>
 for the next release</p>
 </li>
 <li>
+<p>Update the release versions in <a href="https://github.com/NixOS/nixpkgs/blob/master/.github/PULL_REQUEST_TEMPLATE.md"><code>PULL_REQUEST_TEMPLATE.md</code></a>
+on master.</p>
+<p>Examples: <a href="https://github.com/NixOS/nixpkgs/commit/f1b9cc23aa8b1549dd7cb53dbe9fc950efc97646#diff-18813c86948efc57e661623d7ba48ff94325c9b5421ec9177f724922dd553a35">22.11</a></p>
+</li>
+<li>
+<p>Update <a href="https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md"><code>CONTRIBUTING.md</code></a> on master</p>
+<p>Examples: <a href="https://github.com/NixOS/nixpkgs/commit/f1b9cc23aa8b1549dd7cb53dbe9fc950efc97646#diff-eca12c0a30e25b4b46522ebf89465a03ba72a03f540796c979137931d8f92055">22.11</a></p>
+</li>
+<li>
 <p>Commit the changes (<a href="https://github.com/NixOS/nixpkgs/commit/bfdfe12c788d7474b88e7a7790b88b1c0f8e01b5">22.05 example</a> + <a href="https://github.com/NixOS/nixpkgs/commit/953b5d19bca4d4ddfaef5625cca277c47b39f5e7">this additional commit</a>)</p>
 </li>
 <li>
@@ -744,15 +753,6 @@ comm -13 &lt;(jq -r 'keys[]' old.json | sort) &lt;(jq -r 'keys[]' new.json | sor
 <ol>
 <li>
 <p>Update <code>rl-$NEWVER.section.md</code> with the final release date.</p>
-</li>
-<li>
-<p>Update the release versions in <a href="https://github.com/NixOS/nixpkgs/blob/master/.github/PULL_REQUEST_TEMPLATE.md"><code>PULL_REQUEST_TEMPLATE.md</code></a>
-on master.</p>
-<p>Examples: <a href="https://github.com/NixOS/nixpkgs/commit/f1b9cc23aa8b1549dd7cb53dbe9fc950efc97646#diff-18813c86948efc57e661623d7ba48ff94325c9b5421ec9177f724922dd553a35">22.11</a></p>
-</li>
-<li>
-<p>Update <a href="https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md"><code>CONTRIBUTUTING.md</code></a> on master</p>
-<p>Examples: <a href="https://github.com/NixOS/nixpkgs/commit/f1b9cc23aa8b1549dd7cb53dbe9fc950efc97646#diff-eca12c0a30e25b4b46522ebf89465a03ba72a03f540796c979137931d8f92055">22.11</a></p>
 </li>
 <li>
 <p>Commit and push all changes.</p>
