@@ -9,7 +9,7 @@ There is an autoscaler in place for aarch64-linux and x86_64-linux while the
 darwin allocations are pretty much static.
 
 If capacity issues are apparent, contact the infrastructure team on the
-`nixos-org-configurations` repository (example: [21.11 example](https://github.com/NixOS/nixos-org-configurations/issues/186)),
+`infra` repository (example: [21.11 example](https://github.com/NixOS/infra/issues/186)),
 and start a discussion in [#infra:nixos.org](https://matrix.to/#/#infra:nixos.org).
 
 ## ZHF issue

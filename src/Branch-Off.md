@@ -149,10 +149,10 @@ Now we prepare the master branch for the next release after this one.
 Now that everything on git is done, we are still missing the channels.
 
 1. Create the necessary channels for `https://channels.nixos.org` in beta status, by updating
-   [`channels.nix`](https://github.com/NixOS/nixos-org-configurations/blob/master/channels.nix) in `nixos-org-configurations`
+   [`channels.nix`](https://github.com/NixOS/infra/blob/master/channels.nix) in `infra`
    and nag the infrastructure team to get these changes deployed.
 
-   Example: [22.11](https://github.com/NixOS/nixos-org-configurations/commit/9a0b3674a11b445c973334c78e8ca0eda36775e4)
+   Example: [22.11](https://github.com/NixOS/infra/commit/9a0b3674a11b445c973334c78e8ca0eda36775e4)
 
 1. Create the backport [labels](https://github.com/NixOS/nixpkgs/labels) for all new branches:
    - `backport staging-21.05`
@@ -171,7 +171,7 @@ The following steps should be done after the channels have become available on [
 
    ```bash
    git clone git@github.com:nixos/nixos-search
-   nix --extra-experimental-features "nix-command flakes" flake lock --update-input nixos-org-configurations
+   nix --extra-experimental-features "nix-command flakes" flake lock --update-input nixos-infra
    ```
 
 1. Give the [Marketing team](https://matrix.to/#/#marketing:nixos.org) a heads-up about the upcoming release

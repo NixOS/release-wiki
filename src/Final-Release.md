@@ -166,16 +166,16 @@ export NEWVER=23.05
 
    The website is hosted by a CDN so you may occasionally see the old site for a couple of minutes/hours (?) after your changes
 
-1. Update [nixos-org-configurations](https://github.com/NixOS/nixos-org-configurations) to reflect the `stable` channel
+1. Update [infra](https://github.com/NixOS/infra) to reflect the `stable` channel
    status for $NEWVER and the `deprecated` status for $OLDVER.
    
-   Examples: [22.11](https://github.com/NixOS/nixos-org-configurations/pull/228), [22.05](https://github.com/NixOS/nixos-org-configurations/pull/210), [21.11](https://github.com/NixOS/nixos-org-configurations/pull/192)
+   Examples: [22.11](https://github.com/NixOS/infra/pull/228), [22.05](https://github.com/NixOS/infra/pull/210), [21.11](https://github.com/NixOS/infra/pull/192)
 
 1. Create a new topic on [Discourse](https://discourse.nixos.org/) to announce the release.
 
    Examples: [22.11](https://discourse.nixos.org/t/nixos-22-11-released/23637), [22.05](https://discourse.nixos.org/t/nixos-22-05-released/19404)
 
-1. Once the Pull Request in `nixos-org-configurations` is merged, update [nixos-search](https://github.com/NixOS/nixos-search/) to mark the channel as released.
+1. Once the Pull Request in `infra` is merged, update [nixos-search](https://github.com/NixOS/nixos-search/) to mark the channel as released.
    This is the same process as for the creation of the beta channel in the project.
 
 ## After Release
