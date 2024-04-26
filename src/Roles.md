@@ -20,4 +20,4 @@ this wiki can be followed. This "Call for Release-Manager and Release
 Examples:
   - [22.11 Call for Release Manager and Editor](https://discourse.nixos.org/t/22-11-call-for-release-manager-and-editor/21861)
   - [22.05 Call for Release Managers and Editor](https://discourse.nixos.org/t/22-05-call-for-release-managers-and-editor/17663)
-  - [21.11 Call for Release Manger](https://discourse.nixos.org/t/21-11-call-for-release-manager/14934)
+  - [21.11 Call for Release Manager](https://discourse.nixos.org/t/21-11-call-for-release-manager/14934)
