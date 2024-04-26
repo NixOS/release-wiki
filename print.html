@@ -410,7 +410,7 @@ investment, to keep up with the pace of contributions.</p>
 <p>There is an autoscaler in place for aarch64-linux and x86_64-linux while the
 darwin allocations are pretty much static.</p>
 <p>If capacity issues are apparent, contact the infrastructure team on the
-<code>nixos-org-configurations</code> repository (example: <a href="https://github.com/NixOS/nixos-org-configurations/issues/186">21.11 example</a>),
+<code>infra</code> repository (example: <a href="https://github.com/NixOS/infra/issues/186">21.11 example</a>),
 and start a discussion in <a href="https://matrix.to/#/#infra:nixos.org">#infra:nixos.org</a>.</p>
 <h2><a class="header" href="#zhf-issue" id="zhf-issue">ZHF issue</a></h2>
 <ul>
@@ -576,9 +576,9 @@ git describe HEAD # should yield 23.05-pre
 <ol>
 <li>
 <p>Create the necessary channels for <code>https://channels.nixos.org</code> in beta status, by updating
-<a href="https://github.com/NixOS/nixos-org-configurations/blob/master/channels.nix"><code>channels.nix</code></a> in <code>nixos-org-configurations</code>
+<a href="https://github.com/NixOS/infra/blob/master/channels.nix"><code>channels.nix</code></a> in <code>infra</code>
 and nag the infrastructure team to get these changes deployed.</p>
-<p>Example: <a href="https://github.com/NixOS/nixos-org-configurations/commit/9a0b3674a11b445c973334c78e8ca0eda36775e4">22.11</a></p>
+<p>Example: <a href="https://github.com/NixOS/infra/commit/9a0b3674a11b445c973334c78e8ca0eda36775e4">22.11</a></p>
 </li>
 <li>
 <p>Create the backport <a href="https://github.com/NixOS/nixpkgs/labels">labels</a> for all new branches:</p>
@@ -599,7 +599,7 @@ Examples: <a href="https://github.com/NixOS/nixpkgs/issues/172160#issuecomment-1
 <li>
 <p>Update the flake input on the <code>nixos-search</code> repository` and create a pull request:</p>
 <pre><code class="language-bash">git clone git@github.com:nixos/nixos-search
-nix --extra-experimental-features &quot;nix-command flakes&quot; flake lock --update-input nixos-org-configurations
+nix --extra-experimental-features &quot;nix-command flakes&quot; flake lock --update-input nixos-infra
 </code></pre>
 </li>
 <li>
@@ -811,16 +811,16 @@ own fork, so the CI actions work properly.</p>
 <p>The website is hosted by a CDN so you may occasionally see the old site for a couple of minutes/hours (?) after your changes</p>
 </li>
 <li>
-<p>Update <a href="https://github.com/NixOS/nixos-org-configurations">nixos-org-configurations</a> to reflect the <code>stable</code> channel
+<p>Update <a href="https://github.com/NixOS/infra">infra</a> to reflect the <code>stable</code> channel
 status for $NEWVER and the <code>deprecated</code> status for $OLDVER.</p>
-<p>Examples: <a href="https://github.com/NixOS/nixos-org-configurations/pull/228">22.11</a>, <a href="https://github.com/NixOS/nixos-org-configurations/pull/210">22.05</a>, <a href="https://github.com/NixOS/nixos-org-configurations/pull/192">21.11</a></p>
+<p>Examples: <a href="https://github.com/NixOS/infra/pull/228">22.11</a>, <a href="https://github.com/NixOS/infra/pull/210">22.05</a>, <a href="https://github.com/NixOS/infra/pull/192">21.11</a></p>
 </li>
 <li>
 <p>Create a new topic on <a href="https://discourse.nixos.org/">Discourse</a> to announce the release.</p>
 <p>Examples: <a href="https://discourse.nixos.org/t/nixos-22-11-released/23637">22.11</a>, <a href="https://discourse.nixos.org/t/nixos-22-05-released/19404">22.05</a></p>
 </li>
 <li>
-<p>Once the Pull Request in <code>nixos-org-configurations</code> is merged, update <a href="https://github.com/NixOS/nixos-search/">nixos-search</a> to mark the channel as released.
+<p>Once the Pull Request in <code>infra</code> is merged, update <a href="https://github.com/NixOS/nixos-search/">nixos-search</a> to mark the channel as released.
 This is the same process as for the creation of the beta channel in the project.</p>
 </li>
 </ol>
@@ -924,11 +924,11 @@ that were made during the event.</p>
 gets released. At that point a few cleanup tasks need to be done.</p>
 <ol>
 <li>
-<p>Set the EOL channel status from <code>deprecated</code> to <code>unmaintained</code> in <code>nixos-org-configurations</code>. Examples:</p>
+<p>Set the EOL channel status from <code>deprecated</code> to <code>unmaintained</code> in <code>infra</code>. Examples:</p>
 <ul>
-<li><a href="https://github.com/NixOS/nixos-org-configurations/pull/229">channels: Deprecate NixOS 22.05</a></li>
-<li><a href="https://github.com/NixOS/nixos-org-configurations/pull/211">channels: Mark 21.11 as unmaintained</a></li>
-<li><a href="https://github.com/NixOS/nixos-org-configurations/pull/201">channels:21.05 is unmaintained</a></li>
+<li><a href="https://github.com/NixOS/infra/pull/229">channels: Deprecate NixOS 22.05</a></li>
+<li><a href="https://github.com/NixOS/infra/pull/211">channels: Mark 21.11 as unmaintained</a></li>
+<li><a href="https://github.com/NixOS/infra/pull/201">channels:21.05 is unmaintained</a></li>
 </ul>
 </li>
 <li>

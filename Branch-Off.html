@@ -308,9 +308,9 @@ git describe HEAD # should yield 23.05-pre
 <ol>
 <li>
 <p>Create the necessary channels for <code>https://channels.nixos.org</code> in beta status, by updating
-<a href="https://github.com/NixOS/nixos-org-configurations/blob/master/channels.nix"><code>channels.nix</code></a> in <code>nixos-org-configurations</code>
+<a href="https://github.com/NixOS/infra/blob/master/channels.nix"><code>channels.nix</code></a> in <code>infra</code>
 and nag the infrastructure team to get these changes deployed.</p>
-<p>Example: <a href="https://github.com/NixOS/nixos-org-configurations/commit/9a0b3674a11b445c973334c78e8ca0eda36775e4">22.11</a></p>
+<p>Example: <a href="https://github.com/NixOS/infra/commit/9a0b3674a11b445c973334c78e8ca0eda36775e4">22.11</a></p>
 </li>
 <li>
 <p>Create the backport <a href="https://github.com/NixOS/nixpkgs/labels">labels</a> for all new branches:</p>
@@ -331,7 +331,7 @@ Examples: <a href="https://github.com/NixOS/nixpkgs/issues/172160#issuecomment-1
 <li>
 <p>Update the flake input on the <code>nixos-search</code> repository` and create a pull request:</p>
 <pre><code class="language-bash">git clone git@github.com:nixos/nixos-search
-nix --extra-experimental-features &quot;nix-command flakes&quot; flake lock --update-input nixos-org-configurations
+nix --extra-experimental-features &quot;nix-command flakes&quot; flake lock --update-input nixos-infra
 </code></pre>
 </li>
 <li>
