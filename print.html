@@ -934,7 +934,7 @@ gets released. At that point a few cleanup tasks need to be done.</p>
 <li>
 <p>Once this is merged, update the <a href="https://github.com/NixOS/nixos-search"><code>nixos-search</code></a>
 repository to reflect that status on <a href="https://search.nixos.org">search.nixos.org</a>.</p>
-<pre><code class="language-bash">nix --extra-experimental-features nix-command flakes flake update nixos-org-configurations
+<pre><code class="language-bash">nix --extra-experimental-features &quot;nix-command flakes&quot; flake lock --update-input nixos-infra
 </code></pre>
 </li>
 <li>
