@@ -145,8 +145,8 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="branch-off"><a class="header" href="#branch-off">Branch-off</a></h1>
-<p>For these steps &quot;23.05&quot; represents the current release tag and &quot;23.11&quot; represents the next
-(6 months in the future) release tag. &quot;22.11&quot; is the last release which was released 6 months
+<p>For these steps &quot;24.05&quot; represents the current release tag and &quot;24.11&quot; represents the next
+(6 months in the future) release tag. &quot;23.11&quot; is the last release which was released 6 months
 ago.</p>
 <h2 id="jobset-creation"><a class="header" href="#jobset-creation">Jobset creation</a></h2>
 <p>The <a href="https://matrix.to/#/#infra:nixos.org">infrastructure team</a> can create the necessary jobsets
@@ -156,21 +156,21 @@ before release to create the necessary Hydra Jobsets. You can link them this sec
 <ul>
 <li><a href="https://hydra.nixos.org/project/nixos">https://hydra.nixos.org/project/nixos</a>
 <ul>
-<li>release-22.11</li>
-<li>release-22.11-small</li>
+<li>release-24.05</li>
+<li>release-24.05-small</li>
 </ul>
 </li>
 <li><a href="https://hydra.nixos.org/project/nixpkgs">https://hydra.nixos.org/project/nixpkgs</a>
 <ul>
-<li>nixpkgs-22.11-darwin</li>
-<li>staging-next-22.11</li>
+<li>nixpkgs-24.05-darwin</li>
+<li>staging-next-24.05</li>
 </ul>
 </li>
 </ul>
-<p>Example configuration: <a href="https://hydra.nixos.org/jobset/nixos/release-22.11#tabs-configuration">nixos:release-22.11</a></p>
+<p>Example configuration: <a href="https://hydra.nixos.org/jobset/nixos/release-23.11#tabs-configuration">nixos:release-23.11</a></p>
 <div class="table-wrapper"><table><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody>
 <tr><td>State</td><td>Enabled</td></tr>
-<tr><td>Description</td><td>NixOS 22.11 release branch</td></tr>
+<tr><td>Description</td><td>NixOS 24.05 release branch</td></tr>
 <tr><td>Nix expression</td><td><code>nixos/release-combined.nix</code> in input <code>nixpkgs</code></td></tr>
 <tr><td>Check interval</td><td>86400</td></tr>
 <tr><td>Scheduling shares</td><td>5000000 (8.32% out of 60071636 shares)</td></tr>
@@ -180,14 +180,14 @@ before release to create the necessary Hydra Jobsets. You can link them this sec
 </div>
 <p>Inputs:</p>
 <div class="table-wrapper"><table><thead><tr><th>Input name</th><th>Type</th><th>Values</th></tr></thead><tbody>
-<tr><td><code>nixpkgs</code></td><td>Git checkout</td><td><code>https://github.com/NixOS/nixpkgs.git release-22.11</code></td></tr>
+<tr><td><code>nixpkgs</code></td><td>Git checkout</td><td><code>https://github.com/NixOS/nixpkgs.git release-24.05</code></td></tr>
 <tr><td><code>stableBranch</code></td><td>Boolean</td><td><code>false</code></td></tr>
 <tr><td><code>supportedSystems</code></td><td>Nix expression</td><td><code>[ &quot;x86_64-linux&quot; &quot;aarch64-linux&quot; ]</code></td></tr>
 </tbody></table>
 </div>
 <h2 id="actual-branch-off"><a class="header" href="#actual-branch-off">Actual branch-off</a></h2>
 <p>Set NEWVER to the new release version:</p>
-<pre><code class="language-bash">export NEWVER=23.05
+<pre><code class="language-bash">export NEWVER=24.05
 </code></pre>
 <h3 id="on-the-master-branch"><a class="header" href="#on-the-master-branch">On the master branch</a></h3>
 <p>Pull in the final changes before performing the actal branch-off.</p>
@@ -254,35 +254,33 @@ git push upstream master release-$NEWVER $NEWVER-beta staging-$NEWVER staging-ne
 <li>
 <p>Increment the <a href="https://github.com/NixOS/nixpkgs/commit/01268fda85b7eee4e462c873d8654f975067731f#diff-2bc0e46110b507d6d5a344264ef15adaR1"><code>.version</code></a>
 file in the repository root.</p>
-<pre><code class="language-bash"># The release after $NEWVER (23.05 -&gt; 23.11)
-echo -n &quot;23.11&quot; &gt; .version
+<pre><code class="language-bash"># The release after $NEWVER (24.05 -&gt; 24.11)
+echo -n &quot;24.11&quot; &gt; .version
 </code></pre>
 </li>
 <li>
-<p>Update the <code>codeName</code> attribute in <a href="https://github.com/NixOS/nixpkgs/commit/01268fda85b7eee4e462c873d8654f975067731f#diff-03f3d41b68f62079c55001f1a1c55c1dR137"><code>lib/trivial.nix</code></a>
+<p>Update the <code>codeName</code> attribute in <a href="https://github.com/NixOS/nixpkgs/commit/2c28f1de7cdc10be556d2106108411dd2482794b#diff-29c71aa8261b14b1cad6e6fa28486fed7295050db4eeb32ba205672ba91d40e1"><code>lib/trivial.nix</code></a>
 This will be the name for the next release.</p>
 </li>
 <li>
-<p>Create a new <a href="https://github.com/NixOS/nixpkgs/commit/01268fda85b7eee4e462c873d8654f975067731f#diff-e7ee5ff686cdcc513ca089d6e5682587R11">release notes file</a>
+<p>Create a new <a href="https://github.com/NixOS/nixpkgs/blob/44b98d80ea6a56ccc1838aa0ac9e891de9130913/nixos/doc/manual/release-notes/rl-2311.section.md?plain=1">release notes file</a>
 for the next release</p>
 </li>
 <li>
-<p>Update the release versions in <a href="https://github.com/NixOS/nixpkgs/blob/master/.github/PULL_REQUEST_TEMPLATE.md"><code>PULL_REQUEST_TEMPLATE.md</code></a>
+<p>Update the release versions in <a href="https://github.com/NixOS/nixpkgs/commit/2c6ae7132ca558f1052da0eececed3cad191b883#diff-18813c86948efc57e661623d7ba48ff94325c9b5421ec9177f724922dd553a35"><code>.github/PULL_REQUEST_TEMPLATE.md</code></a>
 on master.</p>
-<p>Examples: <a href="https://github.com/NixOS/nixpkgs/commit/f1b9cc23aa8b1549dd7cb53dbe9fc950efc97646#diff-18813c86948efc57e661623d7ba48ff94325c9b5421ec9177f724922dd553a35">22.11</a></p>
 </li>
 <li>
-<p>Update <a href="https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md"><code>CONTRIBUTING.md</code></a> on master</p>
-<p>Examples: <a href="https://github.com/NixOS/nixpkgs/commit/f1b9cc23aa8b1549dd7cb53dbe9fc950efc97646#diff-eca12c0a30e25b4b46522ebf89465a03ba72a03f540796c979137931d8f92055">22.11</a></p>
+<p>Update <a href="https://github.com/NixOS/nixpkgs/commit/2c6ae7132ca558f1052da0eececed3cad191b883#diff-eca12c0a30e25b4b46522ebf89465a03ba72a03f540796c979137931d8f92055"><code>CONTRIBUTING.md</code></a> on master.</p>
 </li>
 <li>
-<p>Commit the changes (<a href="https://github.com/NixOS/nixpkgs/commit/bfdfe12c788d7474b88e7a7790b88b1c0f8e01b5">22.05 example</a> + <a href="https://github.com/NixOS/nixpkgs/commit/953b5d19bca4d4ddfaef5625cca277c47b39f5e7">this additional commit</a>)</p>
+<p>Commit the changes (<a href="https://github.com/NixOS/nixpkgs/commit/2c28f1de7cdc10be556d2106108411dd2482794b">23.05 example</a> + <a href="https://github.com/NixOS/nixpkgs/commit/44b98d80ea6a56ccc1838aa0ac9e891de9130913">this commit</a> + <a href="https://github.com/NixOS/nixpkgs/commit/2c6ae7132ca558f1052da0eececed3cad191b883">this commit</a>)</p>
 </li>
 <li>
-<p>Tag the master branch, so that <code>git describe</code> shows the new version as the base for commits..</p>
-<pre><code class="language-bash">git tag --annotate $NEWVER-pre
-git push upstream master $NEWVER-pre
-git describe HEAD # should yield 23.05-pre
+<p>Tag the master branch, so that <code>git describe</code> shows the new version as the base for commits.</p>
+<pre><code class="language-bash">git tag --annotate 24.11-pre
+git push upstream master 24.11-pre
+git describe HEAD # should yield 24.11-pre
 </code></pre>
 </li>
 </ol>
@@ -298,8 +296,8 @@ and nag the infrastructure team to get these changes deployed.</p>
 <li>
 <p>Create the backport <a href="https://github.com/NixOS/nixpkgs/labels">labels</a> for all new branches:</p>
 <ul>
-<li><code>backport staging-21.05</code></li>
-<li><code>backport release-21.05</code></li>
+<li><code>backport staging-24.05</code></li>
+<li><code>backport release-24.05</code></li>
 </ul>
 <p>Use the description <code>Backport PR automatically</code> and the color value <code>#0fafaa</code></p>
 </li>
@@ -312,7 +310,7 @@ Examples: <a href="https://github.com/NixOS/nixpkgs/issues/172160#issuecomment-1
 <p>The following steps should be done after the channels have become available on <a href="https://channels.nixos.org">channels.nixos.org</a>.</p>
 <ol>
 <li>
-<p>Update the flake input on the <code>nixos-search</code> repository` and create a pull request:</p>
+<p>Update the flake input on the <code>nixos-search</code> repository, and create a pull request:</p>
 <pre><code class="language-bash">git clone git@github.com:nixos/nixos-search
 nix --extra-experimental-features &quot;nix-command flakes&quot; flake lock --update-input nixos-infra
 </code></pre>
