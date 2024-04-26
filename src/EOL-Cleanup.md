@@ -12,7 +12,7 @@ gets released. At that point a few cleanup tasks need to be done.
    repository to reflect that status on [search.nixos.org](https://search.nixos.org).
 
    ```bash
-   nix --extra-experimental-features "nix-command flakes" flake lock --update-input nixos-org-configurations
+   nix --extra-experimental-features "nix-command flakes" flake lock --update-input nixos-infra
    ```
 
 1. Close all pull requests that target one of the the old release- or staging-branches
