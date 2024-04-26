@@ -4,37 +4,24 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Branch-off - NixOS Release Wiki</title>
-        
-        
 
 
         <!-- Custom HTML head -->
         
-
-
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        
         <link rel="icon" href="favicon.svg">
-        
-        
         <link rel="shortcut icon" href="favicon.png">
-        
         <link rel="stylesheet" href="css/variables.css">
         <link rel="stylesheet" href="css/general.css">
         <link rel="stylesheet" href="css/chrome.css">
-        
         <link rel="stylesheet" href="css/print.css" media="print">
-        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        
         <link rel="stylesheet" href="fonts/fonts.css">
-        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="highlight.css">
@@ -42,19 +29,18 @@
         <link rel="stylesheet" href="ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
 
-        
     </head>
     <body>
+    <div id="body-container">
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -70,7 +56,7 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -82,12 +68,14 @@
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        <script>
             var html = document.querySelector('html');
-            var sidebar = 'hidden';
+            var sidebar = null;
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
             }
             html.classList.remove('sidebar-visible');
             html.classList.add("sidebar-" + sidebar);
@@ -103,8 +91,7 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
-                <div id="menu-bar-hover-placeholder"></div>
+                                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -114,35 +101,30 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                         <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
                             <i class="fa fa-search"></i>
                         </button>
-                        
                     </div>
 
                     <h1 class="menu-title">NixOS Release Wiki</h1>
 
                     <div class="right-buttons">
-                        
                         <a href="print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
-                        
+
                     </div>
                 </div>
 
-                
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
                     </form>
                     <div id="searchresults-outer" class="searchresults-outer hidden">
                         <div id="searchresults-header" class="searchresults-header"></div>
@@ -150,10 +132,9 @@
                         </ul>
                     </div>
                 </div>
-                
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -163,11 +144,11 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#branch-off" id="branch-off">Branch-off</a></h1>
+                        <h1 id="branch-off"><a class="header" href="#branch-off">Branch-off</a></h1>
 <p>For these steps &quot;23.05&quot; represents the current release tag and &quot;23.11&quot; represents the next
 (6 months in the future) release tag. &quot;22.11&quot; is the last release which was released 6 months
 ago.</p>
-<h2><a class="header" href="#jobset-creation" id="jobset-creation">Jobset creation</a></h2>
+<h2 id="jobset-creation"><a class="header" href="#jobset-creation">Jobset creation</a></h2>
 <p>The <a href="https://matrix.to/#/#infra:nixos.org">infrastructure team</a> can create the necessary jobsets
 in advance. They will not evaluate because the release branch doesn't exist but it allows the
 infrastructure team and the release team to work more asynchronously. Reach out to them 1-2 days
@@ -187,7 +168,7 @@ before release to create the necessary Hydra Jobsets. You can link them this sec
 </li>
 </ul>
 <p>Example configuration: <a href="https://hydra.nixos.org/jobset/nixos/release-22.11#tabs-configuration">nixos:release-22.11</a></p>
-<table><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody>
 <tr><td>State</td><td>Enabled</td></tr>
 <tr><td>Description</td><td>NixOS 22.11 release branch</td></tr>
 <tr><td>Nix expression</td><td><code>nixos/release-combined.nix</code> in input <code>nixpkgs</code></td></tr>
@@ -196,17 +177,19 @@ before release to create the necessary Hydra Jobsets. You can link them this sec
 <tr><td>Enable Dynamic RunCommand Hooks:</td><td>No (not enabled by server)</td></tr>
 <tr><td>Number of evaluations to keep</td><td>1</td></tr>
 </tbody></table>
+</div>
 <p>Inputs:</p>
-<table><thead><tr><th>Input name</th><th>Type</th><th>Values</th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th>Input name</th><th>Type</th><th>Values</th></tr></thead><tbody>
 <tr><td><code>nixpkgs</code></td><td>Git checkout</td><td><code>https://github.com/NixOS/nixpkgs.git release-22.11</code></td></tr>
 <tr><td><code>stableBranch</code></td><td>Boolean</td><td><code>false</code></td></tr>
 <tr><td><code>supportedSystems</code></td><td>Nix expression</td><td><code>[ &quot;x86_64-linux&quot; &quot;aarch64-linux&quot; ]</code></td></tr>
 </tbody></table>
-<h2><a class="header" href="#actual-branch-off" id="actual-branch-off">Actual branch-off</a></h2>
+</div>
+<h2 id="actual-branch-off"><a class="header" href="#actual-branch-off">Actual branch-off</a></h2>
 <p>Set NEWVER to the new release version:</p>
 <pre><code class="language-bash">export NEWVER=23.05
 </code></pre>
-<h3><a class="header" href="#on-the-master-branch" id="on-the-master-branch">On the master branch</a></h3>
+<h3 id="on-the-master-branch"><a class="header" href="#on-the-master-branch">On the master branch</a></h3>
 <p>Pull in the final changes before performing the actal branch-off.</p>
 <ol>
 <li>
@@ -221,7 +204,7 @@ before release to create the necessary Hydra Jobsets. You can link them this sec
 </code></pre>
 </li>
 </ol>
-<h3><a class="header" href="#on-the-release-branch" id="on-the-release-branch">On the release branch</a></h3>
+<h3 id="on-the-release-branch"><a class="header" href="#on-the-release-branch">On the release branch</a></h3>
 <p>Update metadata on the release branch, create its staging branches and tag the release.</p>
 <ol>
 <li>
@@ -262,7 +245,7 @@ git push upstream master release-$NEWVER $NEWVER-beta staging-$NEWVER staging-ne
 </code></pre>
 </li>
 </ol>
-<h3><a class="header" href="#back-on-the-master-branch" id="back-on-the-master-branch">Back on the master branch</a></h3>
+<h3 id="back-on-the-master-branch"><a class="header" href="#back-on-the-master-branch">Back on the master branch</a></h3>
 <p>Now we prepare the master branch for the next release after this one.</p>
 <ol>
 <li>
@@ -303,7 +286,7 @@ git describe HEAD # should yield 23.05-pre
 </code></pre>
 </li>
 </ol>
-<h3><a class="header" href="#and-afterwards" id="and-afterwards">And afterwards</a></h3>
+<h3 id="and-afterwards"><a class="header" href="#and-afterwards">And afterwards</a></h3>
 <p>Now that everything on git is done, we are still missing the channels.</p>
 <ol>
 <li>
@@ -325,7 +308,7 @@ and nag the infrastructure team to get these changes deployed.</p>
 Examples: <a href="https://github.com/NixOS/nixpkgs/issues/172160#issuecomment-1135112918">22.05</a></p>
 </li>
 </ol>
-<h3><a class="header" href="#once-the-channel-is-available" id="once-the-channel-is-available">Once the channel is available</a></h3>
+<h3 id="once-the-channel-is-available"><a class="header" href="#once-the-channel-is-available">Once the channel is available</a></h3>
 <p>The following steps should be done after the channels have become available on <a href="https://channels.nixos.org">channels.nixos.org</a>.</p>
 <ol>
 <li>
@@ -363,17 +346,13 @@ which requires write permissions to the S3 bucket.</p>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
                             <a rel="prev" href="Zero-Hydra-Failures.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                        
 
-                        
                             <a rel="next" href="Beta-Phase.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        
 
                         <div style="clear: both"></div>
                     </nav>
@@ -381,49 +360,36 @@ which requires write permissions to the S3 bucket.</p>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
                     <a rel="prev" href="Zero-Hydra-Failures.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                
 
-                
                     <a rel="next" href="Beta-Phase.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
-                
             </nav>
 
         </div>
 
-        
 
-        
 
-        
 
-        
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
-        
 
-        
 
-        
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
-        
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
-        
 
-        
 
+    </div>
     </body>
 </html>

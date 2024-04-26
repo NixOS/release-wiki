@@ -4,39 +4,25 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>NixOS Release Wiki</title>
-        
         <meta name="robots" content="noindex" />
-        
-        
 
 
         <!-- Custom HTML head -->
         
-
-
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        
         <link rel="icon" href="favicon.svg">
-        
-        
         <link rel="shortcut icon" href="favicon.png">
-        
         <link rel="stylesheet" href="css/variables.css">
         <link rel="stylesheet" href="css/general.css">
         <link rel="stylesheet" href="css/chrome.css">
-        
         <link rel="stylesheet" href="css/print.css" media="print">
-        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        
         <link rel="stylesheet" href="fonts/fonts.css">
-        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="highlight.css">
@@ -44,19 +30,18 @@
         <link rel="stylesheet" href="ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
 
-        
     </head>
     <body>
+    <div id="body-container">
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -72,7 +57,7 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -84,12 +69,14 @@
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        <script>
             var html = document.querySelector('html');
-            var sidebar = 'hidden';
+            var sidebar = null;
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
             }
             html.classList.remove('sidebar-visible');
             html.classList.add("sidebar-" + sidebar);
@@ -105,8 +92,7 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
-                <div id="menu-bar-hover-placeholder"></div>
+                                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -116,35 +102,30 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                         <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
                             <i class="fa fa-search"></i>
                         </button>
-                        
                     </div>
 
                     <h1 class="menu-title">NixOS Release Wiki</h1>
 
                     <div class="right-buttons">
-                        
                         <a href="print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
-                        
+
                     </div>
                 </div>
 
-                
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
                     </form>
                     <div id="searchresults-outer" class="searchresults-outer hidden">
                         <div id="searchresults-header" class="searchresults-header"></div>
@@ -152,10 +133,9 @@
                         </ul>
                     </div>
                 </div>
-                
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -175,7 +155,7 @@ And also use as it as a reference on how to release NixOS and engage the communi
 It mainly serves as a list of tasks to remember and is not written in stone.
 This means that if you are a Release Manager and think you can do thing better, feel free to do so!
 Also, if you are not a Release Manager and think the process can be improved, open an Issue or Pull Request on the <a href="https://github.com/NixOS/release-wiki">repository</a>.</p>
-<h1><a class="header" href="#roles" id="roles">Roles</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="roles"><a class="header" href="#roles">Roles</a></h1>
 <p>The release process currently knows two kinds of roles, whose duties
 should be documented in this wiki.</p>
 <ul>
@@ -196,7 +176,7 @@ this wiki can be followed. This &quot;Call for Release-Manager and Release
 <li><a href="https://discourse.nixos.org/t/22-05-call-for-release-managers-and-editor/17663">22.05 Call for Release Managers and Editor</a></li>
 <li><a href="https://discourse.nixos.org/t/21-11-call-for-release-manager/14934">21.11 Call for Release Manger</a></li>
 </ul>
-<h1><a class="header" href="#release-managers" id="release-managers">Release Managers</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="release-managers"><a class="header" href="#release-managers">Release Managers</a></h1>
 <blockquote>
 <p>When you are nixpkgs committer, you already have the skillset necessary for release management.
 You just need to apply it in a different way.</p>
@@ -232,12 +212,12 @@ release</p>
 It is <strong>very</strong> important that the new co-release-manager removes the previous manager
 from the team when they assign a new one.</p>
 <p>A release manager must have the commit bit in the nixpkgs repository.</p>
-<h1><a class="header" href="#release-editors" id="release-editors">Release Editors</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="release-editors"><a class="header" href="#release-editors">Release Editors</a></h1>
 <p>The role of the release editors is a result of an action item from the
 21.11 release, where the satistfaction with the release notes was low.</p>
 <p>The first release editor role was filled in the 22.05 release with a
 focus on the release notes and content for the homepage.</p>
-<h2><a class="header" href="#responsibiltiies" id="responsibiltiies">Responsibiltiies</a></h2>
+<h2 id="responsibiltiies"><a class="header" href="#responsibiltiies">Responsibiltiies</a></h2>
 <ul>
 <li>
 <p>Improve the legibility of the release notes</p>
@@ -246,7 +226,7 @@ focus on the release notes and content for the homepage.</p>
 <p>Correct grammar and spelling issues</p>
 </li>
 </ul>
-<h1><a class="header" href="#release-critical-packages" id="release-critical-packages">Release Critical Packages</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="release-critical-packages"><a class="header" href="#release-critical-packages">Release Critical Packages</a></h1>
 <p>These packages are deemed &quot;sufficiently complex&quot; in the package ecosystem to
 warrant treating them differently when stabilizing the package set leading up to
 a stable release. Generally, these packages will be closely related to <code>stdenv</code>
@@ -256,7 +236,7 @@ are that these packages can not have breaking changes applied to them for six we
 leading up to a release date. This delay allows for changes in these packages to be
 sufficiently stabilized through usage on unstable, and allows for many staging
 iterations for these fixes to be applied.</p>
-<h2><a class="header" href="#list-of-release-critical-packages" id="list-of-release-critical-packages">List of Release Critical Packages:</a></h2>
+<h2 id="list-of-release-critical-packages"><a class="header" href="#list-of-release-critical-packages">List of Release Critical Packages:</a></h2>
 <ul>
 <li><code>binutils</code></li>
 <li><code>gcc</code></li>
@@ -264,18 +244,18 @@ iterations for these fixes to be applied.</p>
 <li><code>llvm</code></li>
 <li><code>systemd</code></li>
 </ul>
-<h3><a class="header" href="#process-for-modifying-release-critical-packages" id="process-for-modifying-release-critical-packages">Process for Modifying Release Critical Packages</a></h3>
+<h3 id="process-for-modifying-release-critical-packages"><a class="header" href="#process-for-modifying-release-critical-packages">Process for Modifying Release Critical Packages</a></h3>
 <p>A release retrospective will take place after a release occured; one of the
 topics of discussion will be to modify the list of critical packages.
 Packages may be added if they caused a significant amount of pain, or packages
 may be removed if their updates cause little to no pain. Pain in this case
 is defined as causing failing builds, regressions in downstream packages,
 or regressions in user experience.</p>
-<h1><a class="header" href="#release-process" id="release-process">Release Process</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="release-process"><a class="header" href="#release-process">Release Process</a></h1>
 <p>These pages give an overview of the release process with as many details as there are available at the time of writing.</p>
-<h2><a class="header" href="#release-schedule" id="release-schedule">Release Schedule</a></h2>
+<h2 id="release-schedule"><a class="header" href="#release-schedule">Release Schedule</a></h2>
 <p>With <a href="https://github.com/NixOS/rfcs/blob/master/rfcs/0085-nixos-release-stablization.md">RFC85</a>, the release schedule is largely already dictated below:</p>
-<table><thead><tr><th>Weeks from Release</th><th>Branches Affected</th><th>Events</th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th>Weeks from Release</th><th>Branches Affected</th><th>Events</th></tr></thead><tbody>
 <tr><td>-8 Weeks</td><td></td><td>Start discussion about &quot;Feature Freeze &amp; Release Blockers&quot; with ecosystems maintainers</td></tr>
 <tr><td>-6 Weeks</td><td><code>staging-next</code>, <code>staging</code></td><td>Restrict breaking changes to Release Critical Packages</td></tr>
 <tr><td>-4 Weeks</td><td><code>staging-next</code>, <code>staging</code></td><td>Restrict all breaking changes with the exception of updates to desktop environment</td></tr>
@@ -295,19 +275,21 @@ or regressions in user experience.</p>
 <tr><td>+1 Weeks</td><td></td><td>Release Retrospective, everyone is invited to give feedback!</td></tr>
 <tr><td>+4 Weeks</td><td></td><td>End of life cleanup</td></tr>
 </tbody></table>
+</div>
 <p>Clarification of terms:</p>
-<table><thead><tr><th>Term</th><th>Definition</th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th>Term</th><th>Definition</th></tr></thead><tbody>
 <tr><td><code>staging</code></td><td>Git branch used to batch changes which cause large rebuilds (<code>500+</code> packages). This is to avoid straining infrastructure trying to build large package sets with each change. Since nix captures all changes in a dependency tree, a change to a fundamental package like glibc can affect <code>50,000+</code> packages.</td></tr>
 <tr><td><code>staging-next</code></td><td>Git branch used to build all of the batched changes. This branch has a <a href="https://hydra.nixos.org/jobset/nixpkgs/staging-next">Hydra jobset</a> which is used to fix regressions before the changes will be merged into master.</td></tr>
 <tr><td><code>ZHF</code></td><td>Zero Hydra Failures. A 2-4 week window before a release where there is a large attempt to stabilize failing builds. Also allows for additional &quot;housekeeping&quot; such as removing stale, abandoned, or unmaintained packages.</td></tr>
 </tbody></table>
+</div>
 <p>The purpose of these changes are mainly to push &quot;riskier&quot; PRs to being merged earlier,
 or after a release. Merging pull-requests which may have many downstream breakages should
 be avoided right before ZHF, as ZHF should focus on stabilization of the nixpkgs package
 set, and not distracted by large noise-to-signal build failures. Also, fixes to packages
 which required the <code>staging</code> process will likely require additional <code>staging</code> cycles to
 remedy the regressions.</p>
-<h1><a class="header" href="#what-to-do-once-appointed" id="what-to-do-once-appointed">What to do once appointed</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="what-to-do-once-appointed"><a class="header" href="#what-to-do-once-appointed">What to do once appointed</a></h1>
 <p>You have been appointed as the new Release Manager? Congratulations!
 This is a loose list of things you could start doing now.
 These tasks are not urgent but can be done as early as the appointment which should start to get you into your new role.
@@ -366,7 +348,7 @@ The release manager of the previous release will get in contact with you and hel
 </ul>
 </li>
 </ul>
-<h1><a class="header" href="#feature-freeze-announcement-and-pre-release-cleanup" id="feature-freeze-announcement-and-pre-release-cleanup">Feature Freeze announcement and pre-release cleanup</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="feature-freeze-announcement-and-pre-release-cleanup"><a class="header" href="#feature-freeze-announcement-and-pre-release-cleanup">Feature Freeze announcement and pre-release cleanup</a></h1>
 <p>The feature freeze announcement should be done 8 weeks before the release to
 inform subsystem maintainers about the upcoming feature freeze and to discuss
 potential blockers in the respective subsystems. This announcement is done on
@@ -382,7 +364,7 @@ needs a GitHub username and a token to read the teams from the NixOS org.
 Instructions are provided as a comment in the script.</p>
 <p>You might need to add a comment that pings people again because GitHub seems
 to limit the amount of people that can be pinged per post.</p>
-<h2><a class="header" href="#pre-release-cleanup" id="pre-release-cleanup">Pre-release cleanup</a></h2>
+<h2 id="pre-release-cleanup"><a class="header" href="#pre-release-cleanup">Pre-release cleanup</a></h2>
 <p>The pre-release cleanup consists of multiple small cleanups to keep the release
 secure throughout its lifecycle while also maintaining some level of
 cleanliness.</p>
@@ -403,8 +385,8 @@ project tracks problematic packages that should be removed.</p>
 more than 2 years.</p>
 </li>
 </ul>
-<h1><a class="header" href="#zero-hydra-failures" id="zero-hydra-failures">ZERO Hydra Failures</a></h1>
-<h2><a class="header" href="#hydra-scaling" id="hydra-scaling">Hydra scaling</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="zero-hydra-failures"><a class="header" href="#zero-hydra-failures">ZERO Hydra Failures</a></h1>
+<h2 id="hydra-scaling"><a class="header" href="#hydra-scaling">Hydra scaling</a></h2>
 <p>The activity during ZHF is usually higher, so more build capacity is a good
 investment, to keep up with the pace of contributions.</p>
 <p>There is an autoscaler in place for aarch64-linux and x86_64-linux while the
@@ -412,7 +394,7 @@ darwin allocations are pretty much static.</p>
 <p>If capacity issues are apparent, contact the infrastructure team on the
 <code>infra</code> repository (example: <a href="https://github.com/NixOS/infra/issues/186">21.11 example</a>),
 and start a discussion in <a href="https://matrix.to/#/#infra:nixos.org">#infra:nixos.org</a>.</p>
-<h2><a class="header" href="#zhf-issue" id="zhf-issue">ZHF issue</a></h2>
+<h2 id="zhf-issue"><a class="header" href="#zhf-issue">ZHF issue</a></h2>
 <ul>
 <li>
 <p>Create an issue for tracking Zero Hydra Failures progress. ZHF is an effort
@@ -431,11 +413,11 @@ to track regressions, since it builds for all platforms.</p>
 to coordinate the staging-next merges.</p>
 </li>
 </ul>
-<h1><a class="header" href="#branch-off" id="branch-off">Branch-off</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="branch-off"><a class="header" href="#branch-off">Branch-off</a></h1>
 <p>For these steps &quot;23.05&quot; represents the current release tag and &quot;23.11&quot; represents the next
 (6 months in the future) release tag. &quot;22.11&quot; is the last release which was released 6 months
 ago.</p>
-<h2><a class="header" href="#jobset-creation" id="jobset-creation">Jobset creation</a></h2>
+<h2 id="jobset-creation"><a class="header" href="#jobset-creation">Jobset creation</a></h2>
 <p>The <a href="https://matrix.to/#/#infra:nixos.org">infrastructure team</a> can create the necessary jobsets
 in advance. They will not evaluate because the release branch doesn't exist but it allows the
 infrastructure team and the release team to work more asynchronously. Reach out to them 1-2 days
@@ -455,7 +437,7 @@ before release to create the necessary Hydra Jobsets. You can link them this sec
 </li>
 </ul>
 <p>Example configuration: <a href="https://hydra.nixos.org/jobset/nixos/release-22.11#tabs-configuration">nixos:release-22.11</a></p>
-<table><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody>
 <tr><td>State</td><td>Enabled</td></tr>
 <tr><td>Description</td><td>NixOS 22.11 release branch</td></tr>
 <tr><td>Nix expression</td><td><code>nixos/release-combined.nix</code> in input <code>nixpkgs</code></td></tr>
@@ -464,17 +446,19 @@ before release to create the necessary Hydra Jobsets. You can link them this sec
 <tr><td>Enable Dynamic RunCommand Hooks:</td><td>No (not enabled by server)</td></tr>
 <tr><td>Number of evaluations to keep</td><td>1</td></tr>
 </tbody></table>
+</div>
 <p>Inputs:</p>
-<table><thead><tr><th>Input name</th><th>Type</th><th>Values</th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th>Input name</th><th>Type</th><th>Values</th></tr></thead><tbody>
 <tr><td><code>nixpkgs</code></td><td>Git checkout</td><td><code>https://github.com/NixOS/nixpkgs.git release-22.11</code></td></tr>
 <tr><td><code>stableBranch</code></td><td>Boolean</td><td><code>false</code></td></tr>
 <tr><td><code>supportedSystems</code></td><td>Nix expression</td><td><code>[ &quot;x86_64-linux&quot; &quot;aarch64-linux&quot; ]</code></td></tr>
 </tbody></table>
-<h2><a class="header" href="#actual-branch-off" id="actual-branch-off">Actual branch-off</a></h2>
+</div>
+<h2 id="actual-branch-off"><a class="header" href="#actual-branch-off">Actual branch-off</a></h2>
 <p>Set NEWVER to the new release version:</p>
 <pre><code class="language-bash">export NEWVER=23.05
 </code></pre>
-<h3><a class="header" href="#on-the-master-branch" id="on-the-master-branch">On the master branch</a></h3>
+<h3 id="on-the-master-branch"><a class="header" href="#on-the-master-branch">On the master branch</a></h3>
 <p>Pull in the final changes before performing the actal branch-off.</p>
 <ol>
 <li>
@@ -489,7 +473,7 @@ before release to create the necessary Hydra Jobsets. You can link them this sec
 </code></pre>
 </li>
 </ol>
-<h3><a class="header" href="#on-the-release-branch" id="on-the-release-branch">On the release branch</a></h3>
+<h3 id="on-the-release-branch"><a class="header" href="#on-the-release-branch">On the release branch</a></h3>
 <p>Update metadata on the release branch, create its staging branches and tag the release.</p>
 <ol>
 <li>
@@ -530,7 +514,7 @@ git push upstream master release-$NEWVER $NEWVER-beta staging-$NEWVER staging-ne
 </code></pre>
 </li>
 </ol>
-<h3><a class="header" href="#back-on-the-master-branch" id="back-on-the-master-branch">Back on the master branch</a></h3>
+<h3 id="back-on-the-master-branch"><a class="header" href="#back-on-the-master-branch">Back on the master branch</a></h3>
 <p>Now we prepare the master branch for the next release after this one.</p>
 <ol>
 <li>
@@ -571,7 +555,7 @@ git describe HEAD # should yield 23.05-pre
 </code></pre>
 </li>
 </ol>
-<h3><a class="header" href="#and-afterwards" id="and-afterwards">And afterwards</a></h3>
+<h3 id="and-afterwards"><a class="header" href="#and-afterwards">And afterwards</a></h3>
 <p>Now that everything on git is done, we are still missing the channels.</p>
 <ol>
 <li>
@@ -593,7 +577,7 @@ and nag the infrastructure team to get these changes deployed.</p>
 Examples: <a href="https://github.com/NixOS/nixpkgs/issues/172160#issuecomment-1135112918">22.05</a></p>
 </li>
 </ol>
-<h3><a class="header" href="#once-the-channel-is-available" id="once-the-channel-is-available">Once the channel is available</a></h3>
+<h3 id="once-the-channel-is-available"><a class="header" href="#once-the-channel-is-available">Once the channel is available</a></h3>
 <p>The following steps should be done after the channels have become available on <a href="https://channels.nixos.org">channels.nixos.org</a>.</p>
 <ol>
 <li>
@@ -626,7 +610,7 @@ which requires write permissions to the S3 bucket.</p>
 <p>Make sure the release editors have started finalizing the release notes. Only 7 days left until release!</p>
 </li>
 </ol>
-<h1><a class="header" href="#beta-phase" id="beta-phase">Beta Phase</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="beta-phase"><a class="header" href="#beta-phase">Beta Phase</a></h1>
 <ul>
 <li>
 <p>Monitor the master branch for bugfixes and minor updates and
@@ -639,14 +623,14 @@ this, so look at the corresponding
 <a href="https://github.com/NixOS/release-wiki/pull/42#discussion_r882695363">this discussion</a>.</p>
 </li>
 </ul>
-<h1><a class="header" href="#final-release" id="final-release">Final Release</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="final-release"><a class="header" href="#final-release">Final Release</a></h1>
 <p>Set the following environment variables to execute the commands below</p>
 <pre><code class="language-bash"># The version of the previous stable release
 export OLDVER=22.11
 # The version that is about to be released
 export NEWVER=23.05
 </code></pre>
-<h2><a class="header" href="#before-the-final-release" id="before-the-final-release">Before the final release</a></h2>
+<h2 id="before-the-final-release"><a class="header" href="#before-the-final-release">Before the final release</a></h2>
 <ul>
 <li>
 <p>Two days before expected release date, change <code>stableBranch</code> to <code>true</code> in Hydra and wait for the channel to update</p>
@@ -745,8 +729,8 @@ comm -13 &lt;(jq -r 'keys[]' old.json | sort) &lt;(jq -r 'keys[]' new.json | sor
 </ul>
 </li>
 </ul>
-<h2><a class="header" href="#at-final-release-time" id="at-final-release-time">At final release time</a></h2>
-<h3><a class="header" href="#on-the-master-branch-1" id="on-the-master-branch-1">On the master branch</a></h3>
+<h2 id="at-final-release-time"><a class="header" href="#at-final-release-time">At final release time</a></h2>
+<h3 id="on-the-master-branch-1"><a class="header" href="#on-the-master-branch-1">On the master branch</a></h3>
 <ol>
 <li>
 <p>Create these PRs on master and backport to the release branch:</p>
@@ -763,7 +747,7 @@ git push upstream master
 </ol>
 </li>
 </ol>
-<h3><a class="header" href="#on-the-release-branch-1" id="on-the-release-branch-1">On the release branch</a></h3>
+<h3 id="on-the-release-branch-1"><a class="header" href="#on-the-release-branch-1">On the release branch</a></h3>
 <ol>
 <li>
 <p>Switch to the release branch</p>
@@ -824,7 +808,7 @@ status for $NEWVER and the <code>deprecated</code> status for $OLDVER.</p>
 This is the same process as for the creation of the beta channel in the project.</p>
 </li>
 </ol>
-<h2><a class="header" href="#after-release" id="after-release">After Release</a></h2>
+<h2 id="after-release"><a class="header" href="#after-release">After Release</a></h2>
 <ol>
 <li>
 <p>Add the new release to repology. Don't remove old releases, they want to keep them around.</p>
@@ -859,14 +843,14 @@ nix-shell -p &quot;python3.withPackages (p: [ p.lxml p.requests p.pytest ])&quot
 </li>
 <li>
 <p>Create an announcement for the retrospective, some days after the old channel is discontinued.</p>
+<p>Examples: <a href="https://discourse.nixos.org/t/nixos-22-11-retrospective/23858">22.11</a>, <a href="https://discourse.nixos.org/t/22-05-retrospective/19413">22.05</a></p>
 </li>
 </ol>
-<p>Examples: <a href="https://discourse.nixos.org/t/nixos-22-11-retrospective/23858">22.11</a>, <a href="https://discourse.nixos.org/t/22-05-retrospective/19413">22.05</a></p>
-<h1><a class="header" href="#retrospective" id="retrospective">Retrospective</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="retrospective"><a class="header" href="#retrospective">Retrospective</a></h1>
 <p>The retrospective is an important part of the release process where we
 give every member of the community the chance to give feedback about
 their experience, what went well and what did not.</p>
-<h2><a class="header" href="#after-the-release" id="after-the-release">After the release</a></h2>
+<h2 id="after-the-release"><a class="header" href="#after-the-release">After the release</a></h2>
 <ol>
 <li>
 <p>Set a date and time one week after the release date. This is still
@@ -889,7 +873,7 @@ include audio/video as well as screensharing.</p>
 </ul>
 </li>
 </ol>
-<h2><a class="header" href="#during-the-retrospective" id="during-the-retrospective">During the retrospective</a></h2>
+<h2 id="during-the-retrospective"><a class="header" href="#during-the-retrospective">During the retrospective</a></h2>
 <ol>
 <li>
 <p>Provide a collaborative document, that participants can edit. It
@@ -909,7 +893,7 @@ so every topic can be addressed.</p>
 people who would want to follow up on those.</p>
 </li>
 </ol>
-<h2><a class="header" href="#after-the-retrospective" id="after-the-retrospective">After the retrospective</a></h2>
+<h2 id="after-the-retrospective"><a class="header" href="#after-the-retrospective">After the retrospective</a></h2>
 <ol>
 <li>
 <p>Post the conclusions onto the Discourse thread. Also link the notes
@@ -919,7 +903,7 @@ that were made during the event.</p>
 <p>Follow up on assigned action items.</p>
 </li>
 </ol>
-<h1><a class="header" href="#eol-cleanup" id="eol-cleanup">EOL cleanup</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="eol-cleanup"><a class="header" href="#eol-cleanup">EOL cleanup</a></h1>
 <p>The old release reaches its end of life one month after the new release
 gets released. At that point a few cleanup tasks need to be done.</p>
 <ol>
@@ -952,15 +936,15 @@ the oldest supported release.</p>
 <p>Examples: <a href="https://github.com/NixOS/nixpkgs/pull/180152">22.05</a></p>
 </li>
 </ol>
-<h1><a class="header" href="#handover-to-the-next-team" id="handover-to-the-next-team">Handover to the next team</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="handover-to-the-next-team"><a class="header" href="#handover-to-the-next-team">Handover to the next team</a></h1>
 <p>Some time after your EOL cleanup, publish a new topic to Discourse, asking for a new editor and a new manager to step up.
 You select the team.</p>
 <p>It's often a good idea to schedule a meeting with the upcoming team to get to know each other.</p>
-<h1><a class="header" href="#contrib" id="contrib">Contrib</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="contrib"><a class="header" href="#contrib">Contrib</a></h1>
 <p>This section holds scripts that can be helpful in the context of the
 release, but are optional and would likely impact the legibility of
 the documentation if included inline.</p>
-<h1><a class="header" href="#qemu-aarch64-emulation" id="qemu-aarch64-emulation">QEMU aarch64 emulation</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="qemu-aarch64-emulation"><a class="header" href="#qemu-aarch64-emulation">QEMU aarch64 emulation</a></h1>
 <p>The following script should allow booting the aarch64-linux UEFI
 installer ISOs provided through the <code>nixos:unstable-small</code> and
 <code>nixos:trunk</code> jobsets, when no native hardware support exists.</p>
@@ -1024,9 +1008,7 @@ run_vm
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
 
-                        
 
                         <div style="clear: both"></div>
                     </nav>
@@ -1034,49 +1016,35 @@ run_vm
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
 
-                
             </nav>
 
         </div>
 
-        
 
-        
 
-        
 
-        
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
-        
 
-        
 
-        
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
-        
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
-        
 
-        
-        
-        <script type="text/javascript">
+        <script>
         window.addEventListener('load', function() {
             window.setTimeout(window.print, 100);
         });
         </script>
-        
-        
 
+    </div>
     </body>
 </html>

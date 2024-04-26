@@ -4,37 +4,24 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Home - NixOS Release Wiki</title>
-        
-        
 
 
         <!-- Custom HTML head -->
         
-
-
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        
         <link rel="icon" href="favicon.svg">
-        
-        
         <link rel="shortcut icon" href="favicon.png">
-        
         <link rel="stylesheet" href="css/variables.css">
         <link rel="stylesheet" href="css/general.css">
         <link rel="stylesheet" href="css/chrome.css">
-        
         <link rel="stylesheet" href="css/print.css" media="print">
-        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        
         <link rel="stylesheet" href="fonts/fonts.css">
-        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="highlight.css">
@@ -42,19 +29,18 @@
         <link rel="stylesheet" href="ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
 
-        
     </head>
     <body>
+    <div id="body-container">
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -70,7 +56,7 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -82,12 +68,14 @@
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        <script>
             var html = document.querySelector('html');
-            var sidebar = 'hidden';
+            var sidebar = null;
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
             }
             html.classList.remove('sidebar-visible');
             html.classList.add("sidebar-" + sidebar);
@@ -95,7 +83,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li class="chapter-item expanded "><a href="Roles.html"><strong aria-hidden="true">2.</strong> Roles</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Release-Managers.html"><strong aria-hidden="true">2.1.</strong> Release Managers</a></li><li class="chapter-item expanded "><a href="Release-Editors.html"><strong aria-hidden="true">2.2.</strong> Release Editors</a></li></ol></li><li class="chapter-item expanded "><a href="Release-Critical-Packages.html"><strong aria-hidden="true">3.</strong> Release Critical Packages</a></li><li class="chapter-item expanded "><a href="Release-Process.html"><strong aria-hidden="true">4.</strong> Release Process</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Once-Appointed.html"><strong aria-hidden="true">4.1.</strong> What to do once appointed</a></li><li class="chapter-item expanded "><a href="Feature-Freeze-Announcement.html"><strong aria-hidden="true">4.2.</strong> Feature Freeze announcement and pre-release cleanup</a></li><li class="chapter-item expanded "><a href="Zero-Hydra-Failures.html"><strong aria-hidden="true">4.3.</strong> ZERO Hydra Failures</a></li><li class="chapter-item expanded "><a href="Branch-Off.html"><strong aria-hidden="true">4.4.</strong> Branch-off</a></li><li class="chapter-item expanded "><a href="Beta-Phase.html"><strong aria-hidden="true">4.5.</strong> Beta Phase</a></li><li class="chapter-item expanded "><a href="Final-Release.html"><strong aria-hidden="true">4.6.</strong> Final Release</a></li><li class="chapter-item expanded "><a href="Retrospective.html"><strong aria-hidden="true">4.7.</strong> Retrospective</a></li><li class="chapter-item expanded "><a href="EOL-Cleanup.html"><strong aria-hidden="true">4.8.</strong> EOL cleanup</a></li><li class="chapter-item expanded "><a href="Handover.html"><strong aria-hidden="true">4.9.</strong> Handover to the next team</a></li></ol></li><li class="chapter-item expanded "><a href="Contrib.html"><strong aria-hidden="true">5.</strong> Contrib</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="QEMU-aarch64.html"><strong aria-hidden="true">5.1.</strong> QEMU Aarch64 Emulation</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html" class="active"><strong aria-hidden="true">1.</strong> Home</a></li><li class="chapter-item expanded "><a href="Roles.html"><strong aria-hidden="true">2.</strong> Roles</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Release-Managers.html"><strong aria-hidden="true">2.1.</strong> Release Managers</a></li><li class="chapter-item expanded "><a href="Release-Editors.html"><strong aria-hidden="true">2.2.</strong> Release Editors</a></li></ol></li><li class="chapter-item expanded "><a href="Release-Critical-Packages.html"><strong aria-hidden="true">3.</strong> Release Critical Packages</a></li><li class="chapter-item expanded "><a href="Release-Process.html"><strong aria-hidden="true">4.</strong> Release Process</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Once-Appointed.html"><strong aria-hidden="true">4.1.</strong> What to do once appointed</a></li><li class="chapter-item expanded "><a href="Feature-Freeze-Announcement.html"><strong aria-hidden="true">4.2.</strong> Feature Freeze announcement and pre-release cleanup</a></li><li class="chapter-item expanded "><a href="Zero-Hydra-Failures.html"><strong aria-hidden="true">4.3.</strong> ZERO Hydra Failures</a></li><li class="chapter-item expanded "><a href="Branch-Off.html"><strong aria-hidden="true">4.4.</strong> Branch-off</a></li><li class="chapter-item expanded "><a href="Beta-Phase.html"><strong aria-hidden="true">4.5.</strong> Beta Phase</a></li><li class="chapter-item expanded "><a href="Final-Release.html"><strong aria-hidden="true">4.6.</strong> Final Release</a></li><li class="chapter-item expanded "><a href="Retrospective.html"><strong aria-hidden="true">4.7.</strong> Retrospective</a></li><li class="chapter-item expanded "><a href="EOL-Cleanup.html"><strong aria-hidden="true">4.8.</strong> EOL cleanup</a></li><li class="chapter-item expanded "><a href="Handover.html"><strong aria-hidden="true">4.9.</strong> Handover to the next team</a></li></ol></li><li class="chapter-item expanded "><a href="Contrib.html"><strong aria-hidden="true">5.</strong> Contrib</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="QEMU-aarch64.html"><strong aria-hidden="true">5.1.</strong> QEMU Aarch64 Emulation</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -103,8 +91,7 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
-                <div id="menu-bar-hover-placeholder"></div>
+                                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -114,35 +101,30 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                         <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
                             <i class="fa fa-search"></i>
                         </button>
-                        
                     </div>
 
                     <h1 class="menu-title">NixOS Release Wiki</h1>
 
                     <div class="right-buttons">
-                        
                         <a href="print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
-                        
+
                     </div>
                 </div>
 
-                
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
                     </form>
                     <div id="searchresults-outer" class="searchresults-outer hidden">
                         <div id="searchresults-header" class="searchresults-header"></div>
@@ -150,10 +132,9 @@
                         </ul>
                     </div>
                 </div>
-                
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -178,13 +159,10 @@ Also, if you are not a Release Manager and think the process can be improved, op
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
 
-                        
                             <a rel="next" href="Roles.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        
 
                         <div style="clear: both"></div>
                     </nav>
@@ -192,45 +170,33 @@ Also, if you are not a Release Manager and think the process can be improved, op
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
 
-                
                     <a rel="next" href="Roles.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
-                
             </nav>
 
         </div>
 
-        
 
-        
 
-        
 
-        
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
-        
 
-        
 
-        
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
-        
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
-        
 
-        
 
+    </div>
     </body>
 </html>
