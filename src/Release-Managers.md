@@ -33,4 +33,6 @@ This team has special write permissions to certain repositories in NixOS.
 It is **very** important that the new co-release-manager removes the previous manager
 from the team when they assign a new one.
 
-A release manager must have the commit bit in the nixpkgs repository.
+A release manager must have the commit bit in the nixpkgs repository and must not
+be part of an ongoing conflict, that would impact the execution of their duties
+in this role.
