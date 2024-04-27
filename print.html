@@ -211,7 +211,9 @@ release</p>
 <p>This team has special write permissions to certain repositories in NixOS.
 It is <strong>very</strong> important that the new co-release-manager removes the previous manager
 from the team when they assign a new one.</p>
-<p>A release manager must have the commit bit in the nixpkgs repository.</p>
+<p>A release manager must have the commit bit in the nixpkgs repository and must not
+be part of an ongoing conflict, that would impact the execution of their duties
+in this role.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="release-editors"><a class="header" href="#release-editors">Release Editors</a></h1>
 <p>The role of the release editors is a result of an action item from the
 21.11 release, where the satistfaction with the release notes was low.</p>
