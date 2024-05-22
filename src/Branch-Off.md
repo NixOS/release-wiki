@@ -174,7 +174,6 @@ The following steps should be done after the channels have become available on [
 1. Get in contact with [Arian van Putten](https://github.com/arianvp)
 
    1. They will need to update [upload-legacy-ami.yml](https://github.com/NixOS/amis/blob/main/.github/workflows/upload-legacy-ami.yml) to point to the new jobset. This will automatically upload the AMIs from the jobset to AWS
-   1. A PR is also  welcome :) 
-
+   1. A PR is also welcome :)
 
 1. Make sure the release editors have started finalizing the release notes. Only 7 days left until release!
