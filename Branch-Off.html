@@ -319,20 +319,10 @@ nix --extra-experimental-features &quot;nix-command flakes&quot; flake lock --up
 <p>Give the <a href="https://matrix.to/#/#marketing:nixos.org">Marketing team</a> a heads-up about the upcoming release</p>
 </li>
 <li>
-<p>Get in contact with <a href="https://github.com/AmineChikhaoui">Amine Chikhaoui</a> on the infrastructure room on Matrix, so
-they can get the AMIs updated in time for the release.</p>
+<p>Get in contact with <a href="https://github.com/arianvp">Arian van Putten</a></p>
 <ol>
-<li>
-<p>They will need to run <a href="https://github.com/NixOS/nixpkgs/blob/master/nixos/maintainers/scripts/ec2/create-amis.sh"><code>create-amis.sh</code></a>,
-which requires write permissions to the S3 bucket.</p>
-</li>
-<li>
-<p>Create PR adding it to NixOS configuration. Examples:</p>
-<ul>
-<li><a href="https://github.com/NixOS/nixpkgs/pull/204014">22.11</a></li>
-<li><a href="https://github.com/NixOS/nixpkgs/pull/101720">20.09</a></li>
-</ul>
-</li>
+<li>They will need to update <a href="https://github.com/NixOS/amis/blob/main/.github/workflows/upload-legacy-ami.yml">upload-legacy-ami.yml</a> to point to the new jobset. This will automatically upload the AMIs from the jobset to AWS</li>
+<li>A PR is also welcome :)</li>
 </ol>
 </li>
 <li>
