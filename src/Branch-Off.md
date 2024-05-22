@@ -171,9 +171,9 @@ The following steps should be done after the channels have become available on [
 
 1. Give the [Marketing team](https://matrix.to/#/#marketing:nixos.org) a heads-up about the upcoming release
 
-1. Get in contact with [Arian van Putten](https://github.com/arianvp) (
+1. Get in contact with [Arian van Putten](https://github.com/arianvp)
 
-   1. They will need to update [upload-legacy-ami.yml](https://github.com/NixOS/amis/blob/main/.github/workflows/upload-legacy-ami.yml) to point to the new jobset
+   1. They will need to update [upload-legacy-ami.yml](https://github.com/NixOS/amis/blob/main/.github/workflows/upload-legacy-ami.yml) to point to the new jobset. This will automatically upload the AMIs from the jobset to AWS
    1. A PR is also  welcome :) 
 
 
