@@ -22,6 +22,7 @@ With [RFC85](https://github.com/NixOS/rfcs/blob/master/rfcs/0085-nixos-release-s
 | -1 Weeks | `master`, `release` | Create the release branch and tags |
 | -1 Weeks | `release` | Create release channels |
 | -1 Weeks | `master`, `release` | Fixes need to use the "backport" workflow to arrive in the release |
+| -1 Weeks | `master` | Unrestrict all breaking changes; new changes will not be present in the release |
 | -1 Weeks | `release` | Prepare for release, finish remaining issues |
 | 0 Weeks | `release` | **Release!** Marks the end of the Zero Hydra Failures campaign. |
 | +1 Weeks | | Release Retrospective, everyone is invited to give feedback! |
