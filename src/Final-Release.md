@@ -141,7 +141,7 @@ export NEWVER=23.05
 1. Find the commit id and tag the release **on the release branch**:
 
    ```bash
-   git tag --annotate --message="Release $NEWVER" $NEWVER <COMMIT_ID>
+   git tag --annotate --message="Release $NEWVER" "branch-off-$NEWVER" <COMMIT_ID>
    git push upstream $NEWVER
    ```
 
