@@ -147,18 +147,18 @@ export NEWVER=23.05
 
 1. Update [nixos-homepage](https://github.com/NixOS/nixos-homepage) for the release.
 
-   Examples: [22.11](https://github.com/NixOS/nixos-homepage/pull/952), [22.05](https://github.com/NixOS/nixos-homepage/pull/853)
+   Examples: [24.05](https://github.com/NixOS/nixos-homepage/pull/1453)
 
    This step requires the released ISOs, from the hydra evaluation with `stableBranch` enabled, to be available.
 
-   1. Update the [`flake.nix`](https://github.com/NixOS/nixos-homepage/blob/bd11c42e925f192e6e2d369d021b58046daf384c/flake.nix#L9)
-      input `released-nixpkgs` to $NEWVER and then run:
+   1. Update the [`flake.nix`](https://github.com/NixOS/nixos-homepage/blob/5587a754b21aa34310cb1752ddc03da232e2e9d2/flake.nix#L11)
+      input `released-nixpkgs-stable` to $NEWVER and then run:
 
-   1. Run `./scripts/update.sh` (this updates flake.lock to updated channel).
+   1. Run `nix flake update` (this updates flake.lock to updated channel).
 
-   1. Add a compressed version of the NixOS logo ([19.09 example](https://github.com/NixOS/nixos-homepage/blob/a5626c71c03a2dd69086564e56f1a230a2bb177a/logo/nixos-logo-19.09-loris-lores.png)). The logo should have a width of 100px.
+   1. Add a compressed version of the NixOS logo ([24.05 example](https://github.com/NixOS/nixos-homepage/blob/e17aa94fff8f808ab6331d77b40a787e06e866b5/src/assets/logo/nixos-logo-24.05-uakari-lores.png)). The logo should have a width of 100px.
 
-   1. Write the announcement to `blog/announcements.xml`
+   1. Write the announcement under `src/content/blog/announcements/` ([24.05 example](https://github.com/NixOS/nixos-homepage/blob/e43b7f46a3c3b924844799fac48347e1813ec457/src/content/blog/announcements/2024-05-31_nixos-24.05.md)).
 
    1. Create a pull request and poke the marking team. Make sure to
       push to a branch on the `nixos-homepage` repository, not your
