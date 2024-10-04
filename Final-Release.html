@@ -291,21 +291,21 @@ git push upstream $NEWVER
 </li>
 <li>
 <p>Update <a href="https://github.com/NixOS/nixos-homepage">nixos-homepage</a> for the release.</p>
-<p>Examples: <a href="https://github.com/NixOS/nixos-homepage/pull/952">22.11</a>, <a href="https://github.com/NixOS/nixos-homepage/pull/853">22.05</a></p>
+<p>Examples: <a href="https://github.com/NixOS/nixos-homepage/pull/1453">24.05</a></p>
 <p>This step requires the released ISOs, from the hydra evaluation with <code>stableBranch</code> enabled, to be available.</p>
 <ol>
 <li>
-<p>Update the <a href="https://github.com/NixOS/nixos-homepage/blob/bd11c42e925f192e6e2d369d021b58046daf384c/flake.nix#L9"><code>flake.nix</code></a>
-input <code>released-nixpkgs</code> to $NEWVER and then run:</p>
+<p>Update the <a href="https://github.com/NixOS/nixos-homepage/blob/5587a754b21aa34310cb1752ddc03da232e2e9d2/flake.nix#L11"><code>flake.nix</code></a>
+input <code>released-nixpkgs-stable</code> to $NEWVER and then run:</p>
 </li>
 <li>
-<p>Run <code>./scripts/update.sh</code> (this updates flake.lock to updated channel).</p>
+<p>Run <code>nix flake update</code> (this updates flake.lock to updated channel).</p>
 </li>
 <li>
-<p>Add a compressed version of the NixOS logo (<a href="https://github.com/NixOS/nixos-homepage/blob/a5626c71c03a2dd69086564e56f1a230a2bb177a/logo/nixos-logo-19.09-loris-lores.png">19.09 example</a>). The logo should have a width of 100px.</p>
+<p>Add a compressed version of the NixOS logo (<a href="https://github.com/NixOS/nixos-homepage/blob/e17aa94fff8f808ab6331d77b40a787e06e866b5/src/assets/logo/nixos-logo-24.05-uakari-lores.png">24.05 example</a>). The logo should have a width of 100px.</p>
 </li>
 <li>
-<p>Write the announcement to <code>blog/announcements.xml</code></p>
+<p>Write the announcement under <code>src/content/blog/announcements/</code> (<a href="https://github.com/NixOS/nixos-homepage/blob/e43b7f46a3c3b924844799fac48347e1813ec457/src/content/blog/announcements/2024-05-31_nixos-24.05.md">24.05 example</a>).</p>
 </li>
 <li>
 <p>Create a pull request and poke the marking team. Make sure to
