@@ -259,8 +259,8 @@ or regressions in user experience.</p>
 <p>With <a href="https://github.com/NixOS/rfcs/blob/master/rfcs/0085-nixos-release-stablization.md">RFC85</a>, the release schedule is largely already dictated below:</p>
 <div class="table-wrapper"><table><thead><tr><th>Weeks from Release</th><th>Branches Affected</th><th>Events</th></tr></thead><tbody>
 <tr><td>-8 Weeks</td><td></td><td>Start discussion about &quot;Feature Freeze &amp; Release Blockers&quot; with ecosystems maintainers</td></tr>
-<tr><td>-6 Weeks</td><td><code>staging-next</code>, <code>staging</code></td><td>Restrict breaking changes to Release Critical Packages</td></tr>
-<tr><td>-4 Weeks</td><td><code>staging-next</code>, <code>staging</code></td><td>Restrict all breaking changes with the exception of updates to desktop environment</td></tr>
+<tr><td>-6 Weeks</td><td>All branches</td><td>Restrict breaking changes to Release Critical Packages</td></tr>
+<tr><td>-4 Weeks</td><td>All branches</td><td>Restrict all breaking changes with the exception of updates to desktop environment</td></tr>
 <tr><td>-3 Weeks</td><td><code>master</code></td><td>Wait for <code>staging-next</code> merge into <code>master</code>, begin first <code>staging-next</code> cycle</td></tr>
 <tr><td>-3 Weeks</td><td><code>master</code></td><td>Begin Zero Hydra Failures campaign</td></tr>
 <tr><td>-2 Weeks</td><td><code>master</code></td><td>Wait for first <code>staging-next</code> merge into <code>master</code>; begin second <code>staging-next</code> cycle</td></tr>
@@ -270,15 +270,16 @@ or regressions in user experience.</p>
 <tr><td>-1 Weeks</td><td><code>master</code>, <code>release</code></td><td>Perform Branch-off, create release channels, create new beta / unstable tags</td></tr>
 <tr><td>-1 Weeks</td><td><code>master</code></td><td>Mark failing packages as broken</td></tr>
 <tr><td>-1 Weeks</td><td><code>master</code>, <code>release</code></td><td>Create the release branch and tags</td></tr>
-<tr><td>-1 Weeks</td><td><code>release</code></td><td>Create release channels</td></tr>
+<tr><td>-1 Weeks</td><td><code>release-xx.xx</code></td><td>Create release channels</td></tr>
 <tr><td>-1 Weeks</td><td><code>master</code>, <code>release</code></td><td>Fixes need to use the &quot;backport&quot; workflow to arrive in the release</td></tr>
 <tr><td>-1 Weeks</td><td><code>master</code></td><td>Unrestrict all breaking changes; new changes will not be present in the release</td></tr>
-<tr><td>-1 Weeks</td><td><code>release</code></td><td>Prepare for release, finish remaining issues</td></tr>
-<tr><td>0 Weeks</td><td><code>release</code></td><td><strong>Release!</strong> Marks the end of the Zero Hydra Failures campaign.</td></tr>
+<tr><td>-1 Weeks</td><td><code>release-xx.xx</code></td><td>Prepare for release, finish remaining issues</td></tr>
+<tr><td>0 Weeks</td><td><code>release-xx.xx</code></td><td><strong>Release!</strong> Marks the end of the Zero Hydra Failures campaign.</td></tr>
 <tr><td>+1 Weeks</td><td></td><td>Release Retrospective, everyone is invited to give feedback!</td></tr>
 <tr><td>+4 Weeks</td><td></td><td>End of life cleanup</td></tr>
 </tbody></table>
 </div>
+<p>As Nixpkgs is a project with contributors spanning across many timezones, it is best to make the dates go into effect in accordance to the <a href="https://www.timeanddate.com/time/zones/aoe">Anywhere on Earth (AoE) timezone</a>.</p>
 <p>Clarification of terms:</p>
 <div class="table-wrapper"><table><thead><tr><th>Term</th><th>Definition</th></tr></thead><tbody>
 <tr><td><code>staging</code></td><td>Git branch used to batch changes which cause large rebuilds (<code>500+</code> packages). This is to avoid straining infrastructure trying to build large package sets with each change. Since nix captures all changes in a dependency tree, a change to a fundamental package like glibc can affect <code>50,000+</code> packages.</td></tr>
