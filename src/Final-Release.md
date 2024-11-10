@@ -142,7 +142,7 @@ export NEWVER=23.05
 
    ```bash
    git tag --annotate --message="Release $NEWVER" "branch-off-$NEWVER" <COMMIT_ID>
-   git push upstream $NEWVER
+   git push upstream "branch-off-$NEWVER"
    ```
 
 1. Update [nixos-homepage](https://github.com/NixOS/nixos-homepage) for the release.
