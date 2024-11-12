@@ -286,7 +286,7 @@ git push upstream master
 <li>
 <p>Find the commit id and tag the release <strong>on the release branch</strong>:</p>
 <pre><code class="language-bash">git tag --annotate --message=&quot;Release $NEWVER&quot; &quot;branch-off-$NEWVER&quot; &lt;COMMIT_ID&gt;
-git push upstream $NEWVER
+git push upstream &quot;branch-off-$NEWVER&quot;
 </code></pre>
 </li>
 <li>
