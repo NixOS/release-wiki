@@ -48,7 +48,7 @@ export NEWVER=24.05
 
 ### On the master branch
 
-Pull in the final changes before performing the actal branch-off.
+Pull in the final changes before performing the actual branch-off.
 
 1. Wait for the staging team to merge the final staging-next iteration
 
