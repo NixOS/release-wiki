@@ -48,7 +48,7 @@ export NEWVER=24.05
 
 ### On the master branch
 
-Pull in the final changes before performing the actal branch-off.
+Pull in the final changes before performing the actual branch-off.
 
 1. Wait for the staging team to merge the final staging-next iteration
 
@@ -177,3 +177,11 @@ The following steps should be done after the channels have become available on [
    1. A PR is also welcome :)
 
 1. Make sure the release editors have started finalizing the release notes. Only 7 days left until release!
+
+## For Release Editors
+
+Following a branch-off, Release Editors should keep in mind that the release notes between `master`
+and the release branches may fall out of sync. This is usually due to PRs adding release note
+entries being merged post branch-off. Entries for changes not actually present in the branched
+release may appear in `master` due to this, and backporting restructuring of the notes can be
+troublesome.
