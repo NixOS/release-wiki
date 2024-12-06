@@ -19,6 +19,8 @@ gets released. At that point a few cleanup tasks need to be done.
 
 1. Prune old [backport labels](https://github.com/NixOS/nixpkgs/labels?q=backport)
 
+1. Remove the link to the EOL version's changelog from [`.github/PULL_REQUEST_TEMPLATE.md`](https://github.com/NixOS/nixpkgs/blob/master/.github/PULL_REQUEST_TEMPLATE.md)
+
 1. Remove the old release from the [periodic merge workflows](https://github.com/NixOS/nixpkgs/commit/8befefd1a72da597bdb1d01e97127e0c9866912e)
 
 1. Increase the `oldestSupportedRelease` in `lib/trivial.nix` to match
