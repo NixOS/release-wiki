@@ -178,6 +178,10 @@ The following steps should be done after the channels have become available on [
 
 1. Make sure the release editors have started finalizing the release notes. Only 7 days left until release!
 
+1. Add release to LXC/Incus image server
+
+   Ping [Adam C. Stephens](https://github.com/adamcstephens) or open a Pull Request to [lxc/lxc-ci](https://github.com/lxc/lxc-ci/blob/720a50e23f9a122694056d7394226476ae24f973/jenkins/jobs/image-nixos.yaml#L19-L21)
+
 ## For Release Editors
 
 Following a branch-off, Release Editors should keep in mind that the release notes between `master`
