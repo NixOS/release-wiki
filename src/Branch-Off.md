@@ -82,11 +82,13 @@ Update metadata on the release branch, create its staging branches and tag the r
    git commit -m "$NEWVER beta release" -S
    ```
 
-1. Create the staging branches
+1. Update the staging branches
 
    ```bash
-   git branch staging-$NEWVER
-   git branch staging-next-$NEWVER
+   git checkout staging-$NEWVER
+   git merge release-$NEWVER
+   git checkout staging-next-$NEWVER
+   git merge release-$NEWVER
    ```
 
 1. Tag the release and push everything
@@ -149,8 +151,7 @@ Now that everything on git is done, we are still missing the channels.
 
    Example: [22.11](https://github.com/NixOS/infra/commit/9a0b3674a11b445c973334c78e8ca0eda36775e4)
 
-1. Create the backport [labels](https://github.com/NixOS/nixpkgs/labels) for all new branches:
-   - `backport staging-24.05`
+1. Create the backport [label](https://github.com/NixOS/nixpkgs/labels) for the new release branch:
    - `backport release-24.05`
 
    Use the description `Backport PR automatically` and the color value `#0fafaa`
