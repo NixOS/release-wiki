@@ -19,9 +19,25 @@ gets released. At that point a few cleanup tasks need to be done.
 
 1. Prune old [backport labels](https://github.com/NixOS/nixpkgs/labels?q=backport)
 
+Now create a PR that contains the following changes:
+
 1. Remove the old release from the [periodic merge workflows](https://github.com/NixOS/nixpkgs/commit/8befefd1a72da597bdb1d01e97127e0c9866912e)
+
+1. Remove the references to the old release in `.github/PULL_REQUEST_TEMPLATE.md`
+
+   Examples: [25.05](https://github.com/NixOS/nixpkgs/commit/23454de4554d675d144a5cbeaf0be391a43e5f7f)
+
+1. Remove the references to the old release in `.github/ISSUE_TEMPLATE/*`
+
+   Examples: [25.05](https://github.com/NixOS/nixpkgs/commit/7a31ddea37d998b8f0d5813e71abda0a6a6e75c0)
+
+1. Remove the old release branch from auto-labeler in `.github/labeler-no-sync.yml`
+
+   Examples: [25.05](https://github.com/NixOS/nixpkgs/commit/e83d9fbf169c90bfd9d784f11c8fcc303181e388)
 
 1. Increase the `oldestSupportedRelease` in `lib/trivial.nix` to match
    the oldest supported release.
+
+   Note: This may need a seperate PR as it can be breaking.
 
    Examples: [22.05](https://github.com/NixOS/nixpkgs/pull/180152)

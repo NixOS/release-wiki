@@ -31,6 +31,8 @@ With [RFC85](https://github.com/NixOS/rfcs/blob/master/rfcs/0085-nixos-release-s
 
 As Nixpkgs is a project with contributors spanning across many timezones, it is best to make the dates go into effect in accordance to the [Anywhere on Earth (AoE) timezone](https://www.timeanddate.com/time/zones/aoe).
 
+There should be a day to a few days between a staging rebuild and the next staging build or branch-off to allow Hydra to re-process the queue. It can also help to ask the Staging team before writing the schedule how long an average staging cycle currently takes.
+
 Clarification of terms:
 
 | Term | Definition |

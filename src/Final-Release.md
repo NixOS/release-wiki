@@ -107,6 +107,15 @@ export NEWVER=23.05
     comm -13 <(jq -r 'keys[]' old.json | sort) <(jq -r 'keys[]' new.json | sort) | wc -l
     ```
 
+- Write the final announcement and PR it against [nixos-homepage](https://github.com/nixos/nixos-homepage).
+
+  1. Add a compressed version of the NixOS logo ([25.05 example](https://github.com/NixOS/nixos-homepage/blob/7b1991b67a1565832170dcb53d5cf580d9cb3bcb/core/src/assets/logo/nixos-logo-25.05-warbler-lores.png)). The logo should have a width of 512px.
+
+  1. The announcement is located under `core/src/content/blog/announcements/` ([25.05 example](https://github.com/NixOS/nixos-homepage/blob/7b1991b67a1565832170dcb53d5cf580d9cb3bcb/core/src/content/blog/announcements/2025-05-23_nixos-25.05.md)).
+
+  This allows the outreach team to review the announcement. Feel free to poke them for review.
+  Make sure to push to a branch on the `nixos-homepage` repository, not your own fork, so the CI actions work properly.
+
 ## At final release time
 
 ### On the master branch
@@ -156,13 +165,7 @@ export NEWVER=23.05
 
    1. Run `nix flake update` (this updates flake.lock to updated channel).
 
-   1. Add a compressed version of the NixOS logo ([24.05 example](https://github.com/NixOS/nixos-homepage/blob/e17aa94fff8f808ab6331d77b40a787e06e866b5/src/assets/logo/nixos-logo-24.05-uakari-lores.png)). The logo should have a width of 100px.
-
-   1. Write the announcement under `src/content/blog/announcements/` ([24.05 example](https://github.com/NixOS/nixos-homepage/blob/e43b7f46a3c3b924844799fac48347e1813ec457/src/content/blog/announcements/2024-05-31_nixos-24.05.md)).
-
-   1. Create a pull request and poke the marking team. Make sure to
-      push to a branch on the `nixos-homepage` repository, not your
-      own fork, so the CI actions work properly.
+   1. Merge the announcement PR.
 
    The website is hosted by a CDN so you may occasionally see the old site for a couple of minutes/hours (?) after your changes
 
@@ -179,6 +182,8 @@ export NEWVER=23.05
    This is the same process as for the creation of the beta channel in the project.
 
 ## After Release
+
+1. Update issue templates to include the new version ([25.05 example](https://github.com/NixOS/nixpkgs/pull/407705))
 
 1. Add the new release to repology. Don't remove old releases, they want to keep them around.
 

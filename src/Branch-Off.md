@@ -108,30 +108,42 @@ Update metadata on the release branch, create its staging branches and tag the r
 
 ### Back on the master branch
 
-Now we prepare the master branch for the next release after this one.
+Now we prepare the master branch for the next release after this one. We do this in two steps: One via a PR as it's more error-prone and one direct to allow for proper tagging.
 
-1. Update the [periodic-merge workflow](https://github.com/NixOS/nixpkgs/blob/master/.github/workflows/periodic-merge-24h.yml) to include the new release.
 
-1. Increment the [`.version`](https://github.com/NixOS/nixpkgs/commit/01268fda85b7eee4e462c873d8654f975067731f#diff-2bc0e46110b507d6d5a344264ef15adaR1)
-   file in the repository root.
+#### PR changes
+
+1. Update [`CONTRIBUTING.md`](https://github.com/NixOS/nixpkgs/commit/2c6ae7132ca558f1052da0eececed3cad191b883#diff-eca12c0a30e25b4b46522ebf89465a03ba72a03f540796c979137931d8f92055) on master.
+
+1. Add the release name to [`nixos/doc/manual/release-notes/rl-2411.section.md`](https://github.com/NixOS/nixpkgs/commit/e56e0beed4312a89b60fe312ee2241f7a1627f76#diff-332df55682746a7949fbc279642f4b761456b3470ce93c541924a69ce8a45763), [`doc/release-notes/rl-2411.section.md`](https://github.com/NixOS/nixpkgs/commit/e56e0beed4312a89b60fe312ee2241f7a1627f76#diff-300d64b8febbf8f80bf778114bd0b70a2b31705d602365a32f7b5a2857764090)
+
+1. Include `rl-2411.section.md` in [`nixos/doc/manual/release-notes/release-notes.md`](https://github.com/NixOS/nixpkgs/commit/e56e0beed4312a89b60fe312ee2241f7a1627f76#diff-9b75bf997f6c13cb4a15145ef9e758a28addeeff4a3a5cb893a5c23a976b3a1a) and [`doc/release-notes/release-notes.md`](https://github.com/NixOS/nixpkgs/commit/e56e0beed4312a89b60fe312ee2241f7a1627f76#diff-300d64b8febbf8f80bf778114bd0b70a2b31705d602365a32f7b5a2857764090)
+
+1. Update the [periodic-merge workflow](https://github.com/NixOS/nixpkgs/commit/e56e0beed4312a89b60fe312ee2241f7a1627f76#diff-a4f6ea695ede268916c760fe782e9645a8cab5b27747e4baa994bf59f3e4e07b) so that
+    - release-24.05 (instead of master) gets merged into staging-next-24.05
+
+1. Update the release versions in [`.github/PULL_REQUEST_TEMPLATE.md`](https://github.com/NixOS/nixpkgs/commit/2c6ae7132ca558f1052da0eececed3cad191b883#diff-18813c86948efc57e661623d7ba48ff94325c9b5421ec9177f724922dd553a35)
+
+1. Commit the changes and create a PR
+   Wait for the CI to finish and merge.
+
+#### Direct changes
+
+These changes should be done when the PR is already merged.
+
+1. Increment the [`lib/.version`](https://github.com/NixOS/nixpkgs/commit/01268fda85b7eee4e462c873d8654f975067731f#diff-2bc0e46110b507d6d5a344264ef15adaR1)
+   file. This file must **not** end with a new line!
 
    ```bash
    # The release after $NEWVER (24.05 -> 24.11)
-   echo -n "24.11" > .version
+   echo -n "24.11" > lib/.version
    ````
 
 1. Update the `codeName` attribute in [`lib/trivial.nix`](https://github.com/NixOS/nixpkgs/commit/2c28f1de7cdc10be556d2106108411dd2482794b#diff-29c71aa8261b14b1cad6e6fa28486fed7295050db4eeb32ba205672ba91d40e1)
    This will be the name for the next release.
-
-1. Create a new [release notes file](https://github.com/NixOS/nixpkgs/blob/44b98d80ea6a56ccc1838aa0ac9e891de9130913/nixos/doc/manual/release-notes/rl-2311.section.md?plain=1)
-   for the next release
-
-1. Update the release versions in [`.github/PULL_REQUEST_TEMPLATE.md`](https://github.com/NixOS/nixpkgs/commit/2c6ae7132ca558f1052da0eececed3cad191b883#diff-18813c86948efc57e661623d7ba48ff94325c9b5421ec9177f724922dd553a35)
    on master.
 
-1. Update [`CONTRIBUTING.md`](https://github.com/NixOS/nixpkgs/commit/2c6ae7132ca558f1052da0eececed3cad191b883#diff-eca12c0a30e25b4b46522ebf89465a03ba72a03f540796c979137931d8f92055) on master.
-
-1. Commit the changes ([23.05 example](https://github.com/NixOS/nixpkgs/commit/2c28f1de7cdc10be556d2106108411dd2482794b) + [this commit](https://github.com/NixOS/nixpkgs/commit/44b98d80ea6a56ccc1838aa0ac9e891de9130913) + [this commit](https://github.com/NixOS/nixpkgs/commit/2c6ae7132ca558f1052da0eececed3cad191b883))
+1. Commit the changes ([23.05 example](https://github.com/NixOS/nixpkgs/commit/2c28f1de7cdc10be556d2106108411dd2482794b) + [this commit](https://github.com/NixOS/nixpkgs/commit/2c6ae7132ca558f1052da0eececed3cad191b883))
 
 1. Tag the master branch, so that `git describe` shows the new version as the base for commits.
 
