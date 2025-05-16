@@ -82,11 +82,13 @@ Update metadata on the release branch, create its staging branches and tag the r
    git commit -m "$NEWVER beta release" -S
    ```
 
-1. Create the staging branches
+1. Update the staging branches
 
    ```bash
-   git branch staging-$NEWVER
-   git branch staging-next-$NEWVER
+   git checkout staging-$NEWVER
+   git merge release-$NEWVER
+   git checkout staging-next-$NEWVER
+   git merge release-$NEWVER
    ```
 
 1. Tag the release and push everything
@@ -108,7 +110,9 @@ Update metadata on the release branch, create its staging branches and tag the r
 
 Now we prepare the master branch for the next release after this one.
 
-1. Update the [periodic-merge workflow](https://github.com/NixOS/nixpkgs/blob/master/.github/workflows/periodic-merge-24h.yml) to include the new release.
+<!-- todo update -->
+1. Update the [periodic-merge workflow](https://github.com/NixOS/nixpkgs/blob/master/.github/workflows/periodic-merge-24h.yml) so that
+    - release-24.05 (instead of master) gets merged into staging-next-24.05 
 
 1. Increment the [`.version`](https://github.com/NixOS/nixpkgs/commit/01268fda85b7eee4e462c873d8654f975067731f#diff-2bc0e46110b507d6d5a344264ef15adaR1)
    file in the repository root.
@@ -121,15 +125,13 @@ Now we prepare the master branch for the next release after this one.
 1. Update the `codeName` attribute in [`lib/trivial.nix`](https://github.com/NixOS/nixpkgs/commit/2c28f1de7cdc10be556d2106108411dd2482794b#diff-29c71aa8261b14b1cad6e6fa28486fed7295050db4eeb32ba205672ba91d40e1)
    This will be the name for the next release.
 
-1. Create a new [release notes file](https://github.com/NixOS/nixpkgs/blob/44b98d80ea6a56ccc1838aa0ac9e891de9130913/nixos/doc/manual/release-notes/rl-2311.section.md?plain=1)
-   for the next release
-
 1. Update the release versions in [`.github/PULL_REQUEST_TEMPLATE.md`](https://github.com/NixOS/nixpkgs/commit/2c6ae7132ca558f1052da0eececed3cad191b883#diff-18813c86948efc57e661623d7ba48ff94325c9b5421ec9177f724922dd553a35)
    on master.
 
 1. Update [`CONTRIBUTING.md`](https://github.com/NixOS/nixpkgs/commit/2c6ae7132ca558f1052da0eececed3cad191b883#diff-eca12c0a30e25b4b46522ebf89465a03ba72a03f540796c979137931d8f92055) on master.
 
-1. Commit the changes ([23.05 example](https://github.com/NixOS/nixpkgs/commit/2c28f1de7cdc10be556d2106108411dd2482794b) + [this commit](https://github.com/NixOS/nixpkgs/commit/44b98d80ea6a56ccc1838aa0ac9e891de9130913) + [this commit](https://github.com/NixOS/nixpkgs/commit/2c6ae7132ca558f1052da0eececed3cad191b883))
+<!-- todo: update -->
+1. Commit the changes ([23.05 example](https://github.com/NixOS/nixpkgs/commit/2c28f1de7cdc10be556d2106108411dd2482794b) + [this commit](https://github.com/NixOS/nixpkgs/commit/2c6ae7132ca558f1052da0eececed3cad191b883))
 
 1. Tag the master branch, so that `git describe` shows the new version as the base for commits.
 
@@ -149,8 +151,7 @@ Now that everything on git is done, we are still missing the channels.
 
    Example: [22.11](https://github.com/NixOS/infra/commit/9a0b3674a11b445c973334c78e8ca0eda36775e4)
 
-1. Create the backport [labels](https://github.com/NixOS/nixpkgs/labels) for all new branches:
-   - `backport staging-24.05`
+1. Create the backport [label](https://github.com/NixOS/nixpkgs/labels) for the new release branch:
    - `backport release-24.05`
 
    Use the description `Backport PR automatically` and the color value `#0fafaa`

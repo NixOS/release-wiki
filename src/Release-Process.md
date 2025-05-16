@@ -15,6 +15,7 @@ With [RFC85](https://github.com/NixOS/rfcs/blob/master/rfcs/0085-nixos-release-s
 | -3 Weeks | `master` | Begin Zero Hydra Failures campaign |
 | -2 Weeks | `master` | Wait for first `staging-next` merge into `master`; begin second `staging-next` cycle |
 | -2 Weeks | `staging` | Unrestrict all breaking changes; new changes will not be present in the release |
+| -2 Weeks | `staging-xx.xx` | Perform staging branch-off |
 | -1 Weeks | `master` | Wait for second `staging-next` merge into `master` |
 | -1 Weeks | `staging-next` | Unrestrict all breaking changes; new changes will not be present in the release |
 | -1 Weeks | `master`, `release` | Perform Branch-off, create release channels, create new beta / unstable tags |
