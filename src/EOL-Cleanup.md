@@ -25,3 +25,7 @@ gets released. At that point a few cleanup tasks need to be done.
    the oldest supported release.
 
    Examples: [22.05](https://github.com/NixOS/nixpkgs/pull/180152)
+
+1. Remove old release from LXC/Incus image server
+
+   Ping [Adam C. Stephens](https://github.com/adamcstephens) or open a Pull Request to [lxc/lxc-ci](https://github.com/lxc/lxc-ci/blob/720a50e23f9a122694056d7394226476ae24f973/jenkins/jobs/image-nixos.yaml#L19-L21)
