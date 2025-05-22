@@ -601,6 +601,10 @@ nix --extra-experimental-features &quot;nix-command flakes&quot; flake lock --up
 <li>
 <p>Make sure the release editors have started finalizing the release notes. Only 7 days left until release!</p>
 </li>
+<li>
+<p>Add release to LXC/Incus image server</p>
+<p>Ping <a href="https://github.com/adamcstephens">Adam C. Stephens</a> or open a Pull Request to <a href="https://github.com/lxc/lxc-ci/blob/720a50e23f9a122694056d7394226476ae24f973/jenkins/jobs/image-nixos.yaml#L19-L21">lxc/lxc-ci</a></p>
+</li>
 </ol>
 <h2 id="for-release-editors"><a class="header" href="#for-release-editors">For Release Editors</a></h2>
 <p>Following a branch-off, Release Editors should keep in mind that the release notes between <code>master</code>
@@ -932,6 +936,10 @@ repository to reflect that status on <a href="https://search.nixos.org">search.n
 <p>Increase the <code>oldestSupportedRelease</code> in <code>lib/trivial.nix</code> to match
 the oldest supported release.</p>
 <p>Examples: <a href="https://github.com/NixOS/nixpkgs/pull/180152">22.05</a></p>
+</li>
+<li>
+<p>Remove old release from LXC/Incus image server</p>
+<p>Ping <a href="https://github.com/adamcstephens">Adam C. Stephens</a> or open a Pull Request to <a href="https://github.com/lxc/lxc-ci/blob/720a50e23f9a122694056d7394226476ae24f973/jenkins/jobs/image-nixos.yaml#L19-L21">lxc/lxc-ci</a></p>
 </li>
 </ol>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="handover-to-the-next-team"><a class="header" href="#handover-to-the-next-team">Handover to the next team</a></h1>
