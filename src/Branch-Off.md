@@ -124,9 +124,6 @@ Now we prepare the master branch for the next release after this one.
 1. Create a new [release notes file](https://github.com/NixOS/nixpkgs/blob/44b98d80ea6a56ccc1838aa0ac9e891de9130913/nixos/doc/manual/release-notes/rl-2311.section.md?plain=1)
    for the next release
 
-1. Update the release versions in [`.github/PULL_REQUEST_TEMPLATE.md`](https://github.com/NixOS/nixpkgs/commit/2c6ae7132ca558f1052da0eececed3cad191b883#diff-18813c86948efc57e661623d7ba48ff94325c9b5421ec9177f724922dd553a35)
-   on master.
-
 1. Update [`CONTRIBUTING.md`](https://github.com/NixOS/nixpkgs/commit/2c6ae7132ca558f1052da0eececed3cad191b883#diff-eca12c0a30e25b4b46522ebf89465a03ba72a03f540796c979137931d8f92055) on master.
 
 1. Commit the changes ([23.05 example](https://github.com/NixOS/nixpkgs/commit/2c28f1de7cdc10be556d2106108411dd2482794b) + [this commit](https://github.com/NixOS/nixpkgs/commit/44b98d80ea6a56ccc1838aa0ac9e891de9130913) + [this commit](https://github.com/NixOS/nixpkgs/commit/2c6ae7132ca558f1052da0eececed3cad191b883))
