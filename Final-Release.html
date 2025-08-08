@@ -83,7 +83,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li class="chapter-item expanded "><a href="Roles.html"><strong aria-hidden="true">2.</strong> Roles</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Release-Managers.html"><strong aria-hidden="true">2.1.</strong> Release Managers</a></li><li class="chapter-item expanded "><a href="Release-Editors.html"><strong aria-hidden="true">2.2.</strong> Release Editors</a></li></ol></li><li class="chapter-item expanded "><a href="Release-Critical-Packages.html"><strong aria-hidden="true">3.</strong> Release Critical Packages</a></li><li class="chapter-item expanded "><a href="Release-Process.html"><strong aria-hidden="true">4.</strong> Release Process</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Once-Appointed.html"><strong aria-hidden="true">4.1.</strong> What to do once appointed</a></li><li class="chapter-item expanded "><a href="Feature-Freeze-Announcement.html"><strong aria-hidden="true">4.2.</strong> Feature Freeze announcement and pre-release cleanup</a></li><li class="chapter-item expanded "><a href="Zero-Hydra-Failures.html"><strong aria-hidden="true">4.3.</strong> ZERO Hydra Failures</a></li><li class="chapter-item expanded "><a href="Branch-Off.html"><strong aria-hidden="true">4.4.</strong> Branch-off</a></li><li class="chapter-item expanded "><a href="Beta-Phase.html"><strong aria-hidden="true">4.5.</strong> Beta Phase</a></li><li class="chapter-item expanded "><a href="Final-Release.html" class="active"><strong aria-hidden="true">4.6.</strong> Final Release</a></li><li class="chapter-item expanded "><a href="Retrospective.html"><strong aria-hidden="true">4.7.</strong> Retrospective</a></li><li class="chapter-item expanded "><a href="EOL-Cleanup.html"><strong aria-hidden="true">4.8.</strong> EOL cleanup</a></li><li class="chapter-item expanded "><a href="Handover.html"><strong aria-hidden="true">4.9.</strong> Handover to the next team</a></li></ol></li><li class="chapter-item expanded "><a href="Contrib.html"><strong aria-hidden="true">5.</strong> Contrib</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="QEMU-aarch64.html"><strong aria-hidden="true">5.1.</strong> QEMU Aarch64 Emulation</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li class="chapter-item expanded "><a href="Roles.html"><strong aria-hidden="true">2.</strong> Roles</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Release-Managers.html"><strong aria-hidden="true">2.1.</strong> Release Managers</a></li><li class="chapter-item expanded "><a href="Release-Editors.html"><strong aria-hidden="true">2.2.</strong> Release Editors</a></li></ol></li><li class="chapter-item expanded "><a href="Release-Critical-Packages.html"><strong aria-hidden="true">3.</strong> Release Critical Packages</a></li><li class="chapter-item expanded "><a href="Release-Process.html"><strong aria-hidden="true">4.</strong> Release Process</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Once-Appointed.html"><strong aria-hidden="true">4.1.</strong> What to do once appointed</a></li><li class="chapter-item expanded "><a href="Feature-Freeze-Announcement.html"><strong aria-hidden="true">4.2.</strong> Feature Freeze announcement and pre-release cleanup</a></li><li class="chapter-item expanded "><a href="Zero-Hydra-Failures.html"><strong aria-hidden="true">4.3.</strong> ZERO Hydra Failures</a></li><li class="chapter-item expanded "><a href="Staging-Branch-Off.html"><strong aria-hidden="true">4.4.</strong> Staging-Branch-off</a></li><li class="chapter-item expanded "><a href="Branch-Off.html"><strong aria-hidden="true">4.5.</strong> Branch-off</a></li><li class="chapter-item expanded "><a href="Beta-Phase.html"><strong aria-hidden="true">4.6.</strong> Beta Phase</a></li><li class="chapter-item expanded "><a href="Final-Release.html" class="active"><strong aria-hidden="true">4.7.</strong> Final Release</a></li><li class="chapter-item expanded "><a href="Retrospective.html"><strong aria-hidden="true">4.8.</strong> Retrospective</a></li><li class="chapter-item expanded "><a href="EOL-Cleanup.html"><strong aria-hidden="true">4.9.</strong> EOL cleanup</a></li><li class="chapter-item expanded "><a href="Handover.html"><strong aria-hidden="true">4.10.</strong> Handover to the next team</a></li></ol></li><li class="chapter-item expanded "><a href="Contrib.html"><strong aria-hidden="true">5.</strong> Contrib</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="QEMU-aarch64.html"><strong aria-hidden="true">5.1.</strong> QEMU Aarch64 Emulation</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -249,6 +249,19 @@ comm -13 &lt;(jq -r 'keys[]' old.json | sort) &lt;(jq -r 'keys[]' new.json | sor
 </li>
 </ul>
 </li>
+<li>
+<p>Write the final announcement and PR it against <a href="https://github.com/nixos/nixos-homepage">nixos-homepage</a>.</p>
+<ol>
+<li>
+<p>Add a compressed version of the NixOS logo (<a href="https://github.com/NixOS/nixos-homepage/blob/7b1991b67a1565832170dcb53d5cf580d9cb3bcb/core/src/assets/logo/nixos-logo-25.05-warbler-lores.png">25.05 example</a>). The logo should have a width of 512px.</p>
+</li>
+<li>
+<p>The announcement is located under <code>core/src/content/blog/announcements/</code> (<a href="https://github.com/NixOS/nixos-homepage/blob/7b1991b67a1565832170dcb53d5cf580d9cb3bcb/core/src/content/blog/announcements/2025-05-23_nixos-25.05.md">25.05 example</a>).</p>
+</li>
+</ol>
+<p>This allows the outreach team to review the announcement. Feel free to poke them for review.
+Make sure to push to a branch on the <code>nixos-homepage</code> repository, not your own fork, so the CI actions work properly.</p>
+</li>
 </ul>
 <h2 id="at-final-release-time"><a class="header" href="#at-final-release-time">At final release time</a></h2>
 <h3 id="on-the-master-branch"><a class="header" href="#on-the-master-branch">On the master branch</a></h3>
@@ -302,15 +315,7 @@ input <code>released-nixpkgs-stable</code> to $NEWVER and then run:</p>
 <p>Run <code>nix flake update</code> (this updates flake.lock to updated channel).</p>
 </li>
 <li>
-<p>Add a compressed version of the NixOS logo (<a href="https://github.com/NixOS/nixos-homepage/blob/e17aa94fff8f808ab6331d77b40a787e06e866b5/src/assets/logo/nixos-logo-24.05-uakari-lores.png">24.05 example</a>). The logo should have a width of 100px.</p>
-</li>
-<li>
-<p>Write the announcement under <code>src/content/blog/announcements/</code> (<a href="https://github.com/NixOS/nixos-homepage/blob/e43b7f46a3c3b924844799fac48347e1813ec457/src/content/blog/announcements/2024-05-31_nixos-24.05.md">24.05 example</a>).</p>
-</li>
-<li>
-<p>Create a pull request and poke the marking team. Make sure to
-push to a branch on the <code>nixos-homepage</code> repository, not your
-own fork, so the CI actions work properly.</p>
+<p>Merge the announcement PR.</p>
 </li>
 </ol>
 <p>The website is hosted by a CDN so you may occasionally see the old site for a couple of minutes/hours (?) after your changes</p>
@@ -331,6 +336,9 @@ This is the same process as for the creation of the beta channel in the project.
 </ol>
 <h2 id="after-release"><a class="header" href="#after-release">After Release</a></h2>
 <ol>
+<li>
+<p>Update issue templates to include the new version (<a href="https://github.com/NixOS/nixpkgs/pull/407705">25.05 example</a>)</p>
+</li>
 <li>
 <p>Add the new release to repology. Don't remove old releases, they want to keep them around.</p>
 <p>Examples: <a href="https://github.com/repology/repology-updater/pull/1289">22.11</a>, <a href="https://github.com/repology/repology-updater/pull/1156">22.05</a></p>

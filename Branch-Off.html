@@ -83,7 +83,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li class="chapter-item expanded "><a href="Roles.html"><strong aria-hidden="true">2.</strong> Roles</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Release-Managers.html"><strong aria-hidden="true">2.1.</strong> Release Managers</a></li><li class="chapter-item expanded "><a href="Release-Editors.html"><strong aria-hidden="true">2.2.</strong> Release Editors</a></li></ol></li><li class="chapter-item expanded "><a href="Release-Critical-Packages.html"><strong aria-hidden="true">3.</strong> Release Critical Packages</a></li><li class="chapter-item expanded "><a href="Release-Process.html"><strong aria-hidden="true">4.</strong> Release Process</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Once-Appointed.html"><strong aria-hidden="true">4.1.</strong> What to do once appointed</a></li><li class="chapter-item expanded "><a href="Feature-Freeze-Announcement.html"><strong aria-hidden="true">4.2.</strong> Feature Freeze announcement and pre-release cleanup</a></li><li class="chapter-item expanded "><a href="Zero-Hydra-Failures.html"><strong aria-hidden="true">4.3.</strong> ZERO Hydra Failures</a></li><li class="chapter-item expanded "><a href="Branch-Off.html" class="active"><strong aria-hidden="true">4.4.</strong> Branch-off</a></li><li class="chapter-item expanded "><a href="Beta-Phase.html"><strong aria-hidden="true">4.5.</strong> Beta Phase</a></li><li class="chapter-item expanded "><a href="Final-Release.html"><strong aria-hidden="true">4.6.</strong> Final Release</a></li><li class="chapter-item expanded "><a href="Retrospective.html"><strong aria-hidden="true">4.7.</strong> Retrospective</a></li><li class="chapter-item expanded "><a href="EOL-Cleanup.html"><strong aria-hidden="true">4.8.</strong> EOL cleanup</a></li><li class="chapter-item expanded "><a href="Handover.html"><strong aria-hidden="true">4.9.</strong> Handover to the next team</a></li></ol></li><li class="chapter-item expanded "><a href="Contrib.html"><strong aria-hidden="true">5.</strong> Contrib</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="QEMU-aarch64.html"><strong aria-hidden="true">5.1.</strong> QEMU Aarch64 Emulation</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li class="chapter-item expanded "><a href="Roles.html"><strong aria-hidden="true">2.</strong> Roles</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Release-Managers.html"><strong aria-hidden="true">2.1.</strong> Release Managers</a></li><li class="chapter-item expanded "><a href="Release-Editors.html"><strong aria-hidden="true">2.2.</strong> Release Editors</a></li></ol></li><li class="chapter-item expanded "><a href="Release-Critical-Packages.html"><strong aria-hidden="true">3.</strong> Release Critical Packages</a></li><li class="chapter-item expanded "><a href="Release-Process.html"><strong aria-hidden="true">4.</strong> Release Process</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Once-Appointed.html"><strong aria-hidden="true">4.1.</strong> What to do once appointed</a></li><li class="chapter-item expanded "><a href="Feature-Freeze-Announcement.html"><strong aria-hidden="true">4.2.</strong> Feature Freeze announcement and pre-release cleanup</a></li><li class="chapter-item expanded "><a href="Zero-Hydra-Failures.html"><strong aria-hidden="true">4.3.</strong> ZERO Hydra Failures</a></li><li class="chapter-item expanded "><a href="Staging-Branch-Off.html"><strong aria-hidden="true">4.4.</strong> Staging-Branch-off</a></li><li class="chapter-item expanded "><a href="Branch-Off.html" class="active"><strong aria-hidden="true">4.5.</strong> Branch-off</a></li><li class="chapter-item expanded "><a href="Beta-Phase.html"><strong aria-hidden="true">4.6.</strong> Beta Phase</a></li><li class="chapter-item expanded "><a href="Final-Release.html"><strong aria-hidden="true">4.7.</strong> Final Release</a></li><li class="chapter-item expanded "><a href="Retrospective.html"><strong aria-hidden="true">4.8.</strong> Retrospective</a></li><li class="chapter-item expanded "><a href="EOL-Cleanup.html"><strong aria-hidden="true">4.9.</strong> EOL cleanup</a></li><li class="chapter-item expanded "><a href="Handover.html"><strong aria-hidden="true">4.10.</strong> Handover to the next team</a></li></ol></li><li class="chapter-item expanded "><a href="Contrib.html"><strong aria-hidden="true">5.</strong> Contrib</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="QEMU-aarch64.html"><strong aria-hidden="true">5.1.</strong> QEMU Aarch64 Emulation</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -225,9 +225,11 @@ before release to create the necessary Hydra Jobsets. You can link them this sec
 </code></pre>
 </li>
 <li>
-<p>Create the staging branches</p>
-<pre><code class="language-bash">git branch staging-$NEWVER
-git branch staging-next-$NEWVER
+<p>Update the staging branches</p>
+<pre><code class="language-bash">git checkout staging-$NEWVER
+git merge release-$NEWVER
+git checkout staging-next-$NEWVER
+git merge release-$NEWVER
 </code></pre>
 </li>
 <li>
@@ -246,35 +248,49 @@ git push upstream master release-$NEWVER $NEWVER-beta staging-$NEWVER staging-ne
 </li>
 </ol>
 <h3 id="back-on-the-master-branch"><a class="header" href="#back-on-the-master-branch">Back on the master branch</a></h3>
-<p>Now we prepare the master branch for the next release after this one.</p>
+<p>Now we prepare the master branch for the next release after this one. We do this in two steps: One via a PR as it's more error-prone and one direct to allow for proper tagging.</p>
+<h4 id="pr-changes"><a class="header" href="#pr-changes">PR changes</a></h4>
 <ol>
-<li>
-<p>Update the <a href="https://github.com/NixOS/nixpkgs/blob/master/.github/workflows/periodic-merge-24h.yml">periodic-merge workflow</a> to include the new release.</p>
-</li>
-<li>
-<p>Increment the <a href="https://github.com/NixOS/nixpkgs/commit/01268fda85b7eee4e462c873d8654f975067731f#diff-2bc0e46110b507d6d5a344264ef15adaR1"><code>.version</code></a>
-file in the repository root.</p>
-<pre><code class="language-bash"># The release after $NEWVER (24.05 -&gt; 24.11)
-echo -n &quot;24.11&quot; &gt; .version
-</code></pre>
-</li>
-<li>
-<p>Update the <code>codeName</code> attribute in <a href="https://github.com/NixOS/nixpkgs/commit/2c28f1de7cdc10be556d2106108411dd2482794b#diff-29c71aa8261b14b1cad6e6fa28486fed7295050db4eeb32ba205672ba91d40e1"><code>lib/trivial.nix</code></a>
-This will be the name for the next release.</p>
-</li>
-<li>
-<p>Create a new <a href="https://github.com/NixOS/nixpkgs/blob/44b98d80ea6a56ccc1838aa0ac9e891de9130913/nixos/doc/manual/release-notes/rl-2311.section.md?plain=1">release notes file</a>
-for the next release</p>
-</li>
-<li>
-<p>Update the release versions in <a href="https://github.com/NixOS/nixpkgs/commit/2c6ae7132ca558f1052da0eececed3cad191b883#diff-18813c86948efc57e661623d7ba48ff94325c9b5421ec9177f724922dd553a35"><code>.github/PULL_REQUEST_TEMPLATE.md</code></a>
-on master.</p>
-</li>
 <li>
 <p>Update <a href="https://github.com/NixOS/nixpkgs/commit/2c6ae7132ca558f1052da0eececed3cad191b883#diff-eca12c0a30e25b4b46522ebf89465a03ba72a03f540796c979137931d8f92055"><code>CONTRIBUTING.md</code></a> on master.</p>
 </li>
 <li>
-<p>Commit the changes (<a href="https://github.com/NixOS/nixpkgs/commit/2c28f1de7cdc10be556d2106108411dd2482794b">23.05 example</a> + <a href="https://github.com/NixOS/nixpkgs/commit/44b98d80ea6a56ccc1838aa0ac9e891de9130913">this commit</a> + <a href="https://github.com/NixOS/nixpkgs/commit/2c6ae7132ca558f1052da0eececed3cad191b883">this commit</a>)</p>
+<p>Add the release name to <a href="https://github.com/NixOS/nixpkgs/commit/e56e0beed4312a89b60fe312ee2241f7a1627f76#diff-332df55682746a7949fbc279642f4b761456b3470ce93c541924a69ce8a45763"><code>nixos/doc/manual/release-notes/rl-2411.section.md</code></a>, <a href="https://github.com/NixOS/nixpkgs/commit/e56e0beed4312a89b60fe312ee2241f7a1627f76#diff-300d64b8febbf8f80bf778114bd0b70a2b31705d602365a32f7b5a2857764090"><code>doc/release-notes/rl-2411.section.md</code></a></p>
+</li>
+<li>
+<p>Include <code>rl-2411.section.md</code> in <a href="https://github.com/NixOS/nixpkgs/commit/e56e0beed4312a89b60fe312ee2241f7a1627f76#diff-9b75bf997f6c13cb4a15145ef9e758a28addeeff4a3a5cb893a5c23a976b3a1a"><code>nixos/doc/manual/release-notes/release-notes.md</code></a> and <a href="https://github.com/NixOS/nixpkgs/commit/e56e0beed4312a89b60fe312ee2241f7a1627f76#diff-300d64b8febbf8f80bf778114bd0b70a2b31705d602365a32f7b5a2857764090"><code>doc/release-notes/release-notes.md</code></a></p>
+</li>
+<li>
+<p>Update the <a href="https://github.com/NixOS/nixpkgs/commit/e56e0beed4312a89b60fe312ee2241f7a1627f76#diff-a4f6ea695ede268916c760fe782e9645a8cab5b27747e4baa994bf59f3e4e07b">periodic-merge workflow</a> so that</p>
+<ul>
+<li>release-24.05 (instead of master) gets merged into staging-next-24.05</li>
+</ul>
+</li>
+<li>
+<p>Update the release versions in <a href="https://github.com/NixOS/nixpkgs/commit/2c6ae7132ca558f1052da0eececed3cad191b883#diff-18813c86948efc57e661623d7ba48ff94325c9b5421ec9177f724922dd553a35"><code>.github/PULL_REQUEST_TEMPLATE.md</code></a></p>
+</li>
+<li>
+<p>Commit the changes and create a PR
+Wait for the CI to finish and merge.</p>
+</li>
+</ol>
+<h4 id="direct-changes"><a class="header" href="#direct-changes">Direct changes</a></h4>
+<p>These changes should be done when the PR is already merged.</p>
+<ol>
+<li>
+<p>Increment the <a href="https://github.com/NixOS/nixpkgs/commit/01268fda85b7eee4e462c873d8654f975067731f#diff-2bc0e46110b507d6d5a344264ef15adaR1"><code>lib/.version</code></a>
+file. This file must <strong>not</strong> end with a new line!</p>
+<pre><code class="language-bash"># The release after $NEWVER (24.05 -&gt; 24.11)
+echo -n &quot;24.11&quot; &gt; lib/.version
+</code></pre>
+</li>
+<li>
+<p>Update the <code>codeName</code> attribute in <a href="https://github.com/NixOS/nixpkgs/commit/2c28f1de7cdc10be556d2106108411dd2482794b#diff-29c71aa8261b14b1cad6e6fa28486fed7295050db4eeb32ba205672ba91d40e1"><code>lib/trivial.nix</code></a>
+This will be the name for the next release.
+on master.</p>
+</li>
+<li>
+<p>Commit the changes (<a href="https://github.com/NixOS/nixpkgs/commit/2c28f1de7cdc10be556d2106108411dd2482794b">23.05 example</a> + <a href="https://github.com/NixOS/nixpkgs/commit/2c6ae7132ca558f1052da0eececed3cad191b883">this commit</a>)</p>
 </li>
 <li>
 <p>Tag the master branch, so that <code>git describe</code> shows the new version as the base for commits.</p>
@@ -294,9 +310,8 @@ and nag the infrastructure team to get these changes deployed.</p>
 <p>Example: <a href="https://github.com/NixOS/infra/commit/9a0b3674a11b445c973334c78e8ca0eda36775e4">22.11</a></p>
 </li>
 <li>
-<p>Create the backport <a href="https://github.com/NixOS/nixpkgs/labels">labels</a> for all new branches:</p>
+<p>Create the backport <a href="https://github.com/NixOS/nixpkgs/labels">label</a> for the new release branch:</p>
 <ul>
-<li><code>backport staging-24.05</code></li>
 <li><code>backport release-24.05</code></li>
 </ul>
 <p>Use the description <code>Backport PR automatically</code> and the color value <code>#0fafaa</code></p>
@@ -344,7 +359,7 @@ troublesome.</p>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="Zero-Hydra-Failures.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="Staging-Branch-Off.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
@@ -358,7 +373,7 @@ troublesome.</p>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="Zero-Hydra-Failures.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="Staging-Branch-Off.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Release Editors - NixOS Release Wiki</title>
+        <title>Staging-Branch-off - NixOS Release Wiki</title>
 
 
         <!-- Custom HTML head -->
@@ -83,7 +83,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li class="chapter-item expanded "><a href="Roles.html"><strong aria-hidden="true">2.</strong> Roles</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Release-Managers.html"><strong aria-hidden="true">2.1.</strong> Release Managers</a></li><li class="chapter-item expanded "><a href="Release-Editors.html" class="active"><strong aria-hidden="true">2.2.</strong> Release Editors</a></li></ol></li><li class="chapter-item expanded "><a href="Release-Critical-Packages.html"><strong aria-hidden="true">3.</strong> Release Critical Packages</a></li><li class="chapter-item expanded "><a href="Release-Process.html"><strong aria-hidden="true">4.</strong> Release Process</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Once-Appointed.html"><strong aria-hidden="true">4.1.</strong> What to do once appointed</a></li><li class="chapter-item expanded "><a href="Feature-Freeze-Announcement.html"><strong aria-hidden="true">4.2.</strong> Feature Freeze announcement and pre-release cleanup</a></li><li class="chapter-item expanded "><a href="Zero-Hydra-Failures.html"><strong aria-hidden="true">4.3.</strong> ZERO Hydra Failures</a></li><li class="chapter-item expanded "><a href="Staging-Branch-Off.html"><strong aria-hidden="true">4.4.</strong> Staging-Branch-off</a></li><li class="chapter-item expanded "><a href="Branch-Off.html"><strong aria-hidden="true">4.5.</strong> Branch-off</a></li><li class="chapter-item expanded "><a href="Beta-Phase.html"><strong aria-hidden="true">4.6.</strong> Beta Phase</a></li><li class="chapter-item expanded "><a href="Final-Release.html"><strong aria-hidden="true">4.7.</strong> Final Release</a></li><li class="chapter-item expanded "><a href="Retrospective.html"><strong aria-hidden="true">4.8.</strong> Retrospective</a></li><li class="chapter-item expanded "><a href="EOL-Cleanup.html"><strong aria-hidden="true">4.9.</strong> EOL cleanup</a></li><li class="chapter-item expanded "><a href="Handover.html"><strong aria-hidden="true">4.10.</strong> Handover to the next team</a></li></ol></li><li class="chapter-item expanded "><a href="Contrib.html"><strong aria-hidden="true">5.</strong> Contrib</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="QEMU-aarch64.html"><strong aria-hidden="true">5.1.</strong> QEMU Aarch64 Emulation</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li class="chapter-item expanded "><a href="Roles.html"><strong aria-hidden="true">2.</strong> Roles</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Release-Managers.html"><strong aria-hidden="true">2.1.</strong> Release Managers</a></li><li class="chapter-item expanded "><a href="Release-Editors.html"><strong aria-hidden="true">2.2.</strong> Release Editors</a></li></ol></li><li class="chapter-item expanded "><a href="Release-Critical-Packages.html"><strong aria-hidden="true">3.</strong> Release Critical Packages</a></li><li class="chapter-item expanded "><a href="Release-Process.html"><strong aria-hidden="true">4.</strong> Release Process</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Once-Appointed.html"><strong aria-hidden="true">4.1.</strong> What to do once appointed</a></li><li class="chapter-item expanded "><a href="Feature-Freeze-Announcement.html"><strong aria-hidden="true">4.2.</strong> Feature Freeze announcement and pre-release cleanup</a></li><li class="chapter-item expanded "><a href="Zero-Hydra-Failures.html"><strong aria-hidden="true">4.3.</strong> ZERO Hydra Failures</a></li><li class="chapter-item expanded "><a href="Staging-Branch-Off.html" class="active"><strong aria-hidden="true">4.4.</strong> Staging-Branch-off</a></li><li class="chapter-item expanded "><a href="Branch-Off.html"><strong aria-hidden="true">4.5.</strong> Branch-off</a></li><li class="chapter-item expanded "><a href="Beta-Phase.html"><strong aria-hidden="true">4.6.</strong> Beta Phase</a></li><li class="chapter-item expanded "><a href="Final-Release.html"><strong aria-hidden="true">4.7.</strong> Final Release</a></li><li class="chapter-item expanded "><a href="Retrospective.html"><strong aria-hidden="true">4.8.</strong> Retrospective</a></li><li class="chapter-item expanded "><a href="EOL-Cleanup.html"><strong aria-hidden="true">4.9.</strong> EOL cleanup</a></li><li class="chapter-item expanded "><a href="Handover.html"><strong aria-hidden="true">4.10.</strong> Handover to the next team</a></li></ol></li><li class="chapter-item expanded "><a href="Contrib.html"><strong aria-hidden="true">5.</strong> Contrib</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="QEMU-aarch64.html"><strong aria-hidden="true">5.1.</strong> QEMU Aarch64 Emulation</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -144,30 +144,61 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="release-editors"><a class="header" href="#release-editors">Release Editors</a></h1>
-<p>The role of the release editors is a result of an action item from the
-21.11 release, where the satistfaction with the release notes was low.</p>
-<p>The first release editor role was filled in the 22.05 release with a
-focus on the release notes and content for the homepage.</p>
-<h2 id="responsibiltiies"><a class="header" href="#responsibiltiies">Responsibiltiies</a></h2>
+                        <h1 id="staging-branch-off"><a class="header" href="#staging-branch-off">Staging Branch-off</a></h1>
+<p><strong>Requirement:</strong> The last <code>staging-next</code> cycle before the release started and <code>staging</code> is now unrestricted.</p>
+<p>For these steps &quot;24.05&quot; represents the current release tag (the version you want to release).</p>
+<h2 id="git-branches"><a class="header" href="#git-branches">Git branches</a></h2>
+<p>Set NEWVER to the new release version:</p>
+<pre><code class="language-bash">export NEWVER=24.05
+</code></pre>
+<p>Now create the branches:</p>
+<ol>
+<li>
+<p>Fetch and check out the <code>staging-next</code> branch.</p>
+</li>
+<li>
+<p>Create the actual branches</p>
+<pre><code class="language-bash">git branch staging-$NEWVER
+git branch staging-next-$NEWVER
+</code></pre>
+</li>
+<li>
+<p>Push the changes</p>
+<pre><code class="language-bash">git push upstream staging-$NEWVER staging-next-$NEWVER
+</code></pre>
+</li>
+</ol>
+<h2 id="incorporate-new-branches"><a class="header" href="#incorporate-new-branches">Incorporate new branches</a></h2>
+<p>We now incorporate the new branches into the workflows. The suggestion is to do these changes via a PR.</p>
+<ol>
+<li>
+<p>Create new <a href="https://github.com/NixOS/nixpkgs/commit/95cc97659c813256dc17d2905904144c1588e6ad">NixOS and Nixpkgs release notes file</a></p>
+</li>
+<li>
+<p>Update <a href="https://github.com/NixOS/nixpkgs/commit/86de96dbc1a8e65bc5f02b98d708315c0ec0fc02">periodic-merge workflow</a> so that</p>
 <ul>
-<li>
-<p>Improve the legibility of the release notes</p>
-</li>
-<li>
-<p>Correct grammar and spelling issues</p>
-</li>
+<li>master gets merged into staging-next-24.05</li>
+<li>staging-next-24.05 gets merged into staging-24.05</li>
 </ul>
+</li>
+<li>
+<p>Create the backport <a href="https://github.com/NixOS/nixpkgs/labels">label</a> for the new staging branch:</p>
+<ul>
+<li><code>backport staging-24.05</code></li>
+</ul>
+<p>Use the description <code>Backport PR automatically</code> and the color value <code>#0fafaa</code></p>
+</li>
+</ol>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="Release-Managers.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="Zero-Hydra-Failures.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="Release-Critical-Packages.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="Branch-Off.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -177,11 +208,11 @@ focus on the release notes and content for the homepage.</p>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="Release-Managers.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="Zero-Hydra-Failures.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="Release-Critical-Packages.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="Branch-Off.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
