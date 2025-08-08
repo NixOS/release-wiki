@@ -10,6 +10,7 @@
 	- [Feature Freeze announcement and pre-release
 cleanup](Feature-Freeze-Announcement.md)
 	- [ZERO Hydra Failures](Zero-Hydra-Failures.md)
+	- [Staging-Branch-off](Staging-Branch-Off.md)
 	- [Branch-off](Branch-Off.md)
 	- [Beta Phase](Beta-Phase.md)
 	- [Final Release](Final-Release.md)
