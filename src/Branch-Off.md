@@ -38,6 +38,14 @@ Inputs:
 |`stableBranch`|Boolean|`false`|
 |`supportedSystems`|Nix expression|`[ "x86_64-linux" "aarch64-linux" ]`|
 
+## Nixpkgs branch protection ruleset
+
+The same as for the jobsets applies to Nixpkgs branch protection rulesets, which can be updated by NixOS org owners in advance.
+You can propose the changes as a Pull Request to the NixOS/org repository.
+
+New release branches should be added to the `includes` list in:
+- https://github.com/NixOS/org/blob/main/rulesets/nixpkgs/require-merge-queue.json
+
 ## Actual branch-off
 
 Set NEWVER to the new release version:
