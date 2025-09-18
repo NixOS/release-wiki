@@ -185,6 +185,13 @@ before release to create the necessary Hydra Jobsets. You can link them this sec
 <tr><td><code>supportedSystems</code></td><td>Nix expression</td><td><code>[ &quot;x86_64-linux&quot; &quot;aarch64-linux&quot; ]</code></td></tr>
 </tbody></table>
 </div>
+<h2 id="nixpkgs-branch-protection-ruleset"><a class="header" href="#nixpkgs-branch-protection-ruleset">Nixpkgs branch protection ruleset</a></h2>
+<p>The same as for the jobsets applies to Nixpkgs branch protection rulesets, which can be updated by NixOS org owners in advance.
+You can propose the changes as a Pull Request to the NixOS/org repository.</p>
+<p>New release branches should be added to the <code>includes</code> list in:</p>
+<ul>
+<li>https://github.com/NixOS/org/blob/main/rulesets/nixpkgs/require-merge-queue.json</li>
+</ul>
 <h2 id="actual-branch-off"><a class="header" href="#actual-branch-off">Actual branch-off</a></h2>
 <p>Set NEWVER to the new release version:</p>
 <pre><code class="language-bash">export NEWVER=24.05

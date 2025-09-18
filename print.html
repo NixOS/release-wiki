@@ -505,6 +505,13 @@ before release to create the necessary Hydra Jobsets. You can link them this sec
 <tr><td><code>supportedSystems</code></td><td>Nix expression</td><td><code>[ &quot;x86_64-linux&quot; &quot;aarch64-linux&quot; ]</code></td></tr>
 </tbody></table>
 </div>
+<h2 id="nixpkgs-branch-protection-ruleset"><a class="header" href="#nixpkgs-branch-protection-ruleset">Nixpkgs branch protection ruleset</a></h2>
+<p>The same as for the jobsets applies to Nixpkgs branch protection rulesets, which can be updated by NixOS org owners in advance.
+You can propose the changes as a Pull Request to the NixOS/org repository.</p>
+<p>New release branches should be added to the <code>includes</code> list in:</p>
+<ul>
+<li>https://github.com/NixOS/org/blob/main/rulesets/nixpkgs/require-merge-queue.json</li>
+</ul>
 <h2 id="actual-branch-off"><a class="header" href="#actual-branch-off">Actual branch-off</a></h2>
 <p>Set NEWVER to the new release version:</p>
 <pre><code class="language-bash">export NEWVER=24.05
@@ -1028,6 +1035,8 @@ the oldest supported release.</p>
 <p>Ping <a href="https://github.com/adamcstephens">Adam C. Stephens</a> or open a Pull Request to <a href="https://github.com/lxc/lxc-ci/blob/720a50e23f9a122694056d7394226476ae24f973/jenkins/jobs/image-nixos.yaml#L19-L21">lxc/lxc-ci</a></p>
 </li>
 </ol>
+<p>Last but not least, update the Nixpkgs branch protection rules and remove the old branch from the Merge Queue rule at:
+https://github.com/NixOS/org/blob/main/rulesets/nixpkgs/require-merge-queue.json</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="handover-to-the-next-team"><a class="header" href="#handover-to-the-next-team">Handover to the next team</a></h1>
 <p>Some time after your EOL cleanup, publish a new topic to Discourse, asking for a new editor and a new manager to step up.
 You select the team.</p>
