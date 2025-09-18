@@ -45,3 +45,6 @@ Now create a PR that contains the following changes:
 1. Remove old release from LXC/Incus image server
 
    Ping [Adam C. Stephens](https://github.com/adamcstephens) or open a Pull Request to [lxc/lxc-ci](https://github.com/lxc/lxc-ci/blob/720a50e23f9a122694056d7394226476ae24f973/jenkins/jobs/image-nixos.yaml#L19-L21)
+
+Last but not least, update the Nixpkgs branch protection rules and remove the old branch from the Merge Queue rule at:
+https://github.com/NixOS/org/blob/main/rulesets/nixpkgs/require-merge-queue.json
