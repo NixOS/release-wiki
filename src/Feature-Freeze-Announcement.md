@@ -11,7 +11,7 @@ example](https://discourse.nixos.org/t/22-05-feature-freeze/18453)).
 
 People and teams will be pinged in this issue. The list of people and teams
 pinged is generated from the teams list in nixpkgs. The script to generate
-the pings is: `./maintainers/feature-freeze-teams.pl` in nixpkgs. The script
+the pings is: `./maintainers/scripts/feature-freeze-teams.pl` in nixpkgs. The script
 needs a GitHub username and a token to read the teams from the NixOS org.
 Instructions are provided as a comment in the script.
 
