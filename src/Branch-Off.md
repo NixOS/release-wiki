@@ -130,8 +130,6 @@ Now we prepare the master branch for the next release after this one. We do this
 1. Update the [periodic-merge workflow](https://github.com/NixOS/nixpkgs/commit/e56e0beed4312a89b60fe312ee2241f7a1627f76#diff-a4f6ea695ede268916c760fe782e9645a8cab5b27747e4baa994bf59f3e4e07b) so that
     - release-24.05 (instead of master) gets merged into staging-next-24.05
 
-1. Update the release versions in [`.github/PULL_REQUEST_TEMPLATE.md`](https://github.com/NixOS/nixpkgs/commit/2c6ae7132ca558f1052da0eececed3cad191b883#diff-18813c86948efc57e661623d7ba48ff94325c9b5421ec9177f724922dd553a35)
-
 1. Commit the changes and create a PR
    Wait for the CI to finish and merge.
 
