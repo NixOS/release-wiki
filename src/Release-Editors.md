@@ -6,7 +6,7 @@ The role of the release editors is a result of an action item from the
 The first release editor role was filled in the 22.05 release with a
 focus on the release notes and content for the homepage.
 
-## Responsibiltiies
+## Responsibilities
 
 - Improve the legibility of the release notes
 
