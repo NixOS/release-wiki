@@ -30,13 +30,15 @@ Now create the branches:
 
 ## Incorporate new branches
 
-We now incorporate the new branches into the workflows. The suggestion is to do these changes via a PR.
+We now incorporate the new branches into the workflows. The suggestion is two do step 1 and 2 in seperate PRs, as step 2. should be backported, as it's a CI change.
 
-1. Create new [NixOS and Nixpkgs release notes file](https://github.com/NixOS/nixpkgs/commit/95cc97659c813256dc17d2905904144c1588e6ad)
+1. Create new [NixOS and Nixpkgs release notes file](https://github.com/NixOS/nixpkgs/commit/95cc97659c813256dc17d2905904144c1588e6ad) and PR this
 
 1. Update [periodic-merge workflow](https://github.com/NixOS/nixpkgs/commit/86de96dbc1a8e65bc5f02b98d708315c0ec0fc02) so that
     - master gets merged into staging-next-24.05
     - staging-next-24.05 gets merged into staging-24.05
+
+    and PR this.
 
 1. Create the backport [label](https://github.com/NixOS/nixpkgs/labels) for the new staging branch:
    - `backport staging-24.05`
