@@ -149,12 +149,14 @@ Update metadata on the release branch, create its staging branches and tag the r
    git switch master
    ```
 
+1. Create the backport [label](https://github.com/NixOS/nixpkgs/labels) for the new release branch:
+   - `backport release-24.05`
+
+   Use the description `Backport PR automatically` and the color value `#0fafaa`
+
 ### Back on the master branch
 
-Now we prepare the master branch for the next release after this one. We do this in two steps: One via a PR as it's more error-prone and one direct to allow for proper tagging.
-
-
-#### PR changes
+Now we prepare the master branch for the next release after this one. We do this in two steps, error-prone changes thorugh a PR and direct to allow for proper tagging.
 
 Set NEXTVER to the release number after the one you released (i.e. when you release 24.05, `NEXTVER=24.11`).
 
@@ -162,14 +164,19 @@ Set NEXTVER to the release number after the one you released (i.e. when you rele
 export NEXTVER=24.11
 ```
 
+#### PR changes 1
+
+1. Checkout a branch you want for the first PR, e.g.
+
+   ```bash
+   git switch -c rm-branchoff-documentation-changes
+   ```
+
 1. Add the release name to [`nixos/doc/manual/release-notes/rl-$NEXTVER.section.md`](https://github.com/NixOS/nixpkgs/commit/bf470a4fddca6315d1b7c256a873c90f755b02d9#diff-417feb28ebc7ab0109746fef515d6cccdcd5af5c7386e1ce0b186db9b8e5677b), [`doc/release-notes/rl-2411.section.md`](https://github.com/NixOS/nixpkgs/commit/bf470a4fddca6315d1b7c256a873c90f755b02d9#diff-c5ba8855198f95e7fdb39bcd1106bb29c96b85c14bdfc4030b235a02806bf9b3)
 
 1. Include `rl-$NEXTVER.section.md` in [`nixos/doc/manual/release-notes/release-notes.md`](https://github.com/NixOS/nixpkgs/commit/bf470a4fddca6315d1b7c256a873c90f755b02d9#diff-9b75bf997f6c13cb4a15145ef9e758a28addeeff4a3a5cb893a5c23a976b3a1a), [`doc/release-notes/release-notes.md`](https://github.com/NixOS/nixpkgs/commit/bf470a4fddca6315d1b7c256a873c90f755b02d9#diff-89abd55b6169384ba08083097a7ac5f5c30ea35d432a0ba2d1a76887f50a4f49)
 
 1. Update [`nixos/manual/doc/redirects.json`](https://github.com/NixOS/nixpkgs/commit/bf470a4fddca6315d1b7c256a873c90f755b02d9#diff-8e9034e569678f9c67bf82087ff7dced3b18de5491707988a43fb8979a82794f), [`doc/redirects.json`](https://github.com/NixOS/nixpkgs/commit/bf470a4fddca6315d1b7c256a873c90f755b02d9#diff-9499ad98fd024845445ff2f32b424d29f632932b4bbe15dfd9d0f447890bbae6) and to include the new sections.
-
-1. Update the [.github/workflows/periodic-merge-24h.yml](https://github.com/NixOS/nixpkgs/commit/bf470a4fddca6315d1b7c256a873c90f755b02d9#diff-a4f6ea695ede268916c760fe782e9645a8cab5b27747e4baa994bf59f3e4e07b) so that
-   - `release-$NEWVER` (instead of `master`) gets merged into `staging-next-$NEWVER`
 
 1. Go through `.github/ISSUE_TEMPLATE`, and edit them to include the new version as beta.
 
@@ -178,13 +185,33 @@ export NEXTVER=24.11
 1. Commit the changes and create a PR.
    Wait for the CI to finish and merge.
 
+#### PR changes 2
+
+You can create this PR while waiting for the CI of the first one.
+
+1. Checkout a branch you want for the second PR, e.g.
+
+   ```bash
+   git switch -c rm-branchoff-ci-changes
+   ```
+
+1. Update [.github/workflows/periodic-merge-24h.yml](https://github.com/NixOS/nixpkgs/commit/bf470a4fddca6315d1b7c256a873c90f755b02d9#diff-a4f6ea695ede268916c760fe782e9645a8cab5b27747e4baa994bf59f3e4e07b) so that
+   - `release-$NEWVER` (instead of `master`) gets merged into `staging-next-$NEWVER`
+
+1. Update [.github/labeler-no-sync.yml](https://github.com/NixOS/nixpkgs/commit/fb0fb7420fcafaaced083c6767da35617f2837f3) so that it includes `backport release-25.11`.
+
 #### Direct changes
 
-These changes should be done when the PR is already merged.
+These changes should be done when the two PRs are already merged.
 
 1. Switch back to the `master` branch
   ```bash
   git switch master
+  ```
+
+1. Update the branch to get the changes from the two PRs
+  ```bash
+  git pull
   ```
 
 1. Increment the [`lib/.version`](https://github.com/NixOS/nixpkgs/commit/01268fda85b7eee4e462c873d8654f975067731f#diff-2bc0e46110b507d6d5a344264ef15adaR1)
@@ -217,11 +244,6 @@ Now that everything on git is done, we are still missing the channels.
    and nag the infrastructure team to get these changes deployed.
 
    Example: [22.11](https://github.com/NixOS/infra/commit/9a0b3674a11b445c973334c78e8ca0eda36775e4)
-
-1. Create the backport [label](https://github.com/NixOS/nixpkgs/labels) for the new release branch:
-   - `backport release-24.05`
-
-   Use the description `Backport PR automatically` and the color value `#0fafaa`
 
 1. Update the ZHF issue, that now that the branch-off has been performed, fixes have to be backported.
    Examples: [22.05](https://github.com/NixOS/nixpkgs/issues/172160#issuecomment-1135112918)
