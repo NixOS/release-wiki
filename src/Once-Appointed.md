@@ -22,8 +22,8 @@ This is not an actual part of the release process but rather preparations for st
 - Create a blockers [project](https://github.com/orgs/NixOS/projects) in the organization for your release and the next one
 	- Also close old ones while you're at it and consider migrating remaining open issues to the current project
 - Figure out a codename for the next release (not the one you are releasing but the next one) and write it down somewhere for the branch-off
-- Find someone to create a [logo](https://github.com/NixOS/nixos-artwork/tree/master/releases) or create one yourself for the current release and PR it into the repository
-	- Usually done by creating an issue on the `nixos-artwork` repository pinging artists who created previous logos
+- Find someone to create a logo or create one yourself for the current release and PR it into the repository
+	- Usually done by creating an issue on the [NixOS/branding](https://github.com/NixOS/branding) repository pinging artists who created previous logos
 - Check if the process can be improved this release
 	- Find comments on the Discourse posts, GitHub issues, … of the previous release and see if the comments suggest doing something different this time
 	- Read the Discourse post of the last retrospective
