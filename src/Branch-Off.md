@@ -14,29 +14,53 @@ before release to create the necessary Hydra Jobsets. You can link them this sec
 - [https://hydra.nixos.org/project/nixos](https://hydra.nixos.org/project/nixos)
   - release-24.05
   - release-24.05-small
+  - staging-next-24.05-small
 - [https://hydra.nixos.org/project/nixpkgs](https://hydra.nixos.org/project/nixpkgs)
   - nixpkgs-24.05-darwin
   - staging-next-24.05
+  - staging-24.05
 
-Example configuration: [nixos:release-23.11](https://hydra.nixos.org/jobset/nixos/release-23.11#tabs-configuration)
+The easiest way to create the new jobsets is to clone the ones from the previous release and rewrite the version number.
+
+Example configuration: [nixos:release-25.11](https://hydra.nixos.org/jobset/nixos/release-25.11#tabs-configuration)
 
 |Field|Value|
 |-|-|
 |State|Enabled|
 |Description|NixOS 24.05 release branch|
 |Nix expression|`nixos/release-combined.nix` in input `nixpkgs`|
-|Check interval|86400|
+|Check interval|151200|
 |Scheduling shares|5000000 (8.32% out of 60071636 shares)|
 |Enable Dynamic RunCommand Hooks:|No (not enabled by server)|
 |Number of evaluations to keep|1|
 
-Inputs:
+### Inputs for `nixos/release-24.05`, `nixos/release-24.05-small`:
 
 |Input name|Type|Values|
 |-|-|-|
 |`nixpkgs`|Git checkout|`https://github.com/NixOS/nixpkgs.git release-24.05`|
 |`stableBranch`|Boolean|`false`|
 |`supportedSystems`|Nix expression|`[ "x86_64-linux" "aarch64-linux" ]`|
+
+`stableBranch` influences the `versionSuffix` in NixOS and the channel tarball.
+
+  - `true` leads to `24.05.1234.0abs3fe`
+  - `false` leads to `24.05pre1234.0abs3fe`
+
+Note that changing this leads to a rebuild of most NixOS tests!
+
+### Inputs for `nixpkgs/nixpkgs-24.05-darwin`:
+
+|Input name|Type|Values|
+|-|-|-|
+|`nixpkgs`|Git checkout|`https://github.com/NixOS/nixpkgs.git release-24.05`|
+|`officialRelease`|Boolean|`false`|
+|`supportedSystems`|Nix expression|`[ "x86_64-darwin" "aarch64-darwin" ]`|
+
+`officialRelease` influences the `versionSuffix` of the release tarball
+
+  - `true` leads to `24.05.1234.0abs3fe`
+  - `false` leads to `24.05pre1234.0abs3fe`
 
 ## Nixpkgs branch protection ruleset
 
@@ -48,7 +72,7 @@ New release branches should be added to the `includes` list in:
 
 ## Actual branch-off
 
-Set NEWVER to the new release version:
+Set NEWVER to the new release version (i.e. the version you release):
 
 ```bash
 export NEWVER=24.05
@@ -72,9 +96,9 @@ Pull in the final changes before performing the actual branch-off.
 
 Update metadata on the release branch, create its staging branches and tag the release.
 
-1. Update the `system.defaultChannel` attribute in [`nixos/modules/config/nix-channel.nix`](https://github.com/NixOS/nixpkgs/commit/bb029673bface2fc9fb807f209f63ca06478a72d)
+1. Update the `system.defaultChannel` option default in [`nixos/modules/config/nix-channel.nix`](https://github.com/NixOS/nixpkgs/commit/3c80acabe4eef35d8662733c7e058907fa33a65d#diff-14008678e5ceeef1edd491de85bca2bded89daea16793fe10c4eb724097b7f12)
 
-1. Update the `versionSuffix` attribute in [`nixos/release.nix`](https://github.com/NixOS/nixpkgs/commit/7ae60dd7068478db5d936a3850b6df859aec21d0)
+1. Update the `versionSuffix` attribute in [`nixos/release.nix`](https://github.com/NixOS/nixpkgs/commit/3c80acabe4eef35d8662733c7e058907fa33a65d#diff-20da30ee012d7d87842fb7953237870493c5497c995cba1e6f6c3aa9268398ff)
 
    To get the commit count, use the following command:
 
@@ -82,7 +106,17 @@ Update metadata on the release branch, create its staging branches and tag the r
    git rev-list --count release-$NEWVER
    ```
 
-1. Add `SUPPORT_END=YYYY-MM-DD` to `osReleaseContents` in `nixos/modules/misc/version.nix`.
+1. Add `SUPPORT_END = "YYYY-MM-DD";` to `osReleaseContents` in [`nixos/modules/misc/version.nix`](https://github.com/NixOS/nixpkgs/commit/3c80acabe4eef35d8662733c7e058907fa33a65d#diff-b3379a98640b35a5fe4b046150cd2df1639995edf231d18bbad832be6a70b45f).
+
+1. Run treefmt
+   ```bash
+   nix-shell --run treefmt
+   ```
+
+1. Test that the `tested` "job" still evals
+   ```bash
+   nix eval -f nixos/release-combined.nix tested
+   ```
 
 1. Commit the changes from the previous steps
 
@@ -102,8 +136,9 @@ Update metadata on the release branch, create its staging branches and tag the r
 1. Tag the release and push everything
 
    ```bash
+   git switch release-$NEWVER
    git tag --annotate --message="Release $NEWVER-beta" $NEWVER-beta
-   git push upstream master release-$NEWVER $NEWVER-beta staging-$NEWVER staging-next-$NEWVER
+   git push upstream release-$NEWVER $NEWVER-beta staging-$NEWVER staging-next-$NEWVER
    ```
 
 1. Create jobsets on hydra by contacting the infrastructure team and start the evaluation on all new jobsets.
@@ -114,49 +149,90 @@ Update metadata on the release branch, create its staging branches and tag the r
    git switch master
    ```
 
+1. Create the backport [label](https://github.com/NixOS/nixpkgs/labels) for the new release branch:
+   - `backport release-24.05`
+
+   Use the description `Backport PR automatically` and the color value `#0fafaa`
+
 ### Back on the master branch
 
-Now we prepare the master branch for the next release after this one. We do this in two steps: One via a PR as it's more error-prone and one direct to allow for proper tagging.
+Now we prepare the master branch for the next release after this one. We do this in two steps, error-prone changes thorugh a PR and direct to allow for proper tagging.
 
+Set NEXTVER to the release number after the one you released (i.e. when you release 24.05, `NEXTVER=24.11`).
 
-#### PR changes
+```bash
+export NEXTVER=24.11
+```
 
-1. Update [`CONTRIBUTING.md`](https://github.com/NixOS/nixpkgs/commit/2c6ae7132ca558f1052da0eececed3cad191b883#diff-eca12c0a30e25b4b46522ebf89465a03ba72a03f540796c979137931d8f92055) on master.
+#### PR changes 1
 
-1. Add the release name to [`nixos/doc/manual/release-notes/rl-2411.section.md`](https://github.com/NixOS/nixpkgs/commit/e56e0beed4312a89b60fe312ee2241f7a1627f76#diff-332df55682746a7949fbc279642f4b761456b3470ce93c541924a69ce8a45763), [`doc/release-notes/rl-2411.section.md`](https://github.com/NixOS/nixpkgs/commit/e56e0beed4312a89b60fe312ee2241f7a1627f76#diff-300d64b8febbf8f80bf778114bd0b70a2b31705d602365a32f7b5a2857764090)
+1. Checkout a branch you want for the first PR, e.g.
 
-1. Include `rl-2411.section.md` in [`nixos/doc/manual/release-notes/release-notes.md`](https://github.com/NixOS/nixpkgs/commit/e56e0beed4312a89b60fe312ee2241f7a1627f76#diff-9b75bf997f6c13cb4a15145ef9e758a28addeeff4a3a5cb893a5c23a976b3a1a) and [`doc/release-notes/release-notes.md`](https://github.com/NixOS/nixpkgs/commit/e56e0beed4312a89b60fe312ee2241f7a1627f76#diff-300d64b8febbf8f80bf778114bd0b70a2b31705d602365a32f7b5a2857764090)
+   ```bash
+   git switch -c rm-branchoff-documentation-changes
+   ```
 
-1. Update the [periodic-merge workflow](https://github.com/NixOS/nixpkgs/commit/e56e0beed4312a89b60fe312ee2241f7a1627f76#diff-a4f6ea695ede268916c760fe782e9645a8cab5b27747e4baa994bf59f3e4e07b) so that
-    - release-24.05 (instead of master) gets merged into staging-next-24.05
+1. Add the release name to [`nixos/doc/manual/release-notes/rl-$NEXTVER.section.md`](https://github.com/NixOS/nixpkgs/commit/bf470a4fddca6315d1b7c256a873c90f755b02d9#diff-417feb28ebc7ab0109746fef515d6cccdcd5af5c7386e1ce0b186db9b8e5677b), [`doc/release-notes/rl-2411.section.md`](https://github.com/NixOS/nixpkgs/commit/bf470a4fddca6315d1b7c256a873c90f755b02d9#diff-c5ba8855198f95e7fdb39bcd1106bb29c96b85c14bdfc4030b235a02806bf9b3)
 
-1. Commit the changes and create a PR
+1. Include `rl-$NEXTVER.section.md` in [`nixos/doc/manual/release-notes/release-notes.md`](https://github.com/NixOS/nixpkgs/commit/bf470a4fddca6315d1b7c256a873c90f755b02d9#diff-9b75bf997f6c13cb4a15145ef9e758a28addeeff4a3a5cb893a5c23a976b3a1a), [`doc/release-notes/release-notes.md`](https://github.com/NixOS/nixpkgs/commit/bf470a4fddca6315d1b7c256a873c90f755b02d9#diff-89abd55b6169384ba08083097a7ac5f5c30ea35d432a0ba2d1a76887f50a4f49)
+
+1. Update [`nixos/manual/doc/redirects.json`](https://github.com/NixOS/nixpkgs/commit/bf470a4fddca6315d1b7c256a873c90f755b02d9#diff-8e9034e569678f9c67bf82087ff7dced3b18de5491707988a43fb8979a82794f), [`doc/redirects.json`](https://github.com/NixOS/nixpkgs/commit/bf470a4fddca6315d1b7c256a873c90f755b02d9#diff-9499ad98fd024845445ff2f32b424d29f632932b4bbe15dfd9d0f447890bbae6) and to include the new sections.
+
+1. Go through `.github/ISSUE_TEMPLATE`, and edit them to include the new version as beta.
+
+   Example [25.11](https://github.com/NixOS/nixpkgs/commit/c69a76cf803096fb8d1b3732fea57d69d6d301f1)
+
+1. Commit the changes and create a PR.
    Wait for the CI to finish and merge.
+
+#### PR changes 2
+
+You can create this PR while waiting for the CI of the first one.
+
+1. Checkout a branch you want for the second PR, e.g.
+
+   ```bash
+   git switch -c rm-branchoff-ci-changes
+   ```
+
+1. Update [.github/workflows/periodic-merge-24h.yml](https://github.com/NixOS/nixpkgs/commit/bf470a4fddca6315d1b7c256a873c90f755b02d9#diff-a4f6ea695ede268916c760fe782e9645a8cab5b27747e4baa994bf59f3e4e07b) so that
+   - `release-$NEWVER` (instead of `master`) gets merged into `staging-next-$NEWVER`
+
+1. Update [.github/labeler-no-sync.yml](https://github.com/NixOS/nixpkgs/commit/fb0fb7420fcafaaced083c6767da35617f2837f3) so that it includes `backport release-25.11`.
 
 #### Direct changes
 
-These changes should be done when the PR is already merged.
+These changes should be done when the two PRs are already merged.
+
+1. Switch back to the `master` branch
+  ```bash
+  git switch master
+  ```
+
+1. Update the branch to get the changes from the two PRs
+  ```bash
+  git pull
+  ```
 
 1. Increment the [`lib/.version`](https://github.com/NixOS/nixpkgs/commit/01268fda85b7eee4e462c873d8654f975067731f#diff-2bc0e46110b507d6d5a344264ef15adaR1)
    file. This file must **not** end with a new line!
 
    ```bash
    # The release after $NEWVER (24.05 -> 24.11)
-   echo -n "24.11" > lib/.version
+   echo -n "$NEXTVER" > lib/.version
    ````
 
 1. Update the `codeName` attribute in [`lib/trivial.nix`](https://github.com/NixOS/nixpkgs/commit/2c28f1de7cdc10be556d2106108411dd2482794b#diff-29c71aa8261b14b1cad6e6fa28486fed7295050db4eeb32ba205672ba91d40e1)
    This will be the name for the next release.
-   on master.
 
-1. Commit the changes ([23.05 example](https://github.com/NixOS/nixpkgs/commit/2c28f1de7cdc10be556d2106108411dd2482794b) + [this commit](https://github.com/NixOS/nixpkgs/commit/2c6ae7132ca558f1052da0eececed3cad191b883))
+1. Commit the changes as `$NEXTVER is <codeName>`([25.11 example](https://github.com/NixOS/nixpkgs/commit/2493002b10ccef0880f72d7720538f91fb4f7434))
 
 1. Tag the master branch, so that `git describe` shows the new version as the base for commits.
 
    ```bash
-   git tag --annotate 24.11-pre
-   git push upstream master 24.11-pre
-   git describe HEAD # should yield 24.11-pre
+   git tag --annotate $NEXTVER-pre
+   git push upstream master $NEXTVER-pre
+   git describe HEAD # should yield $NEXTVER-pre
    ```
 
 ### And afterwards
@@ -169,11 +245,6 @@ Now that everything on git is done, we are still missing the channels.
 
    Example: [22.11](https://github.com/NixOS/infra/commit/9a0b3674a11b445c973334c78e8ca0eda36775e4)
 
-1. Create the backport [label](https://github.com/NixOS/nixpkgs/labels) for the new release branch:
-   - `backport release-24.05`
-
-   Use the description `Backport PR automatically` and the color value `#0fafaa`
-
 1. Update the ZHF issue, that now that the branch-off has been performed, fixes have to be backported.
    Examples: [22.05](https://github.com/NixOS/nixpkgs/issues/172160#issuecomment-1135112918)
 
@@ -181,12 +252,7 @@ Now that everything on git is done, we are still missing the channels.
 
 The following steps should be done after the channels have become available on [channels.nixos.org](https://channels.nixos.org).
 
-1. Update the flake input on the `nixos-search` repository, and create a pull request:
-
-   ```bash
-   git clone git@github.com:nixos/nixos-search
-   nix --extra-experimental-features "nix-command flakes" flake lock --update-input nixos-infra
-   ```
+1. Update the flake input on the `nixos-search` repository by running [the update-flake-lock](https://github.com/NixOS/nixos-search/actions/workflows/update-flake-lock.yml) and merging the new created PR afterwards.
 
 1. Give the [Marketing team](https://matrix.to/#/#marketing:nixos.org) a heads-up about the upcoming release
 
