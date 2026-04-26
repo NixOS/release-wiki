@@ -17,9 +17,6 @@ export NEWVER=23.05
 
 - Merge the Pull Request that marks broken packages as broken
 
-- Update [README.md](https://github.com/NixOS/nixpkgs/commit/40fd9ae3ac8048758abdcfc7d28a78b5f22fe97e) on master with
-  new stable NixOS version information. Then backport the change to the release branch.
-
 - Update [Upgrading NixOS](https://nixos.org/manual/nixos/stable/index.html#sec-upgrading) section of the manual to
   match new stable release version and backport this as well. This way the manual will already reflect the new version
   on release. Example: [22.05](https://github.com/nixos/nixpkgs/commit/cbaacfb8dfa2ddadfb152fa8ef163b40db9041af)
@@ -122,7 +119,7 @@ export NEWVER=23.05
 
 1. Create these PRs on master and backport to the release branch:
 
-   1. Update `rl-$NEWVER.section.md` with the final release date.
+   1. Update `nixos/doc/manual/release-notes/rl-$NEWVER.section.md` and `doc/release-notes/rl-2511.section.md` with the final release date.
 
    1. Commit and push all changes.
    
@@ -150,8 +147,8 @@ export NEWVER=23.05
 1. Find the commit id and tag the release **on the release branch**:
 
    ```bash
-   git tag --annotate --message="Release $NEWVER" "branch-off-$NEWVER" <COMMIT_ID>
-   git push upstream "branch-off-$NEWVER"
+   git tag --annotate --message="Release $NEWVER" "$NEWVER" <COMMIT_ID>
+   git push upstream "$NEWVER"
    ```
 
 1. Update [nixos-homepage](https://github.com/NixOS/nixos-homepage) for the release.
@@ -169,21 +166,21 @@ export NEWVER=23.05
 
    The website is hosted by a CDN so you may occasionally see the old site for a couple of minutes/hours (?) after your changes
 
-1. Update [infra](https://github.com/NixOS/infra) to reflect the `stable` channel
+1. Update `channels.nix` in the [infra](https://github.com/NixOS/infra) repository to reflect the `stable` channel
    status for $NEWVER and the `deprecated` status for $OLDVER.
    
-   Examples: [22.11](https://github.com/NixOS/infra/pull/228), [22.05](https://github.com/NixOS/infra/pull/210), [21.11](https://github.com/NixOS/infra/pull/192)
+   Examples: [25.11](https://github.com/NixOS/infra/pull/907)
 
 1. Create a new topic on [Discourse](https://discourse.nixos.org/) to announce the release.
 
    Examples: [22.11](https://discourse.nixos.org/t/nixos-22-11-released/23637), [22.05](https://discourse.nixos.org/t/nixos-22-05-released/19404)
 
 1. Once the Pull Request in `infra` is merged, update [nixos-search](https://github.com/NixOS/nixos-search/) to mark the channel as released.
-   This is the same process as for the creation of the beta channel in the project.
+   For that, run [the update-flake-lock](https://github.com/NixOS/nixos-search/actions/workflows/update-flake-lock.yml) and merge the new created PR afterwards.
 
 ## After Release
 
-1. Update issue templates to include the new version ([25.05 example](https://github.com/NixOS/nixpkgs/pull/407705))
+1. Update issue templates to mark the newly released version as stable ([25.05 example](https://github.com/NixOS/nixpkgs/pull/407705))
 
 1. Add the new release to repology. Don't remove old releases, they want to keep them around.
 

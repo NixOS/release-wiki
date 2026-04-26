@@ -172,9 +172,9 @@ export NEXTVER=24.11
    git switch -c rm-branchoff-documentation-changes
    ```
 
-1. Add the release name to [`nixos/doc/manual/release-notes/rl-$NEXTVER.section.md`](https://github.com/NixOS/nixpkgs/commit/bf470a4fddca6315d1b7c256a873c90f755b02d9#diff-417feb28ebc7ab0109746fef515d6cccdcd5af5c7386e1ce0b186db9b8e5677b), [`doc/release-notes/rl-2411.section.md`](https://github.com/NixOS/nixpkgs/commit/bf470a4fddca6315d1b7c256a873c90f755b02d9#diff-c5ba8855198f95e7fdb39bcd1106bb29c96b85c14bdfc4030b235a02806bf9b3)
+1. Add the release name to [`nixos/doc/manual/release-notes/rl-2411.section.md`](https://github.com/NixOS/nixpkgs/commit/bf470a4fddca6315d1b7c256a873c90f755b02d9#diff-417feb28ebc7ab0109746fef515d6cccdcd5af5c7386e1ce0b186db9b8e5677b), [`doc/release-notes/rl-2411.section.md`](https://github.com/NixOS/nixpkgs/commit/bf470a4fddca6315d1b7c256a873c90f755b02d9#diff-c5ba8855198f95e7fdb39bcd1106bb29c96b85c14bdfc4030b235a02806bf9b3). Replace 2411 with your release number without the dot.
 
-1. Include `rl-$NEXTVER.section.md` in [`nixos/doc/manual/release-notes/release-notes.md`](https://github.com/NixOS/nixpkgs/commit/bf470a4fddca6315d1b7c256a873c90f755b02d9#diff-9b75bf997f6c13cb4a15145ef9e758a28addeeff4a3a5cb893a5c23a976b3a1a), [`doc/release-notes/release-notes.md`](https://github.com/NixOS/nixpkgs/commit/bf470a4fddca6315d1b7c256a873c90f755b02d9#diff-89abd55b6169384ba08083097a7ac5f5c30ea35d432a0ba2d1a76887f50a4f49)
+1. Include `rl-2411.section.md` in [`nixos/doc/manual/release-notes/release-notes.md`](https://github.com/NixOS/nixpkgs/commit/bf470a4fddca6315d1b7c256a873c90f755b02d9#diff-9b75bf997f6c13cb4a15145ef9e758a28addeeff4a3a5cb893a5c23a976b3a1a), [`doc/release-notes/release-notes.md`](https://github.com/NixOS/nixpkgs/commit/bf470a4fddca6315d1b7c256a873c90f755b02d9#diff-89abd55b6169384ba08083097a7ac5f5c30ea35d432a0ba2d1a76887f50a4f49). Replace 2411 with your release number without the dot.
 
 1. Update [`nixos/manual/doc/redirects.json`](https://github.com/NixOS/nixpkgs/commit/bf470a4fddca6315d1b7c256a873c90f755b02d9#diff-8e9034e569678f9c67bf82087ff7dced3b18de5491707988a43fb8979a82794f), [`doc/redirects.json`](https://github.com/NixOS/nixpkgs/commit/bf470a4fddca6315d1b7c256a873c90f755b02d9#diff-9499ad98fd024845445ff2f32b424d29f632932b4bbe15dfd9d0f447890bbae6) and to include the new sections.
 
@@ -215,7 +215,7 @@ These changes should be done when the two PRs are already merged.
   ```
 
 1. Increment the [`lib/.version`](https://github.com/NixOS/nixpkgs/commit/01268fda85b7eee4e462c873d8654f975067731f#diff-2bc0e46110b507d6d5a344264ef15adaR1)
-   file. This file must **not** end with a new line!
+   file. This file must **not** end with a newline!
 
    ```bash
    # The release after $NEWVER (24.05 -> 24.11)
@@ -224,6 +224,16 @@ These changes should be done when the two PRs are already merged.
 
 1. Update the `codeName` attribute in [`lib/trivial.nix`](https://github.com/NixOS/nixpkgs/commit/2c28f1de7cdc10be556d2106108411dd2482794b#diff-29c71aa8261b14b1cad6e6fa28486fed7295050db4eeb32ba205672ba91d40e1)
    This will be the name for the next release.
+
+1. Evaluate Nixpkgs to check for mistakes:
+   ```bash
+   nix-build ci -A eval.singleSystem --argstr evalSystem "x86_64-linux" --arg chunkSize 8000
+   ```
+
+1. Format your code changes:
+   ```bash
+   nix-shell --run treefmt
+   ```
 
 1. Commit the changes as `$NEXTVER is <codeName>`([25.11 example](https://github.com/NixOS/nixpkgs/commit/2493002b10ccef0880f72d7720538f91fb4f7434))
 
@@ -247,6 +257,7 @@ Now that everything on git is done, we are still missing the channels.
 
 1. Update the ZHF issue, that now that the branch-off has been performed, fixes have to be backported.
    Examples: [22.05](https://github.com/NixOS/nixpkgs/issues/172160#issuecomment-1135112918)
+
 
 ### Once the channel is available
 
