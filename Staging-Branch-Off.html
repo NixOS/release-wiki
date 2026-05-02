@@ -169,10 +169,10 @@ git branch staging-next-$NEWVER
 </li>
 </ol>
 <h2 id="incorporate-new-branches"><a class="header" href="#incorporate-new-branches">Incorporate new branches</a></h2>
-<p>We now incorporate the new branches into the workflows. The suggestion is to do these changes via a PR.</p>
+<p>We now incorporate the new branches into the workflows. The suggestion is two do step 1 and 2 in seperate PRs, as step 2. should be backported, as it's a CI change.</p>
 <ol>
 <li>
-<p>Create new <a href="https://github.com/NixOS/nixpkgs/commit/95cc97659c813256dc17d2905904144c1588e6ad">NixOS and Nixpkgs release notes file</a></p>
+<p>Create new <a href="https://github.com/NixOS/nixpkgs/commit/95cc97659c813256dc17d2905904144c1588e6ad">NixOS and Nixpkgs release notes file</a> and PR this</p>
 </li>
 <li>
 <p>Update <a href="https://github.com/NixOS/nixpkgs/commit/86de96dbc1a8e65bc5f02b98d708315c0ec0fc02">periodic-merge workflow</a> so that</p>
@@ -180,6 +180,7 @@ git branch staging-next-$NEWVER
 <li>master gets merged into staging-next-24.05</li>
 <li>staging-next-24.05 gets merged into staging-24.05</li>
 </ul>
+<p>and PR this.</p>
 </li>
 <li>
 <p>Create the backport <a href="https://github.com/NixOS/nixpkgs/labels">label</a> for the new staging branch:</p>

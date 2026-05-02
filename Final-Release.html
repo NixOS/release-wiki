@@ -163,10 +163,6 @@ export NEWVER=23.05
 <p>Merge the Pull Request that marks broken packages as broken</p>
 </li>
 <li>
-<p>Update <a href="https://github.com/NixOS/nixpkgs/commit/40fd9ae3ac8048758abdcfc7d28a78b5f22fe97e">README.md</a> on master with
-new stable NixOS version information. Then backport the change to the release branch.</p>
-</li>
-<li>
 <p>Update <a href="https://nixos.org/manual/nixos/stable/index.html#sec-upgrading">Upgrading NixOS</a> section of the manual to
 match new stable release version and backport this as well. This way the manual will already reflect the new version
 on release. Example: <a href="https://github.com/nixos/nixpkgs/commit/cbaacfb8dfa2ddadfb152fa8ef163b40db9041af">22.05</a></p>
@@ -270,7 +266,7 @@ Make sure to push to a branch on the <code>nixos-homepage</code> repository, not
 <p>Create these PRs on master and backport to the release branch:</p>
 <ol>
 <li>
-<p>Update <code>rl-$NEWVER.section.md</code> with the final release date.</p>
+<p>Update <code>nixos/doc/manual/release-notes/rl-$NEWVER.section.md</code> and <code>doc/release-notes/rl-2511.section.md</code> with the final release date.</p>
 </li>
 <li>
 <p>Commit and push all changes.</p>
@@ -298,8 +294,8 @@ git push upstream master
 </li>
 <li>
 <p>Find the commit id and tag the release <strong>on the release branch</strong>:</p>
-<pre><code class="language-bash">git tag --annotate --message=&quot;Release $NEWVER&quot; &quot;branch-off-$NEWVER&quot; &lt;COMMIT_ID&gt;
-git push upstream &quot;branch-off-$NEWVER&quot;
+<pre><code class="language-bash">git tag --annotate --message=&quot;Release $NEWVER&quot; &quot;$NEWVER&quot; &lt;COMMIT_ID&gt;
+git push upstream &quot;$NEWVER&quot;
 </code></pre>
 </li>
 <li>
@@ -321,9 +317,9 @@ input <code>released-nixpkgs-stable</code> to $NEWVER and then run:</p>
 <p>The website is hosted by a CDN so you may occasionally see the old site for a couple of minutes/hours (?) after your changes</p>
 </li>
 <li>
-<p>Update <a href="https://github.com/NixOS/infra">infra</a> to reflect the <code>stable</code> channel
+<p>Update <code>channels.nix</code> in the <a href="https://github.com/NixOS/infra">infra</a> repository to reflect the <code>stable</code> channel
 status for $NEWVER and the <code>deprecated</code> status for $OLDVER.</p>
-<p>Examples: <a href="https://github.com/NixOS/infra/pull/228">22.11</a>, <a href="https://github.com/NixOS/infra/pull/210">22.05</a>, <a href="https://github.com/NixOS/infra/pull/192">21.11</a></p>
+<p>Examples: <a href="https://github.com/NixOS/infra/pull/907">25.11</a></p>
 </li>
 <li>
 <p>Create a new topic on <a href="https://discourse.nixos.org/">Discourse</a> to announce the release.</p>
@@ -331,13 +327,13 @@ status for $NEWVER and the <code>deprecated</code> status for $OLDVER.</p>
 </li>
 <li>
 <p>Once the Pull Request in <code>infra</code> is merged, update <a href="https://github.com/NixOS/nixos-search/">nixos-search</a> to mark the channel as released.
-This is the same process as for the creation of the beta channel in the project.</p>
+For that, run <a href="https://github.com/NixOS/nixos-search/actions/workflows/update-flake-lock.yml">the update-flake-lock</a> and merge the new created PR afterwards.</p>
 </li>
 </ol>
 <h2 id="after-release"><a class="header" href="#after-release">After Release</a></h2>
 <ol>
 <li>
-<p>Update issue templates to include the new version (<a href="https://github.com/NixOS/nixpkgs/pull/407705">25.05 example</a>)</p>
+<p>Update issue templates to mark the newly released version as stable (<a href="https://github.com/NixOS/nixpkgs/pull/407705">25.05 example</a>)</p>
 </li>
 <li>
 <p>Add the new release to repology. Don't remove old releases, they want to keep them around.</p>
