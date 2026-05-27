@@ -196,9 +196,15 @@ the oldest supported release.</p>
 <p>Remove old release from LXC/Incus image server</p>
 <p>Ping <a href="https://github.com/adamcstephens">Adam C. Stephens</a> or open a Pull Request to <a href="https://github.com/lxc/lxc-ci/blob/720a50e23f9a122694056d7394226476ae24f973/jenkins/jobs/image-nixos.yaml#L19-L21">lxc/lxc-ci</a></p>
 </li>
+<li>
+<p>Update the nixpkgs branch protection rules in <a href="https://github.com/NixOS/org">NixOS/org</a> and remove the old branches from the Merge Queue rules at:</p>
+<ul>
+<li><a href="https://github.com/NixOS/org/blob/main/rulesets/nixpkgs/require-merge-queue.json">rulesets/nixpkgs/require-merge-queue.json</a></li>
+<li><a href="https://github.com/NixOS/org/blob/main/rulesets/nixpkgs/require-merge-queue-except-periodic-merges.json">rulesets/nixpkgs/require-merge-queue-except-periodic-merges.json</a></li>
+</ul>
+<p>Example: <a href="https://github.com/NixOS/org/pull/226/changes">NixOS/org#226</a></p>
+</li>
 </ol>
-<p>Last but not least, update the Nixpkgs branch protection rules and remove the old branch from the Merge Queue rule at:
-https://github.com/NixOS/org/blob/main/rulesets/nixpkgs/require-merge-queue.json</p>
 
                     </main>
 

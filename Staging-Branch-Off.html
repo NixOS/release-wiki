@@ -147,6 +147,12 @@
                         <h1 id="staging-branch-off"><a class="header" href="#staging-branch-off">Staging Branch-off</a></h1>
 <p><strong>Requirement:</strong> The last <code>staging-next</code> cycle before the release started and <code>staging</code> is now unrestricted.</p>
 <p>For these steps &quot;24.05&quot; represents the current release tag (the version you want to release).</p>
+<h2 id="nixpkgs-branch-protection-ruleset"><a class="header" href="#nixpkgs-branch-protection-ruleset">nixpkgs branch protection ruleset</a></h2>
+<p>New staging branches (i.e. <code>staging-24.05</code> and <code>staging-next-24.05</code>) should be added to
+<a href="https://github.com/NixOS/org/blob/977414a805a7d540c4c64b97aecbadf9fbc0a469/rulesets/nixpkgs/require-merge-queue-except-periodic-merges.json">rulesets/nixpkgs/require-merge-queue-except-periodic-merges.json</a>.</p>
+<p>You can propose the changes as a Pull Request to the <a href="https://github.com/NixOS/org">NixOS/org</a> repository.
+They can be applied by NixOS org owners or nixpkgs admin in advance.</p>
+<p>Example: <a href="https://github.com/NixOS/org/pull/258/changes">NixOS/org#258</a></p>
 <h2 id="git-branches"><a class="header" href="#git-branches">Git branches</a></h2>
 <p>Set NEWVER to the new release version:</p>
 <pre><code class="language-bash">export NEWVER=24.05

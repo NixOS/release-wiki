@@ -422,6 +422,12 @@ to coordinate the staging-next merges.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="staging-branch-off"><a class="header" href="#staging-branch-off">Staging Branch-off</a></h1>
 <p><strong>Requirement:</strong> The last <code>staging-next</code> cycle before the release started and <code>staging</code> is now unrestricted.</p>
 <p>For these steps &quot;24.05&quot; represents the current release tag (the version you want to release).</p>
+<h2 id="nixpkgs-branch-protection-ruleset"><a class="header" href="#nixpkgs-branch-protection-ruleset">nixpkgs branch protection ruleset</a></h2>
+<p>New staging branches (i.e. <code>staging-24.05</code> and <code>staging-next-24.05</code>) should be added to
+<a href="https://github.com/NixOS/org/blob/977414a805a7d540c4c64b97aecbadf9fbc0a469/rulesets/nixpkgs/require-merge-queue-except-periodic-merges.json">rulesets/nixpkgs/require-merge-queue-except-periodic-merges.json</a>.</p>
+<p>You can propose the changes as a Pull Request to the <a href="https://github.com/NixOS/org">NixOS/org</a> repository.
+They can be applied by NixOS org owners or nixpkgs admin in advance.</p>
+<p>Example: <a href="https://github.com/NixOS/org/pull/258/changes">NixOS/org#258</a></p>
 <h2 id="git-branches"><a class="header" href="#git-branches">Git branches</a></h2>
 <p>Set NEWVER to the new release version:</p>
 <pre><code class="language-bash">export NEWVER=24.05
@@ -527,7 +533,7 @@ before release to create the necessary Hydra Jobsets. You can link them this sec
 <li><code>true</code> leads to <code>24.05.1234.0abs3fe</code></li>
 <li><code>false</code> leads to <code>24.05pre1234.0abs3fe</code></li>
 </ul>
-<h2 id="nixpkgs-branch-protection-ruleset"><a class="header" href="#nixpkgs-branch-protection-ruleset">Nixpkgs branch protection ruleset</a></h2>
+<h2 id="nixpkgs-branch-protection-ruleset-1"><a class="header" href="#nixpkgs-branch-protection-ruleset-1">Nixpkgs branch protection ruleset</a></h2>
 <p>The same as for the jobsets applies to Nixpkgs branch protection rulesets, which can be updated by NixOS org owners in advance.
 You can propose the changes as a Pull Request to the NixOS/org repository.</p>
 <p>New release branches should be added to the <code>includes</code> list in:</p>
@@ -1100,9 +1106,15 @@ the oldest supported release.</p>
 <p>Remove old release from LXC/Incus image server</p>
 <p>Ping <a href="https://github.com/adamcstephens">Adam C. Stephens</a> or open a Pull Request to <a href="https://github.com/lxc/lxc-ci/blob/720a50e23f9a122694056d7394226476ae24f973/jenkins/jobs/image-nixos.yaml#L19-L21">lxc/lxc-ci</a></p>
 </li>
+<li>
+<p>Update the nixpkgs branch protection rules in <a href="https://github.com/NixOS/org">NixOS/org</a> and remove the old branches from the Merge Queue rules at:</p>
+<ul>
+<li><a href="https://github.com/NixOS/org/blob/main/rulesets/nixpkgs/require-merge-queue.json">rulesets/nixpkgs/require-merge-queue.json</a></li>
+<li><a href="https://github.com/NixOS/org/blob/main/rulesets/nixpkgs/require-merge-queue-except-periodic-merges.json">rulesets/nixpkgs/require-merge-queue-except-periodic-merges.json</a></li>
+</ul>
+<p>Example: <a href="https://github.com/NixOS/org/pull/226/changes">NixOS/org#226</a></p>
+</li>
 </ol>
-<p>Last but not least, update the Nixpkgs branch protection rules and remove the old branch from the Merge Queue rule at:
-https://github.com/NixOS/org/blob/main/rulesets/nixpkgs/require-merge-queue.json</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="handover-to-the-next-team"><a class="header" href="#handover-to-the-next-team">Handover to the next team</a></h1>
 <p>Some time after your EOL cleanup, publish a new topic to Discourse, asking for a new editor and a new manager to step up.
 You select the team.</p>
