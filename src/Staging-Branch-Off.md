@@ -4,6 +4,16 @@
 
 For these steps "24.05" represents the current release tag (the version you want to release).
 
+## nixpkgs branch protection ruleset
+
+New staging branches (i.e. `staging-24.05` and `staging-next-24.05`) should be added to
+[rulesets/nixpkgs/require-merge-queue-except-periodic-merges.json](https://github.com/NixOS/org/blob/977414a805a7d540c4c64b97aecbadf9fbc0a469/rulesets/nixpkgs/require-merge-queue-except-periodic-merges.json).
+
+You can propose the changes as a Pull Request to the [NixOS/org](https://github.com/NixOS/org) repository.
+They can be applied by NixOS org owners or nixpkgs admin in advance.
+
+Example: [NixOS/org#258](https://github.com/NixOS/org/pull/258/changes)
+
 ## Git branches
 
 Set NEWVER to the new release version:
