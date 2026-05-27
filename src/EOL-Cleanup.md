@@ -46,5 +46,8 @@ Now create a PR that contains the following changes:
 
    Ping [Adam C. Stephens](https://github.com/adamcstephens) or open a Pull Request to [lxc/lxc-ci](https://github.com/lxc/lxc-ci/blob/720a50e23f9a122694056d7394226476ae24f973/jenkins/jobs/image-nixos.yaml#L19-L21)
 
-Last but not least, update the Nixpkgs branch protection rules and remove the old branch from the Merge Queue rule at:
-https://github.com/NixOS/org/blob/main/rulesets/nixpkgs/require-merge-queue.json
+1. Update the nixpkgs branch protection rules in [NixOS/org](https://github.com/NixOS/org) and remove the old branches from the Merge Queue rules at:
+   - [rulesets/nixpkgs/require-merge-queue.json](https://github.com/NixOS/org/blob/main/rulesets/nixpkgs/require-merge-queue.json)
+   - [rulesets/nixpkgs/require-merge-queue-except-periodic-merges.json](https://github.com/NixOS/org/blob/main/rulesets/nixpkgs/require-merge-queue-except-periodic-merges.json)
+
+   Example: [NixOS/org#226](https://github.com/NixOS/org/pull/226/changes)
