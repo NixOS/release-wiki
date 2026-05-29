@@ -224,6 +224,7 @@ These changes should be done when the two PRs are already merged.
 
 1. Update the `codeName` attribute in [`lib/trivial.nix`](https://github.com/NixOS/nixpkgs/commit/2c28f1de7cdc10be556d2106108411dd2482794b#diff-29c71aa8261b14b1cad6e6fa28486fed7295050db4eeb32ba205672ba91d40e1)
    This will be the name for the next release.
+   Make sure the new codename had not been used before.
 
 1. Evaluate Nixpkgs to check for mistakes:
    ```bash
