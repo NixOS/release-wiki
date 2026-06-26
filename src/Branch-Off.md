@@ -12,55 +12,55 @@ infrastructure team and the release team to work more asynchronously. Reach out 
 before release to create the necessary Hydra Jobsets. You can link them this section.
 
 - [https://hydra.nixos.org/project/nixos](https://hydra.nixos.org/project/nixos)
-  - release-24.05
-  - release-24.05-small
-  - staging-next-24.05-small
+  - release-26.11
+  - release-26.11-small
+  - staging-next-26.11-small
 - [https://hydra.nixos.org/project/nixpkgs](https://hydra.nixos.org/project/nixpkgs)
-  - nixpkgs-24.05-darwin
-  - staging-next-24.05
-  - staging-24.05
+  - nixpkgs-26.11
+  - staging-next-26.11
+  - staging-26.11
 
 The easiest way to create the new jobsets is to clone the ones from the previous release and rewrite the version number.
 
-Example configuration: [nixos:release-25.11](https://hydra.nixos.org/jobset/nixos/release-25.11#tabs-configuration)
+Example configuration: [nixos:release-26.05](https://hydra.nixos.org/jobset/nixos/release-25.11#tabs-configuration)
 
 |Field|Value|
 |-|-|
 |State|Enabled|
-|Description|NixOS 24.05 release branch|
+|Description|NixOS 26.05 release branch|
 |Nix expression|`nixos/release-combined.nix` in input `nixpkgs`|
 |Check interval|151200|
 |Scheduling shares|5000000 (8.32% out of 60071636 shares)|
 |Enable Dynamic RunCommand Hooks:|No (not enabled by server)|
 |Number of evaluations to keep|1|
 
-### Inputs for `nixos/release-24.05`, `nixos/release-24.05-small`:
+### Inputs for `nixos/release-26.11`, `nixos/release-26.11-small`:
 
 |Input name|Type|Values|
 |-|-|-|
-|`nixpkgs`|Git checkout|`https://github.com/NixOS/nixpkgs.git release-24.05`|
+|`nixpkgs`|Git checkout|`https://github.com/NixOS/nixpkgs.git release-26.11`|
 |`stableBranch`|Boolean|`false`|
-|`supportedSystems`|Nix expression|`[ "x86_64-linux" "aarch64-linux" ]`|
+|`supportedSystems`|Nix expression|`[ "aarch64-linux"  "x86_64-linux" ]`|
 
 `stableBranch` influences the `versionSuffix` in NixOS and the channel tarball.
 
-  - `true` leads to `24.05.1234.0abs3fe`
-  - `false` leads to `24.05pre1234.0abs3fe`
+  - `true` leads to `26.11.1234.0abs3fe`
+  - `false` leads to `26.11pre1234.0abs3fe`
 
 Note that changing this leads to a rebuild of most NixOS tests!
 
-### Inputs for `nixpkgs/nixpkgs-24.05-darwin`:
+### Inputs for `nixpkgs/nixpkgs-26.11`:
 
 |Input name|Type|Values|
 |-|-|-|
-|`nixpkgs`|Git checkout|`https://github.com/NixOS/nixpkgs.git release-24.05`|
+|`nixpkgs`|Git checkout|`https://github.com/NixOS/nixpkgs.git release-26.11`|
 |`officialRelease`|Boolean|`false`|
-|`supportedSystems`|Nix expression|`[ "x86_64-darwin" "aarch64-darwin" ]`|
+|`supportedSystems`|Nix expression|`[ "aarch64-linux" "aarch64-darwin" "x86_64-linux" ]`|
 
 `officialRelease` influences the `versionSuffix` of the release tarball
 
-  - `true` leads to `24.05.1234.0abs3fe`
-  - `false` leads to `24.05pre1234.0abs3fe`
+  - `true` leads to `26.11.1234.0abs3fe`
+  - `false` leads to `26.11pre1234.0abs3fe`
 
 ## Nixpkgs branch protection ruleset
 
