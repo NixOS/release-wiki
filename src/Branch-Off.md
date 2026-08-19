@@ -264,6 +264,8 @@ Now that everything on git is done, we are still missing the channels.
 
 The following steps should be done after the channels have become available on [channels.nixos.org](https://channels.nixos.org).
 
+1. Create the appropriate [redirects](https://github.com/NixOS/flake-registry/commit/122a9ae66c0121367e4e1d7fa2a9343762c7d6b1) in the [Nix flake registry](https://github.com/NixOS/flake-registry).
+
 1. Update the flake input on the `nixos-search` repository by running [the update-flake-lock](https://github.com/NixOS/nixos-search/actions/workflows/update-flake-lock.yml) and merging the new created PR afterwards.
 
 1. Give the [Marketing team](https://matrix.to/#/#marketing:nixos.org) a heads-up about the upcoming release
