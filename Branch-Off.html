@@ -405,6 +405,9 @@ Examples: <a href="https://github.com/NixOS/nixpkgs/issues/172160#issuecomment-1
 <p>The following steps should be done after the channels have become available on <a href="https://channels.nixos.org">channels.nixos.org</a>.</p>
 <ol>
 <li>
+<p>Create the appropriate <a href="https://github.com/NixOS/flake-registry/commit/122a9ae66c0121367e4e1d7fa2a9343762c7d6b1">redirects</a> in the <a href="https://github.com/NixOS/flake-registry">Nix flake registry</a>.</p>
+</li>
+<li>
 <p>Update the flake input on the <code>nixos-search</code> repository by running <a href="https://github.com/NixOS/nixos-search/actions/workflows/update-flake-lock.yml">the update-flake-lock</a> and merging the new created PR afterwards.</p>
 </li>
 <li>
