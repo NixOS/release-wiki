@@ -483,24 +483,24 @@ before release to create the necessary Hydra Jobsets. You can link them this sec
 <ul>
 <li><a href="https://hydra.nixos.org/project/nixos">https://hydra.nixos.org/project/nixos</a>
 <ul>
-<li>release-24.05</li>
-<li>release-24.05-small</li>
-<li>staging-next-24.05-small</li>
+<li>release-26.11</li>
+<li>release-26.11-small</li>
+<li>staging-next-26.11-small</li>
 </ul>
 </li>
 <li><a href="https://hydra.nixos.org/project/nixpkgs">https://hydra.nixos.org/project/nixpkgs</a>
 <ul>
-<li>nixpkgs-24.05-darwin</li>
-<li>staging-next-24.05</li>
-<li>staging-24.05</li>
+<li>nixpkgs-26.11</li>
+<li>staging-next-26.11</li>
+<li>staging-26.11</li>
 </ul>
 </li>
 </ul>
 <p>The easiest way to create the new jobsets is to clone the ones from the previous release and rewrite the version number.</p>
-<p>Example configuration: <a href="https://hydra.nixos.org/jobset/nixos/release-25.11#tabs-configuration">nixos:release-25.11</a></p>
+<p>Example configuration: <a href="https://hydra.nixos.org/jobset/nixos/release-25.11#tabs-configuration">nixos:release-26.05</a></p>
 <div class="table-wrapper"><table><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody>
 <tr><td>State</td><td>Enabled</td></tr>
-<tr><td>Description</td><td>NixOS 24.05 release branch</td></tr>
+<tr><td>Description</td><td>NixOS 26.05 release branch</td></tr>
 <tr><td>Nix expression</td><td><code>nixos/release-combined.nix</code> in input <code>nixpkgs</code></td></tr>
 <tr><td>Check interval</td><td>151200</td></tr>
 <tr><td>Scheduling shares</td><td>5000000 (8.32% out of 60071636 shares)</td></tr>
@@ -508,30 +508,30 @@ before release to create the necessary Hydra Jobsets. You can link them this sec
 <tr><td>Number of evaluations to keep</td><td>1</td></tr>
 </tbody></table>
 </div>
-<h3 id="inputs-for-nixosrelease-2405-nixosrelease-2405-small"><a class="header" href="#inputs-for-nixosrelease-2405-nixosrelease-2405-small">Inputs for <code>nixos/release-24.05</code>, <code>nixos/release-24.05-small</code>:</a></h3>
+<h3 id="inputs-for-nixosrelease-2611-nixosrelease-2611-small"><a class="header" href="#inputs-for-nixosrelease-2611-nixosrelease-2611-small">Inputs for <code>nixos/release-26.11</code>, <code>nixos/release-26.11-small</code>:</a></h3>
 <div class="table-wrapper"><table><thead><tr><th>Input name</th><th>Type</th><th>Values</th></tr></thead><tbody>
-<tr><td><code>nixpkgs</code></td><td>Git checkout</td><td><code>https://github.com/NixOS/nixpkgs.git release-24.05</code></td></tr>
+<tr><td><code>nixpkgs</code></td><td>Git checkout</td><td><code>https://github.com/NixOS/nixpkgs.git release-26.11</code></td></tr>
 <tr><td><code>stableBranch</code></td><td>Boolean</td><td><code>false</code></td></tr>
-<tr><td><code>supportedSystems</code></td><td>Nix expression</td><td><code>[ &quot;x86_64-linux&quot; &quot;aarch64-linux&quot; ]</code></td></tr>
+<tr><td><code>supportedSystems</code></td><td>Nix expression</td><td><code>[ &quot;aarch64-linux&quot;  &quot;x86_64-linux&quot; ]</code></td></tr>
 </tbody></table>
 </div>
 <p><code>stableBranch</code> influences the <code>versionSuffix</code> in NixOS and the channel tarball.</p>
 <ul>
-<li><code>true</code> leads to <code>24.05.1234.0abs3fe</code></li>
-<li><code>false</code> leads to <code>24.05pre1234.0abs3fe</code></li>
+<li><code>true</code> leads to <code>26.11.1234.0abs3fe</code></li>
+<li><code>false</code> leads to <code>26.11pre1234.0abs3fe</code></li>
 </ul>
 <p>Note that changing this leads to a rebuild of most NixOS tests!</p>
-<h3 id="inputs-for-nixpkgsnixpkgs-2405-darwin"><a class="header" href="#inputs-for-nixpkgsnixpkgs-2405-darwin">Inputs for <code>nixpkgs/nixpkgs-24.05-darwin</code>:</a></h3>
+<h3 id="inputs-for-nixpkgsnixpkgs-2611"><a class="header" href="#inputs-for-nixpkgsnixpkgs-2611">Inputs for <code>nixpkgs/nixpkgs-26.11</code>:</a></h3>
 <div class="table-wrapper"><table><thead><tr><th>Input name</th><th>Type</th><th>Values</th></tr></thead><tbody>
-<tr><td><code>nixpkgs</code></td><td>Git checkout</td><td><code>https://github.com/NixOS/nixpkgs.git release-24.05</code></td></tr>
+<tr><td><code>nixpkgs</code></td><td>Git checkout</td><td><code>https://github.com/NixOS/nixpkgs.git release-26.11</code></td></tr>
 <tr><td><code>officialRelease</code></td><td>Boolean</td><td><code>false</code></td></tr>
-<tr><td><code>supportedSystems</code></td><td>Nix expression</td><td><code>[ &quot;x86_64-darwin&quot; &quot;aarch64-darwin&quot; ]</code></td></tr>
+<tr><td><code>supportedSystems</code></td><td>Nix expression</td><td><code>[ &quot;aarch64-linux&quot; &quot;aarch64-darwin&quot; &quot;x86_64-linux&quot; ]</code></td></tr>
 </tbody></table>
 </div>
 <p><code>officialRelease</code> influences the <code>versionSuffix</code> of the release tarball</p>
 <ul>
-<li><code>true</code> leads to <code>24.05.1234.0abs3fe</code></li>
-<li><code>false</code> leads to <code>24.05pre1234.0abs3fe</code></li>
+<li><code>true</code> leads to <code>26.11.1234.0abs3fe</code></li>
+<li><code>false</code> leads to <code>26.11pre1234.0abs3fe</code></li>
 </ul>
 <h2 id="nixpkgs-branch-protection-ruleset-1"><a class="header" href="#nixpkgs-branch-protection-ruleset-1">Nixpkgs branch protection ruleset</a></h2>
 <p>The same as for the jobsets applies to Nixpkgs branch protection rulesets, which can be updated by NixOS org owners in advance.
