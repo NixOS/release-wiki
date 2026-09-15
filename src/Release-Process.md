@@ -4,7 +4,7 @@ These pages give an overview of the release process with as many details as ther
 
 ## Release Schedule
 
-With [RFC85](https://github.com/NixOS/rfcs/blob/master/rfcs/0085-nixos-release-stablization.md), the release schedule is largely already dictated below:
+With [RFC85](https://github.com/NixOS/rfcs/blob/master/rfcs/0085-nixos-release-stabilization.md), the release schedule is largely already dictated below:
 
 | Weeks from Release | Branches Affected | Events |
 | --- | --- | --- |

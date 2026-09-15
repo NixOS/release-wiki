@@ -40,7 +40,7 @@ Now create the branches:
 
 ## Incorporate new branches
 
-We now incorporate the new branches into the workflows. The suggestion is two do step 1 and 2 in seperate PRs, as step 2. should be backported, as it's a CI change.
+We now incorporate the new branches into the workflows. The suggestion is two do step 1 and 2 in separate PRs, as step 2. should be backported, as it's a CI change.
 
 1. Create new [NixOS and Nixpkgs release notes file](https://github.com/NixOS/nixpkgs/commit/95cc97659c813256dc17d2905904144c1588e6ad) and PR this
 
