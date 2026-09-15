@@ -156,7 +156,7 @@ Update metadata on the release branch, create its staging branches and tag the r
 
 ### Back on the master branch
 
-Now we prepare the master branch for the next release after this one. We do this in two steps, error-prone changes thorugh a PR and direct to allow for proper tagging.
+Now we prepare the master branch for the next release after this one. We do this in two steps, error-prone changes through a PR and direct to allow for proper tagging.
 
 Set NEXTVER to the release number after the one you released (i.e. when you release 24.05, `NEXTVER=24.11`).
 

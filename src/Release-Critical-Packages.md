@@ -19,7 +19,7 @@ iterations for these fixes to be applied.
 
 ### Process for Modifying Release Critical Packages
 
-A release retrospective will take place after a release occured; one of the
+A release retrospective will take place after a release occurred; one of the
 topics of discussion will be to modify the list of critical packages.
 Packages may be added if they caused a significant amount of pain, or packages
 may be removed if their updates cause little to no pain. Pain in this case
