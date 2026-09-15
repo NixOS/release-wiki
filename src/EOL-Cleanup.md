@@ -38,7 +38,7 @@ Now create a PR that contains the following changes:
 1. Increase the `oldestSupportedRelease` in `lib/trivial.nix` to match
    the oldest supported release.
 
-   Note: This may need a seperate PR as it can be breaking.
+   Note: This may need a separate PR as it can be breaking.
 
    Examples: [22.05](https://github.com/NixOS/nixpkgs/pull/180152)
 
