@@ -36,7 +36,7 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-3e9df15a.js";
+            window.path_to_searchindex_js = "searchindex-64a650b6.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-5b23d019.js"></script>
@@ -251,7 +251,7 @@ in this role.</p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="release-editors"><a class="header" href="#release-editors">Release Editors</a></h1>
 <p>The role of the release editors is a result of an action item from the
-21.11 release, where the satistfaction with the release notes was low.</p>
+21.11 release, where the satisfaction with the release notes was low.</p>
 <p>The first release editor role was filled in the 22.05 release with a
 focus on the release notes and content for the homepage.</p>
 <h2 id="responsibilities"><a class="header" href="#responsibilities">Responsibilities</a></h2>
@@ -269,7 +269,7 @@ focus on the release notes and content for the homepage.</p>
 warrant treating them differently when stabilizing the package set leading up to
 a stable release. Generally, these packages will be closely related to <code>stdenv</code>
 or fundamental to NixOS (e.g. <code>systemd</code>). The implications of
-<a href="https://github.com/NixOS/rfcs/blob/master/rfcs/0085-nixos-release-stablization.md">RFC 0085</a>
+<a href="https://github.com/NixOS/rfcs/blob/master/rfcs/0085-nixos-release-stabilization.md">RFC 0085</a>
 are that these packages can not have breaking changes applied to them for six weeks
 leading up to a release date. This delay allows for changes in these packages to be
 sufficiently stabilized through usage on unstable, and allows for many staging
@@ -283,7 +283,7 @@ iterations for these fixes to be applied.</p>
 <li><code>systemd</code></li>
 </ul>
 <h3 id="process-for-modifying-release-critical-packages"><a class="header" href="#process-for-modifying-release-critical-packages">Process for Modifying Release Critical Packages</a></h3>
-<p>A release retrospective will take place after a release occured; one of the
+<p>A release retrospective will take place after a release occurred; one of the
 topics of discussion will be to modify the list of critical packages.
 Packages may be added if they caused a significant amount of pain, or packages
 may be removed if their updates cause little to no pain. Pain in this case
@@ -293,7 +293,7 @@ or regressions in user experience.</p>
 <h1 id="release-process"><a class="header" href="#release-process">Release Process</a></h1>
 <p>These pages give an overview of the release process with as many details as there are available at the time of writing.</p>
 <h2 id="release-schedule"><a class="header" href="#release-schedule">Release Schedule</a></h2>
-<p>With <a href="https://github.com/NixOS/rfcs/blob/master/rfcs/0085-nixos-release-stablization.md">RFC85</a>, the release schedule is largely already dictated below:</p>
+<p>With <a href="https://github.com/NixOS/rfcs/blob/master/rfcs/0085-nixos-release-stabilization.md">RFC85</a>, the release schedule is largely already dictated below:</p>
 <div class="table-wrapper">
 <table>
 <thead>
@@ -503,7 +503,7 @@ git branch staging-next-$NEWVER
 </li>
 </ol>
 <h2 id="incorporate-new-branches"><a class="header" href="#incorporate-new-branches">Incorporate new branches</a></h2>
-<p>We now incorporate the new branches into the workflows. The suggestion is two do step 1 and 2 in seperate PRs, as step 2. should be backported, as it’s a CI change.</p>
+<p>We now incorporate the new branches into the workflows. The suggestion is two do step 1 and 2 in separate PRs, as step 2. should be backported, as it’s a CI change.</p>
 <ol>
 <li>
 <p>Create new <a href="https://github.com/NixOS/nixpkgs/commit/95cc97659c813256dc17d2905904144c1588e6ad">NixOS and Nixpkgs release notes file</a> and PR this</p>
@@ -693,7 +693,7 @@ git push upstream release-$NEWVER $NEWVER-beta staging-$NEWVER staging-next-$NEW
 </li>
 </ol>
 <h3 id="back-on-the-master-branch"><a class="header" href="#back-on-the-master-branch">Back on the master branch</a></h3>
-<p>Now we prepare the master branch for the next release after this one. We do this in two steps, error-prone changes thorugh a PR and direct to allow for proper tagging.</p>
+<p>Now we prepare the master branch for the next release after this one. We do this in two steps, error-prone changes through a PR and direct to allow for proper tagging.</p>
 <p>Set NEXTVER to the release number after the one you released (i.e. when you release 24.05, <code>NEXTVER=24.11</code>).</p>
 <pre><code class="language-bash">export NEXTVER=24.11
 </code></pre>
@@ -1179,7 +1179,7 @@ repository to reflect that status on <a href="https://search.nixos.org">search.n
 <li>
 <p>Increase the <code>oldestSupportedRelease</code> in <code>lib/trivial.nix</code> to match
 the oldest supported release.</p>
-<p>Note: This may need a seperate PR as it can be breaking.</p>
+<p>Note: This may need a separate PR as it can be breaking.</p>
 <p>Examples: <a href="https://github.com/NixOS/nixpkgs/pull/180152">22.05</a></p>
 </li>
 <li>
