@@ -1,10 +1,5 @@
 # Release Managers
 
-> When you are nixpkgs committer, you already have the skillset necessary for release management.
-> You just need to apply it in a different way.
->
-> — Jon Ringer
-
 For each release there are two release managers. After each release the
 release manager having managed two releases steps down and the release
 management team of the last release appoints a new release manager.
