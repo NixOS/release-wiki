@@ -50,7 +50,8 @@ We now incorporate the new branches into the workflows. The suggestion is two do
 
     and PR this.
 
-1. Create the backport [label](https://github.com/NixOS/nixpkgs/labels) for the new staging branch:
+1. Create the backport [labels](https://github.com/NixOS/nixpkgs/labels) for the new staging branches:
    - `backport staging-24.05`
+   - `backport staging-next-24.05`
 
    Use the description `Backport PR automatically` and the color value `#0fafaa`
