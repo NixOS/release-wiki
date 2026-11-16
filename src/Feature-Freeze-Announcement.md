@@ -18,6 +18,22 @@ Instructions are provided as a comment in the script.
 You might need to add a comment that pings people again because GitHub seems
 to limit the amount of people that can be pinged per post.
 
+## Feature Freeze Exemptions
+
+Some package updates are exempt from the feature freeze:
+
+`gitlab` and `electron` receive monthly releases and each release is supported for
+three months only. They need to be kept up to date as they tend to receive fixes
+for security vulnerabilities regularly.
+
+`postgresql`'s [versioning policy](https://www.postgresql.org/support/versioning/)
+conflicts with the NixOS release schedule as first and final releases of major
+versions are released between September and November. The PostgreSQL maintainers
+need to submit some Pull Requests during feature freeze.
+The details are outlined in the
+[PostgreSQL section](https://nixos.org/manual/nixos/unstable/#module-services-postgres-versioning)
+of the NixOS manual.
+
 ## Pre-release cleanup
 
 The pre-release cleanup consists of multiple small cleanups to keep the release
