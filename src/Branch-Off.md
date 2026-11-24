@@ -16,7 +16,7 @@ before release to create the necessary Hydra Jobsets. You can link them this sec
   - release-26.11-small
   - staging-next-26.11-small
 - [https://hydra.nixos.org/project/nixpkgs](https://hydra.nixos.org/project/nixpkgs)
-  - nixpkgs-26.11
+  - release-26.11
   - staging-next-26.11
   - staging-26.11
 
@@ -49,7 +49,7 @@ Example configuration: [nixos:release-26.05](https://hydra.nixos.org/jobset/nixo
 
 Note that changing this leads to a rebuild of most NixOS tests!
 
-### Inputs for `nixpkgs/nixpkgs-26.11`:
+### Inputs for `nixpkgs/release-26.11`:
 
 |Input name|Type|Values|
 |-|-|-|
