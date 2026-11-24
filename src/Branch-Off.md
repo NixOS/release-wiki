@@ -205,11 +205,13 @@ You can create this PR while waiting for the CI of the first one.
 These changes should be done when the two PRs are already merged.
 
 1. Switch back to the `master` branch
+
   ```bash
   git switch master
   ```
 
 1. Update the branch to get the changes from the two PRs
+
   ```bash
   git pull
   ```
