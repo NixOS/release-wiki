@@ -176,7 +176,7 @@ export NEWVER=23.05
    Examples: [22.11](https://discourse.nixos.org/t/nixos-22-11-released/23637), [22.05](https://discourse.nixos.org/t/nixos-22-05-released/19404)
 
 1. Once the Pull Request in `infra` is merged, update [nixos-search](https://github.com/NixOS/nixos-search/) to mark the channel as released.
-   For that, run [the update-flake-lock](https://github.com/NixOS/nixos-search/actions/workflows/update-flake-lock.yml) and merge the new created PR afterwards.
+   For that run `nix flake lock --update-input nixos-infra` and merge the newly created PR afterwards.
 
 ## After Release
 

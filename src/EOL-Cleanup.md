@@ -9,11 +9,7 @@ gets released. At that point a few cleanup tasks need to be done.
     - [channels:21.05 is unmaintained](https://github.com/NixOS/infra/pull/201)
 
 1. Once this is merged, update the [`nixos-search`](https://github.com/NixOS/nixos-search)
-   repository to reflect that status on [search.nixos.org](https://search.nixos.org).
-
-   ```bash
-   nix --extra-experimental-features "nix-command flakes" flake lock --update-input nixos-infra
-   ```
+   repository by running `nix flake lock --update-input nixos-infra`  to reflect that status on [search.nixos.org](https://search.nixos.org).
 
 1. Close all pull requests that target one of the the old release- or staging-branches
 
